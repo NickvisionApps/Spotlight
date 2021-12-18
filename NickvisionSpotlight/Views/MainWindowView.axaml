@@ -1,0 +1,136 @@
+<Window x:Class="NickvisionSpotlight.Views.MainWindowView"
+	    xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:ui="using:FluentAvalonia.UI.Controls"
+		xmlns:i="using:Avalonia.Xaml.Interactivity"
+        xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+        mc:Ignorable="d" Name="MainWindow" Title="{Binding Title}" Icon="../Resources/icon.png"
+		Width="800" Height="600" WindowState="Maximized">
+	<i:Interaction.Behaviors>
+		<ia:EventTriggerBehavior EventName="Opened" SourceObject="{Binding #MainWindow}">
+			<ia:InvokeCommandAction Command="{Binding OpenedCommand}" CommandParameter="{Binding #MainWindow}"/>
+		</ia:EventTriggerBehavior>
+	</i:Interaction.Behaviors>
+	
+	<Grid>
+		<Menu HorizontalAlignment="Stretch" VerticalAlignment="Top">
+			<MenuItem Header="_File">
+				<MenuItem Header="S_ave" InputGesture="Ctrl+S" HotKey="Ctrl+S" Command="{Binding SaveCommand}">
+					<MenuItem.Icon>
+						<ui:SymbolIcon Symbol="Save"/>
+					</MenuItem.Icon>
+				</MenuItem>
+
+				<MenuItem Header="Sa_ve All" InputGesture="Ctrl+Shift+S" HotKey="Ctrl+Shift+S" Command="{Binding SaveAllCommand}">
+					<MenuItem.Icon>
+						<ui:SymbolIcon Symbol="SaveLocal"/>
+					</MenuItem.Icon>
+				</MenuItem>
+
+				<Separator />
+
+				<MenuItem Header="E_xit" InputGesture="Alt+F4" HotKey="Alt+F4" Command="{Binding ExitCommand}" CommandParameter="{Binding #MainWindow}">
+					<MenuItem.Icon>
+						<ui:SymbolIcon Symbol="Cancel"/>
+					</MenuItem.Icon>
+				</MenuItem>
+			</MenuItem>
+
+			<MenuItem Header="_Edit">
+				<MenuItem Header="_Settings" InputGesture="Ctrl+." HotKey="Ctrl+." Command="{Binding SettingsCommand}">
+					<MenuItem.Icon>
+						<ui:SymbolIcon Symbol="Settings"/>
+					</MenuItem.Icon>
+				</MenuItem>
+			</MenuItem>
+
+			<MenuItem Header="_Spotlight">
+				<MenuItem Header="S_ync Spotlight Images" InputGesture="F5" HotKey="F5" Command="{Binding SyncSpotlightImagesCommand}">
+					<MenuItem.Icon>
+						<ui:SymbolIcon Symbol="Sync"/>
+					</MenuItem.Icon>
+				</MenuItem>
+
+				<MenuItem Header="Set as _Background" InputGesture="Ctrl+B" HotKey="Ctrl+B" Command="{Binding SetAsBackgroundCommand}">
+					<MenuItem.Icon>
+						<ui:SymbolIcon Symbol="Image"/>
+					</MenuItem.Icon>
+				</MenuItem>
+			</MenuItem>
+
+			<MenuItem Header="_Help">
+				<MenuItem Header="_Check for Updates" Command="{Binding CheckForUpdatesCommand}" CommandParameter="{Binding #MainWindow}">
+					<MenuItem.Icon>
+						<ui:SymbolIcon Symbol="Sync"/>
+					</MenuItem.Icon>
+				</MenuItem>
+
+				<Separator />
+
+				<MenuItem Header="_GitHub Repo" Command="{Binding GitHubRepoCommand}">
+					<MenuItem.Icon>
+						<ui:SymbolIcon Symbol="Library"/>
+					</MenuItem.Icon>
+				</MenuItem>
+
+				<MenuItem Header="_Report a Bug" Command="{Binding ReportABugCommand}">
+					<MenuItem.Icon>
+						<ui:SymbolIcon Symbol="ReportHacked"/>
+					</MenuItem.Icon>
+				</MenuItem>
+
+				<Separator />
+
+				<MenuItem Header="Cha_ngelog" Command="{Binding ChangelogCommand}">
+					<MenuItem.Icon>
+						<ui:SymbolIcon Symbol="List"/>
+					</MenuItem.Icon>
+				</MenuItem>
+
+				<MenuItem Header="_About" InputGesture="F1" HotKey="F1" Command="{Binding AboutCommand}">
+					<MenuItem.Icon>
+						<ui:SymbolIcon Symbol="Help"/>
+					</MenuItem.Icon>
+				</MenuItem>
+			</MenuItem>
+		</Menu>
+
+		<ui:CommandBar HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,40,0,0" DefaultLabelPosition="Right">
+			<ui:CommandBar.Content>
+				<TextBlock Margin="6,12,6,0" Text="{Binding Status}"/>
+			</ui:CommandBar.Content>
+			
+			<ui:CommandBar.PrimaryCommands>
+				<ui:CommandBarSeparator />
+				
+				<ui:CommandBarButton Label="Sync Spotlight Images" Icon="Sync" Command="{Binding SyncSpotlightImagesCommand}"/>
+
+				<ui:CommandBarSeparator />
+
+				<ui:CommandBarButton Label="Save" Icon="Save" Command="{Binding SaveCommand}"/>
+
+				<ui:CommandBarButton Label="Set as Background" Icon="Pictures" Command="{Binding SetAsBackgroundCommand}"/>
+
+				<ui:CommandBarSeparator />
+
+				<ui:CommandBarButton Label="Settings" Icon="Settings" Command="{Binding SettingsCommand}"/>
+			</ui:CommandBar.PrimaryCommands>
+		</ui:CommandBar>
+
+		<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,90,0,0" Background="{DynamicResource CommandBarBackgroundOpen}" CornerRadius="6">
+			<Grid>
+				<Border HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="6,6,0,6" Width="340" Background="{DynamicResource SolidBackgroundFillColorBaseBrush}" CornerRadius="6">
+					<ListBox Margin="6,6,6,6" SelectionMode="Single" Items="{Binding SpotlightImages}" SelectedItem="{Binding SelectedImage}"/>
+				</Border>
+
+				<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="350,6,6,6" Background="{DynamicResource SolidBackgroundFillColorBaseBrush}" CornerRadius="6">
+					<Image Margin="6,6,6,6" Stretch="Uniform" Source="{Binding SelectedImageSource}"/>
+				</Border>
+			</Grid>
+		</Border>
+
+		<ui:InfoBar x:Name="InfoBar" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,10,0"/>
+	</Grid>
+</Window>
