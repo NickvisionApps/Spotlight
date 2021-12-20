@@ -126,7 +126,11 @@
 				</Border>
 
 				<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="350,6,6,6" Background="{DynamicResource SolidBackgroundFillColorBaseBrush}" CornerRadius="6">
-					<Image Margin="6,6,6,6" Stretch="Uniform" Source="{Binding SelectedImageSource}"/>
+					<Grid>
+						<Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="6,6,6,6" Stretch="Uniform" Source="{Binding SelectedImageSource}"/>
+						
+						<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" IsVisible="{Binding IsImageNotSelected}" FontSize="16" Text="Please sync then select an image."/>
+					</Grid>
 				</Border>
 			</Grid>
 		</Border>

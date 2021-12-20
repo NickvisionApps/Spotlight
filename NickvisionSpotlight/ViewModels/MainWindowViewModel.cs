@@ -26,6 +26,7 @@ namespace NickvisionSpotlight.ViewModels
         private string _selectedImage;
         private Bitmap _selectedImageSource;
 
+        public bool IsImageNotSelected => string.IsNullOrEmpty(SelectedImage);
         public ObservableCollection<string> SpotlightImages { get; init; }
         public DelegateAsyncCommand<ICloseable> OpenedCommand { get; init; }
         public DelegateAsyncCommand<object> SaveCommand { get; init; }
@@ -76,6 +77,7 @@ namespace NickvisionSpotlight.ViewModels
             set
             {
                 SetProperty(ref _selectedImage, value);
+                OnPropertyChanged("IsImageNotSelected");
                 foreach(var image in _spotlightManager.SpotlightImages)
                 {
                     if(image.Filename == value)
@@ -155,6 +157,7 @@ namespace NickvisionSpotlight.ViewModels
         private async Task SyncSpotlightImages(object parameter)
         {
             SpotlightImages.Clear();
+            SelectedImageSource = null;
             await _serviceCollection.GetService<IProgressDialogService>().ShowAsync("Syncing spotlight images...", async () => await _spotlightManager.SyncSpotlightImagesAsync());
             foreach(var image in _spotlightManager.SpotlightImages)
             {
@@ -168,7 +171,7 @@ namespace NickvisionSpotlight.ViewModels
 
         private async Task CheckForUpdates(ICloseable window)
         {
-            var updater = new Updater(_httpClient, new Uri("https://raw.githubusercontent.com/nlogozzo/NickvisionSpotlight/main/UpdateConfig.json"), new Version("2021.12.0"));
+            var updater = new Updater(_httpClient, new Uri("https://raw.githubusercontent.com/nlogozzo/NickvisionSpotlight/main/UpdateConfig.json"), new Version("2021.12.1"));
             await _serviceCollection.GetService<IProgressDialogService>().ShowAsync("Checking for updates...", async () => await updater.CheckForUpdatesAsync());
             if (updater.UpdateAvailable)
             {
@@ -213,7 +216,7 @@ namespace NickvisionSpotlight.ViewModels
             await _serviceCollection.GetService<IContentDialogService>().ShowMessageAsync(new ContentDialogInfo()
             {
                 Title = "What's New?",
-                Description  = "- Initial Release",
+                Description  = "- Design Tweaks\n- Fixed an issue where the old image stayed selected after a re-sync",
                 CloseButtonText = "OK",
                 DefaultButton = ContentDialogButton.Close
             });
@@ -224,7 +227,7 @@ namespace NickvisionSpotlight.ViewModels
             await _serviceCollection.GetService<IContentDialogService>().ShowMessageAsync(new ContentDialogInfo()
             {
                 Title = "About",
-                Description  = "Nickvision Spotlight Version 2021.12.0\nA utility for working with Windows Spotlight images.\n\nUsing Avalonia and .NET 6",
+                Description  = "Nickvision Spotlight Version 2021.12.1\nA utility for working with Windows Spotlight images.\n\nUsing Avalonia and .NET 6",
                 CloseButtonText = "OK",
                 DefaultButton = ContentDialogButton.Close
             });
