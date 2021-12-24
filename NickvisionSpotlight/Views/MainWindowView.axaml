@@ -98,13 +98,7 @@
 		</Menu>
 
 		<ui:CommandBar HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,40,0,0" DefaultLabelPosition="Right">
-			<ui:CommandBar.Content>
-				<TextBlock Margin="6,12,6,0" Text="{Binding Status}"/>
-			</ui:CommandBar.Content>
-			
 			<ui:CommandBar.PrimaryCommands>
-				<ui:CommandBarSeparator />
-				
 				<ui:CommandBarButton Label="Sync Spotlight Images" Icon="Sync" Command="{Binding SyncSpotlightImagesCommand}"/>
 
 				<ui:CommandBarSeparator />
@@ -121,15 +115,21 @@
 
 		<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,90,0,0" Background="{DynamicResource CommandBarBackgroundOpen}" CornerRadius="6">
 			<Grid>
-				<Border HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="6,6,0,6" Width="340" Background="{DynamicResource SolidBackgroundFillColorBaseBrush}" CornerRadius="6">
+				<Border HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="6,6,0,46" Width="340" Background="{DynamicResource SolidBackgroundFillColorBaseBrush}" CornerRadius="6">
 					<ListBox Margin="6,6,6,6" SelectionMode="Single" Items="{Binding SpotlightImages}" SelectedItem="{Binding SelectedImage}"/>
 				</Border>
 
-				<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="350,6,6,6" Background="{DynamicResource SolidBackgroundFillColorBaseBrush}" CornerRadius="6">
+				<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="350,6,6,46" Background="{DynamicResource SolidBackgroundFillColorBaseBrush}" CornerRadius="6">
 					<Grid>
 						<Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="6,6,6,6" Stretch="Uniform" Source="{Binding SelectedImageSource}"/>
 						
 						<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" IsVisible="{Binding IsImageNotSelected}" FontSize="16" Text="Please sync then select an image."/>
+					</Grid>
+				</Border>
+
+				<Border HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="6,0,6,6" Height="36" Background="{DynamicResource SolidBackgroundFillColorBaseBrush}" CornerRadius="6">
+					<Grid>
+						<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6,6,0,0" Text="{Binding Status}"/>
 					</Grid>
 				</Border>
 			</Grid>

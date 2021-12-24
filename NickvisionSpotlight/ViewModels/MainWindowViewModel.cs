@@ -171,7 +171,7 @@ namespace NickvisionSpotlight.ViewModels
 
         private async Task CheckForUpdates(ICloseable window)
         {
-            var updater = new Updater(_httpClient, new Uri("https://raw.githubusercontent.com/nlogozzo/NickvisionSpotlight/main/UpdateConfig.json"), new Version("2021.12.1"));
+            var updater = new Updater(_httpClient, new Uri("https://raw.githubusercontent.com/nlogozzo/NickvisionSpotlight/main/UpdateConfig.json"), new Version("2021.12.2"));
             await _serviceCollection.GetService<IProgressDialogService>().ShowAsync("Checking for updates...", async () => await updater.CheckForUpdatesAsync());
             if (updater.UpdateAvailable)
             {
@@ -216,7 +216,7 @@ namespace NickvisionSpotlight.ViewModels
             await _serviceCollection.GetService<IContentDialogService>().ShowMessageAsync(new ContentDialogInfo()
             {
                 Title = "What's New?",
-                Description  = "- Design Tweaks\n- Fixed an issue where the old image stayed selected after a re-sync",
+                Description  = "- Moved status to a bar at the bottom\n- Updated dependencies",
                 CloseButtonText = "OK",
                 DefaultButton = ContentDialogButton.Close
             });
@@ -227,7 +227,7 @@ namespace NickvisionSpotlight.ViewModels
             await _serviceCollection.GetService<IContentDialogService>().ShowMessageAsync(new ContentDialogInfo()
             {
                 Title = "About",
-                Description  = "Nickvision Spotlight Version 2021.12.1\nA utility for working with Windows Spotlight images.\n\nUsing Avalonia and .NET 6",
+                Description  = "Nickvision Spotlight Version 2021.12.2\nA utility for working with Windows Spotlight images.\n\nUsing Avalonia and .NET 6",
                 CloseButtonText = "OK",
                 DefaultButton = ContentDialogButton.Close
             });
