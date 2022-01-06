@@ -1,3 +1,5 @@
+[Depreciated} Nickvision has switched to development in C++/Gtkmm on Linux. Therefore, Windows-only application such as this one, will no longer be supported.
+
 # Nickvision Spotlight
  A utility for working with Windows Spotlight images
 
