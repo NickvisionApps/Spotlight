@@ -1,25 +1,31 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.0.32002.185
+VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NickvisionSpotlight", "NickvisionSpotlight\NickvisionSpotlight.csproj", "{479E8F4E-CAB8-4DF9-9A57-CDDF70196BC7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NickvisionSpotlight", "NickvisionSpotlight\NickvisionSpotlight.vcxproj", "{7D9FB43A-2314-46B4-9ECA-0FF3505731C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{479E8F4E-CAB8-4DF9-9A57-CDDF70196BC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{479E8F4E-CAB8-4DF9-9A57-CDDF70196BC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{479E8F4E-CAB8-4DF9-9A57-CDDF70196BC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{479E8F4E-CAB8-4DF9-9A57-CDDF70196BC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D9FB43A-2314-46B4-9ECA-0FF3505731C6}.Debug|x64.ActiveCfg = Debug|x64
+		{7D9FB43A-2314-46B4-9ECA-0FF3505731C6}.Debug|x64.Build.0 = Debug|x64
+		{7D9FB43A-2314-46B4-9ECA-0FF3505731C6}.Debug|x86.ActiveCfg = Debug|Win32
+		{7D9FB43A-2314-46B4-9ECA-0FF3505731C6}.Debug|x86.Build.0 = Debug|Win32
+		{7D9FB43A-2314-46B4-9ECA-0FF3505731C6}.Release|x64.ActiveCfg = Release|x64
+		{7D9FB43A-2314-46B4-9ECA-0FF3505731C6}.Release|x64.Build.0 = Release|x64
+		{7D9FB43A-2314-46B4-9ECA-0FF3505731C6}.Release|x86.ActiveCfg = Release|Win32
+		{7D9FB43A-2314-46B4-9ECA-0FF3505731C6}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {07A1E6C9-A0A0-4A10-933D-5062024A2BF8}
+		SolutionGuid = {93A12C3D-1297-4EBA-9CBD-1E32474C779B}
 	EndGlobalSection
 EndGlobal

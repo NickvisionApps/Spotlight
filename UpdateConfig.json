@@ -1,1 +1,1 @@
-{"LatestVersion":"2021.12.2","Changelog":"- Moved status to a bar at the bottom\n- Updated dependencies","LinkToExeInstaller":"https://github.com/nlogozzo/NickvisionSpotlight/releases/download/2021.12.2/NickvisionSpotlightSetup.exe"}
+{"LatestVersion":"2022.2.0","Changelog":"- Application rewrite with C++ and wxWidgets","LinkToExe":"https://github.com/nlogozzo/NickvisionApplication/releases/download/2022.2.0/NickvisionSpotlightSetup.exe"}
