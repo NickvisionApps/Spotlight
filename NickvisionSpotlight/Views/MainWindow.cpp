@@ -185,7 +185,7 @@ namespace NickvisionSpotlight::Views
 	{
 		if (m_listImages->GetSelection() != -1)
 		{
-
+			m_spotlightManager.SetImageAsBackground(m_listImages->GetSelection());
 		}
 	}
 

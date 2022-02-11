@@ -67,6 +67,7 @@ namespace NickvisionSpotlight::Models
 		{
 			throw std::invalid_argument("Invalid path index");
 		}
-		SystemParametersInfoA(SPI_SETDESKWALLPAPER, 0, (void*)backgroundPath.c_str(), SPIF_UPDATEINIFILE | SPIF_SENDWININICHANGE);
+		std::string backgroundPathAsString = backgroundPath.string();
+		SystemParametersInfo(SPI_SETDESKWALLPAPER, 0, (void*)(std::wstring(backgroundPathAsString.begin(), backgroundPathAsString.end()).c_str()), SPIF_UPDATEINIFILE);
 	}
 }
