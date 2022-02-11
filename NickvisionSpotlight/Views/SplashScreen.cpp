@@ -75,8 +75,8 @@ namespace NickvisionSpotlight::Views
 		m_trdStartup = std::jthread([&]()
 			{
 				std::this_thread::sleep_for(std::chrono::seconds(1));
-				m_lblProgress->SetLabel("Loading configuration...");
-				m_mainWindow->LoadConfig();
+				m_lblProgress->SetLabel("Syncing spotlight images...");
+				m_mainWindow->SyncSpotlightImages();
 				m_lblProgress->SetLabel("Checking for updates...");
 				m_mainWindow->CheckForUpdates();
 				Close();

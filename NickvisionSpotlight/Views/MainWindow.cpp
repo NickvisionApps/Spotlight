@@ -24,10 +24,10 @@ namespace NickvisionSpotlight::Views
 		m_menuBar = new wxMenuBar();
 		//File
 		m_menuFile = new wxMenu();
-		m_menuFile->Append(IDs::MENU_NEW_FILE, _("&New File\tCtrl+N"));
-		Connect(IDs::MENU_NEW_FILE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainWindow::NewFile));
-		m_menuFile->Append(IDs::MENU_OPEN_FILE, _("&Open File\tCtrl+O"));
-		Connect(IDs::MENU_OPEN_FILE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainWindow::OpenFile));
+		m_menuFile->Append(IDs::MENU_SAVE_IMAGE, _("&Save Image\tCtrl+S"));
+		Connect(IDs::MENU_SAVE_IMAGE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainWindow::SaveImage));
+		m_menuFile->Append(IDs::MENU_SAVE_ALL_IMAGES, _("Save &All Images\tCtrl+Shift+S"));
+		Connect(IDs::MENU_SAVE_ALL_IMAGES, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainWindow::SaveAllImages));
 		m_menuFile->AppendSeparator();
 		m_menuFile->Append(IDs::MENU_EXIT, _("E&xit\tAlt+F4"));
 		Connect(IDs::MENU_EXIT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainWindow::Exit));
@@ -37,6 +37,13 @@ namespace NickvisionSpotlight::Views
 		m_menuEdit->Append(IDs::MENU_SETTINGS, _("&Settings\tCtrl+."));
 		Connect(IDs::MENU_SETTINGS, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainWindow::Settings));
 		m_menuBar->Append(m_menuEdit, _("&Edit"));
+		//Spotlight
+		m_menuSpotlight = new wxMenu();
+		m_menuSpotlight->Append(IDs::MENU_SYNC_SPOTLIGHT_IMAGES, _("&Sync Spotlight Images\tCtrl+Shift+D"));
+		Connect(IDs::MENU_SYNC_SPOTLIGHT_IMAGES, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainWindow::SyncSpotlightImages));
+		m_menuSpotlight->Append(IDs::MENU_SET_AS_BACKGROUND, _("Set as &Background\tCtrl+Shift+B"));
+		Connect(IDs::MENU_SET_AS_BACKGROUND, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainWindow::SetAsBackground));
+		m_menuBar->Append(m_menuSpotlight, _("&Spotlight"));
 		//Help
 		m_menuHelp = new wxMenu();
 		m_menuHelp->Append(IDs::MENU_UPDATE, _("&Update"));
@@ -55,8 +62,11 @@ namespace NickvisionSpotlight::Views
 		SetMenuBar(m_menuBar);
 		//==ToolBar==//
 		m_toolBar = new wxToolBar(this, IDs::TOOLBAR, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL);
-		m_toolBar->AddTool(IDs::TOOL_OPEN_FILE, "", wxBitmap("OPENED_FOLDER", wxBITMAP_TYPE_PNG_RESOURCE))->SetShortHelp(_("Open Folder"));
-		Connect(IDs::TOOL_OPEN_FILE, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(MainWindow::OpenFile));
+		m_toolBar->AddTool(IDs::TOOL_SAVE_IMAGE, "", wxBitmap("SAVE", wxBITMAP_TYPE_PNG_RESOURCE))->SetShortHelp(_("Save Image"));
+		Connect(IDs::TOOL_SAVE_IMAGE, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(MainWindow::SaveImage));
+		m_toolBar->AddSeparator();
+		m_toolBar->AddTool(IDs::TOOL_SET_AS_BACKGROUND, "", wxBitmap("MONITOR", wxBITMAP_TYPE_PNG_RESOURCE))->SetShortHelp(_("Set as Background"));
+		Connect(IDs::TOOL_SET_AS_BACKGROUND, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(MainWindow::SetAsBackground));
 		m_toolBar->AddStretchableSpace();
 		m_toolBar->AddTool(IDs::TOOL_SETTINGS, "", wxBitmap("SETTINGS", wxBITMAP_TYPE_PNG_RESOURCE))->SetShortHelp(_("Settings"));
 		Connect(IDs::TOOL_SETTINGS, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(MainWindow::Settings));
@@ -64,24 +74,23 @@ namespace NickvisionSpotlight::Views
 		SetToolBar(m_toolBar);
 		//==StatusBar==//
 		m_statusBar = new StatusBar(this, IDs::STATUSBAR, m_isLightTheme);
+		m_statusBar->SetMessage("Total Number of Images: 0");
 		SetStatusBar(m_statusBar);
 		//==InfoBar==//
 		m_infoBar = new InfoBar(this, IDs::INFOBAR, m_isLightTheme);
-		//==First Name==//
-		m_lblFirstName = new wxStaticText(this, IDs::LBL_FIRST_NAME, _("First Name"));
-		m_txtFirstName = new wxTextCtrl(this, IDs::TXT_FIRST_NAME, "", wxDefaultPosition, { 320, 24 }, m_isLightTheme ? 0 : wxNO_BORDER);
-		m_txtFirstName->SetHint(_("Enter first name here"));
-		//==Last Name==//
-		m_lblLastName = new wxStaticText(this, IDs::LBL_LAST_NAME, _("Last Name"));
-		m_txtLastName = new wxTextCtrl(this, IDs::TXT_LAST_NAME, "", wxDefaultPosition, { 320, 24 }, m_isLightTheme ? 0 : wxNO_BORDER);
-		m_txtLastName->SetHint(_("Enter last name here"));
+		//==List Images==//
+		m_listImages = new wxListBox(this, IDs::LIST_IMAGES, wxDefaultPosition, wxSize(340, -1), { }, m_isLightTheme ? 0 : wxNO_BORDER | wxLB_SINGLE | wxLB_NEEDED_SB | wxLB_HSCROLL);
+		Connect(IDs::LIST_IMAGES, wxEVT_LISTBOX, wxCommandEventHandler(MainWindow::ListImages_SelectionChanged));
+		//==Selected Image==//
+		m_imgSelected = new wxStaticBitmap(this, IDs::IMG_SELECTED, wxBitmap(1, 1));
+		//==Box Image==//
+		m_boxImage = new wxBoxSizer(wxHORIZONTAL);
+		m_boxImage->Add(m_listImages, 0, wxEXPAND | wxALL, 6);
+		m_boxImage->Add(m_imgSelected, 0, wxEXPAND | wxALL, 6);
 		//==Layout==//
 		m_mainBox = new wxBoxSizer(wxVERTICAL);
 		m_mainBox->Add(m_infoBar, 0, wxEXPAND);
-		m_mainBox->Add(m_lblFirstName, 0, wxLEFT | wxTOP, 6);
-		m_mainBox->Add(m_txtFirstName, 0, wxLEFT | wxTOP, 6);
-		m_mainBox->Add(m_lblLastName, 0, wxLEFT | wxTOP, 6);
-		m_mainBox->Add(m_txtLastName, 0, wxLEFT | wxTOP, 6);
+		m_mainBox->Add(m_boxImage, 1, wxEXPAND | wxALL, 6);
 		SetSizer(m_mainBox);
 		//==Theme==//
 		if (m_isLightTheme) //Light
@@ -90,34 +99,35 @@ namespace NickvisionSpotlight::Views
 			SetBackgroundColour(ThemeHelpers::GetMainLightColor());
 			//ToolBar
 			m_toolBar->SetBackgroundColour(ThemeHelpers::GetSecondaryLightColor());
-			//First Name
-			m_txtFirstName->SetBackgroundColour(ThemeHelpers::GetSecondaryLightColor());
-			//Last Name
-			m_txtLastName->SetBackgroundColour(ThemeHelpers::GetSecondaryLightColor());
+			//List Images
+			m_listImages->SetBackgroundColour(ThemeHelpers::GetSecondaryLightColor());
 		}
 		else //Dark
 		{
 			//Win32
 			ThemeHelpers::ApplyWin32DarkMode(this);
+			ThemeHelpers::ApplyWin32DarkMode(m_listImages);
 			//Window
 			SetBackgroundColour(ThemeHelpers::GetMainDarkColor());
 			//ToolBar
 			m_toolBar->SetBackgroundColour(ThemeHelpers::GetSecondaryDarkColor());
 			m_toolBar->SetForegroundColour(*wxWHITE);
-			//First Name
-			m_lblFirstName->SetForegroundColour(*wxWHITE);
-			m_txtFirstName->SetBackgroundColour(ThemeHelpers::GetSecondaryDarkColor());
-			m_txtFirstName->SetForegroundColour(*wxWHITE);
-			//Last Name
-			m_lblLastName->SetForegroundColour(*wxWHITE);
-			m_txtLastName->SetBackgroundColour(ThemeHelpers::GetSecondaryDarkColor());
-			m_txtLastName->SetForegroundColour(*wxWHITE);
+			//List Images
+			m_listImages->SetBackgroundColour(ThemeHelpers::GetSecondaryDarkColor());
+			m_listImages->SetForegroundColour(*wxWHITE);
 		}
 	}
 
-	void MainWindow::LoadConfig()
+	void MainWindow::SyncSpotlightImages()
 	{
-		Configuration configuration;
+		m_spotlightManager.SyncSpotlightImages();
+		m_listImages->Clear();
+		m_imgSelected->SetBitmap({ 1, 1 });
+		for (const std::filesystem::path& path : m_spotlightManager.GetSpotlightImages())
+		{
+			m_listImages->AppendString(path.filename().string());
+		}
+		m_statusBar->SetMessage("Total Number of Images: " + std::to_string(m_spotlightManager.GetSpotlightImages().size()));
 	}
 
 	void MainWindow::OnClose(wxCloseEvent& WXUNUSED(event))
@@ -129,28 +139,17 @@ namespace NickvisionSpotlight::Views
 		Destroy();
 	}
 
-	void MainWindow::NewFile(wxCommandEvent& WXUNUSED(event))
+	void MainWindow::SaveImage(wxCommandEvent& WXUNUSED(event))
 	{
-		wxFileDialog newFileDialog(this, _("New File"), "", "", "Text Files (*.txt)|*.txt", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
-		if (newFileDialog.ShowModal() == wxID_OK)
+		if (m_listImages->GetSelection() != -1)
 		{
-			std::string path(newFileDialog.GetPath());
-			m_statusBar->SetMessage(path);
-			std::ofstream file(path);
-			if (file.is_open())
-			{
-				file << "" << std::endl;
-			}
+			
 		}
 	}
 
-	void MainWindow::OpenFile(wxCommandEvent& WXUNUSED(event))
+	void MainWindow::SaveAllImages(wxCommandEvent& WXUNUSED(event))
 	{
-		wxFileDialog openFileDialog(this, _("Open File"), "", "", "Text Files (*.txt)|*.txt", wxFD_OPEN | wxFD_FILE_MUST_EXIST);
-		if (openFileDialog.ShowModal() == wxID_OK)
-		{
-			m_statusBar->SetMessage(openFileDialog.GetPath());
-		}
+
 	}
 
 	void MainWindow::Exit(wxCommandEvent& WXUNUSED(event))
@@ -166,6 +165,27 @@ namespace NickvisionSpotlight::Views
 		if (configuration.PreferLightTheme() != m_isLightTheme)
 		{
 			m_infoBar->ShowMessage(_("Please restart the application to apply the theme change."), wxICON_WARNING);
+		}
+	}
+
+	void MainWindow::SyncSpotlightImages(wxCommandEvent& WXUNUSED(event))
+	{
+		wxBusyInfo busySyncing(wxBusyInfoFlags()
+			.Parent(this)
+			.Title(_("<b>Please Wait</b>"))
+			.Text(_("Syncing spotlight images..."))
+			.Background(m_isLightTheme ? *wxWHITE : *wxBLACK)
+			.Foreground(m_isLightTheme ? *wxBLACK : *wxWHITE)
+			.Transparency(4 * wxALPHA_OPAQUE / 5));
+		SyncSpotlightImages();
+		busySyncing.~wxBusyInfo();
+	}
+
+	void MainWindow::SetAsBackground(wxCommandEvent& WXUNUSED(event))
+	{
+		if (m_listImages->GetSelection() != -1)
+		{
+
 		}
 	}
 
@@ -225,5 +245,14 @@ namespace NickvisionSpotlight::Views
 	void MainWindow::About(wxCommandEvent& WXUNUSED(event))
 	{
 		wxMessageBox(_("About Nickvision Spotlight\n\nVersion 2022.2.0-alpha\nA utility for working with Windows Spotlight images.\n\nBuilt with C++, wxWidgets, and Icons8\n(C) Nickvision 2021-2022"), _("About"), wxICON_INFORMATION, this);
+	}
+
+	void MainWindow::ListImages_SelectionChanged(wxCommandEvent& WXUNUSED(event))
+	{
+		if (m_listImages->GetSelection() != -1)
+		{
+			m_imgSelected->SetBitmap(wxBitmap(wxString(m_spotlightManager.GetSpotlightImages()[m_listImages->GetSelection()].string()), wxBITMAP_TYPE_ANY));
+			m_boxImage->Layout();
+		}
 	}
 }

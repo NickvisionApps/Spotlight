@@ -2,6 +2,8 @@
 
 #include <string>
 #include <vector>
+#include <optional>
+#include <filesystem>
 
 namespace NickvisionSpotlight::Models
 {
@@ -9,16 +11,16 @@ namespace NickvisionSpotlight::Models
 	{
 	public:
 		SpotlightManager();
-		const std::vector<std::string>& GetSpotlightImagePaths();
+		const std::vector<std::filesystem::path>& GetSpotlightImages() const;
 		void SyncSpotlightImages();
-		void ExportImage(const std::string& selectedPath, const std::string& savePath) const;
-		void ExportAllImages(const std::string& saveDir) const;
-		void SetImageAsBackground(const std::string& selectedPath);
+		void ExportImage(size_t selectedPath, const std::filesystem::path& savePath) const;
+		void ExportAllImages(const std::filesystem::path& saveDir) const;
+		void SetImageAsBackground(size_t selectedPath) const;
 
 	private:
-		std::string m_spotlightDir;
-		std::string m_dataDir;
-		std::vector<std::string> m_spotlightImagePaths;
+		std::filesystem::path m_spotlightDir;
+		std::filesystem::path m_dataDir;
+		std::vector<std::filesystem::path> m_spotlightImages;
 	};
 }
 

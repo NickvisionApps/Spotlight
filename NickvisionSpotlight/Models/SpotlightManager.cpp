@@ -1,6 +1,5 @@
 #include "SpotlightManager.h"
 #include <stdexcept>
-#include <filesystem>
 #include <windows.h>
 
 namespace NickvisionSpotlight::Models
@@ -17,43 +16,57 @@ namespace NickvisionSpotlight::Models
 		}
 	}
 
-	const std::vector<std::string>& SpotlightManager::GetSpotlightImagePaths()
+	const std::vector<std::filesystem::path>& SpotlightManager::GetSpotlightImages() const
 	{
-		return m_spotlightImagePaths;
+		return m_spotlightImages;
 	}
 
 	void SpotlightManager::SyncSpotlightImages()
 	{
-		m_spotlightImagePaths.clear();
+		m_spotlightImages.clear();
 		for (const std::filesystem::path& path : std::filesystem::directory_iterator(m_spotlightDir))
 		{
 			if (std::filesystem::file_size(path) / 1000 >= 200)
 			{
-				std::string newPath = m_dataDir + path.stem().string() + ".jpg";
+				std::filesystem::path newPath = std::filesystem::path(m_dataDir.string() + path.stem().string() + ".jpg");
 				std::filesystem::copy(path, newPath, std::filesystem::copy_options::overwrite_existing);
-				m_spotlightImagePaths.push_back(newPath);
+				m_spotlightImages.push_back(newPath);
 			}
 		}
 	}
 
-	void SpotlightManager::ExportImage(const std::string& selectedPath, const std::string& savePath) const
+	void SpotlightManager::ExportImage(size_t selectedPath, const std::filesystem::path& savePath) const
 	{
-		std::filesystem::copy(selectedPath, savePath);
+		try
+		{
+			std::filesystem::copy(m_spotlightImages.at(selectedPath), savePath, std::filesystem::copy_options::overwrite_existing);
+		}
+		catch (...)
+		{
+			throw std::invalid_argument("Invalid path index");
+		}
 	}
 
-	void SpotlightManager::ExportAllImages(const std::string& saveDir) const
+	void SpotlightManager::ExportAllImages(const std::filesystem::path& saveDir) const
 	{
-		for (const std::string& path : m_spotlightImagePaths)
+		for (const std::filesystem::path& path : m_spotlightImages)
 		{
-			std::string copyPath = saveDir + std::filesystem::path(path).filename().string();
+			std::filesystem::path copyPath = std::filesystem::path(saveDir.string() + path.filename().string());
 			std::filesystem::copy(path, copyPath, std::filesystem::copy_options::overwrite_existing);
 		}
 	}
 
-	void SpotlightManager::SetImageAsBackground(const std::string& selectedPath)
+	void SpotlightManager::SetImageAsBackground(size_t selectedPath) const
 	{
-		std::string backgroundPath = m_dataDir + "background.jpg";
-		std::filesystem::copy(selectedPath, backgroundPath, std::filesystem::copy_options::overwrite_existing);
+		std::filesystem::path backgroundPath = std::filesystem::path(m_dataDir.string() + "background.jpg");
+		try
+		{
+			std::filesystem::copy(m_spotlightImages.at(selectedPath), backgroundPath, std::filesystem::copy_options::overwrite_existing);
+		}
+		catch (...)
+		{
+			throw std::invalid_argument("Invalid path index");
+		}
 		SystemParametersInfoA(SPI_SETDESKWALLPAPER, 0, (void*)backgroundPath.c_str(), SPIF_UPDATEINIFILE | SPIF_SENDWININICHANGE);
 	}
 }

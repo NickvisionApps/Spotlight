@@ -4,5 +4,6 @@ APP_ICON ICON "Resources/icon.ico"
 
 APP_ICON_PNG RCDATA "Resources/icon.png"
 APP_ICON_SPLASH_PNG RCDATA "Resources/iconSplash.png"
-OPENED_FOLDER RCDATA "Resources/OpenedFolder.png"
+SAVE RCDATA "Resources/Save.png"
+MONITOR RCDATA "Resources/Monitor.png"
 SETTINGS RCDATA "Resources/Settings.png"
