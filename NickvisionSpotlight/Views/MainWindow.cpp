@@ -56,7 +56,7 @@ namespace NickvisionSpotlight::Views
 		m_menuHelp->AppendSeparator();
 		m_menuHelp->Append(IDs::MENU_CHANGELOG, _("&Changelog"));
 		Connect(IDs::MENU_CHANGELOG, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainWindow::Changelog));
-		m_menuHelp->Append(IDs::MENU_ABOUT, _("&About Application\tF1"));
+		m_menuHelp->Append(IDs::MENU_ABOUT, _("&About Spotlight\tF1"));
 		Connect(IDs::MENU_ABOUT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainWindow::About));
 		m_menuBar->Append(m_menuHelp, _("&Help"));
 		SetMenuBar(m_menuBar);
@@ -74,19 +74,18 @@ namespace NickvisionSpotlight::Views
 		SetToolBar(m_toolBar);
 		//==StatusBar==//
 		m_statusBar = new StatusBar(this, IDs::STATUSBAR, m_isLightTheme);
-		m_statusBar->SetMessage("Total Number of Images: 0");
 		SetStatusBar(m_statusBar);
 		//==InfoBar==//
 		m_infoBar = new InfoBar(this, IDs::INFOBAR, m_isLightTheme);
 		//==List Images==//
-		m_listImages = new wxListBox(this, IDs::LIST_IMAGES, wxDefaultPosition, wxSize(340, -1), { }, m_isLightTheme ? 0 : wxNO_BORDER | wxLB_SINGLE | wxLB_NEEDED_SB | wxLB_HSCROLL);
+		m_listImages = new wxListBox(this, IDs::LIST_IMAGES, wxDefaultPosition, wxSize(340, -1), { }, (m_isLightTheme ? 0 : wxNO_BORDER) | wxLB_SINGLE | wxLB_NEEDED_SB | wxLB_HSCROLL);
 		Connect(IDs::LIST_IMAGES, wxEVT_LISTBOX, wxCommandEventHandler(MainWindow::ListImages_SelectionChanged));
-		//==Selected Image==//
-		m_imgSelected = new wxStaticBitmap(this, IDs::IMG_SELECTED, wxBitmap(1, 1));
+		//==Bitmap Image==//
+		m_btmpImage = new wxStaticBitmap(this, IDs::IMG_SELECTED, wxBitmap(1, 1));
 		//==Box Image==//
 		m_boxImage = new wxBoxSizer(wxHORIZONTAL);
 		m_boxImage->Add(m_listImages, 0, wxEXPAND | wxALL, 6);
-		m_boxImage->Add(m_imgSelected, 0, wxEXPAND | wxALL, 6);
+		m_boxImage->Add(m_btmpImage, 0, wxEXPAND | wxALL, 6);
 		//==Layout==//
 		m_mainBox = new wxBoxSizer(wxVERTICAL);
 		m_mainBox->Add(m_infoBar, 0, wxEXPAND);
@@ -122,12 +121,12 @@ namespace NickvisionSpotlight::Views
 	{
 		m_spotlightManager.SyncSpotlightImages();
 		m_listImages->Clear();
-		m_imgSelected->SetBitmap({ 1, 1 });
+		m_btmpImage->SetBitmap({ 1, 1 });
 		for (const std::filesystem::path& path : m_spotlightManager.GetSpotlightImages())
 		{
 			m_listImages->AppendString(path.filename().string());
 		}
-		m_statusBar->SetMessage("Total Number of Images: " + std::to_string(m_spotlightManager.GetSpotlightImages().size()));
+		m_statusBar->SetMessage(_("Total Number of Images: " + std::to_string(m_spotlightManager.GetSpotlightImages().size())));
 	}
 
 	void MainWindow::OnClose(wxCloseEvent& WXUNUSED(event))
@@ -143,13 +142,31 @@ namespace NickvisionSpotlight::Views
 	{
 		if (m_listImages->GetSelection() != -1)
 		{
-			
+			wxFileDialog saveImageDialog(this, _("Save Image"), "", "", "JPEG (*.jpg)|*.jpg", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+			if (saveImageDialog.ShowModal() == wxID_OK)
+			{
+				m_spotlightManager.ExportImage(m_listImages->GetSelection(), saveImageDialog.GetPath().ToStdString());
+				m_infoBar->ShowMessage(_("Image Saved To: " + saveImageDialog.GetPath()), wxICON_INFORMATION);
+			}
 		}
 	}
 
 	void MainWindow::SaveAllImages(wxCommandEvent& WXUNUSED(event))
 	{
-
+		wxDirDialog selectFolderDialog(this, _("Select Folder"), "", wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
+		if (selectFolderDialog.ShowModal() == wxID_OK)
+		{
+			wxBusyInfo busyExporting(wxBusyInfoFlags()
+				.Parent(this)
+				.Title(_("<b>Please Wait</b>"))
+				.Text(_("Exporting all images..."))
+				.Background(m_isLightTheme ? *wxWHITE : *wxBLACK)
+				.Foreground(m_isLightTheme ? *wxBLACK : *wxWHITE)
+				.Transparency(4 * wxALPHA_OPAQUE / 5));
+			m_spotlightManager.ExportAllImages(selectFolderDialog.GetPath().ToStdString() + "\\");
+			busyExporting.~wxBusyInfo();
+			m_infoBar->ShowMessage(_("Images Saved To: " + selectFolderDialog.GetPath()), wxICON_INFORMATION);
+		}
 	}
 
 	void MainWindow::Exit(wxCommandEvent& WXUNUSED(event))
@@ -194,7 +211,7 @@ namespace NickvisionSpotlight::Views
 		m_updater.CheckForUpdates();
 		if (m_updater.UpdateAvailable())
 		{
-			m_infoBar->ShowMessage("There is an update available. Please run the update command in the help menu to download and install the update.", wxICON_INFORMATION);
+			m_infoBar->ShowMessage(_("There is an update available. Please run the update command in the help menu to download and install the update."), wxICON_INFORMATION);
 		}
 	}
 
@@ -244,14 +261,14 @@ namespace NickvisionSpotlight::Views
 
 	void MainWindow::About(wxCommandEvent& WXUNUSED(event))
 	{
-		wxMessageBox(_("About Nickvision Spotlight\n\nVersion 2022.2.0-alpha\nA utility for working with Windows Spotlight images.\n\nBuilt with C++, wxWidgets, and Icons8\n(C) Nickvision 2021-2022"), _("About"), wxICON_INFORMATION, this);
+		wxMessageBox(_("About Nickvision Spotlight\n\nVersion 2022.2.0-beta\nA utility for working with Windows Spotlight images.\n\nBuilt with C++, wxWidgets, and Icons8\n(C) Nickvision 2021-2022"), _("About"), wxICON_INFORMATION, this);
 	}
 
 	void MainWindow::ListImages_SelectionChanged(wxCommandEvent& WXUNUSED(event))
 	{
 		if (m_listImages->GetSelection() != -1)
 		{
-			m_imgSelected->SetBitmap(wxBitmap(wxString(m_spotlightManager.GetSpotlightImages()[m_listImages->GetSelection()].string()), wxBITMAP_TYPE_ANY));
+			m_btmpImage->SetBitmap(wxBitmap(wxString(m_spotlightManager.GetSpotlightImages()[m_listImages->GetSelection()].string()), wxBITMAP_TYPE_ANY));
 			m_boxImage->Layout();
 		}
 	}

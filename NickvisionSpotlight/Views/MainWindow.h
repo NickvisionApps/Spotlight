@@ -57,7 +57,7 @@ namespace NickvisionSpotlight::Views
 		NickvisionSpotlight::Controls::InfoBar* m_infoBar = nullptr;
 		wxBoxSizer* m_boxImage = nullptr;
 		wxListBox* m_listImages = nullptr;
-		wxStaticBitmap* m_imgSelected = nullptr;
+		wxStaticBitmap* m_btmpImage = nullptr;
 		//==Slots==//
 		void OnClose(wxCloseEvent& event);
 		void SaveImage(wxCommandEvent& event);
