@@ -261,7 +261,7 @@ namespace NickvisionSpotlight::Views
 
 	void MainWindow::About(wxCommandEvent& WXUNUSED(event))
 	{
-		wxMessageBox(_("About Nickvision Spotlight\n\nVersion 2022.2.0-beta\nA utility for working with Windows Spotlight images.\n\nBuilt with C++, wxWidgets, and Icons8\n(C) Nickvision 2021-2022"), _("About"), wxICON_INFORMATION, this);
+		wxMessageBox(_("About Nickvision Spotlight\n\nVersion 2022.2.0-beta1\nA utility for working with Windows Spotlight images.\n\nBuilt with C++, wxWidgets, and Icons8\n(C) Nickvision 2021-2022"), _("About"), wxICON_INFORMATION, this);
 	}
 
 	void MainWindow::ListImages_SelectionChanged(wxCommandEvent& WXUNUSED(event))
