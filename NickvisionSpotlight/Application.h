@@ -2,6 +2,7 @@
 
 #include <wx/wx.h>
 #include "Views/MainWindow.h"
+#include "Controls/TaskBarIcon.h"
 
 namespace NickvisionSpotlight
 {
@@ -14,6 +15,7 @@ namespace NickvisionSpotlight
 
 	private:
 		Views::MainWindow* m_mainWindow = nullptr;
+		Controls::TaskBarIcon* m_taskBarIcon = nullptr;
 	};
 }
 

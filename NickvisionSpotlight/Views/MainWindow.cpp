@@ -134,8 +134,8 @@ namespace NickvisionSpotlight::Views
 		//==Save Config==//
 		Configuration configuration;
 		configuration.Save();
-		//==Finish==//
-		Destroy();
+		//==Hide Instead==//
+		Hide();
 	}
 
 	void MainWindow::SaveImage(wxCommandEvent& WXUNUSED(event))
@@ -171,7 +171,7 @@ namespace NickvisionSpotlight::Views
 
 	void MainWindow::Exit(wxCommandEvent& WXUNUSED(event))
 	{
-		Close();
+		Hide();
 	}
 
 	void MainWindow::Settings(wxCommandEvent& WXUNUSED(event))

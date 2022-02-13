@@ -29,6 +29,7 @@
     <ClInclude Include="Models\Update\Updater.h" />
     <ClInclude Include="Helpers\ThemeHelpers.h" />
     <ClInclude Include="Models\SpotlightManager.h" />
+    <ClInclude Include="Controls\TaskBarIcon.h" />
     <ClInclude Include="Views\SplashScreen.h" />
     <ClInclude Include="Views\SettingsDialog.h" />
     <ClInclude Include="Views\MainWindow.h" />
@@ -43,6 +44,7 @@
     <ClCompile Include="Models\Update\Updater.cpp" />
     <ClCompile Include="Helpers\ThemeHelpers.cpp" />
     <ClCompile Include="Models\SpotlightManager.cpp" />
+    <ClCompile Include="Controls\TaskBarIcon.cpp" />
     <ClCompile Include="Views\SplashScreen.cpp" />
     <ClCompile Include="Views\SettingsDialog.cpp" />
     <ClCompile Include="Views\MainWindow.cpp" />
