@@ -1,6 +1,6 @@
 #include "SpotlightManager.h"
 #include <stdexcept>
-#include <windows.h>
+#include <wx/wx.h>
 
 namespace NickvisionSpotlight::Models
 {
@@ -30,7 +30,21 @@ namespace NickvisionSpotlight::Models
 			{
 				std::filesystem::path newPath = std::filesystem::path(m_dataDir.string() + path.stem().string() + ".jpg");
 				std::filesystem::copy(path, newPath, std::filesystem::copy_options::overwrite_existing);
-				m_spotlightImages.push_back(newPath);
+			}
+		}
+		for (const std::filesystem::path& path : std::filesystem::directory_iterator(m_dataDir))
+		{
+			if (path.filename() != "background.jpg")
+			{
+				wxBitmap image(path.string(), wxBITMAP_TYPE_ANY);
+				if (image.GetWidth() > image.GetHeight())
+				{
+					m_spotlightImages.push_back(path);
+				}
+				else
+				{
+					std::filesystem::remove(path);
+				}
 			}
 		}
 	}

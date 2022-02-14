@@ -171,7 +171,7 @@ namespace NickvisionSpotlight::Views
 
 	void MainWindow::Exit(wxCommandEvent& WXUNUSED(event))
 	{
-		Hide();
+		Close();
 	}
 
 	void MainWindow::Settings(wxCommandEvent& WXUNUSED(event))
@@ -256,19 +256,19 @@ namespace NickvisionSpotlight::Views
 
 	void MainWindow::Changelog(wxCommandEvent& WXUNUSED(event))
 	{
-		wxMessageBox(_("What's New?\n\n- Application rewrite with C++ and wxWidgets"), _("Changelog"), wxICON_INFORMATION, this);
+		wxMessageBox(_("What's New?\n\n- Application rewrite with C++ and wxWidgets\n- Added the ability for Spotlight to run in the background to automatically set the desktop background to a random image, if the user chooses to do so\n- Spotlight only displays horizontal images instead of both horizontal and vertical wallpapers\n- Fixed an issue where not all Spotlight images were being shown"), _("Changelog"), wxICON_INFORMATION, this);
 	}
 
 	void MainWindow::About(wxCommandEvent& WXUNUSED(event))
 	{
-		wxMessageBox(_("About Nickvision Spotlight\n\nVersion 2022.2.0-beta1\nA utility for working with Windows Spotlight images.\n\nBuilt with C++, wxWidgets, and Icons8\n(C) Nickvision 2021-2022"), _("About"), wxICON_INFORMATION, this);
+		wxMessageBox(_("About Nickvision Spotlight\n\nVersion 2022.2.0-alpha2\nA utility for working with Windows Spotlight images.\n\nBuilt with C++, wxWidgets, and Icons8\n(C) Nickvision 2021-2022"), _("About"), wxICON_INFORMATION, this);
 	}
 
 	void MainWindow::ListImages_SelectionChanged(wxCommandEvent& WXUNUSED(event))
 	{
 		if (m_listImages->GetSelection() != -1)
 		{
-			m_btmpImage->SetBitmap(wxBitmap(wxString(m_spotlightManager.GetSpotlightImages()[m_listImages->GetSelection()].string()), wxBITMAP_TYPE_ANY));
+			m_btmpImage->SetBitmap(wxBitmap(m_spotlightManager.GetSpotlightImages()[m_listImages->GetSelection()].string(), wxBITMAP_TYPE_ANY));
 			m_boxImage->Layout();
 		}
 	}

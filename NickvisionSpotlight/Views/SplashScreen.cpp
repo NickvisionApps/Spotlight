@@ -33,7 +33,7 @@ namespace NickvisionSpotlight::Views
 		m_panelTitle->SetSizer(m_boxTitle);
 		//==App Info==//
 		//Version
-		m_lblVersion = new wxStaticText(this, IDs::LBL_VERSION, "Version: 2022.2.0-beta1");
+		m_lblVersion = new wxStaticText(this, IDs::LBL_VERSION, "Version: 2022.2.0-alpha2");
 		//Copyright
 		m_lblCopyright = new wxStaticText(this, IDs::LBL_COPYRIGHT, "(C) Nickvision 2021-2022");
 		//Box
