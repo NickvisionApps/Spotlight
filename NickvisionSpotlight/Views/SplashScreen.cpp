@@ -33,7 +33,7 @@ namespace NickvisionSpotlight::Views
 		m_panelTitle->SetSizer(m_boxTitle);
 		//==App Info==//
 		//Version
-		m_lblVersion = new wxStaticText(this, IDs::LBL_VERSION, "Version: 2022.2.0-alpha2");
+		m_lblVersion = new wxStaticText(this, IDs::LBL_VERSION, "Version: 2022.2.0-alpha3");
 		//Copyright
 		m_lblCopyright = new wxStaticText(this, IDs::LBL_COPYRIGHT, "(C) Nickvision 2021-2022");
 		//Box
@@ -62,11 +62,18 @@ namespace NickvisionSpotlight::Views
 		Configuration configuration;
 		if (configuration.PreferLightTheme())
 		{
+			//Win32
+			ThemeHelpers::ApplyWin32LightMode(this);
+			//Dialog
 			SetBackgroundColour(ThemeHelpers::GetMainLightColor());
 		}
 		else
 		{
+			//Win32
+			ThemeHelpers::ApplyWin32DarkMode(this);
+			//Dialog
 			SetBackgroundColour(ThemeHelpers::GetMainDarkColor());
+			//Controls
 			m_lblProgress->SetForegroundColour(*wxWHITE);
 			m_lblVersion->SetForegroundColour(*wxWHITE);
 			m_lblCopyright->SetForegroundColour(*wxWHITE);
@@ -75,6 +82,8 @@ namespace NickvisionSpotlight::Views
 		m_trdStartup = std::jthread([&]()
 			{
 				std::this_thread::sleep_for(std::chrono::seconds(1));
+				m_lblProgress->SetLabel("Loading configuration...");
+				m_mainWindow->LoadConfig();
 				m_lblProgress->SetLabel("Syncing spotlight images...");
 				m_mainWindow->SyncSpotlightImages();
 				m_lblProgress->SetLabel("Checking for updates...");

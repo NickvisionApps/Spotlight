@@ -20,11 +20,13 @@ namespace NickvisionSpotlight::Views
 			LBL_ROOT,
 			PAGE_UI,
 			CHK_PREFER_LIGHT_THEME,
-			PAGE_APP
+			PAGE_APP,
+			BTN_SAVE
 		};
 		NickvisionSpotlight::Models::Configuration m_configuration;
-		//==Layout==//
+		//==UI==//
 		wxBoxSizer* m_mainBox = nullptr;
+		wxBoxSizer* m_settingsBox = nullptr;
 		//Tree
 		wxTreeCtrl* m_mainTree = nullptr;
 		wxTreeItemId m_treeNodeRoot;
@@ -41,8 +43,11 @@ namespace NickvisionSpotlight::Views
 		//App Page
 		wxPanel* m_pageApp = nullptr;
 		wxBoxSizer* m_boxApp = nullptr;
+		//Save Button
+		wxButton* m_btnSave = nullptr;
 		//==Slots==//
 		void OnClose(wxCloseEvent& event);
+		void Save(wxCommandEvent& event);
 		void TreeSelectionChanged(wxTreeEvent& event);
 	};
 }

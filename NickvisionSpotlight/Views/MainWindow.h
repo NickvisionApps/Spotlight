@@ -12,6 +12,8 @@ namespace NickvisionSpotlight::Views
 	{
 	public:
 		MainWindow();
+		void SetIsLightTheme(bool isLightTheme);
+		void LoadConfig();
 		void CheckForUpdates();
 		void SyncSpotlightImages();
 
