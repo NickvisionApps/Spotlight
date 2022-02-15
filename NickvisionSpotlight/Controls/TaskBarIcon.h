@@ -15,6 +15,7 @@ namespace NickvisionSpotlight::Controls
 		enum IDs
 		{
 			MENU_OPEN_WINDOW = 700,
+			MENU_ABOUT,
 			MENU_QUIT
 		};
 		//==Menu==//
@@ -23,6 +24,7 @@ namespace NickvisionSpotlight::Controls
 		//==Slots==//
 		void Clicked(wxTaskBarIconEvent& event);
 		void OpenWindow(wxCommandEvent& event);
+		void About(wxCommandEvent& event);
 		void Quit(wxCommandEvent& event);
 	};
 }

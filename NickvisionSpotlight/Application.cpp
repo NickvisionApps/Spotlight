@@ -24,7 +24,7 @@ namespace NickvisionSpotlight
 		m_singleInstance = new wxSingleInstanceChecker();
 		if (m_singleInstance->IsAnotherRunning())
 		{
-			wxNotificationMessage notifAlreadyRunning("Spotlight Already Running!", "Nickvision Spotlight is already running in the background.\nPlease right click the icon in the system tray to open the main window.", nullptr, wxICON_WARNING);
+			wxNotificationMessage notifAlreadyRunning("Nickvision Spotlight Already Running!", "Please right click the icon in the system tray to open the main window.", nullptr, wxICON_WARNING);
 			notifAlreadyRunning.Show();
 			delete m_singleInstance;
 			m_singleInstance = nullptr;

@@ -14,6 +14,8 @@ namespace NickvisionSpotlight::Controls
 		m_menu->Append(IDs::MENU_OPEN_WINDOW, _("Open Window"));
 		Connect(IDs::MENU_OPEN_WINDOW, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(TaskBarIcon::OpenWindow));
 		m_menu->AppendSeparator();
+		m_menu->Append(IDs::MENU_ABOUT, _("About"));
+		Connect(IDs::MENU_ABOUT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(TaskBarIcon::About));
 		m_menu->Append(IDs::MENU_QUIT, _("Quit"));
 		Connect(IDs::MENU_QUIT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(TaskBarIcon::Quit));
 	}
@@ -26,6 +28,11 @@ namespace NickvisionSpotlight::Controls
 	void TaskBarIcon::OpenWindow(wxCommandEvent& event)
 	{
 		m_mainWindow->Show();
+	}
+
+	void TaskBarIcon::About(wxCommandEvent& event)
+	{
+		m_mainWindow->About(event);
 	}
 
 	void TaskBarIcon::Quit(wxCommandEvent& event)

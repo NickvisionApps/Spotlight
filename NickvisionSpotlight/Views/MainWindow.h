@@ -16,6 +16,7 @@ namespace NickvisionSpotlight::Views
 		void LoadConfig();
 		void CheckForUpdates();
 		void SyncSpotlightImages();
+		void About(wxCommandEvent& event);
 
 	private:
 		enum IDs
@@ -39,7 +40,8 @@ namespace NickvisionSpotlight::Views
 			TOOL_SET_AS_BACKGROUND,
 			TOOL_SETTINGS,
 			LIST_IMAGES,
-			IMG_SELECTED
+			SCROLL_IMAGE,
+			BTMP_IMAGE
 		};
 		bool m_isLightTheme;
 		NickvisionSpotlight::Models::Update::Updater m_updater;
@@ -59,6 +61,7 @@ namespace NickvisionSpotlight::Views
 		NickvisionSpotlight::Controls::InfoBar* m_infoBar = nullptr;
 		wxBoxSizer* m_boxImage = nullptr;
 		wxListBox* m_listImages = nullptr;
+		wxScrolledWindow* m_scrollImage = nullptr;
 		wxStaticBitmap* m_btmpImage = nullptr;
 		//==Slots==//
 		void OnClose(wxCloseEvent& event);
@@ -72,7 +75,6 @@ namespace NickvisionSpotlight::Views
 		void GitHubRepo(wxCommandEvent& event);
 		void ReportABug(wxCommandEvent& event);
 		void Changelog(wxCommandEvent& event);
-		void About(wxCommandEvent& event);
 		void ListImages_SelectionChanged(wxCommandEvent& event);
 	};
 }

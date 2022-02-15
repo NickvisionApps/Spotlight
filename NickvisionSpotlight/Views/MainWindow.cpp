@@ -76,14 +76,16 @@ namespace NickvisionSpotlight::Views
 		//==InfoBar==//
 		m_infoBar = new InfoBar(this, IDs::INFOBAR);
 		//==List Images==//
-		m_listImages = new wxListBox(this, IDs::LIST_IMAGES, wxDefaultPosition, wxSize(340, -1), { }, wxBORDER_NONE | wxLB_SINGLE | wxLB_NEEDED_SB | wxLB_HSCROLL);
+		m_listImages = new wxListBox(this, IDs::LIST_IMAGES, wxDefaultPosition, wxSize(300, -1), { }, wxBORDER_NONE | wxLB_SINGLE | wxLB_NEEDED_SB | wxLB_HSCROLL);
 		Connect(IDs::LIST_IMAGES, wxEVT_LISTBOX, wxCommandEventHandler(MainWindow::ListImages_SelectionChanged));
 		//==Bitmap Image==//
-		m_btmpImage = new wxStaticBitmap(this, IDs::IMG_SELECTED, wxBitmap(1, 1));
+		m_scrollImage = new wxScrolledWindow(this, IDs::SCROLL_IMAGE);
+		m_btmpImage = new wxStaticBitmap(m_scrollImage, IDs::BTMP_IMAGE, wxBitmap(1, 1));
+		m_scrollImage->SetScrollRate(4, 4);
 		//==Box Image==//
 		m_boxImage = new wxBoxSizer(wxHORIZONTAL);
 		m_boxImage->Add(m_listImages, 0, wxEXPAND | wxALL, 6);
-		m_boxImage->Add(m_btmpImage, 0, wxEXPAND | wxALL, 6);
+		m_boxImage->Add(m_scrollImage, 1, wxEXPAND | wxALL, 6);
 		//==Layout==//
 		m_mainBox = new wxBoxSizer(wxVERTICAL);
 		m_mainBox->Add(m_infoBar, 0, wxEXPAND);
@@ -99,6 +101,7 @@ namespace NickvisionSpotlight::Views
 			//Win32
 			ThemeHelpers::ApplyWin32LightMode(this);
 			ThemeHelpers::ApplyWin32LightMode(m_listImages);
+			ThemeHelpers::ApplyWin32LightMode(m_scrollImage);
 			//Window
 			SetBackgroundColour(ThemeHelpers::GetMainLightColor());
 			//ToolBar
@@ -108,15 +111,17 @@ namespace NickvisionSpotlight::Views
 			m_statusBar->SetIsLightTheme(true);
 			//InfoBar
 			m_infoBar->SetIsLightTheme(true);
-			//List Images
+			//Images
 			m_listImages->SetBackgroundColour(ThemeHelpers::GetSecondaryLightColor());
 			m_listImages->SetForegroundColour(*wxBLACK);
+			m_scrollImage->SetBackgroundColour(ThemeHelpers::GetSecondaryLightColor());
 		}
 		else
 		{
 			//Win32
 			ThemeHelpers::ApplyWin32DarkMode(this);
 			ThemeHelpers::ApplyWin32DarkMode(m_listImages);
+			ThemeHelpers::ApplyWin32DarkMode(m_scrollImage);
 			//Window
 			SetBackgroundColour(ThemeHelpers::GetMainDarkColor());
 			//ToolBar
@@ -126,9 +131,10 @@ namespace NickvisionSpotlight::Views
 			m_statusBar->SetIsLightTheme(false);
 			//InfoBar
 			m_infoBar->SetIsLightTheme(false);
-			//List Images
+			//Images
 			m_listImages->SetBackgroundColour(ThemeHelpers::GetSecondaryDarkColor());
 			m_listImages->SetForegroundColour(*wxWHITE);
+			m_scrollImage->SetBackgroundColour(ThemeHelpers::GetSecondaryDarkColor());
 		}
 		m_infoBar->Dismiss();
 		Refresh();
@@ -279,12 +285,12 @@ namespace NickvisionSpotlight::Views
 
 	void MainWindow::Changelog(wxCommandEvent& WXUNUSED(event))
 	{
-		wxMessageBox(_("What's New?\n\n- Application rewrite with C++ and wxWidgets\n- Added the ability for Spotlight to run in the background to automatically set the desktop background to a random image, if the user chooses to do so\n- Spotlight only displays horizontal images instead of both horizontal and vertical wallpapers\n- Fixed an issue where not all Spotlight images were being shown\n\nNew in Alpha 3:\n- Reworked Theme Module: Spotlight no longer requires a restart to apply a theme change\n- Fixed a bug in the update module that would not close the application correctly"), _("Changelog"), wxICON_INFORMATION, this);
+		wxMessageBox(_("What's New?\n\n- Application rewrite with C++ and wxWidgets\n- Added the ability for Spotlight to run in the background to automatically set the desktop background to a random image, if the user chooses to do so\n- Spotlight only displays horizontal images instead of both horizontal and vertical wallpapers\n- Fixed an issue where not all Spotlight images were being shown\n\nNew in Alpha 4:\n- Wrapped spotlight image in ScrolledWindow\n- Added About entry to TaskBarIcon menu\n- Shortened already running message"), _("Changelog"), wxICON_INFORMATION, this);
 	}
 
 	void MainWindow::About(wxCommandEvent& WXUNUSED(event))
 	{
-		wxMessageBox(_("About Nickvision Spotlight\n\nVersion 2022.2.0-alpha3\nA utility for working with Windows Spotlight images.\n\nBuilt with C++, wxWidgets, and Icons8\n(C) Nickvision 2021-2022"), _("About"), wxICON_INFORMATION, this);
+		wxMessageBox(_("About Nickvision Spotlight\n\nVersion 2022.2.0-alpha4\nA utility for working with Windows Spotlight images.\n\nBuilt with C++, wxWidgets, and Icons8\n(C) Nickvision 2021-2022"), _("About"), wxICON_INFORMATION, this);
 	}
 
 	void MainWindow::ListImages_SelectionChanged(wxCommandEvent& WXUNUSED(event))
@@ -292,7 +298,8 @@ namespace NickvisionSpotlight::Views
 		if (m_listImages->GetSelection() != -1)
 		{
 			m_btmpImage->SetBitmap(wxBitmap(m_spotlightManager.GetSpotlightImages()[m_listImages->GetSelection()].string(), wxBITMAP_TYPE_ANY));
-			m_boxImage->Layout();
+			m_btmpImage->SetSize(m_btmpImage->GetBitmap().GetSize());
+			m_scrollImage->SetVirtualSize(m_btmpImage->GetSize());
 		}
 	}
 }
