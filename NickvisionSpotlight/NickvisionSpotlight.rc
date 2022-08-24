@@ -1,9 +1,0 @@
-#include "resource.h"
-
-APP_ICON ICON "Resources/icon.ico"
-
-APP_ICON_PNG RCDATA "Resources/icon.png"
-APP_ICON_SPLASH_PNG RCDATA "Resources/iconSplash.png"
-SAVE RCDATA "Resources/Save.png"
-MONITOR RCDATA "Resources/Monitor.png"
-SETTINGS RCDATA "Resources/Settings.png"

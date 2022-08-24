@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "NickvisionSpotlight (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "NickvisionSpotlight (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

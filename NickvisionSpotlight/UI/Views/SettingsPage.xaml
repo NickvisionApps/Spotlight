@@ -1,0 +1,41 @@
+﻿<Page
+    x:Class="NickvisionSpotlight.UI.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NickvisionSpotlight.UI.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Orientation="Vertical" Margin="20,20,20,20" Spacing="6">
+        <TextBlock Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Text="Settings"/>
+
+        <MenuFlyoutSeparator/>
+
+        <Expander HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0,14,0,0">
+            <Expander.Header>
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="14" Glyph="&#xe790;"/>
+
+                    <TextBlock FontSize="14" Text="Appearance"/>
+                </StackPanel>
+            </Expander.Header>
+
+            <StackPanel Orientation="Vertical" Spacing="6">
+                <RadioButton Name="BtnLight" Content="Light" Click="BtnTheme_Click"/>
+
+                <RadioButton Name="BtnDark" Content="Dark" Click="BtnTheme_Click"/>
+
+                <RadioButton Name="BtnSystem" Content="System" Click="BtnTheme_Click"/>
+
+                <TextBlock Text="An application restart is required to apply a theme change.">
+                    <TextBlock.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="#f75145"></Setter>
+                        </Style>
+                    </TextBlock.Resources>
+                </TextBlock>
+            </StackPanel>
+        </Expander>
+    </StackPanel>
+</Page>
