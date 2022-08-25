@@ -1,7 +1,11 @@
 # Nickvision Spotlight
-![icon](NickvisionSpotlight/Assets/icon.png)
+<img src="NickvisionSpotlight/Assets/icon.png" width="100" height="100"/>
 
 *A utility for working with Windows Spotlight images*
+
+<a style="text-decoration:none" href="https://www.microsoft.com/store/apps/9P1M73Z5QMXJ">
+    <img src="https://img.shields.io/badge/Microsoft%20Store-Download-purple.svg?style=flat-round" alt="Store link" />
+</a>
 
 # Screenshots
 ![MainWindow](https://user-images.githubusercontent.com/17648453/186289432-edff2a6b-d04c-4c00-b5c5-4de4f75e6aca.png)
