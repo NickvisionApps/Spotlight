@@ -1,8 +1,10 @@
-﻿namespace NickvisionSpotlight.UI.Views
+﻿namespace NickvisionSpotlight.UI.Views;
+
+/// <summary>
+/// Pages for the application
+/// </summary>
+public enum Pages
 {
-    public enum Pages
-    {
-        Spotlight = 0,
-        Settings
-    }
+    Spotlight = 0,
+    Settings
 }

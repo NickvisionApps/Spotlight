@@ -7,21 +7,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel Orientation="Vertical" Margin="20,20,20,20" Spacing="6">
+    <StackPanel Margin="20,20,20,20" Orientation="Vertical" Spacing="6">
         <TextBlock Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Text="Settings"/>
 
-        <MenuFlyoutSeparator/>
+        <StackPanel Margin="0,20,0,0" Orientation="Horizontal" Spacing="6">
+            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="14" Glyph="&#xe790;"/>
 
-        <Expander HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0,14,0,0">
-            <Expander.Header>
-                <StackPanel Orientation="Horizontal" Spacing="6">
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="14" Glyph="&#xe790;"/>
+            <TextBlock FontSize="14" Text="Appearance"/>
+        </StackPanel>
 
-                    <TextBlock FontSize="14" Text="Appearance"/>
-                </StackPanel>
-            </Expander.Header>
-
-            <StackPanel Orientation="Vertical" Spacing="6">
+        <Border Background="{ThemeResource LayerFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+            <StackPanel Margin="10,10,10,10" Orientation="Vertical" Spacing="6">
                 <RadioButton Name="BtnLight" Content="Light" Click="BtnTheme_Click"/>
 
                 <RadioButton Name="BtnDark" Content="Dark" Click="BtnTheme_Click"/>
@@ -36,6 +32,6 @@
                     </TextBlock.Resources>
                 </TextBlock>
             </StackPanel>
-        </Expander>
+        </Border>
     </StackPanel>
 </Page>

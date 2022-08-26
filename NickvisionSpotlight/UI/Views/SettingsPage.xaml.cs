@@ -9,12 +9,15 @@ namespace NickvisionSpotlight.UI.Views;
 /// </summary>
 public sealed partial class SettingsPage : Page
 {
+    private readonly MainWindow _mainWindow;
+
     /// <summary>
     /// Constructs a SettingsPage
     /// </summary>
-    public SettingsPage()
+    public SettingsPage(MainWindow mainWindow)
     {
         InitializeComponent();
+        _mainWindow = mainWindow;
         //Load Config
         if (Configuration.Current.Theme == Theme.Light)
         {

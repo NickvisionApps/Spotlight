@@ -14,17 +14,37 @@ namespace NickvisionSpotlight.UI.Views;
 /// </summary>
 public sealed partial class SpotlightPage : Page
 {
+    private readonly MainWindow _mainWindow;
     private readonly SpotlightManager _spotlightManager;
 
     /// <summary>
     /// Constructs a SpotlightPage
     /// </summary>
-    /// <param name="spotlightManager"></param>
-    public SpotlightPage(SpotlightManager spotlightManager)
+    /// <param name="mainWindow">The MainWindow</param>
+    /// <param name="spotlightManager">The SpotlightManager</param>
+    public SpotlightPage(MainWindow mainWindow, SpotlightManager spotlightManager)
     {
         InitializeComponent();
+        _mainWindow = mainWindow;
         _spotlightManager = spotlightManager;
-        Messenger.Current.Register("SpotlightPage.UpdateSpotlightList", (object? parameter) => UpdateSpotlightList());
+        _spotlightManager.ImagesChanged += SpotlightManager_ImagesChanged;
+    }
+
+    /// <summary>
+    /// Updates ListSpotlight with the number of synced images
+    /// </summary>
+    private void SpotlightManager_ImagesChanged(object? sender, EventArgs e)
+    {
+        ListSpotlight.Items.Clear();
+        for (int i = 0; i < _spotlightManager.SpotlightImages.Count; i++)
+        {
+            ListSpotlight.Items.Add(i + 1);
+        }
+        BtnExportAllImages.IsEnabled = _spotlightManager.SpotlightImages.Count > 0;
+        if (_spotlightManager.SpotlightImages.Count == 0)
+        {
+            _mainWindow.ShowInfoBarMessage(new InfoBarMessageInfo("No Spotlight Images?", "For Nickvision Spotlight to find spotlight images, please make sure you have your lockscreen is set to Windows Spotlight for Windows to download spotlight images and check back later.", InfoBarSeverity.Warning));
+        }
     }
 
     /// <summary>
@@ -38,12 +58,12 @@ public sealed partial class SpotlightPage : Page
         {
             var fileSavePicker = new FileSavePicker();
             fileSavePicker.FileTypeChoices.Add("Images", new List<string>() { ".jpg" });
-            Messenger.Current.Send("MainWindow.InitializeWithWindow", fileSavePicker);
+            _mainWindow.InitializeWithWindow(fileSavePicker);
             var file = await fileSavePicker.PickSaveFileAsync();
             if (file != null)
             {
                 _spotlightManager.ExportImage(ListSpotlight.SelectedIndex, file.Path);
-                Messenger.Current.Send("MainWindow.ShowInfoBarMessage", new InfoBarMessageInfo("Export Successful", $"Image saved to: {file.Path}", InfoBarSeverity.Success));
+                _mainWindow.ShowInfoBarMessage(new InfoBarMessageInfo("Export Successful", $"Image saved to: {file.Path}", InfoBarSeverity.Success));
             }
         }
     }
@@ -59,7 +79,7 @@ public sealed partial class SpotlightPage : Page
         {
             var folderPicker = new FolderPicker();
             folderPicker.FileTypeFilter.Add("*");
-            Messenger.Current.Send("MainWindow.InitializeWithWindow", folderPicker);
+            _mainWindow.InitializeWithWindow(folderPicker);
             var folder = await folderPicker.PickSingleFolderAsync();
             if (folder != null)
             {
@@ -68,7 +88,7 @@ public sealed partial class SpotlightPage : Page
                     XamlRoot = Content.XamlRoot
                 };
                 await exportingDialog.ShowAsync();
-                Messenger.Current.Send("MainWindow.ShowInfoBarMessage", new InfoBarMessageInfo("Export Successful", $"Images saved to: {folder.Path}", InfoBarSeverity.Success));
+                _mainWindow.ShowInfoBarMessage(new InfoBarMessageInfo("Export Successful", $"Images saved to: {folder.Path}", InfoBarSeverity.Success));
             }
         }
     }
@@ -96,7 +116,7 @@ public sealed partial class SpotlightPage : Page
                 infoBarMessage.Message = "Unable to set the desktop background. Please try again. If the issue continues, file a bug report.";
                 infoBarMessage.Severity = InfoBarSeverity.Error;
             }
-            Messenger.Current.Send("MainWindow.ShowInfoBarMessage", infoBarMessage);
+            _mainWindow.ShowInfoBarMessage(infoBarMessage);
         }
     }
 
@@ -110,22 +130,5 @@ public sealed partial class SpotlightPage : Page
         BtnExportImage.IsEnabled = ListSpotlight.SelectedIndex != -1;
         BtnSetAsBackground.IsEnabled = ListSpotlight.SelectedIndex != -1;
         ImgSelected.Source = ListSpotlight.SelectedIndex != -1 ? new BitmapImage(new Uri(_spotlightManager.SpotlightImages[ListSpotlight.SelectedIndex])) : null;
-    }
-
-    /// <summary>
-    /// Updates ListSpotlight with the number of synced images
-    /// </summary>
-    private void UpdateSpotlightList()
-    {
-        ListSpotlight.Items.Clear();
-        for(int i = 0; i < _spotlightManager.SpotlightImages.Count; i++)
-        {
-            ListSpotlight.Items.Add(i + 1);
-        }
-        BtnExportAllImages.IsEnabled = _spotlightManager.SpotlightImages.Count > 0;
-        if (_spotlightManager.SpotlightImages.Count == 0)
-        {
-            Messenger.Current.Send("MainWindow.ShowInfoBarMessage", new InfoBarMessageInfo("No Spotlight Images?", "For Nickvision Spotlight to find spotlight images, please make sure you have your lockscreen is set to Windows Spotlight for Windows to download spotlight images and check back later.", InfoBarSeverity.Warning));
-        }
     }
 }

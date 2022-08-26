@@ -1,28 +1,27 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 
-namespace NickvisionSpotlight.UI.Controls
+namespace NickvisionSpotlight.UI.Controls;
+
+/// <summary>
+/// A control for displaying a splash screen
+/// </summary>
+public sealed partial class SplashScreen : UserControl
 {
     /// <summary>
-    /// A control for displaying a splash screen
+    /// Constructs a SplashScreen
     /// </summary>
-    public sealed partial class SplashScreen : UserControl
+    public SplashScreen()
     {
-        /// <summary>
-        /// Constructs a SplashScreen
-        /// </summary>
-        public SplashScreen()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        /// <summary>
-        /// Text to show on the splash screen
-        /// </summary>
-        public string Description
-        {
-            get => LblDescription.Text;
+    /// <summary>
+    /// Text to show on the splash screen
+    /// </summary>
+    public string Description
+    {
+        get => LblDescription.Text;
 
-            set => LblDescription.Text = value;
-        }
+        set => LblDescription.Text = value;
     }
 }

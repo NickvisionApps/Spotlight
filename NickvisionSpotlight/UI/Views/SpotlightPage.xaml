@@ -7,51 +7,51 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
-        <Grid Name="ToolBar" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="6,0,6,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="40"/>
-            </Grid.ColumnDefinitions>
+    <Grid Margin="6,0,6,6">
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="{ThemeResource LayerFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+            <Grid Name="ToolBar" Margin="6,0,6,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
 
-            <AppBarButton Name="BtnExportImage" Grid.Column="0" Width="40" LabelPosition="Collapsed" IsEnabled="False" ToolTipService.Placement="Bottom" ToolTipService.ToolTip="Export Image (Ctrl+S)" Click="BtnExportImage_Click">
-                <AppBarButton.Icon>
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xee71;"/>
-                </AppBarButton.Icon>
-                
-                <AppBarButton.KeyboardAccelerators>
-                    <KeyboardAccelerator Modifiers="Control" Key="S"/>
-                </AppBarButton.KeyboardAccelerators>
-            </AppBarButton>
+                <AppBarButton Name="BtnExportImage" Grid.Column="0" Width="40" LabelPosition="Collapsed" IsEnabled="False" ToolTipService.Placement="Bottom" ToolTipService.ToolTip="Export Image (Ctrl+S)" Click="BtnExportImage_Click">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xee71;"/>
+                    </AppBarButton.Icon>
 
-            <AppBarButton Name="BtnExportAllImages" Grid.Column="1" Width="40" LabelPosition="Collapsed" IsEnabled="False" Icon="MoveToFolder" ToolTipService.Placement="Bottom" ToolTipService.ToolTip="Export All Images (Ctrl+Shift+S)" Click="BtnExportAllImages_Click">
-                <AppBarButton.KeyboardAccelerators>
-                    <KeyboardAccelerator Modifiers="Control,Shift" Key="S"/>
-                </AppBarButton.KeyboardAccelerators>
-            </AppBarButton>
+                    <AppBarButton.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="Control" Key="S"/>
+                    </AppBarButton.KeyboardAccelerators>
+                </AppBarButton>
 
-            <AppBarSeparator Grid.Column="2"/>
+                <AppBarButton Name="BtnExportAllImages" Grid.Column="1" Width="40" LabelPosition="Collapsed" IsEnabled="False" Icon="MoveToFolder" ToolTipService.Placement="Bottom" ToolTipService.ToolTip="Export All Images (Ctrl+Shift+S)" Click="BtnExportAllImages_Click">
+                    <AppBarButton.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="Control,Shift" Key="S"/>
+                    </AppBarButton.KeyboardAccelerators>
+                </AppBarButton>
 
-            <AppBarButton Name="BtnSetAsBackground" Grid.Column="3" Width="40" LabelPosition="Collapsed" IsEnabled="False" ToolTipService.Placement="Bottom" ToolTipService.ToolTip="Set as Desktop Background (Ctrl+Shift+B)" Click="BtnSetAsBackground_Click">
-                <AppBarButton.Icon>
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xe8ba;"/>
-                </AppBarButton.Icon>
-                
-                <AppBarButton.KeyboardAccelerators>
-                    <KeyboardAccelerator Modifiers="Control,Shift" Key="B"/>
-                </AppBarButton.KeyboardAccelerators>
-            </AppBarButton>
-        </Grid>
+                <AppBarSeparator Grid.Column="2"/>
 
-        <MenuFlyoutSeparator HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,46,0,0"/>
+                <AppBarButton Name="BtnSetAsBackground" Grid.Column="3" Width="40" LabelPosition="Collapsed" IsEnabled="False" ToolTipService.Placement="Bottom" ToolTipService.ToolTip="Set as Desktop Background (Ctrl+Shift+B)" Click="BtnSetAsBackground_Click">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xe8ba;"/>
+                    </AppBarButton.Icon>
 
-        <ListView Name="ListSpotlight" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="0,54,0,0" Width="200" SelectionChanged="ListSpotlight_SelectionChanged"/>
+                    <AppBarButton.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="Control,Shift" Key="B"/>
+                    </AppBarButton.KeyboardAccelerators>
+                </AppBarButton>
+            </Grid>
+        </Border>
 
-        <AppBarSeparator HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="200,40,0,-8"/>
+        <Border HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="0,54,0,0" Width="200" Background="{ThemeResource LayerFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
+            <ListView Name="ListSpotlight" SelectionChanged="ListSpotlight_SelectionChanged"/>
+        </Border>
 
-        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="210,54,6,6" Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="6">
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="204,54,0,0" Background="{ThemeResource LayerFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8">
             <Image Name="ImgSelected" Stretch="UniformToFill">
                 <Image.ContextFlyout>
                     <MenuFlyout>

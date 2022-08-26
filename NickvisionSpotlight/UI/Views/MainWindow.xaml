@@ -79,6 +79,11 @@
 
         <NavigationView Name="NavView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,84,0,0" PaneDisplayMode="Left" OpenPaneLength="220"
                         IsBackButtonVisible="Collapsed" IsSettingsVisible="False" IsPaneToggleButtonVisible="False" SelectionChanged="NavView_SelectionChanged">
+            <NavigationView.Resources>
+                <Thickness x:Key="NavigationViewContentGridBorderThickness">0</Thickness>
+                <SolidColorBrush x:Key="NavigationViewContentBackground" Color="Transparent"></SolidColorBrush>
+            </NavigationView.Resources>
+            
             <NavigationView.MenuItems>
                 <NavigationViewItem Name="NavItemSpotlight" Tag="Spotlight" Content="Spotlight" Icon="Pictures"/>
             </NavigationView.MenuItems>
