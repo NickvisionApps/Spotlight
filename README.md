@@ -8,6 +8,6 @@
 </a>
 
 # Screenshots
-![MainWindow](https://user-images.githubusercontent.com/17648453/186289432-edff2a6b-d04c-4c00-b5c5-4de4f75e6aca.png)
-![Image](https://user-images.githubusercontent.com/17648453/186289435-234c35a6-69d2-4e66-977b-ac7152d124da.png)
-![LightTheme](https://user-images.githubusercontent.com/17648453/186289439-12274923-c30e-43f0-8c5e-c473b201b9d3.png)
+![MainWindow](https://user-images.githubusercontent.com/17648453/186967903-952dd974-a313-4c66-9778-339577922ce4.png)
+![Image](https://user-images.githubusercontent.com/17648453/186967916-0334035b-2834-4d5e-a9a8-c3bc956ac223.png)
+![LightTheme](https://user-images.githubusercontent.com/17648453/186967921-78e1e99c-5502-49f4-9ae4-e08f530d4e16.png)
