@@ -90,8 +90,6 @@ public sealed partial class MainWindow : Window
         ToolTipService.SetToolTip(BtnExportAllImages, _controller.Localizer["ExportAllImages", "Tooltip"]);
         BtnSetAsBackground.Label = _controller.Localizer["SetAsBackground"];
         ToolTipService.SetToolTip(BtnSetAsBackground, _controller.Localizer["SetAsBackground", "Tooltip"]);
-        StatusNoImage.Title = _controller.Localizer["NoImageSelected"];
-        StatusNoImage.Description = _controller.Localizer["NoImageSelected", "Description"];
         //Pages
         ViewStack.ChangePage("Home");
     }
@@ -240,16 +238,20 @@ public sealed partial class MainWindow : Window
         await _controller.SyncSpotlightImagesAsync();
         Loading.IsLoading = false;
         ViewStack.ChangePage("Spotlight");
-        ViewImage.ChangePage("NoImage");
         IconStatus.Glyph = "\uE8B9";
         LblStatus.Text = string.Format(_controller.Localizer["TotalSpotlightImages"], _controller.SpotlightImagesCount);
         MenuExportAllImages.IsEnabled = _controller.SpotlightImagesCount > 0;
         BtnExportAllImages.IsEnabled = _controller.SpotlightImagesCount > 0;
         ListSpotlight.Items.Clear();
-        ImgSelected.Source = null;
         for (var i = 0; i < _controller.SpotlightImagesCount; i++)
         {
-            ListSpotlight.Items.Add(i + 1);
+            ListSpotlight.Items.Add(new Image()
+            {
+                Width = 400,
+                Height = 300,
+                Source = new BitmapImage(new Uri(_controller.GetSpotlightImagePathByIndex(i))),
+                Stretch = Stretch.UniformToFill
+            });
         }
     }
 
@@ -345,7 +347,5 @@ public sealed partial class MainWindow : Window
         MenuSetAsBackground.IsEnabled = ListSpotlight.SelectedIndex != -1;
         BtnExportImage.IsEnabled = ListSpotlight.SelectedIndex != -1;
         BtnSetAsBackground.IsEnabled = ListSpotlight.SelectedIndex != -1;
-        ImgSelected.Source = ListSpotlight.SelectedIndex != -1 ? new BitmapImage(new Uri(_controller.GetSpotlightImagePathByIndex(ListSpotlight.SelectedIndex))) : null;
-        ViewImage.ChangePage(ListSpotlight.SelectedIndex != -1 ? "Image" : "NoImage");
     }
 }
