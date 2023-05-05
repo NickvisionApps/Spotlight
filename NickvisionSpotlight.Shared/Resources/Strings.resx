@@ -24,7 +24,7 @@
 	</data>
 
 	<data name="Description" xml:space="preserve">
-		<value>Find your favorite windows spotlight images</value>
+		<value>Find your favorite Windows spotlight images</value>
 	</data>
 
 	<data name="Version" xml:space="preserve">
@@ -125,22 +125,13 @@
 		<value>Home</value>
 	</data>
 
-	<data name="Folder" xml:space="preserve">
-		<value>Folder</value>
+	<data name="Images" xml:space="preserve">
+		<value>Images</value>
 	</data>
 
 	<data name="Settings" xml:space="preserve">
 		<!--Mostly used in WinUI-->
 		<value>Settings</value>
-	</data>
-
-	<data name="Preferences" xml:space="preserve">
-		<!--Mostly used in GNOME-->
-		<value>Preferences</value>
-	</data>
-
-	<data name="KeyboardShortcuts" xml:space="preserve">
-		<value>Keyboard Shortcuts</value>
 	</data>
 
 	<!--MainWindow-->
@@ -156,28 +147,44 @@
 		<value>Help</value>
 	</data>
 
-	<data name="OpenFolder" xml:space="preserve">
-		<value>Open Folder</value>
+	<data name="SyncSpotlightImages" xml:space="preserve">
+		<value>Sync Spotlight Images</value>
 	</data>
 
-	<data name="OpenFolder.Tooltip" xml:space="preserve">
-		<value>Open Folder (Ctrl+O)</value>
+	<data name="SyncSpotlightImages.Tooltip" xml:space="preserve">
+		<value>Sync Spotlight Images (F5)</value>
 	</data>
 
-	<data name="CloseFolder" xml:space="preserve">
-		<value>Close Folder</value>
+	<data name="ExportImage" xml:space="preserve">
+		<value>Export Image</value>
 	</data>
 
-	<data name="CloseFolder.Tooltip" xml:space="preserve">
-		<value>Close Folder (Ctrl+W)</value>
+	<data name="ExportImage.Tooltip" xml:space="preserve">
+		<value>Export Image (Ctrl+S)</value>
 	</data>
 
-	<data name="NoFolderOpened" xml:space="preserve">
-		<value>No Folder Opened</value>
+	<data name="ExportAllImages" xml:space="preserve">
+		<value>Export All Images</value>
 	</data>
 
-	<data name="NoFolderDescription" xml:space="preserve">
-		<value>Open a folder (or drag one into the app) to get started.</value>
+	<data name="ExportAllImages.Tooltip" xml:space="preserve">
+		<value>Export All Images (Ctrl+Shift+S)</value>
+	</data>
+
+	<data name="SetAsBackground" xml:space="preserve">
+		<value>Set As Desktop Background</value>
+	</data>
+
+	<data name="SetAsBackground.Tooltip" xml:space="preserve">
+		<value>Set As Desktop Background (Ctrl+Shift+B)</value>
+	</data>
+
+	<data name="Start" xml:space="preserve">
+		<value>Start by syncing spotlight images.</value>
+	</data>
+
+	<data name="Syncing" xml:space="preserve">
+		<value>Syncing spotlight images...</value>
 	</data>
 
 	<!--MainWindowController-->
@@ -207,20 +214,24 @@
 		<value>Good Morning!</value>
 	</data>
 
-	<data name="FolderOpened" xml:space="preserve">
-		<value>Folder Opened: {0}</value>
+	<data name="NoSpotlightImages" xml:space="preserve">
+		<value>For Spotlight to find images, please make sure you have your lockscreen and/or desktop set to Windows Spotlight for Windows to download spotlight images.</value>
 	</data>
 
-	<data name="FolderClosed" xml:space="preserve">
-		<value>Folder closed.</value>
+	<data name="ImageSaved" xml:space="preserve">
+		<value>Image saved to: {0}</value>
 	</data>
 
-	<data name="CloseFolderDialog.Title" xml:space="preserve">
-		<value>Close Folder?</value>
+	<data name="ImagesSaved" xml:space="preserve">
+		<value>Images saved to: {0}</value>
 	</data>
 
-	<data name="CloseFolderDialog.Description" xml:space="preserve">
-		<value>Are you sure you want to close the folder?</value>
+	<data name="Wallpaper.Success" xml:space="preserve">
+		<value>Enjoy your new wallpaper!</value>
+	</data>
+
+	<data name="Wallpaper.Error" xml:space="preserve">
+		<value>Unable to set the desktop background. Please try again. If the issue continues, file a bug report.</value>
 	</data>
 
 	<!--Settings-->

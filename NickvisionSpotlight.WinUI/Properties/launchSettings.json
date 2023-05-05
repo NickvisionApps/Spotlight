@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "NickvisionSpotlight.WinUI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "NickvisionSpotlight.WinUI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

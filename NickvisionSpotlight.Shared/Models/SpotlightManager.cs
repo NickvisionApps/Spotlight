@@ -22,11 +22,6 @@ public class SpotlightManager
     public List<string> SpotlightImages { get; init; }
 
     /// <summary>
-    /// Occurs when the list of spotlight images is changed
-    /// </summary>
-    public event EventHandler<EventArgs>? ImagesChanged;
-
-    /// <summary>
     /// Constructs a SpotlightManager
     /// </summary>
     /// <exception cref="ApplicationException">Thrown if the Windows Spotlight folder does not exist</exception>
@@ -75,7 +70,6 @@ public class SpotlightManager
                 }
             }
         });
-        ImagesChanged?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>

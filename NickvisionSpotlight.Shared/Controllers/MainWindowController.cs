@@ -89,22 +89,6 @@ public class MainWindowController : IDisposable
     }
 
     /// <summary>
-    /// Occurs when the spotlight images are changed
-    /// </summary>
-    public event EventHandler<EventArgs>? SpotlightImagesChanged
-    {
-        add
-        {
-            _spotlight.ImagesChanged += value;
-        }
-
-        remove
-        {
-            _spotlight.ImagesChanged -= value;
-        }
-    }
-
-    /// <summary>
     /// Frees resources used by the MainWindowController object
     /// </summary>
     public void Dispose()
@@ -138,25 +122,50 @@ public class MainWindowController : IDisposable
     /// <summary>
     /// Scans the Windows Spotlight folder for images and adds them to the Nickvision Spotlight cached images folder, while populating the SpotlightImages list
     /// </summary>
-    public async Task SyncSpotlightImagesAsync() => await _spotlight.SyncSpotlightImagesAsync();
+    public async Task SyncSpotlightImagesAsync()
+    {
+        await _spotlight.SyncSpotlightImagesAsync();
+        if(_spotlight.SpotlightImages.Count == 0)
+        {
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["NoSpotlightImages"], NotificationSeverity.Warning));
+        }
+    }
 
     /// <summary>
     /// Exports a spotlight image
     /// </summary>
     /// <param name="index">The index of the image to export</param>
     /// <param name="path">The path of where to export the image to</param>
-    public void ExportImage(int index, string path) => _spotlight.ExportImage(index, path);
+    public void ExportImage(int index, string path)
+    {
+        _spotlight.ExportImage(index, path);
+        NotificationSent?.Invoke(this, new NotificationSentEventArgs(string.Format(Localizer["ImageSaved"], path), NotificationSeverity.Success));
+    }
 
     /// <summary>
     /// Exports all spotlight images to a directory
     /// </summary>
     /// <param name="path">The directory to export all images</param>
-    public async Task ExportAllImagesAsync(string path) => await _spotlight.ExportAllImagesAsync(path);
+    public async Task ExportAllImagesAsync(string path)
+    {
+        await _spotlight.ExportAllImagesAsync(path);
+        NotificationSent?.Invoke(this, new NotificationSentEventArgs(string.Format(Localizer["ImagesSaved"], path), NotificationSeverity.Success));
+    }
 
     /// <summary>
     /// Sets a spotlight image as the desktop background
     /// </summary>
     /// <param name="index">The index of the image to use as the desktop background</param>
-    /// <returns>True, unless there is an error with SystemParametersInfo</returns>
-    public bool SetAsBackground(int index) => _spotlight.SetImageAsDesktopBackground(index);
+    public void SetAsBackground(int index)
+    {
+        var result = _spotlight.SetImageAsDesktopBackground(index);
+        if(result)
+        {
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Wallpaper", "Success"], NotificationSeverity.Success));
+        }
+        else
+        {
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Wallpaper", "Error"], NotificationSeverity.Error));
+        }
+    }
 }
