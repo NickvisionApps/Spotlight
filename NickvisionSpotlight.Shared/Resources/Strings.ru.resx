@@ -165,9 +165,6 @@
   <data name="Exporting" xml:space="preserve">
     <value>Экспорт всех изображений...</value>
   </data>
-  <data name="NoImageSelected" xml:space="preserve">
-    <value>Не выбрано изображение</value>
-  </data>
   <data name="Greeting.Generic" xml:space="preserve">
     <!-- Shown when system time can't be detected -->
     <value>Здравствуйте!</value>
