@@ -17,7 +17,7 @@ jobs:
     runs-on: windows-latest
     if: ${{ github.event.pull_request.user.login != 'weblate' }}
     env:
-      Solution_Name: NickvisionApplication.sln
+      Solution_Name: NickvisionSpotlight.sln
     permissions:
       actions: read
       contents: read
