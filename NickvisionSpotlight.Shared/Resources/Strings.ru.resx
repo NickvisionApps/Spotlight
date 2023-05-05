@@ -165,9 +165,6 @@
   <data name="Exporting" xml:space="preserve">
     <value>Экспорт всех изображений...</value>
   </data>
-  <data name="TotalSpotlightImages" xml:space="preserve">
-    <value>Всего изображений Spotlight: {0}</value>
-  </data>
   <data name="NoImageSelected" xml:space="preserve">
     <value>Не выбрано изображение</value>
   </data>
@@ -269,9 +266,6 @@
   </data>
   <data name="File" xml:space="preserve">
     <value>Файл</value>
-  </data>
-  <data name="NoImageSelected.Description" xml:space="preserve">
-    <value>Выберите изображение, чтобы начать.</value>
   </data>
   <data name="Help" xml:space="preserve">
     <value>Помощь</value>
