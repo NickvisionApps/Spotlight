@@ -28,7 +28,7 @@ public class SpotlightManager
     public SpotlightManager()
     {
         _spotlightDir = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\\Packages\\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\\LocalState\\Assets\\";
-        _dataDir = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}Nick vision{Path.DirectorySeparatorChar}{AppInfo.Current.Name}{Path.DirectorySeparatorChar}Images{Path.DirectorySeparatorChar}";
+        _dataDir = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Current.Name}{Path.DirectorySeparatorChar}Images{Path.DirectorySeparatorChar}";
         SpotlightImages = new List<string>();
         if (!Directory.Exists(_spotlightDir))
         {

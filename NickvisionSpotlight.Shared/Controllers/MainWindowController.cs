@@ -13,16 +13,12 @@ namespace NickvisionSpotlight.Shared.Controllers;
 public class MainWindowController : IDisposable
 {
     private bool _disposed;
-    private SpotlightManager _spotlight;
+    private SpotlightManager? _spotlight;
 
     /// <summary>
     /// The localizer to get translated strings from
     /// </summary>
     public Localizer Localizer { get; init; }
-    /// <summary>
-    /// The path of the folder opened
-    /// </summary>
-    public string FolderPath { get; private set; }
 
     /// <summary>
     /// Gets the AppInfo object
@@ -52,9 +48,7 @@ public class MainWindowController : IDisposable
     public MainWindowController()
     {
         _disposed = false;
-        _spotlight = new SpotlightManager();
         Localizer = new Localizer();
-        FolderPath = "No Folder Opened";
     }
 
     /// <summary>
@@ -124,6 +118,10 @@ public class MainWindowController : IDisposable
     /// </summary>
     public async Task SyncSpotlightImagesAsync()
     {
+        if(_spotlight == null)
+        {
+            _spotlight = new SpotlightManager();
+        }
         await _spotlight.SyncSpotlightImagesAsync();
         if (_spotlight.SpotlightImages.Count == 0)
         {
@@ -145,7 +143,7 @@ public class MainWindowController : IDisposable
     /// <param name="path">The path of where to export the image to</param>
     public void ExportImage(int index, string path)
     {
-        _spotlight.ExportImage(index, path);
+        _spotlight!.ExportImage(index, path);
         NotificationSent?.Invoke(this, new NotificationSentEventArgs(string.Format(Localizer["ImageSaved"], path), NotificationSeverity.Success));
     }
 
@@ -155,7 +153,7 @@ public class MainWindowController : IDisposable
     /// <param name="path">The directory to export all images</param>
     public async Task ExportAllImagesAsync(string path)
     {
-        await _spotlight.ExportAllImagesAsync(path);
+        await _spotlight!.ExportAllImagesAsync(path);
         NotificationSent?.Invoke(this, new NotificationSentEventArgs(string.Format(Localizer["ImagesSaved"], path), NotificationSeverity.Success));
     }
 
@@ -165,7 +163,7 @@ public class MainWindowController : IDisposable
     /// <param name="index">The index of the image to use as the desktop background</param>
     public void SetAsBackground(int index)
     {
-        var result = _spotlight.SetImageAsDesktopBackground(index);
+        var result = _spotlight!.SetImageAsDesktopBackground(index);
         if (result)
         {
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Wallpaper", "Success"], NotificationSeverity.Success));

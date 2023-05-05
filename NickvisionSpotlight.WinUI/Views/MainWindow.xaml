@@ -177,28 +177,7 @@
                                 </CommandBar>
                             </Border>
 
-                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" ColumnSpacing="6">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="240"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-
-                                <ListView x:Name="ListSpotlight" Grid.Column="0" VerticalAlignment="Stretch" SelectionMode="Single" SelectionChanged="ListSpotlight_SelectionChanged"/>
-
-                                <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8">
-                                    <nickvision:ViewStack x:Name="ViewImage">
-                                        <nickvision:ViewStack.Pages>
-                                            <nickvision:ViewStackPage PageName="NoImage">
-                                                <nickvision:StatusPage x:Name="StatusNoImage" HorizontalAlignment="Center" VerticalAlignment="Center" Glyph="&#xE14E;"/>
-                                            </nickvision:ViewStackPage>
-
-                                            <nickvision:ViewStackPage PageName="Image">
-                                                <Image Name="ImgSelected" Stretch="Fill"/>
-                                            </nickvision:ViewStackPage>
-                                        </nickvision:ViewStack.Pages>
-                                    </nickvision:ViewStack>
-                                </Border>
-                            </Grid>
+                            <GridView x:Name="ListSpotlight" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="4,6,0,0" SelectionMode="Single" SelectionChanged="ListSpotlight_SelectionChanged" DoubleTapped="ListSpotlight_DoubleTapped"/>
                         </Grid>
                     </nickvision:ViewStackPage>
                 </nickvision:ViewStack.Pages>
