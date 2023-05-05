@@ -26,7 +26,7 @@ public partial class App : Application
         _mainWindowController.AppInfo.Name = "Nickvision Spotlight";
         _mainWindowController.AppInfo.ShortName = _mainWindowController.Localizer["ShortName"];
         _mainWindowController.AppInfo.Description = $"{_mainWindowController.Localizer["Description"]}.";
-        _mainWindowController.AppInfo.Version = "2023.5.0-next";
+        _mainWindowController.AppInfo.Version = "2023.5.0";
         _mainWindowController.AppInfo.Changelog = "- Rewrote the application with a new design and better performance";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/NickvisionApps/Spotlight");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Spotlight/issues/new");

@@ -3,6 +3,7 @@ using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.Windows.AppNotifications;
 using Microsoft.Windows.AppNotifications.Builder;
 using NickvisionSpotlight.Shared.Controllers;
@@ -10,12 +11,9 @@ using NickvisionSpotlight.Shared.Events;
 using NickvisionSpotlight.WinUI.Controls;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Runtime.InteropServices;
 using Vanara.PInvoke;
-using Windows.ApplicationModel.DataTransfer;
 using Windows.Graphics;
-using Windows.Storage;
 using Windows.Storage.Pickers;
 using WinRT.Interop;
 
@@ -82,7 +80,6 @@ public sealed partial class MainWindow : Window
         MenuAbout.Text = string.Format(_controller.Localizer["About"], _controller.AppInfo.ShortName);
         MenuHelp.Title = _controller.Localizer["Help"];
         LblStatus.Text = _controller.Localizer["StatusReady", "WinUI"];
-        LblLoading.Text = _controller.Localizer["Syncing"];
         StatusPageHome.Glyph = _controller.ShowSun ? "\xE706" : "\xE708";
         StatusPageHome.Title = _controller.Greeting;
         StatusPageHome.Description = _controller.Localizer["Start"];
@@ -93,6 +90,8 @@ public sealed partial class MainWindow : Window
         ToolTipService.SetToolTip(BtnExportAllImages, _controller.Localizer["ExportAllImages", "Tooltip"]);
         BtnSetAsBackground.Label = _controller.Localizer["SetAsBackground"];
         ToolTipService.SetToolTip(BtnSetAsBackground, _controller.Localizer["SetAsBackground", "Tooltip"]);
+        StatusNoImage.Title = _controller.Localizer["NoImageSelected"];
+        StatusNoImage.Description = _controller.Localizer["NoImageSelected", "Description"];
         //Pages
         ViewStack.ChangePage("Home");
     }
@@ -236,14 +235,21 @@ public sealed partial class MainWindow : Window
     /// <param name="e">RoutedEventArgs</param>
     private async void SyncSpotlightImages(object sender, RoutedEventArgs e)
     {
+        LblLoading.Text = _controller.Localizer["Syncing"];
         Loading.IsLoading = true;
         await _controller.SyncSpotlightImagesAsync();
         Loading.IsLoading = false;
         ViewStack.ChangePage("Spotlight");
-        if(_controller.SpotlightImagesCount > 0)
+        ViewImage.ChangePage("NoImage");
+        IconStatus.Glyph = "\uE8B9";
+        LblStatus.Text = string.Format(_controller.Localizer["TotalSpotlightImages"], _controller.SpotlightImagesCount);
+        MenuExportAllImages.IsEnabled = _controller.SpotlightImagesCount > 0;
+        BtnExportAllImages.IsEnabled = _controller.SpotlightImagesCount > 0;
+        ListSpotlight.Items.Clear();
+        ImgSelected.Source = null;
+        for (var i = 0; i < _controller.SpotlightImagesCount; i++)
         {
-            MenuExportAllImages.IsEnabled = true;
-            BtnExportAllImages.IsEnabled = true;
+            ListSpotlight.Items.Add(i + 1);
         }
     }
 
@@ -274,9 +280,16 @@ public sealed partial class MainWindow : Window
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void ExportImage(object sender, RoutedEventArgs e)
+    private async void ExportImage(object sender, RoutedEventArgs e)
     {
-
+        var fileSavePicker = new FileSavePicker();
+        fileSavePicker.FileTypeChoices.Add("Images", new List<string>() { ".jpg" });
+        InitializeWithWindow(fileSavePicker);
+        var file = await fileSavePicker.PickSaveFileAsync();
+        if (file != null)
+        {
+            _controller.ExportImage(ListSpotlight.SelectedIndex, file.Path);
+        }
     }
 
     /// <summary>
@@ -284,9 +297,19 @@ public sealed partial class MainWindow : Window
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void ExportAllImages(object sender, RoutedEventArgs e)
+    private async void ExportAllImages(object sender, RoutedEventArgs e)
     {
-
+        var folderPicker = new FolderPicker();
+        folderPicker.FileTypeFilter.Add("*");
+        InitializeWithWindow(folderPicker);
+        var folder = await folderPicker.PickSingleFolderAsync();
+        if (folder != null)
+        {
+            LblLoading.Text = _controller.Localizer["Exporting"];
+            Loading.IsLoading = true;
+            await _controller.ExportAllImagesAsync(folder.Path);
+            Loading.IsLoading = false;
+        }
     }
 
     /// <summary>
@@ -294,10 +317,7 @@ public sealed partial class MainWindow : Window
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void SetAsBackground(object sender, RoutedEventArgs e)
-    {
-
-    }
+    private void SetAsBackground(object sender, RoutedEventArgs e) => _controller.SetAsBackground(ListSpotlight.SelectedIndex);
 
     /// <summary>
     /// Occurs when the about menu item is clicked
@@ -312,5 +332,20 @@ public sealed partial class MainWindow : Window
             RequestedTheme = MainMenu.RequestedTheme
         };
         await aboutDialog.ShowAsync();
+    }
+
+    /// <summary>
+    /// Occurs when the ListSpotlight's selection changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">SelectionChangedEventArgs</param>
+    private void ListSpotlight_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        MenuExportImage.IsEnabled = ListSpotlight.SelectedIndex != -1;
+        MenuSetAsBackground.IsEnabled = ListSpotlight.SelectedIndex != -1;
+        BtnExportImage.IsEnabled = ListSpotlight.SelectedIndex != -1;
+        BtnSetAsBackground.IsEnabled = ListSpotlight.SelectedIndex != -1;
+        ImgSelected.Source = ListSpotlight.SelectedIndex != -1 ? new BitmapImage(new Uri(_controller.GetSpotlightImagePathByIndex(ListSpotlight.SelectedIndex))) : null;
+        ViewImage.ChangePage(ListSpotlight.SelectedIndex != -1 ? "Image" : "NoImage");
     }
 }

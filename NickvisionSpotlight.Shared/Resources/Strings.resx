@@ -68,7 +68,7 @@
 
 	<data name="Artists.Credits" xml:space="preserve">
 		<!--ARTIST NAME(S) GOES HERE. SEPARATE WITH &#xA;-->
-		<value>Nicholas Logozzo https://github.com/nlogozzo</value>
+		<value>David Lapshin https://github.com/daudix-UFO</value>
 	</data>
 
 	<data name="Translators.Credits" xml:space="preserve">
@@ -185,6 +185,22 @@
 
 	<data name="Syncing" xml:space="preserve">
 		<value>Syncing spotlight images...</value>
+	</data>
+
+	<data name="Exporting" xml:space="preserve">
+		<value>Exporting all images...</value>
+	</data>
+
+	<data name="TotalSpotlightImages" xml:space="preserve">
+		<value>Total Spotlight Images: {0}</value>
+	</data>
+
+	<data name="NoImageSelected" xml:space="preserve">
+		<value>No Image Selected</value>
+	</data>
+
+	<data name="NoImageSelected.Description" xml:space="preserve">
+		<value>Select an image to get started.</value>
 	</data>
 
 	<!--MainWindowController-->

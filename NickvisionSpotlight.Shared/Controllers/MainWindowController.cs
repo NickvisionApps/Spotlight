@@ -125,11 +125,18 @@ public class MainWindowController : IDisposable
     public async Task SyncSpotlightImagesAsync()
     {
         await _spotlight.SyncSpotlightImagesAsync();
-        if(_spotlight.SpotlightImages.Count == 0)
+        if (_spotlight.SpotlightImages.Count == 0)
         {
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["NoSpotlightImages"], NotificationSeverity.Warning));
         }
     }
+
+    /// <summary>
+    /// Gets the path of a spotlight image by index
+    /// </summary>
+    /// <param name="index">The index of the spotlight image</param>
+    /// <returns>The path of the spotlight image</returns>
+    public string GetSpotlightImagePathByIndex(int index) => _spotlight.SpotlightImages[index];
 
     /// <summary>
     /// Exports a spotlight image
@@ -159,7 +166,7 @@ public class MainWindowController : IDisposable
     public void SetAsBackground(int index)
     {
         var result = _spotlight.SetImageAsDesktopBackground(index);
-        if(result)
+        if (result)
         {
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(Localizer["Wallpaper", "Success"], NotificationSeverity.Success));
         }
