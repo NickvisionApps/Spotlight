@@ -9,6 +9,8 @@
 - View all of Windows Spotlight's images
     - Easily export them as an image on disk
     - Use them as desktop wallpapers
+    
+*Spotlight is only available for Windows*
 
 # Installation
 <a href='https://apps.microsoft.com/store/detail/nickvision-spotlight/9P1M73Z5QMXJ'><img width='140' alt='Download from Microsoft Store' src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Get_it_from_Microsoft_Badge.svg/1024px-Get_it_from_Microsoft_Badge.svg.png'/></a>
