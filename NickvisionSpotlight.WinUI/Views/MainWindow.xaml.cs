@@ -2,6 +2,7 @@ using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.Windows.AppNotifications;
@@ -14,7 +15,9 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Vanara.PInvoke;
 using Windows.Graphics;
+using Windows.Storage;
 using Windows.Storage.Pickers;
+using Windows.System;
 using WinRT.Interop;
 
 namespace NickvisionSpotlight.WinUI.Views;
@@ -347,5 +350,26 @@ public sealed partial class MainWindow : Window
         MenuSetAsBackground.IsEnabled = ListSpotlight.SelectedIndex != -1;
         BtnExportImage.IsEnabled = ListSpotlight.SelectedIndex != -1;
         BtnSetAsBackground.IsEnabled = ListSpotlight.SelectedIndex != -1;
+    }
+
+    /// <summary>
+    /// Occurs when the ListSpotlight is double tapped
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">DoubleTappedRoutedEventArgs</param>
+    private async void ListSpotlight_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+    {
+        var contentDialog = new ContentDialog()
+        {
+            Content = new Image()
+            {
+                Source = new BitmapImage(new Uri(_controller.GetSpotlightImagePathByIndex(ListSpotlight.SelectedIndex))),
+                Stretch = Stretch.Fill
+            },
+            CloseButtonText = _controller.Localizer["OK"],
+            DefaultButton = ContentDialogButton.Close,
+            XamlRoot = Content.XamlRoot
+        };
+        await contentDialog.ShowAsync();
     }
 }

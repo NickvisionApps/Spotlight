@@ -177,7 +177,7 @@
                                 </CommandBar>
                             </Border>
 
-                            <GridView x:Name="ListSpotlight" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="4,6,0,0" SelectionMode="Single" SelectionChanged="ListSpotlight_SelectionChanged"/>
+                            <GridView x:Name="ListSpotlight" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="4,6,0,0" SelectionMode="Single" SelectionChanged="ListSpotlight_SelectionChanged" DoubleTapped="ListSpotlight_DoubleTapped"/>
                         </Grid>
                     </nickvision:ViewStackPage>
                 </nickvision:ViewStack.Pages>
