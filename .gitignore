@@ -336,3 +336,14 @@ ASALocalRun/
 
 #Intellij
 .idea/
+
+#Resources
+*.Designer.cs
+
+# Flatpak Builder
+.flatpak-builder/
+.flatpak/
+
+# Temporary build files
+_nickbuild/
+*.ui
