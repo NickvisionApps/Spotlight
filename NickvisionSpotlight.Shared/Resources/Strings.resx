@@ -191,6 +191,10 @@
 		<value>Exporting all images...</value>
 	</data>
 
+	<data name="TotalSpotlightImages" xml:space="preserve">
+		<value>Total Spotlight Images: {0}</value>
+	</data>
+
 	<!--MainWindowController-->
 	<data name="Greeting.Generic" xml:space="preserve">
 		<!-- Shown when system time can't be detected -->
