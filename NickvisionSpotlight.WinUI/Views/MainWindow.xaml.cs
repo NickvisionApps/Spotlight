@@ -250,10 +250,10 @@ public sealed partial class MainWindow : Window
         {
             ListSpotlight.Items.Add(new Image()
             {
-                Width = 400,
+                Width = 500,
                 Height = 300,
                 Source = new BitmapImage(new Uri(_controller.GetSpotlightImagePathByIndex(i))),
-                Stretch = Stretch.UniformToFill
+                Stretch = Stretch.Fill
             });
         }
     }
