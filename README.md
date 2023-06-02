@@ -1,3 +1,9 @@
+# ===STATUS UPDATE===
+Spotlight is now in **maintaince mode**. 
+
+This means that no new features will be considered/added to the application. Only critical bugs will be addressed and fixed if needed.
+*Translation updates are welcome, but may not be released right away.*
+
 # Spotlight
 <img src="NickvisionSpotlight.Shared/Resources/org.nickvision.spotlight.png" width="100" height="100"/>
 
