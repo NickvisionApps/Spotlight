@@ -22,7 +22,7 @@ A C++20 compiler is also required to build Spotlight.
 1. Set the `VCPKG_ROOT` environment variable to the path of your vcpkg installation's root directory.
 #### Windows
 1. Set the `VCPKG_DEFAULT_TRIPLET` environment variable to `x64-windows`
-1. Run `vcpkg install libnick`
+1. Run `vcpkg install libnick libjpeg-turbo boost-gil`
 
 ### Building
 1. First, clone/download the repo.

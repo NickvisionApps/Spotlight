@@ -3,6 +3,7 @@
 #include <format>
 #include <locale>
 #include <sstream>
+#include <stdexcept>
 #include <thread>
 #include <libnick/app/aura.h>
 #include <libnick/helpers/codehelpers.h>
@@ -59,6 +60,11 @@ namespace Nickvision::Spotlight::Shared::Controllers
         return Aura::getActive().getConfig<Configuration>("config").getTheme();
     }
 
+    const std::vector<std::filesystem::path>& MainWindowController::getSpotlightImages() const
+    {
+        return m_spotlightManager->getImages();
+    }
+
     Event<EventArgs>& MainWindowController::configurationSaved()
     {
         return Aura::getActive().getConfig<Configuration>("config").saved();
@@ -105,49 +111,6 @@ namespace Nickvision::Spotlight::Shared::Controllers
         return builder.str();
     }
 
-    const std::filesystem::path& MainWindowController::getFolderPath() const
-    {
-        return m_folderPath;
-    }
-
-    const std::vector<std::filesystem::path>& MainWindowController::getFiles() const
-    {
-        return m_files;
-    }
-
-    bool MainWindowController::isFolderOpened() const
-    {
-        return std::filesystem::exists(m_folderPath) && std::filesystem::is_directory(m_folderPath);
-    }
-
-    Event<EventArgs>& MainWindowController::folderChanged()
-    {
-        return m_folderChanged;
-    }
-
-    std::string MainWindowController::getGreeting() const
-    {
-        std::time_t now{ std::time(nullptr) };
-        std::tm* cal{ std::localtime(&now) };
-        if (cal->tm_hour >= 0 && cal->tm_hour < 6)
-        {
-            return _p("Night", "Good Morning!");
-        }
-        else if (cal->tm_hour < 12)
-        {
-            return _p("Morning", "Good Morning!");
-        }
-        else if (cal->tm_hour < 18)
-        {
-            return _("Good Afternoon!");
-        }
-        else if (cal->tm_hour < 24)
-        {
-            return _("Good Evening!");
-        }
-        return _("Good Day!");
-    }
-
     std::shared_ptr<PreferencesViewController> MainWindowController::createPreferencesViewController() const
     {
         return std::make_shared<PreferencesViewController>();
@@ -171,6 +134,15 @@ namespace Nickvision::Spotlight::Shared::Controllers
         {
             checkForUpdates();
         }
+        m_spotlightManager = std::make_shared<SpotlightManager>();
+        if(!*m_spotlightManager)
+        {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Critical, "Unable to find spotlight images directory.");
+            throw std::runtime_error("Unable to find spotlight images directory.");
+        }
+        Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Loading spotlight images...");
+        size_t count{ m_spotlightManager->sync().size() };
+        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Loaded " + std::to_string(count) + " image(s).");
         m_started = true;
         Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "MainWindow started.");
     }
@@ -234,47 +206,5 @@ namespace Nickvision::Spotlight::Shared::Controllers
         {
             Aura::getActive().getLogger().log(Logging::LogLevel::Error, "Unable to connect to Windows taskbar.");
         }
-    }
-
-    bool MainWindowController::openFolder(const std::filesystem::path& path)
-    {
-        if (std::filesystem::exists(path) && std::filesystem::is_directory(path))
-        {
-            m_folderPath = path;
-            loadFiles();
-            m_notificationSent.invoke({ std::vformat(_("Folder Opened: {}"), std::make_format_args(CodeHelpers::unmove(m_folderPath.string()))), NotificationSeverity::Success, "close" });
-            m_folderChanged.invoke({});
-            m_taskbar.setCount(static_cast<long>(m_files.size()));
-            m_taskbar.setCountVisible(true);
-            Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Folder opened. (" + m_folderPath.string() + ")");
-            return true;
-        }
-        return false;
-    }
-
-    void MainWindowController::closeFolder()
-    {
-        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Folder closed. (" + m_folderPath.string() + ")");
-        m_folderPath = std::filesystem::path();
-        m_files.clear();
-        m_notificationSent.invoke({ _("Folder closed"), NotificationSeverity::Warning });
-        m_folderChanged.invoke({});
-        m_taskbar.setCountVisible(false);
-    }
-
-    void MainWindowController::loadFiles()
-    {
-        m_files.clear();
-        if (std::filesystem::exists(m_folderPath))
-        {
-            for (const std::filesystem::directory_entry& e : std::filesystem::directory_iterator(m_folderPath))
-            {
-                if (e.is_regular_file())
-                {
-                    m_files.push_back(e.path());
-                }
-            }
-        }
-        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Loaded " + std::to_string(m_files.size()) + " file(s). (" + m_folderPath.string() + ")");
     }
 }

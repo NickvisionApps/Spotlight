@@ -5,7 +5,8 @@ endif()
 add_library(libspotlight
     "src/controllers/mainwindowcontroller.cpp"
     "src/controllers/preferencesviewcontroller.cpp"
-    "src/models/configuration.cpp")
+    "src/models/configuration.cpp"
+    "src/models/spotlightmanager.cpp")
 target_include_directories(libspotlight PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set_target_properties(libspotlight PROPERTIES VERSION "${PROJECT_VERSION}" SOVERSION "${PROJECT_VERSION}")
 if(MSVC)
@@ -15,7 +16,9 @@ else()
 endif()
 
 find_package(libnick CONFIG REQUIRED)
-target_link_libraries(libspotlight PUBLIC libnick::libnick)
+find_package(JPEG REQUIRED)
+find_package(Boost REQUIRED COMPONENTS gil)
+target_link_libraries(libspotlight PUBLIC libnick::libnick JPEG::JPEG Boost::boost Boost::gil)
 
 add_custom_target(shared_commands ALL DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/__shared.h")
 add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/__shared.h" "${CMAKE_CURRENT_BINARY_DIR}/shared.h" COMMAND "${CMAKE_COMMAND}" -E touch "${CMAKE_CURRENT_BINARY_DIR}/shared.h")

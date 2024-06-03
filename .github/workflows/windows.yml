@@ -27,7 +27,7 @@ jobs:
         uses: johnwason/vcpkg-action@v5
         id: vcpkg
         with:
-          pkgs: libnick
+          pkgs: libnick libjpeg-turbo boost-gil
           triplet: x64-windows
           cache-key: windows-latest
           revision: fc6345e114c2e2c4f9714037340ccb08326b3e8c
