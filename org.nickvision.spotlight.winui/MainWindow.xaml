@@ -11,7 +11,7 @@
         <MicaBackdrop/>
     </Window.SystemBackdrop>
 
-	<Grid x:Name="MainGrid" AllowDrop="True" Loaded="OnLoaded" DragOver="OnDragOver" Drop="OnDrop">
+	<Grid x:Name="MainGrid" AllowDrop="True" Loaded="OnLoaded">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -21,15 +21,9 @@
 
         <NavigationView x:Name="NavView" Grid.Row="1" IsBackButtonVisible="Collapsed" IsSettingsVisible="False" SelectionChanged="OnNavSelectionChanged">
             <NavigationView.MenuItems>
-                <NavigationViewItem x:Name="NavViewHome" Tag="Home">
+                <NavigationViewItem x:Name="NavViewImages" Tag="Images">
                     <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE80F;"/>
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
-
-                <NavigationViewItem x:Name="NavViewFolder" Tag="Folder" IsEnabled="False">
-                    <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8B7;"/>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8B9;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
@@ -123,72 +117,12 @@
                             <Frame x:Name="FrameCustom"/>
                         </nickvision:ViewStackPage>
 
-                        <nickvision:ViewStackPage PageName="Home">
-                            <nickvision:StatusPage x:Name="StatusPageHome" UseAppIcon="True">
-                                <nickvision:StatusPage.Child>
-                                    <Button HorizontalAlignment="Center" Style="{ThemeResource AccentButtonStyle}" Click="OpenFolder">
-                                        <Button.Content>
-                                            <StackPanel Orientation="Horizontal" Spacing="6">
-                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE838;"/>
-
-                                                <TextBlock x:Name="HomeOpenFolderButtonLabel" TextWrapping="WrapWholeWords"/>
-                                            </StackPanel>
-                                        </Button.Content>
-
-                                        <Button.KeyboardAccelerators>
-                                            <KeyboardAccelerator Modifiers="Control" Key="O"/>
-                                        </Button.KeyboardAccelerators>
-                                    </Button>
-                                </nickvision:StatusPage.Child>
-                            </nickvision:StatusPage>
+                        <nickvision:ViewStackPage PageName="NoImages">
+                           <nickvision:StatusPage x:Name="StatusPageNoImages" UseAppIcon="True"/>
                         </nickvision:ViewStackPage>
 
-                        <nickvision:ViewStackPage PageName="Folder">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-
-                                <Grid Grid.Row="0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <CommandBar Grid.Column="0" DefaultLabelPosition="Right">
-                                        <AppBarButton x:Name="FolderOpenFolderButton" Icon="OpenLocal" Click="OpenFolder">
-                                            <AppBarButton.KeyboardAccelerators>
-                                                <KeyboardAccelerator Modifiers="Control" Key="O"/>
-                                            </AppBarButton.KeyboardAccelerators>
-                                        </AppBarButton>
-
-                                        <AppBarButton x:Name="FolderCloseFolderButton" Icon="UnSyncFolder" Click="CloseFolder">
-                                            <AppBarButton.KeyboardAccelerators>
-                                                <KeyboardAccelerator Modifiers="Control" Key="W"/>
-                                            </AppBarButton.KeyboardAccelerators>
-                                        </AppBarButton>
-                                    </CommandBar>
-                                </Grid>
-
-                                <MenuFlyoutSeparator Grid.Row="1"/>
-
-                                <Grid Grid.Row="2">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="360"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <ListView x:Name="ListFiles" Grid.Column="0" SelectionMode="Extended"/>
-
-                                    <AppBarSeparator Grid.Column="1" Margin="0,-6,0,-6"/>
-
-                                    <nickvision:StatusPage x:Name="StatusPageFiles" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" IsCompact="True" Glyph="&#xE130;"/>
-                                </Grid>
-                            </Grid>
+                        <nickvision:ViewStackPage PageName="Images">
+                            
                         </nickvision:ViewStackPage>
                     </nickvision:ViewStack.Pages>
                 </nickvision:ViewStack>

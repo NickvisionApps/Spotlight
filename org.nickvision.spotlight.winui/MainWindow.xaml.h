@@ -47,18 +47,6 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
          */
         void OnActivated(const IInspectable& sender, const Microsoft::UI::Xaml::WindowActivatedEventArgs& args);
         /**
-         * @brief Handles when the main window's receives something dragged over.
-         * @param sender IInspectable
-         * @param args Microsoft::UI::Xaml::DragEventArgs
-         */
-        void OnDragOver(const IInspectable& sender, const Microsoft::UI::Xaml::DragEventArgs& args);
-        /**
-         * @brief Handles when the main window's receives a drop.
-         * @param sender Microsoft::UI::Xaml::FrameworkElement
-         * @param args IInspectable
-         */
-        Windows::Foundation::IAsyncAction OnDrop(const IInspectable& sender, const Microsoft::UI::Xaml::DragEventArgs& args);
-        /**
          * @brief Handles when the application's configuration is saved to disk.
          * @param args Nickvision::Events::EventArgs 
          */
@@ -127,23 +115,6 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
          * @param args Microsoft::UI::Xaml::RoutedEventArgs
          */
         Windows::Foundation::IAsyncAction Discussions(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
-        /**
-         * @brief Handles when the open folder is changed (including closed).
-         * @param args Nickvision::Events::EventArgs 
-         */
-        void OnFolderChanged(const ::Nickvision::Events::EventArgs& args);
-        /**
-         * @brief Opens a folder. 
-         * @param sender IInspectable
-         * @param args Microsoft::UI::Xaml::RoutedEventArgs
-         */
-        Windows::Foundation::IAsyncAction OpenFolder(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
-        /**
-         * @brief Closes the folder if one is open.
-         * @param sender IInspectable
-         * @param args Microsoft::UI::Xaml::RoutedEventArgs
-         */
-        void CloseFolder(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
 
     private:
         std::shared_ptr<::Nickvision::Spotlight::Shared::Controllers::MainWindowController> m_controller;
