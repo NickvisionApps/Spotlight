@@ -6,8 +6,8 @@ All types of contributions are encouraged and valued. See the [Table of Contents
 
 > And if you like the project, but just don't have time to contribute, that's fine. There are other easy ways to support the project and show your appreciation, which we would also be very happy about:
 > - Star the project
-> - Tweet about it
-> - Refer this project in your project's readme
+> - Post about it
+> - Reference this project in your project's readme
 > - [Sponsor](https://github.com/sponsors/nlogozzo) the lead developer
 
 ## Table of Contents
@@ -20,14 +20,14 @@ All types of contributions are encouraged and valued. See the [Table of Contents
     - [Via Weblate](#via-weblate)
     - [Manually](#manually)
   - [Your First Code Contribution](#your-first-code-contribution)
-    - [Developing on Windows](#developing-on-windows)
-    - [Developing on Linux](#developing-on-linux)
 - [Styleguides](#styleguides)
 - [Join The Project Team](#join-the-project-team)
 
 ## I Have a Question
 
-Before you ask a question, it is best to search for existing [Discussions](https://github.com/NickvisionApps/Spotlight/discussions) and [Issues](https://github.com/NickvisionApps/Spotlight/issues) that might help you. In case you have found a suitable issue and still need clarification, you can write your question in this discussion post. It is also advisable to search the internet for answers first.
+Before you ask a question, it is best to search for existing [Discussions](https://github.com/NickvisionApps/Spotlight/discussions) and [Issues](https://github.com/NickvisionApps/Spotlight/issues) that might help you. 
+
+In case you have found a suitable existing issue/discussion and still need clarification, you can write your question in said post. It is also advisable to search the internet for answers first to common error messages.
 
 If you then still feel the need to ask a question and need clarification, we recommend the following:
 
@@ -35,50 +35,53 @@ If you then still feel the need to ask a question and need clarification, we rec
 - Provide as much context as you can about what you're running into.
 - Provide project and platform versions (windows, gnome, etc...), depending on what seems relevant.
 
-We will then take care of the question as soon as possible.
+We will then take care of the question as soon as possible and convert it to a proper issue, if needed.
 
 ## I Want To Contribute
 
 > ### Legal Notice
-> When contributing to this project, you must agree that you have authored 100% of the content, that you have the necessary rights to the content and that the content you contribute may be provided under the project license.
+> When contributing to this project, you must agree that you have authored 100% of the content and/or that you have the necessary rights to the content and that the content you contribute may be provided under the project [license](COPYING).
 
 ### Reporting Bugs
 
 #### Before Submitting a Bug Report
 
-A good bug report shouldn't leave others needing to chase you up for more information. Therefore, we ask you to investigate carefully, collect information and describe the issue in detail in your report. Please complete the following steps in advance to help us fix any potential bug as fast as possible.
+A good bug report shouldn't leave others needing to chase you up for more information. Therefore, we ask that you to investigate carefully, collect information and describe the issue in detail in your report. Please complete the following steps in advance to help us fix any potential bug as fast as possible:
 
 - Make sure that you are using the latest released version.
 - Determine if your bug is really a bug and not an error on your side. If you are looking for support, you might want to check [this section](#i-have-a-question).
-- To see if other users have experienced (and potentially already solved) the same issue you are having, check if there is not already a bug report existing for your bug or error in both the [Discussions](https://github.com/NickvisionApps/Spotlight/discussions) and [Issues](https://github.com/NickvisionApps/Spotlight/issues) sections.
+- See if other users have experienced (and potentially already solved) the same issue you are having, check if there is not already a bug report existing for your bug or error in both the [Discussions](https://github.com/NickvisionApps/Spotlight/discussions) and [Issues](https://github.com/NickvisionApps/Spotlight/issues) sections.
 - Collect information about the bug:
+  - Debug information provided by the application
+    - GNOME: From the main hamburger menu, open About Spotlight → Troubleshooting → Debugging Information and copy the information to the clipboard to paste in your issue.
+    - WinUI: From the Help item in the left-side navigation, click the gear/wrench icon in the top right corner of the flyout to copy the information to the clipboard to paste in your issue.
   - Stack trace (Traceback)
     - Including any error messages thrown by the application
     - You may need to start the application via the terminal/console to receive an error message for a crash.
-  - OS, Platform and Version (Windows, Linux, macOS, x86, ARM)
-  - Possibly your input and the output
+  - OS, Platform and Version (Distro, Kernel Version, x64/ARM, etc...)
+  - Your input and the output to the application
+    - i.e. Steps you took to produce the crash and/or attach any files you may have opened within the app that caused a crash
   - Can you reliably reproduce the issue? And can you also reproduce it with older versions?
 
 #### How Do I Submit a Good Bug Report?
 
-> You must never report security related issues, vulnerabilities or bugs including sensitive information to the issue tracker, or elsewhere in public. Instead sensitive bugs must be sent by email to <nlogozzo225@gmail.com>.
+> You must never report security related issues, vulnerabilities and bugs (including sensitive information) to the issue tracker nor elsewhere in public. Instead sensitive issues must be reported and handled via email to <nlogozzo225@gmail.com>.
 
 We use GitHub issues to track bugs and errors. If you run into an issue with the project:
 
-- Open an [Issue](https://github.com/NickvisionApps/Spotlight/issues/new). (Since we can't be sure at this point whether it is a bug or not, we ask you not to talk about a bug yet and not to label the issue.)
-- Explain the behavior you would expect and the actual behavior.
-- Please provide as much context as possible and describe the *reproduction steps* that someone else can follow to recreate the issue on their own. This usually includes your code. For good bug reports you should isolate the problem and create a reduced test case.
+- Open a [new Issue](https://github.com/NickvisionApps/Spotlight/issues/new) and explain the behavior you are experiencing and what you expect to happen.
+- Please provide as much context as possible and describe the *reproduction steps* that someone else can follow to recreate the issue on their own system. For good bug reports you should isolate the problem and create a reduced test case.
 - Provide the information you collected in the previous section.
 
-Once it's filed:
+Once it has been opened:
 
 - The project team will label the issue accordingly.
-- A team member will try to reproduce the issue with your provided steps. If there are no reproduction steps or no obvious way to reproduce the issue, the team will ask you for those steps. Bugs that are not able to be reproduced will not be addressed until they are reproduced.
-- If the team is able to reproduce the issue, it will be marked as a `bug` and the issue will be left to be [implemented by someone](#your-first-code-contribution).
+- A team member will try to reproduce the issue with your provided steps. If there are no reproduction steps or no obvious way to reproduce the issue, the team will ask you for those steps. 
+    - Bugs that are not able to be reproduced will not be addressed until they are reproduced. Therefore, it is important to include steps to speed up the fixing process.
 
 ### Suggesting Enhancements
 
-This section guides you through submitting an enhancement suggestion for Nickvision Spotlight, **including completely new features and minor improvements to existing functionality**. Following these guidelines will help maintainers and the community to understand your suggestion and find related suggestions.
+This section guides you through submitting an enhancement suggestion for Nickvision Spotlight, **including completely new features and minor improvements to existing functionality**. Following these guidelines will help maintainers and the community in understanding your suggestion and finding related suggestions.
 
 #### Before Submitting an Enhancement
 
@@ -92,71 +95,94 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/Nickvi
 
 - Use a **clear and descriptive title** for the issue to identify the suggestion.
 - Provide a **step-by-step description of the suggested enhancement** in as many details as possible.
-- **Describe the current behavior** and **explain which behavior you expected to see instead** and why. At this point you can also tell which alternatives do not work for you.
-- You may want to **include screenshots and animated GIFs** which help you demonstrate the steps or point out the part which the suggestion is related to. You can use [this tool](https://www.cockos.com/licecap/) to record GIFs on macOS and Windows, and [this tool](https://github.com/colinkeenan/silentcast) or [this tool](https://flathub.org/apps/details/io.github.seadve.Kooha) on Linux.
-- **Explain why this enhancement would be useful** to most Nickvision Spotlight users. You may also want to point out the other projects that solved it better and which could serve as inspiration.
+    - For enhancements to existing functionality, **describe the current behavior** and **explain which behavior you expected to see instead** and why. At this point you can also tell which alternatives do not work for you.
+    - For completely new features, **describe what you would like to see from this new feature** in terms of **both functionality and design**. Providing mockups, even if in sketch format, greatly help the team envision what you would like to see.
+- **Explain why this enhancement would be useful** to most Spotlight users. You may also want to point out similar projects of other platforms and their solutions to serve as inspiration.
 
 ### Providing Translations
 
 Everyone is welcome to translate this app into their native or known languages, so that the application is accessible to everyone.
 
-#### Via Weblate
+##### Via Weblate
 
-Spotlight is available to translate on [Weblate](https://hosted.weblate.org/engage/nickvision-spotlight/)!
+Spotlight is available to translate on [Weblate](https://hosted.weblate.org/engage/nickvision-application/)!
 
-#### Manually
+##### Manually
 
 To start translating the app, fork the repository and clone it locally.
 
-In the `NickvisionSpotlight.Shared/Resources` folder you will see a file called `String.resx`. This is a C# resource file that contains all the strings for the application. Simply copy that file and rename it `String.<lang-code>.resx`. For example, if I'm creating an Italian translation, the copied file would be called `Strings.it.resx`. Once you have your copied file, simply replace each `<value>` block of each `<data>` string block with your language's appropriate translation.
+Spotlight uses [gettext](https://www.gnu.org/software/gettext/manual/gettext.html#PO-Files) for translations. In the `resources/po` folder you will find files that can be edited in your favourite `*.po` files editor (or with any plain text editor). 
 
-To check your translation file, make sure your system is in the locale of the language you are translating and run the app. You should see your translated strings!
+If you want to create a new translation, copy the `application.pot` file and rename said copy as `<lang_code>.po`, where `<lang_code>` is the language code for your translation. Usually the code is two letters, but it can also be a specific locale code to differentiate between versions of the same language (for example, `pt` and `pt_BR`). **Also, add the language code to `LINGUAS` file** (keeping this file in alphabetical order).
 
-Once all changes to your translated file are made, make sure the file is in the path `NickvisionSpotlight.Shared/Resources/String.<lang-code>.resx`, commit these changes and create a pull request to the project.
+Edit your new translation file with correct translations for the English messages. 
+
+To check your translation file, make sure your system is in the locale of the language you are translating and [locally build and run the app](README#building-manually). If all steps were carried out successfully, you should see your translation in action!
+
+Once all changes to your translated file are made, commit these changes and create a pull request to the project.
 
 ### Your First Code Contribution
 
-Spotlight is built using .NET 7 and C#. With these technologies, Spotlight is built for Windows only.
-The solution is setup into 2 projects:
- - NickvisionApplication.Shared
- - NickvisionApplication.WinUI
+#### Structure
 
-The whole solution utilizes the [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) pattern for separating data and UI views.
+Spotlight is built using C++20 and platform-native user interface libraries. With these technologies, Spotlight is built for Windows.
 
-#### NickvisionApplication.Shared
+The project is split up into the following sub-projects:
+ - [libspotlight](#libspotlight)
+ - [org.nickvision.spotlight.winui](org.nickvision.spotlight.winui)
 
-This project contains all of the code used by all platforms of the app. 
-- Models => The data driven objects of the application (i.e. Configuration, Database, etc...)
-- Controllers => The objects used by UI views to receive and manipulate data from the Models
-- Helpers => Useful objects such as the Localizer for receiving translated strings throughout the app
-- Resources => Strings, icons, and fonts used by the app
+The whole project utilizes the [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) pattern for separating data models and UI views.
 
-#### NickvisionApplication.WinUI
+##### libspotlight
 
-This project contains all of the code used for the Windows platform version of the app.
-Powered by the [WindowsAppSDK](https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/)
-- Views => The views (pages, windows, dialogs) of the app that connect to the shared controllers
-- Controls => Generic controls for the app
-  - These controls should not be connected to a controller and should be able to be ported to any other application 
+This project contains all of the code used by all platforms of the app:
+- `controllers` => The objects used by UI views to receive and manipulate data from the models.
+- `helpers` => Useful objects and functions specific to the application that can be used by all platforms.
+- `models` => The data driven objects of the application (i.e. Configuration, Database, etc...).
 
-#### Developing on Windows
+##### org.nickvision.spotlight.winui
 
-Recommended IDE:
-- Visual Studio 2019 or Visual Studio 2022 with the required workloads (including .NET 7) and components for Windows app development. For more information, see [Install tools for the Windows App SDK](https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/set-up-your-development-environment?tabs=cs-vs-community%2Ccpp-vs-community%2Cvs-2022-17-1-a%2Cvs-2022-17-1-b)
+This project contains all of the code used for the Windows platform (WinUI) version of the app, including installer scripts:
+Powered by the [Windows App SDK](https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/)
+- `controls` => Generic controls for the app.
+    - These UI objects are separate from views in that they should not be backed by a controller and should be easily ported to any other app.
+- `helpers` => Useful objects and functions specific for the WinUI platform version of the app.
+- `views` => The views (pages, windows, dialogs, etc...) of the app.
+- `installer` => Inno installer scripts.
 
-Although, any IDE that supports .NET 7 and WindowsAppSDK should work.
+#### Developing and Testing
 
-*Rider does support .NET 7, but has no WindowsAppSDK support at the time of writing this. Therefore, you will be able to develop part of the application use Rider, but will be unable to build and run the Windows platform version.*
+Spotlight simply relies on `cmake` to configure and manage the correct projects for the running platform.
+
+[See the readme](README#building-manually) for instructions on building and running the app locally.
 
 ## Styleguides
 
-Application follows [Microsoft's C# Coding Conventions](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions).
+Spotlight uses the following naming conventions:
+- `CamelCase` for namespaces and classes
+- `pascalCase` for file names, functions, and variables
+- `m_` prefix appended to class member variables
+- `get` and `set` prefixes used for accessor and modifiers methods of a class variable respectively
+    - Exception: For boolean class members, `is` and `setIs` should be used as the prefixes for the accessor and modifier methods of said members.
 
-See [Microsoft's C# Identifier Names](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/identifier-names) as well.
+Spotlight uses the following coding styles:
+- ```cpp
+    #ifndef FILENAME_H
+    #define FILENAME_H
+    ...
+    #endif //FILENAME_H
+  ``` 
+  used as the guards to a header file. 
+  - `#pragma once` should not be used.
+- Brackets `{}` should be placed on individual new lines and never inline. 
+    - This applies for any type of structure (`if`, `switch`, `class`, etc...) that requires brackets.
+    - *Single-line if statements should also be wrapped by brackets.*
+- Proper indentation using spacing with spaces and not tabs.
+
 
 ## Join The Project Team
 
 <a href='https://matrix.to/#/#nickvision:matrix.org'><img width='140' alt='Join our room' src='https://user-images.githubusercontent.com/17648453/196094077-c896527d-af6d-4b43-a5d8-e34a00ffd8f6.png'/></a>
 
 ## Attribution
-This guide is based on the **contributing-gen**. [Make your own](https://github.com/bttger/contributing-gen)!
+This guide was based on a template by [contributing-gen](https://github.com/bttger/contributing-gen).
