@@ -258,7 +258,7 @@
   </data>
   <data name="Greeting.Afternoon" xml:space="preserve">
     <!-- Shown from noon to 6pm -->
-    <value>Доброго дня!</value>
+    <value>Добрий день!</value>
   </data>
   <data name="Greeting.Generic" xml:space="preserve">
     <!-- Shown when system time can't be detected -->
