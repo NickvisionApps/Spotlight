@@ -71,18 +71,24 @@ namespace Nickvision::Spotlight::Shared::Models
                 std::filesystem::copy_file(entry.path(), newPath, std::filesystem::copy_options::overwrite_existing);
             }
         } };
-        for(const std::filesystem::directory_entry& entry : std::filesystem::directory_iterator(m_spotlightLockScreenDir))
+        if(std::filesystem::exists(m_spotlightLockScreenDir))
         {
-            if(entry.file_size() / 1000 >= 200)
+            for(const std::filesystem::directory_entry& entry : std::filesystem::directory_iterator(m_spotlightLockScreenDir))
             {
-                processEntry(entry);
+                if(entry.file_size() / 1000 >= 200)
+                {
+                    processEntry(entry);
+                }
             }
         }
-        for(const std::filesystem::directory_entry& entry: std::filesystem::recursive_directory_iterator(m_spotlightDesktopDir))
+        if(std::filesystem::exists(m_spotlightDesktopDir))
         {
-            if(entry.path().extension() == ".jpg")
+            for(const std::filesystem::directory_entry& entry : std::filesystem::recursive_directory_iterator(m_spotlightDesktopDir))
             {
-                processEntry(entry);
+                if(entry.path().extension() == ".jpg")
+                {
+                    processEntry(entry);
+                }
             }
         }
         for(const std::filesystem::directory_entry& entry : std::filesystem::directory_iterator(m_dataDir))
