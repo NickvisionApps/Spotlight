@@ -1,5 +1,7 @@
 #include "models/configuration.h"
 
+using namespace Nickvision::App;
+
 namespace Nickvision::Spotlight::Shared::Models
 {
     Configuration::Configuration(const std::string& key)
@@ -25,6 +27,23 @@ namespace Nickvision::Spotlight::Shared::Models
         bool def{ false };
 #endif
         return m_json.get("AutomaticallyCheckForUpdates", def).asBool();
+    }
+
+    WindowGeometry Configuration::getWindowGeometry() const
+    {
+        WindowGeometry geometry;
+        const Json::Value json{ m_json["WindowGeometry"] };
+        geometry.setWidth(json.get("Width", 900).asInt64());
+        geometry.setHeight(json.get("Height", 700).asInt64());
+        geometry.setIsMaximized(json.get("IsMaximized", false).asBool());
+        return geometry;
+    }
+
+    void Configuration::setWindowGeometry(const WindowGeometry& geometry)
+    {
+        m_json["WindowGeometry"]["Width"] = static_cast<Json::Int64>(geometry.getWidth());
+        m_json["WindowGeometry"]["Height"] = static_cast<Json::Int64>(geometry.getHeight());
+        m_json["WindowGeometry"]["IsMaximized"] = geometry.isMaximized();
     }
 
     void Configuration::setAutomaticallyCheckForUpdates(bool check)

@@ -96,8 +96,9 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
         {
             return;
         }
-        m_controller->connectTaskbar(m_hwnd);
         m_controller->startup();
+        m_controller->connectTaskbar(m_hwnd);
+        m_controller->getWindowGeometry().apply(m_hwnd);
         NavView().IsEnabled(true);
         NavViewImages().IsSelected(true);
         m_opened = true;
@@ -105,8 +106,7 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
 
     void MainWindow::OnClosing(const Microsoft::UI::Windowing::AppWindow& sender, const AppWindowClosingEventArgs& args)
     {
-        bool cancel{ false };
-        args.Cancel(cancel);
+        m_controller->shutdown({ m_hwnd });
     }
 
     void MainWindow::OnActivated(const IInspectable& sender, const WindowActivatedEventArgs& args)

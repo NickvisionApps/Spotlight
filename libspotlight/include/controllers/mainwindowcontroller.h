@@ -10,6 +10,7 @@
 #include <string>
 #include <vector>
 #include <libnick/app/appinfo.h>
+#include <libnick/app/windowgeometry.h>
 #include <libnick/events/event.h>
 #include <libnick/notifications/notificationsenteventargs.h>
 #include <libnick/notifications/shellnotificationsenteventargs.h>
@@ -48,6 +49,11 @@ namespace Nickvision::Spotlight::Shared::Controllers
          */
         Models::Theme getTheme() const;
         /**
+         * @brief Gets the window geometry for the application.
+         * @return The window geometry
+         */
+        Nickvision::App::WindowGeometry getWindowGeometry() const;
+        /**
          * @brief Gets the list of paths to synced spotlight images.
          * @return The list of paths to synced spotlight images
          */
@@ -83,6 +89,11 @@ namespace Nickvision::Spotlight::Shared::Controllers
          * @brief Will only have an effect on the first time called.
          */
         void startup();
+        /**
+         * @brief Shuts down the application.
+         * @param geometry The window geometry to save
+         */
+        void shutdown(const Nickvision::App::WindowGeometry& geometry);
         /**
          * @brief Checks for an application update and sends a notification if one is available.
          */

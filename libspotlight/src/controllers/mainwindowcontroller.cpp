@@ -12,10 +12,10 @@
 #include <windows.h>
 #include "models/configuration.h"
 
-using namespace Nickvision::Spotlight::Shared::Models;
 using namespace Nickvision::App;
 using namespace Nickvision::Events;
 using namespace Nickvision::Notifications;
+using namespace Nickvision::Spotlight::Shared::Models;
 using namespace Nickvision::Update;
 
 namespace Nickvision::Spotlight::Shared::Controllers
@@ -58,6 +58,11 @@ namespace Nickvision::Spotlight::Shared::Controllers
     Theme MainWindowController::getTheme() const
     {
         return Aura::getActive().getConfig<Configuration>("config").getTheme();
+    }
+
+    WindowGeometry MainWindowController::getWindowGeometry() const
+    {
+        return Aura::getActive().getConfig<Configuration>("config").getWindowGeometry();
     }
 
     const std::vector<std::filesystem::path>& MainWindowController::getSpotlightImages() const
@@ -145,6 +150,13 @@ namespace Nickvision::Spotlight::Shared::Controllers
         Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Loaded " + std::to_string(count) + " image(s).");
         m_started = true;
         Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "MainWindow started.");
+    }
+
+    void MainWindowController::shutdown(const WindowGeometry& geometry)
+    {
+        Aura::getActive().getConfig<Configuration>("config").setWindowGeometry(geometry);
+        Aura::getActive().getConfig<Configuration>("config").save();
+        Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "MainWindow shutdown.");
     }
 
     void MainWindowController::checkForUpdates()

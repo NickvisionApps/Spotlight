@@ -86,7 +86,7 @@ namespace winrt::Nickvision::Spotlight::WinUI::Controls::implementation
         m_appWindow.TitleBar().ButtonBackgroundColor(Colors::Transparent());
         m_appWindow.TitleBar().ButtonInactiveBackgroundColor(Colors::Transparent());
         m_appWindow.Title(Title());
-        m_appWindow.SetIcon(L"..\\resources\\org.nickvision.spotlight.ico");
+        m_appWindow.SetIcon(L"resources\\org.nickvision.spotlight.ico");
         SetDragRegion();
     }
     
