@@ -126,6 +126,17 @@ namespace Nickvision::Spotlight::Shared::Controllers
          * @param index The index of the image to set as the desktop background
          */
         void setImageAsDesktopBackground(int index);
+        /**
+         * @brief Exports a spotlight image.
+         * @param index The index of the image to export
+         * @param path The path to export the image to
+         */
+        void exportImage(int index, const std::filesystem::path& path);
+        /**
+         * @brief Exports all spotlight images.
+         * @param path The path to export the images to
+         */
+        void exportAllImages(const std::filesystem::path& path);
 
     private:
         bool m_started;

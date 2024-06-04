@@ -143,13 +143,13 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
          * @param sender IInspectable
          * @param args Microsoft::UI::Xaml::RoutedEventArgs
          */
-        void Export(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
+        Windows::Foundation::IAsyncAction Export(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
         /**
          * @brief Exports all images to a user selected folder.
          * @param sender IInspectable
          * @param args Microsoft::UI::Xaml::RoutedEventArgs
          */
-        void ExportAll(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
+        Windows::Foundation::IAsyncAction ExportAll(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
         /**
          * @brief Sets the selected image as the desktop background.
          * @param sender IInspectable

@@ -355,14 +355,29 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
         OnImageSelectionChanged(sender, nullptr);
     }
 
-    void MainWindow::Export(const IInspectable& sender, const RoutedEventArgs& args)
+    Windows::Foundation::IAsyncAction MainWindow::Export(const IInspectable& sender, const RoutedEventArgs& args)
     {
         int selectedIndex{ MenuViewGrid().IsChecked() ? GridImages().SelectedIndex() : FlipImages().SelectedIndex() };
+        FileSavePicker picker;
+        picker.as<::IInitializeWithWindow>()->Initialize(m_hwnd);
+        picker.FileTypeChoices().Insert(L"JPG", winrt::single_threaded_vector<winrt::hstring>({ L".jpg" }));
+        StorageFile file{ co_await picker.PickSaveFileAsync() };
+        if(file)
+        {
+            m_controller->exportImage(selectedIndex, winrt::to_string(file.Path()));
+        }
     }
 
-    void MainWindow::ExportAll(const IInspectable& sender, const RoutedEventArgs& args)
+    Windows::Foundation::IAsyncAction MainWindow::ExportAll(const IInspectable& sender, const RoutedEventArgs& args)
     {
-        
+        FolderPicker picker;
+        picker.as<::IInitializeWithWindow>()->Initialize(m_hwnd);
+        picker.FileTypeFilter().Append(L"*");
+        StorageFolder folder{ co_await picker.PickSingleFolderAsync() };
+        if(folder)
+        {
+            m_controller->exportAllImages(winrt::to_string(folder.Path()));
+        }
     }
 
     void MainWindow::SetAsBackground(const IInspectable& sender, const RoutedEventArgs& args)

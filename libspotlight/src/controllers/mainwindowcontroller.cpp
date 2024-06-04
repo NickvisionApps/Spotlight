@@ -242,4 +242,28 @@ namespace Nickvision::Spotlight::Shared::Controllers
             m_notificationSent.invoke({ _("Unable to set image as desktop background"), NotificationSeverity::Error });
         }
     }
+
+    void MainWindowController::exportImage(int index, const std::filesystem::path& path)
+    {
+        if(m_spotlightManager.exportImage(static_cast<size_t>(index), path))
+        {
+            m_notificationSent.invoke({ std::vformat(_("Image exported to {}"), std::make_format_args(CodeHelpers::unmove(path.string()))), NotificationSeverity::Success });
+        }
+        else
+        {
+            m_notificationSent.invoke({ _("Unable to export image"), NotificationSeverity::Error });
+        }
+    }
+
+    void MainWindowController::exportAllImages(const std::filesystem::path& path)
+    {
+        if(m_spotlightManager.exportAllImages(path))
+        {
+            m_notificationSent.invoke({ std::vformat(_("Images exported to {}"), std::make_format_args(CodeHelpers::unmove(path.string()))), NotificationSeverity::Success });
+        }
+        else
+        {
+            m_notificationSent.invoke({ _("Unable to export images"), NotificationSeverity::Error });
+        }
+    }
 }
