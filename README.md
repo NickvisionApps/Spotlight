@@ -1,6 +1,8 @@
 # Spotlight
 <img src="resources/org.nickvision.spotlight.svg" width="100" height="100"/>
 
+[![Translation status](https://hosted.weblate.org/widgets/nickvision-spotlight/-/app/svg-badge.svg)](https://hosted.weblate.org/engage/nickvision-spotlight/) ✨Powered by [Weblate](https://weblate.org/en/)✨
+
 **Find your favorite Windows spotlight images**
 
 ## Features
