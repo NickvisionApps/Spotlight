@@ -1,0 +1,232 @@
+<Window
+	x:Class="Nickvision.Spotlight.WinUI.MainWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:local="using:Nickvision.Spotlight.WinUI"
+    xmlns:nickvision="using:Nickvision.Spotlight.WinUI.Controls"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" Activated="OnActivated">
+    <Window.SystemBackdrop>
+        <MicaBackdrop/>
+    </Window.SystemBackdrop>
+
+	<Grid x:Name="MainGrid" AllowDrop="True" Loaded="OnLoaded">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <nickvision:TitleBar x:Name="TitleBar" Grid.Row="0"/>
+
+        <NavigationView x:Name="NavView" Grid.Row="1" IsBackButtonVisible="Collapsed" IsSettingsVisible="False" SelectionChanged="OnNavSelectionChanged">
+            <NavigationView.MenuItems>
+                <NavigationViewItem x:Name="NavViewImages" Tag="Images">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8B9;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+            </NavigationView.MenuItems>
+
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem x:Name="NavViewHelp" SelectsOnInvoked="False" Tapped="OnNavViewItemTapped">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE897;"/>
+                    </NavigationViewItem.Icon>
+
+                    <FlyoutBase.AttachedFlyout>
+                        <Flyout>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                <StackPanel Orientation="Vertical" Spacing="12">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackPanel Grid.Column="0" Orientation="Vertical" Spacing="12">
+                                            <TextBlock x:Name="LblAppName" Style="{ThemeResource NavigationViewItemHeaderTextStyle}" FontSize="18"/>
+
+                                            <TextBlock x:Name="LblAppDescription" Foreground="Gray"/>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Column="2" VerticalAlignment="Top" Orientation="Horizontal" Spacing="6">
+                                            <Button x:Name="BtnCheckForUpdates" Style="{ThemeResource AccentButtonStyle}" Click="CheckForUpdates">
+                                                <Button.Content>
+                                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="14" Glyph="&#xE895;"/>
+                                                </Button.Content>
+                                            </Button>
+                                            
+                                            <Button x:Name="BtnCredits" Click="Credits">
+                                                <Button.Content>
+                                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="14" Glyph="&#xE716;"/>
+                                                </Button.Content>
+                                            </Button>
+
+                                            <Button x:Name="BtnCopyDebugInfo" Click="CopyDebugInformation">
+                                                <Button.Content>
+                                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="14" Glyph="&#xE90F;"/>
+                                                </Button.Content>
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+
+                                    <TextBlock x:Name="LblAppVersion"/>
+
+                                    <TextBlock x:Name="LblChangelog" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                                    <TextBlock x:Name="LblAppChangelog" TextWrapping="WrapWholeWords"/>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <HyperlinkButton x:Name="BtnGitHubRepo" Grid.Column="0" Click="GitHubRepo"/>
+
+                                        <HyperlinkButton x:Name="BtnReportABug" Grid.Column="1" Click="ReportABug"/>
+
+                                        <HyperlinkButton x:Name="BtnDiscussions" Grid.Column="2" Click="Discussions"/>
+                                    </Grid>
+
+                                    <TextBlock x:Name="LblAppCopyright" Text="© Nickvision 2021-2024" Foreground="Gray"/>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Flyout>
+                    </FlyoutBase.AttachedFlyout>
+                </NavigationViewItem>
+
+                <NavigationViewItem x:Name="NavViewSettings" Tag="Settings">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE713;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+            </NavigationView.FooterMenuItems>
+
+            <Grid>
+                <nickvision:ViewStack x:Name="ViewStack">
+                    <nickvision:ViewStack.Pages>
+                        <nickvision:ViewStackPage PageName="Spinner">
+                            <ProgressRing HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </nickvision:ViewStackPage>
+
+                        <nickvision:ViewStackPage PageName="Custom">
+                            <Frame x:Name="FrameCustom"/>
+                        </nickvision:ViewStackPage>
+
+                        <nickvision:ViewStackPage PageName="NoImages">
+                           <nickvision:StatusPage x:Name="StatusPageNoImages" UseAppIcon="True"/>
+                        </nickvision:ViewStackPage>
+
+                        <nickvision:ViewStackPage PageName="Images">
+                            <Grid RowSpacing="12">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock x:Name="LblImagesTitle" Grid.Row="0" Margin="40,24,40,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}" FontSize="26"/>
+
+                                <Grid Grid.Row="1" HorizontalAlignment="Stretch" Margin="40,0,40,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Orientation="Horizontal" Grid.Column="0" Spacing="6">
+                                        <Button x:Name="BtnExport" Style="{ThemeResource AccentButtonStyle}" Visibility="Collapsed" Click="Export">
+                                            <Button.Content>
+                                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEE71;"/>
+
+                                                    <TextBlock x:Name="LblExport"/>
+                                                </StackPanel>
+                                            </Button.Content>
+
+                                            <Button.KeyboardAccelerators>
+                                                <KeyboardAccelerator Modifiers="Control" Key="S"/>
+                                            </Button.KeyboardAccelerators>
+                                        </Button>
+
+                                        <Button x:Name="BtnSetAsBackground" Visibility="Collapsed" Click="SetAsBackground">
+                                            <Button.Content>
+                                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE7B5;"/>
+
+                                                    <TextBlock x:Name="LblSetAsBackground"/>
+                                                </StackPanel>
+                                            </Button.Content>
+
+                                            <Button.KeyboardAccelerators>
+                                                <KeyboardAccelerator Modifiers="Control" Key="B"/>
+                                            </Button.KeyboardAccelerators>
+                                        </Button>
+                                    </StackPanel>
+
+                                    
+
+                                    <CommandBar Grid.Column="2" DefaultLabelPosition="Right" VerticalContentAlignment="Center">
+                                        <CommandBar.Content>
+                                            <TextBlock x:Name="LblImagesCount" Margin="0,0,12,0"/>
+                                        </CommandBar.Content>
+
+                                        <AppBarSeparator/>
+
+                                        <AppBarButton x:Name="BtnExportAll" Click="ExportAll">
+                                            <AppBarButton.Icon>
+                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE896;"/>
+                                            </AppBarButton.Icon>
+
+                                            <AppBarButton.KeyboardAccelerators>
+                                                <KeyboardAccelerator Modifiers="Control,Shift" Key="S"/>
+                                            </AppBarButton.KeyboardAccelerators>
+                                        </AppBarButton>
+
+                                        <AppBarButton x:Name="BtnView">
+                                            <AppBarButton.Icon>
+                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE890;"/>
+                                            </AppBarButton.Icon>
+
+                                            <AppBarButton.Flyout>
+                                                <MenuFlyout>
+                                                    <RadioMenuFlyoutItem x:Name="MenuViewGrid" GroupName="View" Click="ChangeImageViewMode">
+                                                        <RadioMenuFlyoutItem.Icon>
+                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xF0E2;"/>
+                                                        </RadioMenuFlyoutItem.Icon>
+                                                    </RadioMenuFlyoutItem>
+
+                                                    <RadioMenuFlyoutItem x:Name="MenuViewFlip" GroupName="View" Click="ChangeImageViewMode">
+                                                        <RadioMenuFlyoutItem.Icon>
+                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE7C4;"/>
+                                                        </RadioMenuFlyoutItem.Icon>
+                                                    </RadioMenuFlyoutItem>
+                                                </MenuFlyout>
+                                            </AppBarButton.Flyout>
+                                        </AppBarButton>
+                                    </CommandBar>
+                                </Grid>
+
+                                <ScrollView x:Name="ScrollImages" Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                                    <GridView x:Name="GridImages" Margin="40,0,40,16" SelectionMode="Single" SelectionChanged="OnImageSelectionChanged" DoubleTapped="OnImageDoubleTapped"/> 
+                                </ScrollView>
+
+                                <FlipView x:Name="FlipImages" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="40,0,40,16" SelectionChanged="OnImageSelectionChanged"/>
+                            </Grid>
+                        </nickvision:ViewStackPage>
+                    </nickvision:ViewStack.Pages>
+                </nickvision:ViewStack>
+
+                <InfoBar x:Name="InfoBar" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,6" CornerRadius="12">
+                    <InfoBar.ActionButton>
+                        <Button x:Name="BtnInfoBar" HorizontalAlignment="Right"/>
+                    </InfoBar.ActionButton>
+                </InfoBar>
+            </Grid>
+        </NavigationView>
+    </Grid>
+</Window>

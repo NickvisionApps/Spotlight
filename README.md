@@ -1,36 +1,52 @@
-# ===STATUS UPDATE===
-Spotlight is now in **maintenance mode**. 
-
-This means that no new features will be considered/added to the application. Only critical bugs will be addressed and fixed if needed.
-*Translation updates are welcome, but may not be released right away.*
-
 # Spotlight
-<img src="NickvisionSpotlight.Shared/Resources/org.nickvision.spotlight.png" width="100" height="100"/>
+<img src="resources/org.nickvision.spotlight.svg" width="100" height="100"/>
 
- [![Translation status](https://hosted.weblate.org/widgets/nickvision-spotlight/-/app/svg-badge.svg)](https://hosted.weblate.org/engage/nickvision-spotlight/) ✨Powered by [Weblate](https://weblate.org/en/)✨
+**Find your favorite Windows spotlight images**
 
- **Find your favorite Windows spotlight images**
+## Features
+- View all of Windows Spotlight's images stored locally on your machine
+  - Easily export them as an images on disk
+  - Use them as desktop wallpapers
 
-# Features
-- View all of Windows Spotlight's images
-    - Easily export them as an image on disk
-    - Use them as desktop wallpapers
-    
-*Spotlight is only available for Windows*
-
-# Installation
-<a href='https://apps.microsoft.com/store/detail/nickvision-spotlight/9P1M73Z5QMXJ'><img width='140' alt='Download from Microsoft Store' src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Get_it_from_Microsoft_Badge.svg/1024px-Get_it_from_Microsoft_Badge.svg.png'/></a>
-
-# Chat
+## Chat
 <a href='https://matrix.to/#/#nickvision:matrix.org'><img width='140' alt='Join our room' src='https://user-images.githubusercontent.com/17648453/196094077-c896527d-af6d-4b43-a5d8-e34a00ffd8f6.png'/></a>
 
-# Contributing
+## Screenshots
+
+<details>
+  <summary>WinUI</summary>
+
+  ![Main](resources/screenshots/winui/main.png)
+  ![Flip](resources/screenshots/winui/flip.png)
+  ![Dark](resources/screenshots/winui/dark.png)
+</details>
+
+## Building Manually
+Spotlight uses `vcpkg` to manage its dependencies and `cmake` as its build system.
+
+Ensure both `vcpkg` and `cmake` are installed on your system before building.
+
+A C++20 compiler is also required to build Spotlight.
+
+### Configuring vcpkg
+1. Set the `VCPKG_ROOT` environment variable to the path of your vcpkg installation's root directory.
+#### Windows
+1. Set the `VCPKG_DEFAULT_TRIPLET` environment variable to `x64-windows`
+1. Run `vcpkg install libnick libjpeg-turbo boost-gil`
+
+### Building
+1. First, clone/download the repo.
+1. Open a terminal and navigate to the repo's root directory.
+1. Create a new `build` directory and `cd` into it. 
+#### Windows
+1. From the `build` folder, run `cmake .. -G "Visual Studio 17 2022"`.
+1. From the `build` folder, run `cmake --build . --config Release`.
+1. After these commands complete, Spotlight will be successfully built and its binaries can be found in the `org.nickvision.spotlight.winui/Release` folder of the `build` folder.
+
+## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how can you help the project and how to provide information so we can help you in case of troubles with the app.
 
-# WinUI Screenshots
-![WinUILight](NickvisionSpotlight.WinUI/Screenshots/Light.png)
-![WinUIDark](NickvisionSpotlight.WinUI/Screenshots/Dark.png)
+## Code of Conduct
 
-# Dependencies
-- [.NET 7](https://dotnet.microsoft.com/en-us/)
+This project follows the [GNOME Code of Conduct](https://wiki.gnome.org/Foundation/CodeOfConduct).

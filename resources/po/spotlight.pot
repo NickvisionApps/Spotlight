@@ -1,0 +1,248 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-04 13:18-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:32
+msgid "Spotlight"
+msgstr ""
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:33
+msgid "Find your favorite Windows spotlight images"
+msgstr ""
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:37
+msgid "Matrix Chat"
+msgstr ""
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:39
+msgid "Contributors on GitHub"
+msgstr ""
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:41
+msgid "Fyodor Sobolev"
+msgstr ""
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:43
+msgid "David Lapshin"
+msgstr ""
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:44
+msgid "translator-credits"
+msgstr ""
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:183
+msgid "New update available"
+msgstr ""
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:211
+msgid "Unable to download and install update"
+msgstr ""
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:238
+msgid "Image set as desktop background"
+msgstr ""
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:242
+msgid "Unable to set image as desktop background"
+msgstr ""
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:250
+msgid "Image exported to {}"
+msgstr ""
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:254
+msgid "Unable to export image"
+msgstr ""
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:262
+msgid "Images exported to {}"
+msgstr ""
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:266
+msgid "Unable to export images"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/Controls/TitleBar.xaml.cpp:120
+msgid "Search"
+msgstr ""
+
+#. Localize Strings
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:55
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:67
+msgid "Images"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:56
+msgid "Help"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:57
+msgid "Check for Updates"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:58
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:272
+msgid "Credits"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:59
+msgid "Copy Debug Information"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:60
+msgid "Changelog"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:61
+msgid "GitHub Repo"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:62
+msgid "Report a Bug"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:63
+msgid "Discussions"
+msgstr ""
+
+#. Localize Strings
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:64
+#: org.nickvision.spotlight.winui/SettingsPage.xaml.cpp:19
+msgid "Settings"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:65
+msgid "No Spotlight Images"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:66
+msgid "Ensure Windows Spotlight is enabled and come back later to try again"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:68
+msgid "Export"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:69
+msgid "Export (Ctrl+S)"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:70
+msgid "Set as Background"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:71
+msgid "Set as Background (Ctrl+B)"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:72
+msgid "View"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:73
+msgid "Grid"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:74
+msgid "Flip"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:75
+msgid "Export All"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:76
+msgid "Export All (Ctrl+Shift+S)"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:92
+msgid "PREVIEW"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:190
+msgid "Update"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:250
+msgid "Debug information copied to clipboard."
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:275
+msgid ""
+"Developers:\n"
+"{}\n"
+"Designers:\n"
+"{}\n"
+"Artists:\n"
+"{}"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:279
+msgid ""
+"Developers:\n"
+"{}\n"
+"Designers:\n"
+"{}\n"
+"Artists:\n"
+"{}\n"
+"Translators:\n"
+"{}"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:281
+msgid "Close"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:294
+msgid "Total Number of Images: {}"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/SettingsPage.xaml.cpp:20
+msgid "Appearance & behavior"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/SettingsPage.xaml.cpp:21
+msgid "Theme"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/SettingsPage.xaml.cpp:22
+msgctxt "Theme"
+msgid "Light"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/SettingsPage.xaml.cpp:23
+msgctxt "Theme"
+msgid "Dark"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/SettingsPage.xaml.cpp:24
+msgctxt "Theme"
+msgid "System"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/SettingsPage.xaml.cpp:25
+msgid "Automatically Check for Updates"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/SettingsPage.xaml.cpp:26
+msgid "On"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/SettingsPage.xaml.cpp:27
+msgid "Off"
+msgstr ""
