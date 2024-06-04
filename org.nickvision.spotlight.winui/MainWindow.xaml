@@ -122,7 +122,89 @@
                         </nickvision:ViewStackPage>
 
                         <nickvision:ViewStackPage PageName="Images">
-                            
+                            <Grid RowSpacing="12">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock x:Name="LblImagesTitle" Grid.Row="0" Margin="40,24,40,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}" FontSize="26"/>
+
+                                <Grid Grid.Row="1" HorizontalAlignment="Stretch" Margin="40,0,40,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button x:Name="BtnSetAsBackground" Grid.Column="0" Style="{ThemeResource AccentButtonStyle}" IsEnabled="False" Click="SetAsBackground">
+                                        <Button.Content>
+                                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE7B5;"/>
+
+                                                <TextBlock x:Name="LblSetAsBackground"/>
+                                            </StackPanel>
+                                        </Button.Content>
+
+                                        <Button.KeyboardAccelerators>
+                                            <KeyboardAccelerator Modifiers="Control" Key="B"/>
+                                        </Button.KeyboardAccelerators>
+                                    </Button>
+
+                                    <CommandBar Grid.Column="2" DefaultLabelPosition="Right">
+                                        <AppBarButton x:Name="BtnView">
+                                            <AppBarButton.Icon>
+                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE890;"/>
+                                            </AppBarButton.Icon>
+
+                                            <AppBarButton.Flyout>
+                                                <MenuFlyout>
+                                                    <RadioMenuFlyoutItem x:Name="MenuViewGrid" GroupName="View" IsChecked="True" Click="ChangeImageViewMode">
+                                                        <RadioMenuFlyoutItem.Icon>
+                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xF0E2;"/>
+                                                        </RadioMenuFlyoutItem.Icon>
+                                                    </RadioMenuFlyoutItem>
+
+                                                    <RadioMenuFlyoutItem x:Name="MenuViewFlip" GroupName="View" Click="ChangeImageViewMode">
+                                                        <RadioMenuFlyoutItem.Icon>
+                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE7C4;"/>
+                                                        </RadioMenuFlyoutItem.Icon>
+                                                    </RadioMenuFlyoutItem>
+                                                </MenuFlyout>
+                                            </AppBarButton.Flyout>
+                                        </AppBarButton>
+
+                                        <AppBarSeparator/>
+
+                                        <AppBarButton x:Name="BtnExportAll" Click="ExportAll">
+                                            <AppBarButton.Icon>
+                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE896;"/>
+                                            </AppBarButton.Icon>
+
+                                            <AppBarButton.KeyboardAccelerators>
+                                                <KeyboardAccelerator Modifiers="Control,Shift" Key="S"/>
+                                            </AppBarButton.KeyboardAccelerators>
+                                        </AppBarButton>
+
+                                        <AppBarButton x:Name="BtnExport" IsEnabled="False" Click="Export">
+                                            <AppBarButton.Icon>
+                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEE71;"/>
+                                            </AppBarButton.Icon>
+
+                                            <AppBarButton.KeyboardAccelerators>
+                                                <KeyboardAccelerator Modifiers="Control" Key="S"/>
+                                            </AppBarButton.KeyboardAccelerators>
+                                        </AppBarButton>
+                                    </CommandBar>
+                                </Grid>
+
+                                <ScrollView x:Name="ScrollImages" Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                                    <GridView x:Name="GridImages" Margin="40,0,40,16" SelectionMode="Single" SelectionChanged="OnImageSelectionChanged" DoubleTapped="OnImageDoubleTapped"/> 
+                                </ScrollView>
+
+                                <FlipView x:Name="FlipImages" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="40,0,40,16" Visibility="Collapsed" SelectionChanged="OnImageSelectionChanged"/>
+                            </Grid>
                         </nickvision:ViewStackPage>
                     </nickvision:ViewStack.Pages>
                 </nickvision:ViewStack>

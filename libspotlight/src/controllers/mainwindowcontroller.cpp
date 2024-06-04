@@ -145,9 +145,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
             Aura::getActive().getLogger().log(Logging::LogLevel::Critical, "Unable to find spotlight images directory.");
             throw std::runtime_error("Unable to find spotlight images directory.");
         }
-        Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Loading spotlight images...");
-        size_t count{ m_spotlightManager->sync().size() };
-        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Loaded " + std::to_string(count) + " image(s).");
+        m_spotlightManager->sync();
         m_started = true;
         Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "MainWindow started.");
     }
@@ -217,6 +215,18 @@ namespace Nickvision::Spotlight::Shared::Controllers
         else
         {
             Aura::getActive().getLogger().log(Logging::LogLevel::Error, "Unable to connect to Windows taskbar.");
+        }
+    }
+
+    void MainWindowController::setImageAsDesktopBackground(int index)
+    {
+        if(m_spotlightManager->setAsDesktopBackground(static_cast<size_t>(index)))
+        {
+            m_notificationSent.invoke({ _("Image set as desktop background"), NotificationSeverity::Success });
+        }
+        else
+        {
+            m_notificationSent.invoke({ _("Unable to set image as desktop background"), NotificationSeverity::Error });
         }
     }
 }

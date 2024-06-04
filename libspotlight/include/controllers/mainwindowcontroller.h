@@ -109,6 +109,11 @@ namespace Nickvision::Spotlight::Shared::Controllers
          * @param hwnd The main window handle
          */
         void connectTaskbar(HWND hwnd);
+        /**
+         * @brief Sets a spotlight image as the desktop background.
+         * @param index The index of the image to set as the desktop background
+         */
+        void setImageAsDesktopBackground(int index);
 
     private:
         bool m_started;

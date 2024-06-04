@@ -23,6 +23,7 @@ using namespace winrt::Microsoft::UI::Xaml::Controls;
 using namespace winrt::Microsoft::UI::Xaml::Controls::Primitives;
 using namespace winrt::Microsoft::UI::Xaml::Input;
 using namespace winrt::Microsoft::UI::Xaml::Media;
+using namespace winrt::Microsoft::UI::Xaml::Media::Imaging;
 using namespace winrt::Microsoft::UI::Windowing;
 using namespace winrt::Windows::ApplicationModel::DataTransfer;
 using namespace winrt::Windows::Foundation::Collections;
@@ -63,6 +64,16 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
         NavViewSettings().Content(winrt::box_value(winrt::to_hstring(_("Settings"))));
         StatusPageNoImages().Title(winrt::to_hstring(_("No Spotlight Images")));
         StatusPageNoImages().Description(winrt::to_hstring(_("Ensure Windows Spotlight is enabled and come back later to try again")));
+        LblImagesTitle().Text(winrt::to_hstring(_("Images")));
+        LblSetAsBackground().Text(winrt::to_hstring(_("Set as Background")));
+        ToolTipService::SetToolTip(BtnSetAsBackground(), winrt::box_value(winrt::to_hstring(_("Set as Background (Ctrl+B)"))));
+        BtnView().Label(winrt::to_hstring(_("View")));
+        MenuViewGrid().Text(winrt::to_hstring(_("Grid")));
+        MenuViewFlip().Text(winrt::to_hstring(_("Flip")));
+        BtnExportAll().Label(winrt::to_hstring(_("Export All")));
+        ToolTipService::SetToolTip(BtnExportAll(), winrt::box_value(winrt::to_hstring(_("Export All (Ctrl+Shift+S)"))));
+        BtnExport().Label(winrt::to_hstring(_("Export")));
+        ToolTipService::SetToolTip(BtnExport(), winrt::box_value(winrt::to_hstring(_("Export (Ctrl+S)"))));
         //Default
         NavView().IsEnabled(false);
         ViewStack().CurrentPage(L"Spinner");
@@ -101,6 +112,19 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
         m_controller->getWindowGeometry().apply(m_hwnd);
         NavView().IsEnabled(true);
         NavViewImages().IsSelected(true);
+        for(const std::filesystem::path& image : m_controller->getSpotlightImages())
+        {
+            Image gridControl;
+            gridControl.Width(500);
+            gridControl.Height(300);
+            gridControl.Stretch(Stretch::UniformToFill);
+            gridControl.Source(BitmapImage(Windows::Foundation::Uri(winrt::to_hstring(image.string()))));
+            GridImages().Items().Append(gridControl);
+            Image flipControl;
+            flipControl.Source(BitmapImage(Windows::Foundation::Uri(winrt::to_hstring(image.string()))));
+            flipControl.Stretch(Stretch::UniformToFill);
+            FlipImages().Items().Append(flipControl);
+        }
         m_opened = true;
     }
 
@@ -273,5 +297,58 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
         dialog.RequestedTheme(MainGrid().ActualTheme());
         dialog.XamlRoot(MainGrid().XamlRoot());
         co_await dialog.ShowAsync();
+    }
+
+    void MainWindow::OnImageSelectionChanged(const IInspectable& sender, const SelectionChangedEventArgs& args)
+    {
+        if(MenuViewGrid().IsChecked())
+        {
+            BtnSetAsBackground().IsEnabled(GridImages().SelectedIndex() != -1);
+            BtnExport().IsEnabled(GridImages().SelectedIndex() != -1);
+        }
+        else if(MenuViewFlip().IsChecked())
+        {
+            BtnSetAsBackground().IsEnabled(FlipImages().SelectedIndex() != -1);
+            BtnExport().IsEnabled(FlipImages().SelectedIndex() != -1);
+        }
+    }
+
+    Windows::Foundation::IAsyncAction MainWindow::OnImageDoubleTapped(const IInspectable& sender, const DoubleTappedRoutedEventArgs& args)
+    {
+        const std::filesystem::path& image{ m_controller->getSpotlightImages()[GridImages().SelectedIndex()] };
+        co_await Launcher::LaunchFileAsync(co_await StorageFile::GetFileFromPathAsync(winrt::to_hstring(image.string())));
+    }
+
+    void MainWindow::ChangeImageViewMode(const IInspectable& sender, const RoutedEventArgs& args)
+    {
+        if(MenuViewGrid().IsChecked())
+        {
+            ScrollImages().Visibility(Visibility::Visible);
+            FlipImages().Visibility(Visibility::Collapsed);
+            MenuViewFlip().IsChecked(false);
+        }
+        else if(MenuViewFlip().IsChecked())
+        {
+            ScrollImages().Visibility(Visibility::Collapsed);
+            FlipImages().Visibility(Visibility::Visible);
+            MenuViewGrid().IsChecked(false);
+        }
+        OnImageSelectionChanged(sender, nullptr);
+    }
+
+    void MainWindow::SetAsBackground(const IInspectable& sender, const RoutedEventArgs& args)
+    {
+        int selectedIndex{ MenuViewGrid().IsChecked() ? GridImages().SelectedIndex() : FlipImages().SelectedIndex() };
+        m_controller->setImageAsDesktopBackground(selectedIndex);
+    }
+
+    void MainWindow::ExportAll(const IInspectable& sender, const RoutedEventArgs& args)
+    {
+        
+    }
+
+    void MainWindow::Export(const IInspectable& sender, const RoutedEventArgs& args)
+    {
+        int selectedIndex{ MenuViewGrid().IsChecked() ? GridImages().SelectedIndex() : FlipImages().SelectedIndex() };
     }
 }

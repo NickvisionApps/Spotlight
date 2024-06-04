@@ -115,6 +115,42 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
          * @param args Microsoft::UI::Xaml::RoutedEventArgs
          */
         Windows::Foundation::IAsyncAction Discussions(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
+        /**
+         * @brief Handles when the image selection is changed.
+         * @param sender IInspectable
+         * @param args Microsoft::UI::Xaml::Controls::SelectionChangedEventArgs 
+         */
+        void OnImageSelectionChanged(const IInspectable& sender, const Microsoft::UI::Xaml::Controls::SelectionChangedEventArgs& args);
+        /**
+         * @brief Handles when the image is double tapped.
+         * @param sender IInspectable
+         * @param args Microsoft::UI::Xaml::Input::DoubleTappedRoutedEventArgs
+         */
+        Windows::Foundation::IAsyncAction OnImageDoubleTapped(const IInspectable& sender, const Microsoft::UI::Xaml::Input::DoubleTappedRoutedEventArgs& args);
+        /**
+         * @brief Changes the image view mode.
+         * @param sender IInspectable
+         * @param args Microsoft::UI::Xaml::RoutedEventArgs 
+         */
+        void ChangeImageViewMode(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
+        /**
+         * @brief Sets the selected image as the desktop background.
+         * @param sender IInspectable
+         * @param args Microsoft::UI::Xaml::RoutedEventArgs 
+         */
+        void SetAsBackground(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
+        /**
+         * @brief Exports all images to a user selected folder.
+         * @param sender IInspectable
+         * @param args Microsoft::UI::Xaml::RoutedEventArgs
+         */
+        void ExportAll(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
+        /**
+         * @brief Exports the selected image to a user selected folder.
+         * @param sender IInspectable
+         * @param args Microsoft::UI::Xaml::RoutedEventArgs
+         */
+        void Export(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
 
     private:
         std::shared_ptr<::Nickvision::Spotlight::Shared::Controllers::MainWindowController> m_controller;
