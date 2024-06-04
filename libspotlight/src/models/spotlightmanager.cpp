@@ -40,6 +40,23 @@ namespace Nickvision::Spotlight::Shared::Models
         return m_images;
     }
 
+    SpotlightSupport SpotlightManager::getSupportLevel() const
+    {
+        if(std::filesystem::exists(m_spotlightLockScreenDir) && std::filesystem::exists(m_spotlightDesktopDir))
+        {
+            return SpotlightSupport::Full;
+        }
+        else if(std::filesystem::exists(m_spotlightLockScreenDir))
+        {
+            return SpotlightSupport::LockScreenOnly;
+        }
+        else if(std::filesystem::exists(m_spotlightDesktopDir))
+        {
+            return SpotlightSupport::DesktopOnly;
+        }
+        return SpotlightSupport::None;
+    }
+
     const std::vector<std::filesystem::path>& SpotlightManager::sync()
     {
         Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Loading spotlight images...");

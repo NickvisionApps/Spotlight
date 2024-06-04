@@ -65,6 +65,8 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
         StatusPageNoImages().Title(winrt::to_hstring(_("No Spotlight Images")));
         StatusPageNoImages().Description(winrt::to_hstring(_("Ensure Windows Spotlight is enabled and come back later to try again")));
         LblImagesTitle().Text(winrt::to_hstring(_("Images")));
+        LblExport().Text(winrt::to_hstring(_("Export")));
+        ToolTipService::SetToolTip(BtnExport(), winrt::box_value(winrt::to_hstring(_("Export (Ctrl+S)"))));
         LblSetAsBackground().Text(winrt::to_hstring(_("Set as Background")));
         ToolTipService::SetToolTip(BtnSetAsBackground(), winrt::box_value(winrt::to_hstring(_("Set as Background (Ctrl+B)"))));
         BtnView().Label(winrt::to_hstring(_("View")));
@@ -72,8 +74,6 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
         MenuViewFlip().Text(winrt::to_hstring(_("Flip")));
         BtnExportAll().Label(winrt::to_hstring(_("Export All")));
         ToolTipService::SetToolTip(BtnExportAll(), winrt::box_value(winrt::to_hstring(_("Export All (Ctrl+Shift+S)"))));
-        BtnExport().Label(winrt::to_hstring(_("Export")));
-        ToolTipService::SetToolTip(BtnExport(), winrt::box_value(winrt::to_hstring(_("Export (Ctrl+S)"))));
 
     }
 
@@ -116,7 +116,7 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
 
     void MainWindow::OnClosing(const Microsoft::UI::Windowing::AppWindow& sender, const AppWindowClosingEventArgs& args)
     {
-        m_controller->shutdown({ m_hwnd });
+        m_controller->shutdown({ m_hwnd }, MenuViewFlip().IsChecked() ? ViewMode::Flip : ViewMode::Grid);
     }
 
     void MainWindow::OnActivated(const IInspectable& sender, const WindowActivatedEventArgs& args)
@@ -291,6 +291,7 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
         {
             NavView().IsEnabled(true);
             NavViewImages().IsSelected(true);
+            LblImagesCount().Text(winrt::to_hstring(std::vformat(_("Total Number of Images: {}"), std::make_format_args(CodeHelpers::unmove(m_controller->getSpotlightImages().size())))));
             for(const std::filesystem::path& image : m_controller->getSpotlightImages())
             {
                 Image gridControl;
@@ -304,6 +305,15 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
                 flipControl.Stretch(Stretch::UniformToFill);
                 FlipImages().Items().Append(flipControl);
             }
+            if(m_controller->getViewMode() == ViewMode::Flip)
+            {
+                MenuViewFlip().IsChecked(true);
+            }
+            else
+            {
+                MenuViewGrid().IsChecked(true);
+            }
+            ChangeImageViewMode(nullptr, nullptr);
         });
 
     }
@@ -312,13 +322,13 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
     {
         if(MenuViewGrid().IsChecked())
         {
-            BtnSetAsBackground().IsEnabled(GridImages().SelectedIndex() != -1);
-            BtnExport().IsEnabled(GridImages().SelectedIndex() != -1);
+            BtnSetAsBackground().Visibility(GridImages().SelectedIndex() != -1 ? Visibility::Visible : Visibility::Collapsed);
+            BtnExport().Visibility(GridImages().SelectedIndex() != -1 ? Visibility::Visible : Visibility::Collapsed);
         }
         else if(MenuViewFlip().IsChecked())
         {
-            BtnSetAsBackground().IsEnabled(FlipImages().SelectedIndex() != -1);
-            BtnExport().IsEnabled(FlipImages().SelectedIndex() != -1);
+            BtnSetAsBackground().Visibility(FlipImages().SelectedIndex() != -1 ? Visibility::Visible : Visibility::Collapsed);
+            BtnExport().Visibility(FlipImages().SelectedIndex() != -1 ? Visibility::Visible : Visibility::Collapsed);
         }
     }
 
@@ -345,10 +355,9 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
         OnImageSelectionChanged(sender, nullptr);
     }
 
-    void MainWindow::SetAsBackground(const IInspectable& sender, const RoutedEventArgs& args)
+    void MainWindow::Export(const IInspectable& sender, const RoutedEventArgs& args)
     {
         int selectedIndex{ MenuViewGrid().IsChecked() ? GridImages().SelectedIndex() : FlipImages().SelectedIndex() };
-        m_controller->setImageAsDesktopBackground(selectedIndex);
     }
 
     void MainWindow::ExportAll(const IInspectable& sender, const RoutedEventArgs& args)
@@ -356,8 +365,9 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
         
     }
 
-    void MainWindow::Export(const IInspectable& sender, const RoutedEventArgs& args)
+    void MainWindow::SetAsBackground(const IInspectable& sender, const RoutedEventArgs& args)
     {
         int selectedIndex{ MenuViewGrid().IsChecked() ? GridImages().SelectedIndex() : FlipImages().SelectedIndex() };
+        m_controller->setImageAsDesktopBackground(selectedIndex);
     }
 }

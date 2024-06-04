@@ -3,6 +3,7 @@
 
 #include <filesystem>
 #include <vector>
+#include "spotlightsupport.h"
 
 namespace Nickvision::Spotlight::Shared::Models
 {
@@ -21,6 +22,11 @@ namespace Nickvision::Spotlight::Shared::Models
          * @return The list of paths to synced spotlight images
          */
         const std::vector<std::filesystem::path>& getImages() const;
+        /**
+         * @brief Gets the level of support for spotlight images.
+         * @return The level of support for spotlight images
+         */
+        SpotlightSupport getSupportLevel() const;
         /**
          * @brief Syncs spotlight images.
          * @return The list of paths to synced spotlight images

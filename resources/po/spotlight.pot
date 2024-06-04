@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-04 00:04-0400\n"
+"POT-Creation-Date: 2024-06-04 00:35-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,19 +45,19 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:173
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:183
 msgid "New update available"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:201
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:211
 msgid "Unable to download and install update"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:228
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:238
 msgid "Image set as desktop background"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:232
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:242
 msgid "Unable to set image as desktop background"
 msgstr ""
 
@@ -119,39 +119,39 @@ msgid "Ensure Windows Spotlight is enabled and come back later to try again"
 msgstr ""
 
 #: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:68
-msgid "Set as Background"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:69
-msgid "Set as Background (Ctrl+B)"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:70
-msgid "View"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:71
-msgid "Grid"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:72
-msgid "Flip"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:73
-msgid "Export All"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:74
-msgid "Export All (Ctrl+Shift+S)"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:75
 msgid "Export"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:76
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:69
 msgid "Export (Ctrl+S)"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:70
+msgid "Set as Background"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:71
+msgid "Set as Background (Ctrl+B)"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:72
+msgid "View"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:73
+msgid "Grid"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:74
+msgid "Flip"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:75
+msgid "Export All"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:76
+msgid "Export All (Ctrl+Shift+S)"
 msgstr ""
 
 #: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:92
@@ -190,6 +190,10 @@ msgstr ""
 
 #: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:281
 msgid "Close"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:294
+msgid "Total Number of Images: {}"
 msgstr ""
 
 #: org.nickvision.spotlight.winui/SettingsPage.xaml.cpp:20

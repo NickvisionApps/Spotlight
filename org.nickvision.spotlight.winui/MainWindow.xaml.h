@@ -139,11 +139,11 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
          */
         void ChangeImageViewMode(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
         /**
-         * @brief Sets the selected image as the desktop background.
+         * @brief Exports the selected image to a user selected folder.
          * @param sender IInspectable
-         * @param args Microsoft::UI::Xaml::RoutedEventArgs 
+         * @param args Microsoft::UI::Xaml::RoutedEventArgs
          */
-        void SetAsBackground(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
+        void Export(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
         /**
          * @brief Exports all images to a user selected folder.
          * @param sender IInspectable
@@ -151,11 +151,11 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
          */
         void ExportAll(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
         /**
-         * @brief Exports the selected image to a user selected folder.
+         * @brief Sets the selected image as the desktop background.
          * @param sender IInspectable
-         * @param args Microsoft::UI::Xaml::RoutedEventArgs
+         * @param args Microsoft::UI::Xaml::RoutedEventArgs 
          */
-        void Export(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
+        void SetAsBackground(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
 
     private:
         std::shared_ptr<::Nickvision::Spotlight::Shared::Controllers::MainWindowController> m_controller;

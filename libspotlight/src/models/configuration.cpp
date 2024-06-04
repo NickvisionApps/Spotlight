@@ -50,4 +50,14 @@ namespace Nickvision::Spotlight::Shared::Models
     {
         m_json["AutomaticallyCheckForUpdates"] = check;
     }
+
+    ViewMode Configuration::getViewMode() const
+    {
+        return static_cast<ViewMode>(m_json.get("ViewMode", static_cast<int>(ViewMode::Grid)).asInt());
+    }
+
+    void Configuration::setViewMode(ViewMode mode)
+    {
+        m_json["ViewMode"] = static_cast<int>(mode);
+    }
 }

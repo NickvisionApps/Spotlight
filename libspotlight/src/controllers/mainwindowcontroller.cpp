@@ -64,6 +64,11 @@ namespace Nickvision::Spotlight::Shared::Controllers
         return Aura::getActive().getConfig<Configuration>("config").getWindowGeometry();
     }
 
+    ViewMode MainWindowController::getViewMode() const
+    {
+        return Aura::getActive().getConfig<Configuration>("config").getViewMode();
+    }
+
     const std::vector<std::filesystem::path>& MainWindowController::getSpotlightImages() const
     {
         return m_spotlightManager.getImages();
@@ -90,23 +95,26 @@ namespace Nickvision::Spotlight::Shared::Controllers
         builder << Aura::getActive().getAppInfo().getId();
         builder << ".winui" << std::endl;
         builder << Aura::getActive().getAppInfo().getVersion().toString() << std::endl << std::endl;
-        if(Aura::getActive().isRunningViaFlatpak())
-        {
-            builder << "Running under Flatpak" << std::endl;
-        }
-        else if(Aura::getActive().isRunningViaSnap())
-        {
-            builder << "Running under Snap" << std::endl;
-        }
-        else
-        {
-            builder << "Running locally" << std::endl;
-        }
         LCID lcid = GetThreadLocale();
         wchar_t name[LOCALE_NAME_MAX_LENGTH];
         if(LCIDToLocaleName(lcid, name, LOCALE_NAME_MAX_LENGTH, 0) > 0)
         {
             builder << StringHelpers::toString(name) << std::endl;
+        }
+        switch(m_spotlightManager.getSupportLevel())
+        {
+        case SpotlightSupport::Full:
+            builder << "Spotlight Support Level: Full" << std::endl;
+            break;
+        case SpotlightSupport::LockScreenOnly:
+            builder << "Spotlight Support Level: Lock Screen Only" << std::endl;
+            break;
+        case SpotlightSupport::DesktopOnly:
+            builder << "Spotlight Support Level: Desktop Only" << std::endl;
+            break;
+        default:
+            builder << "Spotlight Support Level: None" << std::endl;
+            break;
         }
         if (!extraInformation.empty())
         {
@@ -148,10 +156,12 @@ namespace Nickvision::Spotlight::Shared::Controllers
         Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "MainWindow started.");
     }
 
-    void MainWindowController::shutdown(const WindowGeometry& geometry)
+    void MainWindowController::shutdown(const WindowGeometry& geometry, ViewMode viewMode)
     {
-        Aura::getActive().getConfig<Configuration>("config").setWindowGeometry(geometry);
-        Aura::getActive().getConfig<Configuration>("config").save();
+        Configuration& config{ Aura::getActive().getConfig<Configuration>("config") };
+        config.setWindowGeometry(geometry);
+        config.setViewMode(viewMode);
+        config.save();
         Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "MainWindow shutdown.");
     }
 

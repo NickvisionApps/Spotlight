@@ -138,42 +138,42 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <Button x:Name="BtnSetAsBackground" Grid.Column="0" Style="{ThemeResource AccentButtonStyle}" IsEnabled="False" Click="SetAsBackground">
-                                        <Button.Content>
-                                            <StackPanel Orientation="Horizontal" Spacing="6">
-                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE7B5;"/>
+                                    <StackPanel Orientation="Horizontal" Grid.Column="0" Spacing="6">
+                                        <Button x:Name="BtnExport" Style="{ThemeResource AccentButtonStyle}" Visibility="Collapsed" Click="Export">
+                                            <Button.Content>
+                                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEE71;"/>
 
-                                                <TextBlock x:Name="LblSetAsBackground"/>
-                                            </StackPanel>
-                                        </Button.Content>
+                                                    <TextBlock x:Name="LblExport"/>
+                                                </StackPanel>
+                                            </Button.Content>
 
-                                        <Button.KeyboardAccelerators>
-                                            <KeyboardAccelerator Modifiers="Control" Key="B"/>
-                                        </Button.KeyboardAccelerators>
-                                    </Button>
+                                            <Button.KeyboardAccelerators>
+                                                <KeyboardAccelerator Modifiers="Control" Key="S"/>
+                                            </Button.KeyboardAccelerators>
+                                        </Button>
 
-                                    <CommandBar Grid.Column="2" DefaultLabelPosition="Right">
-                                        <AppBarButton x:Name="BtnView">
-                                            <AppBarButton.Icon>
-                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE890;"/>
-                                            </AppBarButton.Icon>
+                                        <Button x:Name="BtnSetAsBackground" Visibility="Collapsed" Click="SetAsBackground">
+                                            <Button.Content>
+                                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE7B5;"/>
 
-                                            <AppBarButton.Flyout>
-                                                <MenuFlyout>
-                                                    <RadioMenuFlyoutItem x:Name="MenuViewGrid" GroupName="View" IsChecked="True" Click="ChangeImageViewMode">
-                                                        <RadioMenuFlyoutItem.Icon>
-                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xF0E2;"/>
-                                                        </RadioMenuFlyoutItem.Icon>
-                                                    </RadioMenuFlyoutItem>
+                                                    <TextBlock x:Name="LblSetAsBackground"/>
+                                                </StackPanel>
+                                            </Button.Content>
 
-                                                    <RadioMenuFlyoutItem x:Name="MenuViewFlip" GroupName="View" Click="ChangeImageViewMode">
-                                                        <RadioMenuFlyoutItem.Icon>
-                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE7C4;"/>
-                                                        </RadioMenuFlyoutItem.Icon>
-                                                    </RadioMenuFlyoutItem>
-                                                </MenuFlyout>
-                                            </AppBarButton.Flyout>
-                                        </AppBarButton>
+                                            <Button.KeyboardAccelerators>
+                                                <KeyboardAccelerator Modifiers="Control" Key="B"/>
+                                            </Button.KeyboardAccelerators>
+                                        </Button>
+                                    </StackPanel>
+
+                                    
+
+                                    <CommandBar Grid.Column="2" DefaultLabelPosition="Right" VerticalContentAlignment="Center">
+                                        <CommandBar.Content>
+                                            <TextBlock x:Name="LblImagesCount" Margin="0,0,12,0"/>
+                                        </CommandBar.Content>
 
                                         <AppBarSeparator/>
 
@@ -187,14 +187,26 @@
                                             </AppBarButton.KeyboardAccelerators>
                                         </AppBarButton>
 
-                                        <AppBarButton x:Name="BtnExport" IsEnabled="False" Click="Export">
+                                        <AppBarButton x:Name="BtnView">
                                             <AppBarButton.Icon>
-                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEE71;"/>
+                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE890;"/>
                                             </AppBarButton.Icon>
 
-                                            <AppBarButton.KeyboardAccelerators>
-                                                <KeyboardAccelerator Modifiers="Control" Key="S"/>
-                                            </AppBarButton.KeyboardAccelerators>
+                                            <AppBarButton.Flyout>
+                                                <MenuFlyout>
+                                                    <RadioMenuFlyoutItem x:Name="MenuViewGrid" GroupName="View" Click="ChangeImageViewMode">
+                                                        <RadioMenuFlyoutItem.Icon>
+                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xF0E2;"/>
+                                                        </RadioMenuFlyoutItem.Icon>
+                                                    </RadioMenuFlyoutItem>
+
+                                                    <RadioMenuFlyoutItem x:Name="MenuViewFlip" GroupName="View" Click="ChangeImageViewMode">
+                                                        <RadioMenuFlyoutItem.Icon>
+                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE7C4;"/>
+                                                        </RadioMenuFlyoutItem.Icon>
+                                                    </RadioMenuFlyoutItem>
+                                                </MenuFlyout>
+                                            </AppBarButton.Flyout>
                                         </AppBarButton>
                                     </CommandBar>
                                 </Grid>
@@ -203,7 +215,7 @@
                                     <GridView x:Name="GridImages" Margin="40,0,40,16" SelectionMode="Single" SelectionChanged="OnImageSelectionChanged" DoubleTapped="OnImageDoubleTapped"/> 
                                 </ScrollView>
 
-                                <FlipView x:Name="FlipImages" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="40,0,40,16" Visibility="Collapsed" SelectionChanged="OnImageSelectionChanged"/>
+                                <FlipView x:Name="FlipImages" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="40,0,40,16" SelectionChanged="OnImageSelectionChanged"/>
                             </Grid>
                         </nickvision:ViewStackPage>
                     </nickvision:ViewStack.Pages>

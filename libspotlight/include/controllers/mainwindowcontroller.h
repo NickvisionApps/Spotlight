@@ -19,6 +19,7 @@
 #include "controllers/preferencesviewcontroller.h"
 #include "models/spotlightmanager.h"
 #include "models/theme.h"
+#include "models/viewmode.h"
 
 namespace Nickvision::Spotlight::Shared::Controllers
 {
@@ -53,6 +54,11 @@ namespace Nickvision::Spotlight::Shared::Controllers
          * @return The window geometry
          */
         Nickvision::App::WindowGeometry getWindowGeometry() const;
+        /**
+         * @brief Gets the view mode for the application.
+         * @return The view mode
+         */
+        Models::ViewMode getViewMode() const;
         /**
          * @brief Gets the list of paths to synced spotlight images.
          * @return The list of paths to synced spotlight images
@@ -92,8 +98,9 @@ namespace Nickvision::Spotlight::Shared::Controllers
         /**
          * @brief Shuts down the application.
          * @param geometry The window geometry to save
+         * @param viewMode The view mode to save
          */
-        void shutdown(const Nickvision::App::WindowGeometry& geometry);
+        void shutdown(const Nickvision::App::WindowGeometry& geometry, Models::ViewMode viewMode);
         /**
          * @brief Checks for an application update and sends a notification if one is available.
          */
