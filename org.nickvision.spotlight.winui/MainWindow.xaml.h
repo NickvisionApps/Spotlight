@@ -116,6 +116,11 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
          */
         Windows::Foundation::IAsyncAction Discussions(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
         /**
+         * @brief Handles when the images are synced.
+         * @param args Nickvision::Events::EventArgs 
+         */
+        void OnImagesSynced(const ::Nickvision::Events::EventArgs& args);
+        /**
          * @brief Handles when the image selection is changed.
          * @param sender IInspectable
          * @param args Microsoft::UI::Xaml::Controls::SelectionChangedEventArgs 

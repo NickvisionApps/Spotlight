@@ -74,9 +74,7 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
         ToolTipService::SetToolTip(BtnExportAll(), winrt::box_value(winrt::to_hstring(_("Export All (Ctrl+Shift+S)"))));
         BtnExport().Label(winrt::to_hstring(_("Export")));
         ToolTipService::SetToolTip(BtnExport(), winrt::box_value(winrt::to_hstring(_("Export (Ctrl+S)"))));
-        //Default
-        NavView().IsEnabled(false);
-        ViewStack().CurrentPage(L"Spinner");
+
     }
 
     void MainWindow::SetController(const std::shared_ptr<MainWindowController>& controller, ElementTheme systemTheme)
@@ -88,6 +86,7 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
         m_controller->configurationSaved() += [&](const EventArgs& args) { OnConfigurationSaved(args); };
         m_controller->notificationSent() += [&](const NotificationSentEventArgs& args) { OnNotificationSent(args); };
         m_controller->shellNotificationSent() += [&](const ShellNotificationSentEventArgs& args) { OnShellNotificationSent(args); };
+        m_controller->imagesSynced() += [&](const EventArgs& args) { OnImagesSynced(args); };
         //Localize Strings
         TitleBar().Title(winrt::to_hstring(m_controller->getAppInfo().getShortName()));
         NavView().PaneTitle(m_controller->isDevVersion() ? winrt::to_hstring(_("PREVIEW")) : L"");
@@ -107,24 +106,11 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
         {
             return;
         }
+        NavView().IsEnabled(false);
+        ViewStack().CurrentPage(L"Spinner");
         m_controller->startup();
         m_controller->connectTaskbar(m_hwnd);
         m_controller->getWindowGeometry().apply(m_hwnd);
-        NavView().IsEnabled(true);
-        NavViewImages().IsSelected(true);
-        for(const std::filesystem::path& image : m_controller->getSpotlightImages())
-        {
-            Image gridControl;
-            gridControl.Width(500);
-            gridControl.Height(300);
-            gridControl.Stretch(Stretch::UniformToFill);
-            gridControl.Source(BitmapImage(Windows::Foundation::Uri(winrt::to_hstring(image.string()))));
-            GridImages().Items().Append(gridControl);
-            Image flipControl;
-            flipControl.Source(BitmapImage(Windows::Foundation::Uri(winrt::to_hstring(image.string()))));
-            flipControl.Stretch(Stretch::UniformToFill);
-            FlipImages().Items().Append(flipControl);
-        }
         m_opened = true;
     }
 
@@ -297,6 +283,29 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
         dialog.RequestedTheme(MainGrid().ActualTheme());
         dialog.XamlRoot(MainGrid().XamlRoot());
         co_await dialog.ShowAsync();
+    }
+
+    void MainWindow::OnImagesSynced(const EventArgs& args)
+    {
+        DispatcherQueue().TryEnqueue([this]()
+        {
+            NavView().IsEnabled(true);
+            NavViewImages().IsSelected(true);
+            for(const std::filesystem::path& image : m_controller->getSpotlightImages())
+            {
+                Image gridControl;
+                gridControl.Width(500);
+                gridControl.Height(300);
+                gridControl.Stretch(Stretch::UniformToFill);
+                gridControl.Source(BitmapImage(Windows::Foundation::Uri(winrt::to_hstring(image.string()))));
+                GridImages().Items().Append(gridControl);
+                Image flipControl;
+                flipControl.Source(BitmapImage(Windows::Foundation::Uri(winrt::to_hstring(image.string()))));
+                flipControl.Stretch(Stretch::UniformToFill);
+                FlipImages().Items().Append(flipControl);
+            }
+        });
+
     }
 
     void MainWindow::OnImageSelectionChanged(const IInspectable& sender, const SelectionChangedEventArgs& args)

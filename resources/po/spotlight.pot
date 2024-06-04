@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-03 23:43-0400\n"
+"POT-Creation-Date: 2024-06-04 00:04-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,47 +17,47 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:33
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:32
 msgid "Spotlight"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:34
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:33
 msgid "Find your favorite Windows spotlight images"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:38
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:37
 msgid "Matrix Chat"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:40
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:39
 msgid "Contributors on GitHub"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:42
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:41
 msgid "Fyodor Sobolev"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:44
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:43
 msgid "David Lapshin"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:45
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:44
 msgid "translator-credits"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:175
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:173
 msgid "New update available"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:203
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:201
 msgid "Unable to download and install update"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:225
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:228
 msgid "Image set as desktop background"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:229
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:232
 msgid "Unable to set image as desktop background"
 msgstr ""
 
@@ -80,7 +80,7 @@ msgid "Check for Updates"
 msgstr ""
 
 #: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:58
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:286
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:272
 msgid "Credits"
 msgstr ""
 
@@ -154,19 +154,19 @@ msgstr ""
 msgid "Export (Ctrl+S)"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:93
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:92
 msgid "PREVIEW"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:204
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:190
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:264
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:250
 msgid "Debug information copied to clipboard."
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:289
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:275
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -176,7 +176,7 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:293
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:279
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -188,7 +188,7 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:295
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:281
 msgid "Close"
 msgstr ""
 

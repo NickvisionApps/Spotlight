@@ -110,6 +110,11 @@ namespace Nickvision::Spotlight::Shared::Controllers
          */
         void connectTaskbar(HWND hwnd);
         /**
+         * @brief Gets the event for when images are synced.
+         * @return The images synced event
+         */
+        Nickvision::Events::Event<Nickvision::Events::EventArgs>& imagesSynced();
+        /**
          * @brief Sets a spotlight image as the desktop background.
          * @param index The index of the image to set as the desktop background
          */
@@ -121,7 +126,8 @@ namespace Nickvision::Spotlight::Shared::Controllers
         Nickvision::Taskbar::TaskbarItem m_taskbar;
         Nickvision::Events::Event<Nickvision::Notifications::NotificationSentEventArgs> m_notificationSent;
         Nickvision::Events::Event<Nickvision::Notifications::ShellNotificationSentEventArgs> m_shellNotificationSent;
-        std::shared_ptr<Models::SpotlightManager> m_spotlightManager;
+        Models::SpotlightManager m_spotlightManager;
+        Nickvision::Events::Event<Nickvision::Events::EventArgs> m_imagesSynced;
     };
 }
 

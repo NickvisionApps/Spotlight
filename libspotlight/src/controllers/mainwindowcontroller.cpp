@@ -3,7 +3,6 @@
 #include <format>
 #include <locale>
 #include <sstream>
-#include <stdexcept>
 #include <thread>
 #include <libnick/app/aura.h>
 #include <libnick/helpers/codehelpers.h>
@@ -67,7 +66,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
 
     const std::vector<std::filesystem::path>& MainWindowController::getSpotlightImages() const
     {
-        return m_spotlightManager->getImages();
+        return m_spotlightManager.getImages();
     }
 
     Event<EventArgs>& MainWindowController::configurationSaved()
@@ -139,13 +138,12 @@ namespace Nickvision::Spotlight::Shared::Controllers
         {
             checkForUpdates();
         }
-        m_spotlightManager = std::make_shared<SpotlightManager>();
-        if(!*m_spotlightManager)
+        std::thread syncWorker{ [this]()
         {
-            Aura::getActive().getLogger().log(Logging::LogLevel::Critical, "Unable to find spotlight images directory.");
-            throw std::runtime_error("Unable to find spotlight images directory.");
-        }
-        m_spotlightManager->sync();
+            m_spotlightManager.sync();
+            m_imagesSynced.invoke({});
+        } };
+        syncWorker.detach();
         m_started = true;
         Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "MainWindow started.");
     }
@@ -164,7 +162,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
             return;
         }
         Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Checking for updates...");
-        std::thread worker{ [&]()
+        std::thread worker{ [this]()
         {
             Version latest{ m_updater->fetchCurrentStableVersion() };
             if (!latest.empty())
@@ -194,7 +192,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
             return;
         }
         Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Fetching Windows app update...");
-        std::thread worker{ [&]()
+        std::thread worker{ [this]()
         {
             bool res{ m_updater->windowsUpdate(VersionType::Stable) };
             if (!res)
@@ -218,9 +216,14 @@ namespace Nickvision::Spotlight::Shared::Controllers
         }
     }
 
+    Event<EventArgs>& MainWindowController::imagesSynced()
+    {
+        return m_imagesSynced;
+    }
+
     void MainWindowController::setImageAsDesktopBackground(int index)
     {
-        if(m_spotlightManager->setAsDesktopBackground(static_cast<size_t>(index)))
+        if(m_spotlightManager.setAsDesktopBackground(static_cast<size_t>(index)))
         {
             m_notificationSent.invoke({ _("Image set as desktop background"), NotificationSeverity::Success });
         }

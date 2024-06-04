@@ -17,11 +17,6 @@ namespace Nickvision::Spotlight::Shared::Models
          */
         SpotlightManager();
         /**
-         * @brief Gets whether or not the object is valid.
-         * @return True if valid, else false 
-         */
-        bool isValid() const;
-        /**
          * @brief Gets the list of paths to synced spotlight images.
          * @return The list of paths to synced spotlight images
          */
@@ -63,14 +58,10 @@ namespace Nickvision::Spotlight::Shared::Models
          * @return True if successful, else false
          */
         bool setAsDesktopBackground(const std::filesystem::path& image) const;
-        /**
-         * @brief Gets whether or not the object is valid.
-         * @return True if valid, else false 
-         */
-        operator bool() const;
 
     private:
-        std::filesystem::path m_spotlightDir;
+        std::filesystem::path m_spotlightLockScreenDir;
+        std::filesystem::path m_spotlightDesktopDir;
         std::filesystem::path m_dataDir;
         std::vector<std::filesystem::path> m_images;
     };
