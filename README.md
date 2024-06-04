@@ -11,6 +11,16 @@
 ## Chat
 <a href='https://matrix.to/#/#nickvision:matrix.org'><img width='140' alt='Join our room' src='https://user-images.githubusercontent.com/17648453/196094077-c896527d-af6d-4b43-a5d8-e34a00ffd8f6.png'/></a>
 
+## Screenshots
+
+<details>
+  <summary>WinUI</summary>
+
+  ![Main](resources/screenshots/winui/main.png)
+  ![Flip](resources/screenshots/winui/flip.png)
+  ![Dark](resources/screenshots/winui/dark.png)
+</details>
+
 ## Building Manually
 Spotlight uses `vcpkg` to manage its dependencies and `cmake` as its build system.
 

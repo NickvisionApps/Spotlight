@@ -179,7 +179,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
             {
                 if (latest > Aura::getActive().getAppInfo().getVersion())
                 {
-                    Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Update found: " + latest.toString());
+                    Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Update found: " + latest.toString());
                     m_notificationSent.invoke({ _("New update available"), NotificationSeverity::Success, "update" });
                 }
                 else
