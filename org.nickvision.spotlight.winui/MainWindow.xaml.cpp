@@ -183,6 +183,7 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
             }
             if(args.getAction() == "error")
             {
+                NavView().SelectedItem(nullptr);
                 NavViewImages().IsSelected(true);
             }
             else if(args.getAction() == "update")

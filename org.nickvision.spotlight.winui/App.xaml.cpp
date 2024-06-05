@@ -23,7 +23,7 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
             throw;
         });
 #endif
-        m_controller->getAppInfo().setChangelog("- Improved performance of loading spotlight images");
+        m_controller->getAppInfo().setChangelog("- Fixed an issue where some spotlight\nimages were missing\n- Fixed an issue where the app would not\ndownload and install updates correctly\n- Updated translations");
         m_systemTheme = RequestedTheme() == ApplicationTheme::Light ? ElementTheme::Light : ElementTheme::Dark;
         switch (m_controller->getTheme())
         {
