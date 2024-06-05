@@ -28,7 +28,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
         Aura::getActive().init("org.nickvision.spotlight", "Nickvision Spotlight", "Spotlight", Logging::LogLevel::Info);
 #endif
         AppInfo& appInfo{ Aura::getActive().getAppInfo() };
-        appInfo.setVersion({ "2024.6.1" });
+        appInfo.setVersion({ "2024.6.2-next" });
         appInfo.setShortName(_("Spotlight"));
         appInfo.setDescription(_("Find your favorite Windows spotlight images"));
         appInfo.setSourceRepo("https://github.com/NickvisionApps/Spotlight");
