@@ -61,41 +61,18 @@ namespace Nickvision::Spotlight::Shared::Models
     {
         Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Loading spotlight images...");
         m_images.clear();
-        std::function<void(const std::filesystem::directory_entry&)> processEntry{ [&](const std::filesystem::directory_entry& entry)
-        {
-            boost::gil::rgb8_image_t img;
-            boost::gil::read_image(entry.path().string(), img, boost::gil::jpeg_tag());
-            if(img.width() > img.height())
-            {
-                std::filesystem::path newPath{ m_dataDir / (entry.path().stem().string() + ".jpg") };
-                std::filesystem::copy_file(entry.path(), newPath, std::filesystem::copy_options::overwrite_existing);
-            }
-        } };
         if(std::filesystem::exists(m_spotlightLockScreenDir))
         {
             for(const std::filesystem::directory_entry& entry : std::filesystem::directory_iterator(m_spotlightLockScreenDir))
             {
-                if(entry.file_size() / 1000 >= 200)
-                {
-                    processEntry(entry);
-                }
+                processEntry(entry, SpotlightImageType::LockScreen);
             }
         }
         if(std::filesystem::exists(m_spotlightDesktopDir))
         {
             for(const std::filesystem::directory_entry& entry : std::filesystem::recursive_directory_iterator(m_spotlightDesktopDir))
             {
-                if(entry.path().extension() == ".jpg")
-                {
-                    processEntry(entry);
-                }
-            }
-        }
-        for(const std::filesystem::directory_entry& entry : std::filesystem::directory_iterator(m_dataDir))
-        {
-            if(entry.path().extension() == ".jpg")
-            {
-                m_images.push_back(entry.path());
+                processEntry(entry, SpotlightImageType::Desktop);
             }
         }
         Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Loaded " + std::to_string(m_images.size()) + " image(s).");
@@ -163,5 +140,30 @@ namespace Nickvision::Spotlight::Shared::Models
             return false;
         }
         return setAsDesktopBackground(it - m_images.begin());
+    }
+
+    void SpotlightManager::processEntry(const std::filesystem::directory_entry& entry, SpotlightImageType type)
+    {
+        std::filesystem::path newPath{ m_dataDir / (entry.path().stem().string() + ".jpg") };
+        if(type == SpotlightImageType::LockScreen && entry.file_size() / 1000 < 200)
+        {
+           return;
+        }
+        else if(type == SpotlightImageType::Desktop && entry.path().extension() != ".jpg")
+        {
+            return;
+        }
+        else if(std::filesystem::exists(newPath))
+        {
+            m_images.push_back(newPath);
+            return;
+        }
+        boost::gil::rgb8_image_t img;
+        boost::gil::read_image(entry.path().string(), img, boost::gil::jpeg_tag());
+        if(img.width() > img.height())
+        {
+            std::filesystem::copy_file(entry.path(), newPath, std::filesystem::copy_options::skip_existing);
+            m_images.push_back(newPath);
+        }
     }
 }

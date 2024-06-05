@@ -15,7 +15,7 @@ if (POLICY CMP0141)
     set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 endif()
 
-project("org.nickvision.spotlight" LANGUAGES C CXX VERSION 2024.6.0 DESCRIPTION "Find your favorite Windows spotlight images.")
+project("org.nickvision.spotlight" LANGUAGES C CXX VERSION 2024.6.1 DESCRIPTION "Find your favorite Windows spotlight images.")
 set(SHORT_NAME "spotlight")
 include(GNUInstallDirs)
 

@@ -23,7 +23,7 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
             throw;
         });
 #endif
-        m_controller->getAppInfo().setChangelog("- Added support for spotlight images fetched by\nthe Windows desktop\n- Added a new flip view mode\n- Redesign user interface");
+        m_controller->getAppInfo().setChangelog("- Improved performance of loading spotlight images");
         m_systemTheme = RequestedTheme() == ApplicationTheme::Light ? ElementTheme::Light : ElementTheme::Dark;
         switch (m_controller->getTheme())
         {

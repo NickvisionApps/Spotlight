@@ -3,6 +3,7 @@
 
 #include <filesystem>
 #include <vector>
+#include "spotlightimagetype.h"
 #include "spotlightsupport.h"
 
 namespace Nickvision::Spotlight::Shared::Models
@@ -66,6 +67,12 @@ namespace Nickvision::Spotlight::Shared::Models
         bool setAsDesktopBackground(const std::filesystem::path& image) const;
 
     private:
+        /**
+         * @brief Processes a directory entry.
+         * @param entry The directory entry to process
+         * @param type The type of spotlight image
+         */
+        void processEntry(const std::filesystem::directory_entry& entry, SpotlightImageType type);
         std::filesystem::path m_spotlightLockScreenDir;
         std::filesystem::path m_spotlightDesktopDir;
         std::filesystem::path m_dataDir;

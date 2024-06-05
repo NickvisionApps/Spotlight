@@ -28,7 +28,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
         Aura::getActive().init("org.nickvision.spotlight", "Nickvision Spotlight", "Spotlight", Logging::LogLevel::Info);
 #endif
         AppInfo& appInfo{ Aura::getActive().getAppInfo() };
-        appInfo.setVersion({ "2024.6.0" });
+        appInfo.setVersion({ "2024.6.1" });
         appInfo.setShortName(_("Spotlight"));
         appInfo.setDescription(_("Find your favorite Windows spotlight images"));
         appInfo.setSourceRepo("https://github.com/NickvisionApps/Spotlight");
@@ -71,7 +71,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
 
     const std::vector<std::filesystem::path>& MainWindowController::getSpotlightImages() const
     {
-        return m_spotlightManager.getImages();
+        return m_spotlightManager->getImages();
     }
 
     Event<EventArgs>& MainWindowController::configurationSaved()
@@ -101,7 +101,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
         {
             builder << StringHelpers::toString(name) << std::endl;
         }
-        switch(m_spotlightManager.getSupportLevel())
+        switch(m_spotlightManager->getSupportLevel())
         {
         case SpotlightSupport::Full:
             builder << "Spotlight Support Level: Full" << std::endl;
@@ -146,9 +146,10 @@ namespace Nickvision::Spotlight::Shared::Controllers
         {
             checkForUpdates();
         }
+        m_spotlightManager = std::make_shared<SpotlightManager>();
         std::thread syncWorker{ [this]()
         {
-            m_spotlightManager.sync();
+            m_spotlightManager->sync();
             m_imagesSynced.invoke({});
         } };
         syncWorker.detach();
@@ -233,7 +234,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
 
     void MainWindowController::setImageAsDesktopBackground(int index)
     {
-        if(m_spotlightManager.setAsDesktopBackground(static_cast<size_t>(index)))
+        if(m_spotlightManager->setAsDesktopBackground(static_cast<size_t>(index)))
         {
             m_notificationSent.invoke({ _("Image set as desktop background"), NotificationSeverity::Success });
         }
@@ -245,7 +246,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
 
     void MainWindowController::exportImage(int index, const std::filesystem::path& path)
     {
-        if(m_spotlightManager.exportImage(static_cast<size_t>(index), path))
+        if(m_spotlightManager->exportImage(static_cast<size_t>(index), path))
         {
             m_notificationSent.invoke({ std::vformat(_("Image exported to {}"), std::make_format_args(CodeHelpers::unmove(path.string()))), NotificationSeverity::Success });
         }
@@ -257,7 +258,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
 
     void MainWindowController::exportAllImages(const std::filesystem::path& path)
     {
-        if(m_spotlightManager.exportAllImages(path))
+        if(m_spotlightManager->exportAllImages(path))
         {
             m_notificationSent.invoke({ std::vformat(_("Images exported to {}"), std::make_format_args(CodeHelpers::unmove(path.string()))), NotificationSeverity::Success });
         }

@@ -144,7 +144,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
         Nickvision::Taskbar::TaskbarItem m_taskbar;
         Nickvision::Events::Event<Nickvision::Notifications::NotificationSentEventArgs> m_notificationSent;
         Nickvision::Events::Event<Nickvision::Notifications::ShellNotificationSentEventArgs> m_shellNotificationSent;
-        Models::SpotlightManager m_spotlightManager;
+        std::shared_ptr<Models::SpotlightManager> m_spotlightManager;
         Nickvision::Events::Event<Nickvision::Events::EventArgs> m_imagesSynced;
     };
 }
