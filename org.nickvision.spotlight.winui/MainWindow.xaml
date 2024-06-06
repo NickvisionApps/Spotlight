@@ -168,8 +168,6 @@
                                         </Button>
                                     </StackPanel>
 
-                                    
-
                                     <CommandBar Grid.Column="2" DefaultLabelPosition="Right" VerticalContentAlignment="Center">
                                         <CommandBar.Content>
                                             <TextBlock x:Name="LblImagesCount" Margin="0,0,12,0"/>
@@ -211,11 +209,15 @@
                                     </CommandBar>
                                 </Grid>
 
-                                <ScrollView x:Name="ScrollImages" Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                                <PipsPager x:Name="PipsImages" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,12,0,0"
+                                           Visibility="{Binding ElementName=FlipImages, Path=Visibility, Mode=TwoWay}" PreviousButtonVisibility="Visible" NextButtonVisibility="Visible" 
+                                           NumberOfPages="{Binding ElementName=FlipImages, Path=Items.Count, Mode=OneWay}" SelectedPageIndex="{Binding ElementName=FlipImages, Path=SelectedIndex, Mode=TwoWay}"/>
+
+                                <ScrollView x:Name="ScrollImages" Grid.Row="3" VerticalScrollBarVisibility="Auto">
                                     <GridView x:Name="GridImages" Margin="40,0,40,16" SelectionMode="Single" SelectionChanged="OnImageSelectionChanged" DoubleTapped="OnImageDoubleTapped"/> 
                                 </ScrollView>
 
-                                <FlipView x:Name="FlipImages" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="40,0,40,16" SelectionChanged="OnImageSelectionChanged"/>
+                                <FlipView x:Name="FlipImages" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="40,0,40,16" SelectionChanged="OnImageSelectionChanged"/>
                             </Grid>
                         </nickvision:ViewStackPage>
                     </nickvision:ViewStack.Pages>

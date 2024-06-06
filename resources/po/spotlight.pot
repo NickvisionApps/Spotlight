@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 14:46-0400\n"
+"POT-Creation-Date: 2024-06-05 21:20-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,35 +45,35 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:185
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:184
 msgid "New update available"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:217
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:216
 msgid "Unable to download and install update"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:244
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:243
 msgid "Image set as desktop background"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:248
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:247
 msgid "Unable to set image as desktop background"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:256
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:255
 msgid "Image exported to {}"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:260
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:259
 msgid "Unable to export image"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:268
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:267
 msgid "Images exported to {}"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:272
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:271
 msgid "Unable to export images"
 msgstr ""
 
