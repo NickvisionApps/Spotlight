@@ -8,60 +8,57 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-05 21:20-0400\n"
-"PO-Revision-Date: 2024-06-04 18:22+0000\n"
-"Last-Translator: Nick Logozzo <nlogozzo225@gmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-"
-"spotlight/app/it/>\n"
-"Language: it\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6-dev\n"
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:32
 msgid "Spotlight"
-msgstr "Spotlight"
+msgstr ""
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:33
 msgid "Find your favorite Windows spotlight images"
-msgstr "Trova le tue foto Windows spotlight preferite"
+msgstr ""
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:37
 msgid "Matrix Chat"
-msgstr "Chat Matrix"
+msgstr ""
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:39
 msgid "Contributors on GitHub"
-msgstr "Contributori su GitHub"
+msgstr ""
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:41
 msgid "Fyodor Sobolev"
-msgstr "Fyodor Sobolev"
+msgstr ""
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:43
 msgid "David Lapshin"
-msgstr "David Lapshin"
+msgstr ""
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:44
 msgid "translator-credits"
-msgstr "Nicholas Logozzo"
+msgstr ""
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:184
 msgid "New update available"
-msgstr "Nuovo aggiornamento disponibile"
+msgstr ""
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:216
 msgid "Unable to download and install update"
-msgstr "Scaricamento dell'aggiornamento non riuscito"
+msgstr ""
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:243
 msgid "Image set as desktop background"
-msgstr "La foto impostata come sfondo"
+msgstr ""
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:247
 msgid "Unable to set image as desktop background"
-msgstr "impostazione della foto come sfondo non riuscita"
+msgstr ""
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:255
 msgid "Image exported to {}"
