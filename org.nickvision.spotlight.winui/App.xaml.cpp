@@ -1,6 +1,8 @@
 #include "App.xaml.h"
+#include <libnick/helpers/stringhelpers.h>
 #include "MainWindow.xaml.h"
 
+using namespace ::Nickvision::Helpers;
 using namespace ::Nickvision::Spotlight::Shared::Controllers;
 using namespace ::Nickvision::Spotlight::Shared::Models;
 using namespace winrt::Microsoft::UI::Xaml;
@@ -8,7 +10,7 @@ using namespace winrt::Microsoft::UI::Xaml;
 namespace winrt::Nickvision::Spotlight::WinUI::implementation 
 {
     App::App()
-        : m_controller{ std::make_shared<MainWindowController>() },
+        : m_controller{ std::make_shared<MainWindowController>(StringHelpers::split(GetCommandLineA(), " ")) },
         m_mainWindow{ nullptr }
     {
         InitializeComponent();
