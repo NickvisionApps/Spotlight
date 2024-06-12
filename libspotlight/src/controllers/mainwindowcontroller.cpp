@@ -13,6 +13,7 @@
 
 using namespace Nickvision::App;
 using namespace Nickvision::Events;
+using namespace Nickvision::Helpers;
 using namespace Nickvision::Notifications;
 using namespace Nickvision::Spotlight::Shared::Models;
 using namespace Nickvision::Update;
@@ -28,7 +29,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
         Aura::getActive().init("org.nickvision.spotlight", "Nickvision Spotlight", "Spotlight", Logging::LogLevel::Info);
 #endif
         AppInfo& appInfo{ Aura::getActive().getAppInfo() };
-        appInfo.setVersion({ "2024.6.2" });
+        appInfo.setVersion({ "2024.6.3-next" });
         appInfo.setShortName(_("Spotlight"));
         appInfo.setDescription(_("Find your favorite Windows spotlight images"));
         appInfo.setSourceRepo("https://github.com/NickvisionApps/Spotlight");
@@ -94,12 +95,12 @@ namespace Nickvision::Spotlight::Shared::Controllers
         std::stringstream builder;
         builder << Aura::getActive().getAppInfo().getId();
         builder << ".winui" << std::endl;
-        builder << Aura::getActive().getAppInfo().getVersion().toString() << std::endl << std::endl;
+        builder << Aura::getActive().getAppInfo().getVersion().str() << std::endl << std::endl;
         LCID lcid = GetThreadLocale();
         wchar_t name[LOCALE_NAME_MAX_LENGTH];
         if(LCIDToLocaleName(lcid, name, LOCALE_NAME_MAX_LENGTH, 0) > 0)
         {
-            builder << StringHelpers::toString(name) << std::endl;
+            builder << StringHelpers::str(name) << std::endl;
         }
         switch(m_spotlightManager->getSupportLevel())
         {
@@ -180,7 +181,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
             {
                 if (latest > Aura::getActive().getAppInfo().getVersion())
                 {
-                    Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Update found: " + latest.toString());
+                    Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Update found: " + latest.str());
                     m_notificationSent.invoke({ _("New update available"), NotificationSeverity::Success, "update" });
                 }
                 else
