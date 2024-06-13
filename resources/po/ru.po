@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-11 23:06-0400\n"
+"POT-Creation-Date: 2024-06-13 17:51-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -76,7 +76,7 @@ msgstr ""
 msgid "Unable to export images"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/Controls/TitleBar.xaml.cpp:120
+#: org.nickvision.spotlight.winui/Controls/TitleBar.xaml.cpp:132
 msgid "Search"
 msgstr ""
 
@@ -170,7 +170,7 @@ msgid "Export All (Ctrl+Shift+S)"
 msgstr ""
 
 #: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:93
-msgid "PREVIEW"
+msgid "Preview"
 msgstr ""
 
 #: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:192
