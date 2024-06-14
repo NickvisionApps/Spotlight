@@ -3,7 +3,7 @@
 
 #define MyAppName "Nickvision Spotlight"
 #define MyAppShortName "Spotlight"
-#define MyAppVersion "2024.6.2"
+#define MyAppVersion "2024.6.3"
 #define MyAppPublisher "Nickvision"
 #define MyAppURL "https://nickvision.org"
 #define MyAppExeName "org.nickvision.spotlight.winui.exe"
