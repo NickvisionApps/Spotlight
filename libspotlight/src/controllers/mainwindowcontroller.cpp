@@ -28,7 +28,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
         Logging::LogLevel logLevel{ std::find(m_args.begin(), m_args.end(), "--debug") != m_args.end() ? Logging::LogLevel::Debug : Logging::LogLevel::Info };
         Aura::getActive().init("org.nickvision.spotlight", "Nickvision Spotlight", "Spotlight", logLevel);
         AppInfo& appInfo{ Aura::getActive().getAppInfo() };
-        appInfo.setVersion({ "2024.6.3" });
+        appInfo.setVersion({ "2024.6.4-next" });
         appInfo.setShortName(_("Spotlight"));
         appInfo.setDescription(_("Find your favorite Windows spotlight images"));
         appInfo.setSourceRepo("https://github.com/NickvisionApps/Spotlight");
