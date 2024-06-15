@@ -25,7 +25,7 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
             throw;
         });
 #endif
-        m_controller->getAppInfo().setChangelog("- Updated dependencies");
+        m_controller->getAppInfo().setChangelog("- Updated user interface\n- Updated dependencies");
         m_systemTheme = RequestedTheme() == ApplicationTheme::Light ? ElementTheme::Light : ElementTheme::Dark;
         switch (m_controller->getTheme())
         {

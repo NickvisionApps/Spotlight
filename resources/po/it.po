@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-13 17:51-0400\n"
+"POT-Creation-Date: 2024-06-15 03:26-0400\n"
 "PO-Revision-Date: 2024-06-04 18:22+0000\n"
 "Last-Translator: Nick Logozzo <nlogozzo225@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-"
@@ -85,7 +85,6 @@ msgstr ""
 
 #. Localize Strings
 #: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:56
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:68
 msgid "Images"
 msgstr ""
 
@@ -98,7 +97,7 @@ msgid "Check for Updates"
 msgstr ""
 
 #: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:59
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:274
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:273
 msgid "Credits"
 msgstr ""
 
@@ -136,55 +135,55 @@ msgstr ""
 msgid "Ensure Windows Spotlight is enabled and come back later to try again"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:69
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:68
 msgid "Export"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:70
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:69
 msgid "Export (Ctrl+S)"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:71
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:70
 msgid "Set as Background"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:72
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:71
 msgid "Set as Background (Ctrl+B)"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:73
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:72
 msgid "View"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:74
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:73
 msgid "Grid"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:75
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:74
 msgid "Flip"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:76
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:75
 msgid "Export All"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:77
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:76
 msgid "Export All (Ctrl+Shift+S)"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:93
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:92
 msgid "Preview"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:192
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:191
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:252
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:251
 msgid "Debug information copied to clipboard."
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:277
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:276
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -194,7 +193,7 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:281
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:280
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -206,12 +205,8 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:283
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:282
 msgid "Close"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:296
-msgid "Total Number of Images: {}"
 msgstr ""
 
 #: org.nickvision.spotlight.winui/SettingsPage.xaml.cpp:20
