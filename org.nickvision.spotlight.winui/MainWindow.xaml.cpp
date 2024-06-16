@@ -297,9 +297,7 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
             for(const std::filesystem::path& image : m_controller->getSpotlightImages())
             {
                 Image gridControl;
-                gridControl.Width(500);
-                gridControl.Height(300);
-                gridControl.Stretch(Stretch::UniformToFill);
+                gridControl.Stretch(Stretch::Fill);
                 gridControl.Source(BitmapImage(Windows::Foundation::Uri(winrt::to_hstring(image.string()))));
                 GridImages().Items().Append(gridControl);
                 Image flipControl;
@@ -316,8 +314,8 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
                 MenuViewGrid().IsChecked(true);
             }
             ChangeImageViewMode(nullptr, nullptr);
+            GridImages().SelectedIndex(0);
         });
-
     }
 
     void MainWindow::OnImageSelectionChanged(const IInspectable& sender, const SelectionChangedEventArgs& args)
