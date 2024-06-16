@@ -65,6 +65,7 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
         NavViewSettings().Content(winrt::box_value(winrt::to_hstring(_("Settings"))));
         StatusPageNoImages().Title(winrt::to_hstring(_("No Spotlight Images")));
         StatusPageNoImages().Description(winrt::to_hstring(_("Ensure Windows Spotlight is enabled and come back later to try again")));
+        LblImagesTitle().Text(winrt::to_hstring(_("Images")));
         LblExport().Text(winrt::to_hstring(_("Export")));
         ToolTipService::SetToolTip(BtnExport(), winrt::box_value(winrt::to_hstring(_("Export (Ctrl+S)"))));
         LblSetAsBackground().Text(winrt::to_hstring(_("Set as Background")));
@@ -292,10 +293,13 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
         {
             NavView().IsEnabled(true);
             NavViewImages().IsSelected(true);
+            LblImagesCount().Text(winrt::to_hstring(std::vformat(_("Total Number of Images: {}"), std::make_format_args(CodeHelpers::unmove(m_controller->getSpotlightImages().size())))));
             for(const std::filesystem::path& image : m_controller->getSpotlightImages())
             {
                 Image gridControl;
-                gridControl.Stretch(Stretch::Fill);
+                gridControl.Width(500);
+                gridControl.Height(300);
+                gridControl.Stretch(Stretch::UniformToFill);
                 gridControl.Source(BitmapImage(Windows::Foundation::Uri(winrt::to_hstring(image.string()))));
                 GridImages().Items().Append(gridControl);
                 Image flipControl;
@@ -312,8 +316,8 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
                 MenuViewGrid().IsChecked(true);
             }
             ChangeImageViewMode(nullptr, nullptr);
-            GridImages().SelectedIndex(0);
         });
+
     }
 
     void MainWindow::OnImageSelectionChanged(const IInspectable& sender, const SelectionChangedEventArgs& args)

@@ -122,13 +122,16 @@
                         </nickvision:ViewStackPage>
 
                         <nickvision:ViewStackPage PageName="Images">
-                            <Grid RowSpacing="6">
+                            <Grid RowSpacing="12">
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
 
-                                <Grid Grid.Row="0" HorizontalAlignment="Stretch" Margin="20,12,20,0">
+                                <TextBlock x:Name="LblImagesTitle" Grid.Row="0" Margin="40,24,40,0" Style="{ThemeResource NavigationViewItemHeaderTextStyle}" FontSize="26"/>
+
+                                <Grid Grid.Row="1" HorizontalAlignment="Stretch" Margin="40,0,40,0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="*"/>
@@ -166,6 +169,12 @@
                                     </StackPanel>
 
                                     <CommandBar Grid.Column="2" DefaultLabelPosition="Right" VerticalContentAlignment="Center">
+                                        <CommandBar.Content>
+                                            <TextBlock x:Name="LblImagesCount" Margin="0,0,12,0"/>
+                                        </CommandBar.Content>
+
+                                        <AppBarSeparator/>
+
                                         <AppBarButton x:Name="BtnExportAll" Click="ExportAll">
                                             <AppBarButton.Icon>
                                                 <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE896;"/>
@@ -200,26 +209,15 @@
                                     </CommandBar>
                                 </Grid>
 
-                                <PipsPager x:Name="PipsImages" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,12,0,0"
+                                <PipsPager x:Name="PipsImages" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,12,0,0"
                                            Visibility="{Binding ElementName=FlipImages, Path=Visibility, Mode=TwoWay}" PreviousButtonVisibility="Visible" NextButtonVisibility="Visible" 
                                            NumberOfPages="{Binding ElementName=FlipImages, Path=Items.Count, Mode=OneWay}" SelectedPageIndex="{Binding ElementName=FlipImages, Path=SelectedIndex, Mode=TwoWay}"/>
 
-                                <ScrollViewer x:Name="ScrollImages" Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                                    <GridView x:Name="GridImages" Margin="20,0,20,12" SelectionMode="Single" SelectionChanged="OnImageSelectionChanged" DoubleTapped="OnImageDoubleTapped">
-                                        <GridView.ItemContainerStyle>
-                                            <Style TargetType="GridViewItem" BasedOn="{StaticResource DefaultGridViewItemStyle}">
-                                                <Setter Property="Margin" Value="6,6,6,6"/>
-                                            </Style>
-                                        </GridView.ItemContainerStyle>
-                                        <GridView.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <ItemsWrapGrid Orientation="Horizontal" ItemWidth="300" ItemHeight="200"/>
-                                            </ItemsPanelTemplate>
-                                        </GridView.ItemsPanel>
-                                    </GridView>
-                                </ScrollViewer>
+                                <ScrollView x:Name="ScrollImages" Grid.Row="3" VerticalScrollBarVisibility="Auto">
+                                    <GridView x:Name="GridImages" Margin="40,0,40,16" SelectionMode="Single" SelectionChanged="OnImageSelectionChanged" DoubleTapped="OnImageDoubleTapped"/> 
+                                </ScrollView>
 
-                                <FlipView x:Name="FlipImages" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,0,20,12" SelectionChanged="OnImageSelectionChanged"/>
+                                <FlipView x:Name="FlipImages" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="40,0,40,16" SelectionChanged="OnImageSelectionChanged"/>
                             </Grid>
                         </nickvision:ViewStackPage>
                     </nickvision:ViewStack.Pages>
