@@ -13,6 +13,10 @@
 ## Chat
 <a href='https://matrix.to/#/#nickvision:matrix.org'><img width='140' alt='Join our room' src='https://user-images.githubusercontent.com/17648453/196094077-c896527d-af6d-4b43-a5d8-e34a00ffd8f6.png'/></a>
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how can you help the project and how to provide information so we can help you in case of troubles with the app.
+
 ## Screenshots
 
 <details>
@@ -44,10 +48,6 @@ A C++20 compiler is also required to build Spotlight.
 1. From the `build` folder, run `cmake .. -G "Visual Studio 17 2022"`.
 1. From the `build` folder, run `cmake --build . --config Release`.
 1. After these commands complete, Spotlight will be successfully built and its binaries can be found in the `org.nickvision.spotlight.winui/Release` folder of the `build` folder.
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how can you help the project and how to provide information so we can help you in case of troubles with the app.
 
 ## Code of Conduct
 
