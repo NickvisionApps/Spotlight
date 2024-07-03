@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-15 22:17-0400\n"
+"POT-Creation-Date: 2024-07-02 22:25-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,63 +17,63 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:32
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:36
 msgid "Spotlight"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:33
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:37
 msgid "Find your favorite Windows spotlight images"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:37
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:42
 msgid "Matrix Chat"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:39
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:44
 msgid "Contributors on GitHub"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:41
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:46
 msgid "Fyodor Sobolev"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:43
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:48
 msgid "David Lapshin"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:44
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:49
 msgid "translator-credits"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:184
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:185
 msgid "New update available"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:215
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:216
 msgid "Unable to download and install update"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:242
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:231
 msgid "Image set as desktop background"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:246
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:235
 msgid "Unable to set image as desktop background"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:254
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:243
 msgid "Image exported to {}"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:258
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:247
 msgid "Unable to export image"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:266
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:255
 msgid "Images exported to {}"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:270
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:259
 msgid "Unable to export images"
 msgstr ""
 
@@ -82,107 +82,107 @@ msgid "Search"
 msgstr ""
 
 #. Localize Strings
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:56
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:68
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:55
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:67
 msgid "Images"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:57
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:56
 msgid "Help"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:58
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:57
 msgid "Check for Updates"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:59
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:274
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:58
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:275
 msgid "Credits"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:60
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:59
 msgid "Copy Debug Information"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:61
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:60
 msgid "Changelog"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:62
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:61
 msgid "GitHub Repo"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:63
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:62
 msgid "Report a Bug"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:64
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:63
 msgid "Discussions"
 msgstr ""
 
 #. Localize Strings
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:65
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:64
 #: org.nickvision.spotlight.winui/SettingsPage.xaml.cpp:19
 msgid "Settings"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:66
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:65
 msgid "No Spotlight Images"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:67
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:66
 msgid "Ensure Windows Spotlight is enabled and come back later to try again"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:69
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:68
 msgid "Export"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:70
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:69
 msgid "Export (Ctrl+S)"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:71
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:70
 msgid "Set as Background"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:72
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:71
 msgid "Set as Background (Ctrl+B)"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:73
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:72
 msgid "View"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:74
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:73
 msgid "Grid"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:75
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:74
 msgid "Flip"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:76
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:75
 msgid "Export All"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:77
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:76
 msgid "Export All (Ctrl+Shift+S)"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:93
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:91
 msgid "Preview"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:192
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:193
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:252
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:253
 msgid "Debug information copied to clipboard."
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:277
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:278
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -192,7 +192,7 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:281
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:282
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -204,11 +204,11 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:283
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:284
 msgid "Close"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:296
+#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:297
 msgid "Total Number of Images: {}"
 msgstr ""
 

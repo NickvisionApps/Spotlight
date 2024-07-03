@@ -10,7 +10,7 @@ using namespace winrt::Microsoft::UI::Xaml;
 namespace winrt::Nickvision::Spotlight::WinUI::implementation 
 {
     App::App()
-        : m_controller{ std::make_shared<MainWindowController>(StringHelpers::split(GetCommandLineA(), " ")) },
+        : m_controller{ std::make_shared<MainWindowController>(StringHelpers::splitArgs(GetCommandLineA())) },
         m_mainWindow{ nullptr }
     {
         InitializeComponent();
@@ -25,7 +25,6 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
             throw;
         });
 #endif
-        m_controller->getAppInfo().setChangelog("- Updated dependencies");
         m_systemTheme = RequestedTheme() == ApplicationTheme::Light ? ElementTheme::Light : ElementTheme::Dark;
         switch (m_controller->getTheme())
         {

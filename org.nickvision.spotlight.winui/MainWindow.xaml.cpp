@@ -3,7 +3,6 @@
 #include "MainWindow.g.cpp"
 #endif
 #include <format>
-#include <libnick/app/aura.h>
 #include <libnick/helpers/codehelpers.h>
 #include <libnick/helpers/stringhelpers.h>
 #include <libnick/notifications/shellnotification.h>
@@ -11,12 +10,12 @@
 #include "SettingsPage.xaml.h"
 
 using namespace ::Nickvision;
-using namespace ::Nickvision::App;
 using namespace ::Nickvision::Events;
 using namespace ::Nickvision::Helpers;
 using namespace ::Nickvision::Notifications;
 using namespace ::Nickvision::Spotlight::Shared::Controllers;
 using namespace ::Nickvision::Spotlight::Shared::Models;
+using namespace ::Nickvision::Update;
 using namespace winrt::Microsoft::UI;
 using namespace winrt::Microsoft::UI::Dispatching;
 using namespace winrt::Microsoft::UI::Xaml;
@@ -75,7 +74,6 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
         MenuViewFlip().Text(winrt::to_hstring(_("Flip")));
         BtnExportAll().Label(winrt::to_hstring(_("Export All")));
         ToolTipService::SetToolTip(BtnExportAll(), winrt::box_value(winrt::to_hstring(_("Export All (Ctrl+Shift+S)"))));
-
     }
 
     void MainWindow::SetController(const std::shared_ptr<MainWindowController>& controller, ElementTheme systemTheme)
@@ -90,7 +88,7 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
         m_controller->imagesSynced() += [&](const EventArgs& args) { OnImagesSynced(args); };
         //Localize Strings
         TitleBar().Title(winrt::to_hstring(m_controller->getAppInfo().getShortName()));
-        TitleBar().Subtitle(m_controller->isDevVersion() ? winrt::to_hstring(_("Preview")) : L"");
+        TitleBar().Subtitle(m_controller->getAppInfo().getVersion().getVersionType() == VersionType::Preview ? winrt::to_hstring(_("Preview")) : L"");
         LblAppName().Text(winrt::to_hstring(m_controller->getAppInfo().getShortName()));
         LblAppDescription().Text(winrt::to_hstring(m_controller->getAppInfo().getDescription()));
         LblAppVersion().Text(winrt::to_hstring(m_controller->getAppInfo().getVersion().str()));
@@ -109,14 +107,17 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
         }
         NavView().IsEnabled(false);
         ViewStack().CurrentPage(L"Spinner");
-        m_controller->startup();
-        m_controller->connectTaskbar(m_hwnd);
-        m_controller->getWindowGeometry().apply(m_hwnd);
+        m_controller->startup(m_hwnd).apply(m_hwnd);
         m_opened = true;
     }
 
     void MainWindow::OnClosing(const Microsoft::UI::Windowing::AppWindow& sender, const AppWindowClosingEventArgs& args)
     {
+        if(!m_controller->canShutdown())
+        {
+            args.Cancel(true);
+            return;
+        }
         m_controller->shutdown({ m_hwnd }, MenuViewFlip().IsChecked() ? ViewMode::Flip : ViewMode::Grid);
     }
 
@@ -199,7 +200,7 @@ namespace winrt::Nickvision::Spotlight::WinUI::implementation
 
     void MainWindow::OnShellNotificationSent(const ShellNotificationSentEventArgs& args)
     {
-        Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "ShellNotification sent. (" + args.getMessage() + ")");
+        m_controller->log(Logging::LogLevel::Debug, "ShellNotification sent. (" + args.getMessage() + ")");
         ShellNotification::send(args, m_hwnd);
     }
 

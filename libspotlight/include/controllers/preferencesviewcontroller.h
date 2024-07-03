@@ -2,7 +2,7 @@
 #define PREFERENCESVIEWCONTROLLER_H
 
 #include <string>
-#include "models/theme.h"
+#include "models/configuration.h"
 
 namespace Nickvision::Spotlight::Shared::Controllers
 {
@@ -14,13 +14,9 @@ namespace Nickvision::Spotlight::Shared::Controllers
     public:
         /**
          * @brief Constructs a PreferencesViewController.
+         * @param configuration The reference to the configuration to use
          */
-        PreferencesViewController() = default;
-        /**
-         * @brief Gets the application's id.
-         * @return The app id
-         */
-        const std::string& getId() const;
+        PreferencesViewController(Models::Configuration& configuration);
         /**
          * @brief Gets the preferred theme for the application.
          * @return The preferred theme
@@ -45,6 +41,9 @@ namespace Nickvision::Spotlight::Shared::Controllers
          * @brief Saves the current configuration to disk.
          */
         void saveConfiguration();
+
+    private:
+        Models::Configuration& m_configuration;
     };
 }
 

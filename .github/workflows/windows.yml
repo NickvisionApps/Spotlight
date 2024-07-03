@@ -30,7 +30,7 @@ jobs:
         with:
           pkgs: libnick libjpeg-turbo boost-gil
           triplet: x64-windows
-          revision: 104d435187f499323cf9aab78e3f10fced5635d1
+          revision: 90ff15472a7c9f858717667b66403344e73cfb9c
           token: ${{ secrets.GITHUB_TOKEN }}
           github-binarycache: true
       - name: "Build"
@@ -38,8 +38,16 @@ jobs:
         run: |
           cmake -G "Visual Studio 17 2022" ..
           cmake --build . --config Release
+      - name: "Create Installer"
+        working-directory: ${{github.workspace}}
+        run: |
+          choco install wget
+          choco install innosetup
+          wget https://aka.ms/vs/17/release/vc_redist.x64.exe -O vc_redist.x64.exe
+          wget https://aka.ms/windowsappsdk/1.5/1.5.240607001/windowsappruntimeinstall-x64.exe -O windowsappruntimeinstall-x64.exe
+          iscc inno/setup.iss
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
-          path: ${{github.workspace}}/build/org.nickvision.spotlight.winui/Release
+          path: ${{github.workspace}}/inno/NickvisionSpotlightSetup.exe
           name: Windows-x64-Release

@@ -1,12 +1,11 @@
 #include "models/spotlightmanager.h"
 #include <fstream>
 #include <boost/gil/extension/io/jpeg.hpp>
-#include <libnick/app/aura.h>
 #include <libnick/filesystem/userdirectories.h>
 #include <windows.h>
 
-using namespace Nickvision::App;
 using namespace Nickvision::Filesystem;
+using namespace Nickvision::Logging;
 
 namespace Nickvision::Spotlight::Shared::Models
 {
@@ -24,10 +23,11 @@ namespace Nickvision::Spotlight::Shared::Models
         return message;
     }
 
-    SpotlightManager::SpotlightManager()
-        : m_spotlightLockScreenDir{ UserDirectories::getCache() / "Packages/Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy/LocalState/Assets" },
-        m_spotlightDesktopDir{ UserDirectories::getCache() / "Packages/MicrosoftWindows.Client.CBS_cw5n1h2txyewy/LocalCache/Microsoft/IrisService" },
-        m_dataDir{ UserDirectories::getApplicationConfig() / "Images" }
+    SpotlightManager::SpotlightManager(const std::string& appName, Logger& logger)
+        : m_spotlightLockScreenDir{ UserDirectories::get(UserDirectory::LocalData) / "Packages/Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy/LocalState/Assets" },
+        m_spotlightDesktopDir{ UserDirectories::get(UserDirectory::LocalData) / "Packages/MicrosoftWindows.Client.CBS_cw5n1h2txyewy/LocalCache/Microsoft/IrisService" },
+        m_dataDir{ UserDirectories::get(UserDirectory::ApplicationConfig, appName) / "Images" },
+        m_logger{ logger }
     {
         if(!std::filesystem::exists(m_dataDir))
         {
@@ -59,7 +59,7 @@ namespace Nickvision::Spotlight::Shared::Models
 
     const std::vector<std::filesystem::path>& SpotlightManager::sync()
     {
-        Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Loading spotlight images...");
+        m_logger.log(LogLevel::Debug, "Loading spotlight images...");
         m_images.clear();
         if(std::filesystem::exists(m_spotlightLockScreenDir))
         {
@@ -79,7 +79,7 @@ namespace Nickvision::Spotlight::Shared::Models
         {
             m_images.push_back(entry.path());
         }
-        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Loaded " + std::to_string(m_images.size()) + " image(s).");
+        m_logger.log(LogLevel::Info, "Loaded " + std::to_string(m_images.size()) + " image(s).");
         return m_images;
     }
 
@@ -90,7 +90,7 @@ namespace Nickvision::Spotlight::Shared::Models
             return false;
         }
         std::filesystem::copy_file(m_images[index], path, std::filesystem::copy_options::overwrite_existing);
-        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Exported " + m_images[index].stem().string() + " to " + path.string());
+        m_logger.log(LogLevel::Info, "Exported " + m_images[index].stem().string() + " to " + path.string());
         return true;
     }
 
@@ -114,7 +114,7 @@ namespace Nickvision::Spotlight::Shared::Models
         {
             std::filesystem::copy_file(image, path / image.filename(), std::filesystem::copy_options::overwrite_existing);
         }
-        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Exported all images to " + path.string());
+        m_logger.log(LogLevel::Info, "Exported all images to " + path.string());
         return true;
     }
 
@@ -124,15 +124,15 @@ namespace Nickvision::Spotlight::Shared::Models
         {
             return false;
         }
-        std::filesystem::path tempPath{ UserDirectories::getCache() / "NickvisionSpotlight.jpg" };
+        std::filesystem::path tempPath{ UserDirectories::get(UserDirectory::LocalData) / "NickvisionSpotlight.jpg" };
         std::filesystem::copy_file(m_images[index], tempPath, std::filesystem::copy_options::overwrite_existing);
-        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Setting desktop background to " + m_images[index].stem().string() + "...");
+        m_logger.log(LogLevel::Info, "Setting desktop background to " + m_images[index].stem().string() + "...");
         if(SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, (void*)tempPath.wstring().c_str(), SPIF_UPDATEINIFILE | SPIF_SENDCHANGE) == 0)
         {
-            Aura::getActive().getLogger().log(Logging::LogLevel::Error, "Failed to set desktop background: " + GetLastErrorAsString());
+            m_logger.log(LogLevel::Error, "Failed to set desktop background: " + GetLastErrorAsString());
             return false;
         }
-        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Desktop background set.");
+        m_logger.log(LogLevel::Info, "Desktop background set.");
         return true;
     }
 
