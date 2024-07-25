@@ -30,7 +30,7 @@ jobs:
         with:
           pkgs: libnick libjpeg-turbo boost-gil
           triplet: x64-windows
-          revision: 90ff15472a7c9f858717667b66403344e73cfb9c
+          revision: 02d93df47bb4c9b062921b26c77a251490127151
           token: ${{ secrets.GITHUB_TOKEN }}
           github-binarycache: true
       - name: "Build"
@@ -39,13 +39,13 @@ jobs:
           cmake -G "Visual Studio 17 2022" ..
           cmake --build . --config Release
       - name: "Create Installer"
-        working-directory: ${{github.workspace}}
+        working-directory: ${{github.workspace}}/inno
         run: |
           choco install wget
           choco install innosetup
           wget https://aka.ms/vs/17/release/vc_redist.x64.exe -O vc_redist.x64.exe
-          wget https://aka.ms/windowsappsdk/1.5/1.5.240607001/windowsappruntimeinstall-x64.exe -O windowsappruntimeinstall-x64.exe
-          iscc inno/setup.iss
+          wget https://aka.ms/windowsappsdk/1.5/1.5.240627000/windowsappruntimeinstall-x64.exe -O windowsappruntimeinstall-x64.exe
+          iscc setup.iss
       - name: Upload
         uses: actions/upload-artifact@v4
         with:

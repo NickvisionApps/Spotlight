@@ -3,7 +3,7 @@
 
 #define MyAppName "Nickvision Spotlight"
 #define MyAppShortName "Spotlight"
-#define MyAppVersion "2024.6.4"
+#define MyAppVersion "2024.7.0"
 #define MyAppPublisher "Nickvision"
 #define MyAppURL "https://nickvision.org"
 #define MyAppExeName "org.nickvision.spotlight.winui.exe"
@@ -66,8 +66,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "..\vc_redist.x64.exe"; DestDir: "{app}\deps"; AfterInstall: SetupVC  
-Source: "..\windowsappruntimeinstall-x64.exe"; DestDir: "{app}\deps"; AfterInstall: SetupWinAppSDK  
+Source: "vc_redist.x64.exe"; DestDir: "{app}\deps"; AfterInstall: SetupVC  
+Source: "windowsappruntimeinstall-x64.exe"; DestDir: "{app}\deps"; AfterInstall: SetupWinAppSDK  
 Source: "..\build\org.nickvision.spotlight.winui\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion 
 Source: "..\build\org.nickvision.spotlight.winui\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; AfterInstall: Cleanup
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files

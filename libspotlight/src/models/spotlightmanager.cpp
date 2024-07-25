@@ -26,7 +26,7 @@ namespace Nickvision::Spotlight::Shared::Models
     SpotlightManager::SpotlightManager(const std::string& appName, Logger& logger)
         : m_spotlightLockScreenDir{ UserDirectories::get(UserDirectory::LocalData) / "Packages/Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy/LocalState/Assets" },
         m_spotlightDesktopDir{ UserDirectories::get(UserDirectory::LocalData) / "Packages/MicrosoftWindows.Client.CBS_cw5n1h2txyewy/LocalCache/Microsoft/IrisService" },
-        m_dataDir{ UserDirectories::get(UserDirectory::ApplicationConfig, appName) / "Images" },
+        m_dataDir{ UserDirectories::get(ApplicationUserDirectory::Config, appName) / "Images" },
         m_logger{ logger }
     {
         if(!std::filesystem::exists(m_dataDir))

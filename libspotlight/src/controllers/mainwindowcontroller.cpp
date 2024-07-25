@@ -29,10 +29,10 @@ namespace Nickvision::Spotlight::Shared::Controllers
         m_args{ args },
         m_appInfo{ "org.nickvision.spotlight", "Nickvision Spotlight", "Spotlight" },
         m_dataFileManager{ m_appInfo.getName() },
-        m_logger{ UserDirectories::get(UserDirectory::ApplicationLocalData, m_appInfo.getName()) / "log.txt", std::find(m_args.begin(), m_args.end(), "--debug") != m_args.end() ? Logging::LogLevel::Debug : Logging::LogLevel::Info, false },
+        m_logger{ UserDirectories::get(ApplicationUserDirectory::LocalData, m_appInfo.getName()) / "log.txt", Logging::LogLevel::Info, false },
         m_spotlightManager{ m_appInfo.getName(), m_logger }
     {
-        m_appInfo.setVersion({ "2024.6.4" });
+        m_appInfo.setVersion({ "2024.7.0-next" });
         m_appInfo.setShortName(_("Spotlight"));
         m_appInfo.setDescription(_("Find your favorite Windows spotlight images"));
         m_appInfo.setChangelog("- Updated dependencies");
