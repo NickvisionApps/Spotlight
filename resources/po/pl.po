@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-25 12:18-0400\n"
+"POT-Creation-Date: 2024-08-11 19:33-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:36
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:34
 msgid "Spotlight"
 msgstr ""
 
@@ -76,172 +77,126 @@ msgstr ""
 msgid "Unable to export images"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/Controls/TitleBar.xaml.cpp:132
-msgid "Search"
+#: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:31
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:53
+msgid "About Spotlight"
 msgstr ""
 
-#. Localize Strings
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:55
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:67
-msgid "Images"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:56
-msgid "Help"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:57
-msgid "Check for Updates"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:58
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:275
-msgid "Credits"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:59
+#: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:37
 msgid "Copy Debug Information"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:60
-msgid "Changelog"
+#: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:38
+msgid "Changelog:"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:61
-msgid "GitHub Repo"
+#: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:39
+msgid ""
+"Developers:\n"
+"{}\n"
+"Designers:\n"
+"{}\n"
+"Artists:\n"
+"{}"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:62
-msgid "Report a Bug"
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:34
+msgid "Spotlight (Preview)"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:63
-msgid "Discussions"
+#. Localize Menu Strings
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:36
+msgid "File"
 msgstr ""
 
-#. Localize Strings
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:64
-#: org.nickvision.spotlight.winui/SettingsPage.xaml.cpp:19
-msgid "Settings"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:65
-msgid "No Spotlight Images"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:66
-msgid "Ensure Windows Spotlight is enabled and come back later to try again"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:68
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:37
 msgid "Export"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:69
-msgid "Export (Ctrl+S)"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:70
-msgid "Set as Background"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:71
-msgid "Set as Background (Ctrl+B)"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:72
-msgid "View"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:73
-msgid "Grid"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:74
-msgid "Flip"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:75
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:38
 msgid "Export All"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:76
-msgid "Export All (Ctrl+Shift+S)"
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:39
+msgid "Exit"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:91
-msgid "Preview"
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:40
+msgid "Edit"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:193
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:41
+#: org.nickvision.spotlight.qt/src/views/settingsdialog.cpp:16
+msgid "Settings"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:42
+msgid "View"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:43
+msgid "Mode"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:44
+msgid "Grid"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:45
+msgid "Flip"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:46
+msgid "Image"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:47
+msgid "Set as Background"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:48
+msgid "Help"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:49
+msgid "Check for Updates"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:50
+msgid "GitHub Repo"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:51
+msgid "Report a Bug"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:52
+msgid "Discussions"
+msgstr ""
+
+#. Localize Grid Page
+#. Localize Flip Page
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:56
+msgid "Previous"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:57
+msgid "Next"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:215
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:253
-msgid "Debug information copied to clipboard."
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:227
+msgid "Open"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:278
-msgid ""
-"Developers:\n"
-"{}\n"
-"Designers:\n"
-"{}\n"
-"Artists:\n"
-"{}"
+#. Localize Strings
+#: org.nickvision.spotlight.qt/src/views/settingsdialog.cpp:18
+msgid "User Interface"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:282
-msgid ""
-"Developers:\n"
-"{}\n"
-"Designers:\n"
-"{}\n"
-"Artists:\n"
-"{}\n"
-"Translators:\n"
-"{}"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:284
-msgid "Close"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/MainWindow.xaml.cpp:297
-msgid "Total Number of Images: {}"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/SettingsPage.xaml.cpp:20
-msgid "Appearance & behavior"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/SettingsPage.xaml.cpp:21
-msgid "Theme"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/SettingsPage.xaml.cpp:22
-msgctxt "Theme"
-msgid "Light"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/SettingsPage.xaml.cpp:23
-msgctxt "Theme"
-msgid "Dark"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/SettingsPage.xaml.cpp:24
-msgctxt "Theme"
-msgid "System"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/SettingsPage.xaml.cpp:25
+#: org.nickvision.spotlight.qt/src/views/settingsdialog.cpp:19
 msgid "Automatically Check for Updates"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/SettingsPage.xaml.cpp:26
-msgid "On"
-msgstr ""
-
-#: org.nickvision.spotlight.winui/SettingsPage.xaml.cpp:27
-msgid "Off"
 msgstr ""

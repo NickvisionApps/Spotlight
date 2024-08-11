@@ -32,10 +32,10 @@ namespace Nickvision::Spotlight::Shared::Controllers
         m_logger{ UserDirectories::get(ApplicationUserDirectory::LocalData, m_appInfo.getName()) / "log.txt", Logging::LogLevel::Info, false },
         m_spotlightManager{ m_appInfo.getName(), m_logger }
     {
-        m_appInfo.setVersion({ "2024.7.0-next" });
+        m_appInfo.setVersion({ "2024.8.0-next" });
         m_appInfo.setShortName(_("Spotlight"));
         m_appInfo.setDescription(_("Find your favorite Windows spotlight images"));
-        m_appInfo.setChangelog("- Updated dependencies");
+        m_appInfo.setChangelog("- Redesigned the user interface with QT");
         m_appInfo.setSourceRepo("https://github.com/NickvisionApps/Spotlight");
         m_appInfo.setIssueTracker("https://github.com/NickvisionApps/Spotlight/issues/new");
         m_appInfo.setSupportUrl("https://github.com/NickvisionApps/Spotlight/discussions");

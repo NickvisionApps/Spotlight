@@ -1,0 +1,7 @@
+<RCC>
+  <qresource>
+    <file>../resources/org.nickvision.spotlight.ico</file>
+    <file>../resources/org.nickvision.spotlight.svg</file>
+    <file>../resources/org.nickvision.spotlight-devel.svg</file>
+  </qresource>
+</RCC>
