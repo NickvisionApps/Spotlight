@@ -105,7 +105,7 @@ Everyone is welcome to translate this app into their native or known languages, 
 
 ##### Via Weblate
 
-Spotlight is available to translate on [Weblate](https://hosted.weblate.org/engage/nickvision-application/)!
+Spotlight is available to translate on [Weblate](https://hosted.weblate.org/engage/nickvision-spotlight/)!
 
 ##### Manually
 
@@ -113,7 +113,7 @@ To start translating the app, fork the repository and clone it locally.
 
 Spotlight uses [gettext](https://www.gnu.org/software/gettext/manual/gettext.html#PO-Files) for translations. In the `resources/po` folder you will find files that can be edited in your favourite `*.po` files editor (or with any plain text editor). 
 
-If you want to create a new translation, copy the `application.pot` file and rename said copy as `<lang_code>.po`, where `<lang_code>` is the language code for your translation. Usually the code is two letters, but it can also be a specific locale code to differentiate between versions of the same language (for example, `pt` and `pt_BR`). **Also, add the language code to `LINGUAS` file** (keeping this file in alphabetical order).
+If you want to create a new translation, copy the `spotlight.pot` file and rename said copy as `<lang_code>.po`, where `<lang_code>` is the language code for your translation. Usually the code is two letters, but it can also be a specific locale code to differentiate between versions of the same language (for example, `pt` and `pt_BR`). **Also, add the language code to `LINGUAS` file** (keeping this file in alphabetical order).
 
 Edit your new translation file with correct translations for the English messages. 
 
@@ -129,7 +129,7 @@ Spotlight is built using C++20 and platform-native user interface libraries. Wit
 
 The project is split up into the following sub-projects:
  - [libspotlight](#libspotlight)
- - [org.nickvision.spotlight.winui](org.nickvision.spotlight.winui)
+ - [org.nickvision.spotlight.qt](org.nickvision.spotlight.qt)
 
 The whole project utilizes the [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) pattern for separating data models and UI views.
 
@@ -140,15 +140,14 @@ This project contains all of the code used by all platforms of the app:
 - `helpers` => Useful objects and functions specific to the application that can be used by all platforms.
 - `models` => The data driven objects of the application (i.e. Configuration, Database, etc...).
 
-##### org.nickvision.spotlight.winui
+##### org.nickvision.spotlight.qt
 
-This project contains all of the code used for the Windows platform (WinUI) version of the app, including installer scripts:
-Powered by the [Windows App SDK](https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/)
+This project contains all of the code used for the QT platform (Windows) version of the app:
 - `controls` => Generic controls for the app.
     - These UI objects are separate from views in that they should not be backed by a controller and should be easily ported to any other app.
-- `helpers` => Useful objects and functions specific for the WinUI platform version of the app.
+- `helpers` => Useful objects and functions specific for the QT platform version of the app.
+- `resources` => Extra icons and other files specific for the QT platform version of the app.
 - `views` => The views (pages, windows, dialogs, etc...) of the app.
-- `installer` => Inno installer scripts.
 
 #### Developing and Testing
 

@@ -3,10 +3,10 @@
 
 #define MyAppName "Nickvision Spotlight"
 #define MyAppShortName "Spotlight"
-#define MyAppVersion "2024.7.0"
+#define MyAppVersion "2024.8.0"
 #define MyAppPublisher "Nickvision"
 #define MyAppURL "https://nickvision.org"
-#define MyAppExeName "org.nickvision.spotlight.winui.exe"
+#define MyAppExeName "org.nickvision.spotlight.qt.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -45,15 +45,6 @@ begin
     MsgBox('Unable to install VC . Please try again', mbError, MB_OK);
 end;
 
-procedure SetupWinAppSDK();
-var
-  ResultCode: Integer;
-begin
-  if not Exec(ExpandConstant('{app}\deps\windowsappruntimeinstall-x64.exe'), '--quiet', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
-  then
-    MsgBox('Unable to install Windows App SDK. Please try again', mbError, MB_OK);
-end;
-
 procedure Cleanup();
 begin
   DelTree(ExpandConstant('{app}\deps'), True, True, True);
@@ -67,9 +58,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "vc_redist.x64.exe"; DestDir: "{app}\deps"; AfterInstall: SetupVC  
-Source: "windowsappruntimeinstall-x64.exe"; DestDir: "{app}\deps"; AfterInstall: SetupWinAppSDK  
-Source: "..\build\org.nickvision.spotlight.winui\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion 
-Source: "..\build\org.nickvision.spotlight.winui\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; AfterInstall: Cleanup
+Source: "..\build\org.nickvision.spotlight.qt\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion 
+Source: "..\build\org.nickvision.spotlight.qt\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; AfterInstall: Cleanup
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

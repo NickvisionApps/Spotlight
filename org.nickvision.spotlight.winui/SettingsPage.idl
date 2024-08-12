@@ -1,8 +1,0 @@
-namespace Nickvision.Spotlight.WinUI
-{
-    [default_interface]
-    runtimeclass SettingsPage : Microsoft.UI.Xaml.Controls.UserControl
-    {
-        SettingsPage();
-    }
-}
