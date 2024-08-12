@@ -260,7 +260,7 @@ namespace Nickvision::Spotlight::QT::Views
     {
         const std::filesystem::path image{ m_controller->getSpotlightImages()[value] };
         QPixmap pixmap{ QString::fromStdString(image.string()) };
-        m_ui->lblFlipImage->setPixmap(pixmap.scaled(m_ui->scrollFlip->width() - 20, m_ui->scrollFlip->height() - 20, Qt::KeepAspectRatio, Qt::FastTransformation));
+        m_ui->lblFlipImage->setPixmap(pixmap.scaled(m_ui->scrollFlip->width() - 20, m_ui->scrollFlip->height() - 20, Qt::KeepAspectRatio));
     }
 
     void MainWindow::flipNext()
