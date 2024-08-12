@@ -1,5 +1,6 @@
 #include "views/mainwindow.h"
 #include "ui_mainwindow.h"
+#include <cmath>
 #include <format>
 #include <QDesktopServices>
 #include <QFileDialog>
@@ -313,6 +314,25 @@ namespace Nickvision::Spotlight::QT::Views
         lblStatus->setText(QString::fromStdString(std::vformat(_("Total Number of Images: {}"), std::make_format_args(CodeHelpers::unmove(m_controller->getSpotlightImages().size())))));
         m_ui->statusBar->addWidget(lblStatus);
         //Setup Grid Page
+        int rowCount{ static_cast<int>(std::ceil(m_controller->getSpotlightImages().size() / static_cast<double>(m_ui->tblImages->columnCount()))) };
+        m_ui->tblImages->setRowCount(rowCount);
+        for(int i = 0; i < rowCount; i++)
+        {
+            for(int j = 0; j < m_ui->tblImages->columnCount(); j++)
+            {
+                int index{ i * m_ui->tblImages->columnCount() + j };
+                if(index >= m_controller->getSpotlightImages().size())
+                {
+                    break;
+                }
+                QPixmap pixmap{ QString::fromStdString(m_controller->getSpotlightImages()[index].string()) };
+                QLabel* lbl{ new QLabel() };
+                lbl->setPixmap(pixmap.scaled(m_ui->tblImages->horizontalHeader()->defaultSectionSize(), m_ui->tblImages->verticalHeader()->defaultSectionSize(), Qt::KeepAspectRatio, Qt::FastTransformation));
+                lbl->setScaledContents(true);
+                m_ui->tblImages->setCellWidget(i, j, lbl);
+                qApp->processEvents();
+            }
+        }
         //Setup Flip Page
         m_ui->sliderFlip->setMaximum(m_controller->getSpotlightImages().size() - 1);
         m_ui->sliderFlip->setValue(0);

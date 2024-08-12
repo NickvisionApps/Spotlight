@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-11 20:36-0400\n"
+"POT-Creation-Date: 2024-08-11 21:51-0400\n"
 "PO-Revision-Date: 2024-08-11 20:09+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Weblate 5.7-dev\n"
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:36
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:35
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:36
 msgid "Spotlight"
 msgstr ""
 
@@ -81,7 +81,7 @@ msgid "Unable to export images"
 msgstr "Bilder können nicht exportiert werden"
 
 #: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:31
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:54
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:55
 #, fuzzy
 msgid "About Spotlight"
 msgstr "Keine Spotlight-Bilder"
@@ -111,121 +111,121 @@ msgstr ""
 "Künstler:\n"
 "{}"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:35
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:36
 msgid "Spotlight (Preview)"
 msgstr ""
 
 #. Localize Menu Strings
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:37
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:38
 msgid "File"
 msgstr ""
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:38
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:39
 msgid "Export"
 msgstr "Exportieren"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:39
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:40
 msgid "Export All"
 msgstr "Alle exportieren"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:40
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:41
 msgid "Exit"
 msgstr ""
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:41
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:42
 msgid "Edit"
 msgstr ""
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:42
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:43
 #: org.nickvision.spotlight.qt/src/views/settingsdialog.cpp:16
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:43
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:44
 msgid "View"
 msgstr "Ansicht"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:44
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:45
 msgid "Mode"
 msgstr ""
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:45
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:46
 msgid "Grid"
 msgstr "Raster"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:46
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:47
 msgid "Flip"
 msgstr ""
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:47
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:48
 #, fuzzy
 msgid "Image"
 msgstr "Bilder"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:48
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:49
 msgid "Set as Background"
 msgstr "Als Hintergrund festlegen"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:49
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:50
 msgid "Help"
 msgstr "Hilfe"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:50
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:51
 msgid "Check for Updates"
 msgstr "Auf Aktualisierungen prüfen"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:51
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:52
 msgid "GitHub Repo"
 msgstr "GitHub-Repo"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:52
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:53
 msgid "Report a Bug"
 msgstr "Problem melden"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:53
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:54
 msgid "Discussions"
 msgstr "Diskussionen"
 
 #. Localize Grid Page
 #. Localize Flip Page
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:57
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:58
 #, fuzzy
 msgid "Previous"
 msgstr "Vorschau"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:58
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:59
 msgid "Next"
 msgstr ""
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:135
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:136
 #, fuzzy
 msgid "Export Image"
 msgstr "Exportieren"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:149
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:150
 #, fuzzy
 msgid "Export All Images"
 msgstr "Alle exportieren"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:288
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:289
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:300
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:301
 msgid "Open"
 msgstr ""
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:308
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:309
 msgid "No Spotlight Images Found"
 msgstr ""
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:308
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:309
 msgid ""
 "Ensure Windows Spotlight is enabled and come back later to try again. The "
 "application will now close."
 msgstr ""
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:313
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:314
 msgid "Total Number of Images: {}"
 msgstr "Gesamtzahl der Bilder: {}"
 
