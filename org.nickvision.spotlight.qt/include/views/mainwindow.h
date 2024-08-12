@@ -99,6 +99,18 @@ namespace Nickvision::Spotlight::QT::Views
          */
         void about();
         /**
+         * @brief Handles when the tblImages' selection is changed.
+         * @param row The row index
+         * @param column The column index
+         */
+        void onTblImagesSelectionChanged(int row, int column);
+        /**
+         * @brief Handles when the tblImages is double clicked.
+         * @param row The row index
+         * @param column The column index
+         */
+        void onTblImagesDoubleClicked(int row, int column);
+        /**
          * @brief Handles when the flip view's slider is changed.
          * @param value The value of the slider
          */

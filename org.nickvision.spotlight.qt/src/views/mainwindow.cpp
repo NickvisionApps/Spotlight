@@ -70,6 +70,8 @@ namespace Nickvision::Spotlight::QT::Views
         connect(m_ui->actionReportABug, &QAction::triggered, this, &MainWindow::reportABug);
         connect(m_ui->actionDiscussions, &QAction::triggered, this, &MainWindow::discussions);
         connect(m_ui->actionAbout, &QAction::triggered, this, &MainWindow::about);
+        connect(m_ui->tblImages, &QTableWidget::cellClicked, this, &MainWindow::onTblImagesSelectionChanged);
+        connect(m_ui->tblImages, &QTableWidget::cellDoubleClicked, this, &MainWindow::onTblImagesDoubleClicked);
         connect(m_ui->sliderFlip, &QSlider::valueChanged, this, &MainWindow::onSliderFlipChanged);
         connect(m_ui->btnFlipNext, &QPushButton::clicked, this, &MainWindow::flipNext);
         connect(m_ui->btnFlipPrev, &QPushButton::clicked, this, &MainWindow::flipPrev);
@@ -127,9 +129,13 @@ namespace Nickvision::Spotlight::QT::Views
         {
             return;
         }
-        if(m_ui->actionGrid->isChecked())
+        if(m_ui->actionGrid->isChecked() && m_ui->tblImages->selectionModel()->hasSelection())
         {
-
+            QString file{ QFileDialog::getSaveFileName(this, _("Export Image"), QString::fromStdString(UserDirectories::get(UserDirectory::Pictures).string()), "JPEG (*.jpg)") };
+            if(!file.isEmpty())
+            {
+                m_controller->exportImage(m_ui->tblImages->selectionModel()->currentIndex().row() * m_ui->tblImages->columnCount() + m_ui->tblImages->selectionModel()->currentIndex().column(), file.toStdString());
+            }
         }
         else
         {
@@ -193,9 +199,9 @@ namespace Nickvision::Spotlight::QT::Views
         {
             return;
         }
-        if(m_ui->actionGrid->isChecked())
+        if(m_ui->actionGrid->isChecked() && m_ui->tblImages->selectionModel()->hasSelection())
         {
-
+            m_controller->setImageAsDesktopBackground(m_ui->tblImages->selectionModel()->currentIndex().row() * m_ui->tblImages->columnCount() + m_ui->tblImages->selectionModel()->currentIndex().column());
         }
         else
         {
@@ -234,6 +240,20 @@ namespace Nickvision::Spotlight::QT::Views
     {
         AboutDialog dialog{ m_controller->getAppInfo(), m_controller->getDebugInformation(), this };
         dialog.exec();
+    }
+
+    void MainWindow::onTblImagesSelectionChanged(int row, int column)
+    {
+        static QLabel* lastSelected{ static_cast<QLabel*>(m_ui->tblImages->cellWidget(0, 0)) };
+        lastSelected->setFrameStyle(QFrame::NoFrame);
+        lastSelected = static_cast<QLabel*>(m_ui->tblImages->cellWidget(row, column));
+        lastSelected->setFrameStyle(QFrame::Box);
+        lastSelected->setLineWidth(3);
+    }
+
+    void MainWindow::onTblImagesDoubleClicked(int row, int column)
+    {
+        QDesktopServices::openUrl(QUrl::fromLocalFile(QString::fromStdString(m_controller->getSpotlightImages()[row * m_ui->tblImages->columnCount() + column].string())));
     }
 
     void MainWindow::onSliderFlipChanged(int value)
@@ -327,9 +347,14 @@ namespace Nickvision::Spotlight::QT::Views
                 }
                 QPixmap pixmap{ QString::fromStdString(m_controller->getSpotlightImages()[index].string()) };
                 QLabel* lbl{ new QLabel() };
-                lbl->setPixmap(pixmap.scaled(m_ui->tblImages->horizontalHeader()->defaultSectionSize(), m_ui->tblImages->verticalHeader()->defaultSectionSize(), Qt::KeepAspectRatio, Qt::FastTransformation));
                 lbl->setScaledContents(true);
+                lbl->setPixmap(pixmap.scaled(m_ui->tblImages->horizontalHeader()->defaultSectionSize(), m_ui->tblImages->verticalHeader()->defaultSectionSize(), Qt::KeepAspectRatio, Qt::FastTransformation));
                 m_ui->tblImages->setCellWidget(i, j, lbl);
+                if(i == 0 && j == 0)
+                {
+                    lbl->setFrameStyle(QFrame::Box);
+                    lbl->setLineWidth(3);
+                }
                 qApp->processEvents();
             }
         }

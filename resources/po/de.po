@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-11 21:51-0400\n"
+"POT-Creation-Date: 2024-08-11 22:37-0400\n"
 "PO-Revision-Date: 2024-08-11 20:09+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-"
@@ -197,35 +197,36 @@ msgstr "Vorschau"
 msgid "Next"
 msgstr ""
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:136
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:134
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:142
 #, fuzzy
 msgid "Export Image"
 msgstr "Exportieren"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:150
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:156
 #, fuzzy
 msgid "Export All Images"
 msgstr "Alle exportieren"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:289
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:309
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:301
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:321
 msgid "Open"
 msgstr ""
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:309
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:329
 msgid "No Spotlight Images Found"
 msgstr ""
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:309
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:329
 msgid ""
 "Ensure Windows Spotlight is enabled and come back later to try again. The "
 "application will now close."
 msgstr ""
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:314
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:334
 msgid "Total Number of Images: {}"
 msgstr "Gesamtzahl der Bilder: {}"
 
