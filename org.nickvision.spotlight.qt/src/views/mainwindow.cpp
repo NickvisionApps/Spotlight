@@ -257,9 +257,13 @@ namespace Nickvision::Spotlight::QT::Views
 
     void MainWindow::loadGridView()
     {
-        m_ui->tblImages->clear();
         int columnCount{ static_cast<int>(std::floor(m_ui->tblImages->width() / static_cast<double>(m_ui->tblImages->horizontalHeader()->defaultSectionSize()))) };
         int rowCount{ static_cast<int>(std::ceil(m_controller->getSpotlightImages().size() / static_cast<double>(columnCount))) };
+        if(columnCount == m_ui->tblImages->columnCount())
+        {
+            return;
+        }
+        m_ui->tblImages->clear();
         m_ui->tblImages->setColumnCount(columnCount);
         m_ui->tblImages->setRowCount(rowCount);
         for(int i = 0; i < rowCount; i++)
