@@ -3,9 +3,8 @@
 
 #include <memory>
 #include <QCloseEvent>
-#include <QDragEnterEvent>
-#include <QDropEvent>
 #include <QMainWindow>
+#include <QResizeEvent>
 #include "controllers/mainwindowcontroller.h"
 
 namespace Ui { class MainWindow; }
@@ -99,6 +98,19 @@ namespace Nickvision::Spotlight::QT::Views
          * @brief Displays the about dialog.
          */
         void about();
+        /**
+         * @brief Handles when the flip view's slider is changed.
+         * @param value The value of the slider
+         */
+        void onSliderFlipChanged(int value);
+        /**
+         * @brief Flips to the next image.
+         */
+        void flipNext();
+        /**
+         * @brief Flips to the previous image.
+         */
+        void flipPrev();
 
     private:
         /**

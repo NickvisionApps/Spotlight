@@ -4,8 +4,8 @@
 #include <QDesktopServices>
 #include <QFileDialog>
 #include <QMessageBox>
-#include <QMimeData>
 #include <QPushButton>
+#include <libnick/filesystem/userdirectories.h>
 #include <libnick/helpers/codehelpers.h>
 #include <libnick/localization/gettext.h>
 #include <libnick/notifications/shellnotification.h>
@@ -15,6 +15,7 @@
 
 using namespace Nickvision::App;
 using namespace Nickvision::Events;
+using namespace Nickvision::Filesystem;
 using namespace Nickvision::Helpers;
 using namespace Nickvision::Notifications;
 using namespace Nickvision::Spotlight::QT::Controls;
@@ -68,6 +69,9 @@ namespace Nickvision::Spotlight::QT::Views
         connect(m_ui->actionReportABug, &QAction::triggered, this, &MainWindow::reportABug);
         connect(m_ui->actionDiscussions, &QAction::triggered, this, &MainWindow::discussions);
         connect(m_ui->actionAbout, &QAction::triggered, this, &MainWindow::about);
+        connect(m_ui->sliderFlip, &QSlider::valueChanged, this, &MainWindow::onSliderFlipChanged);
+        connect(m_ui->btnFlipNext, &QPushButton::clicked, this, &MainWindow::flipNext);
+        connect(m_ui->btnFlipPrev, &QPushButton::clicked, this, &MainWindow::flipPrev);
         m_controller->notificationSent() += [&](const NotificationSentEventArgs& args) { QTHelpers::dispatchToMainThread([this, args]() { onNotificationSent(args); }); };
         m_controller->shellNotificationSent() += [&](const ShellNotificationSentEventArgs& args) { onShellNotificationSent(args); };
         m_controller->imagesSynced() += [&](const EventArgs& args) { QTHelpers::dispatchToMainThread([this]() { onImagesSynced(); }); };
@@ -118,12 +122,35 @@ namespace Nickvision::Spotlight::QT::Views
 
     void MainWindow::exportImage()
     {
+        if(m_controller->getSpotlightImages().empty())
+        {
+            return;
+        }
+        if(m_ui->actionGrid->isChecked())
+        {
 
+        }
+        else
+        {
+            QString file{ QFileDialog::getSaveFileName(this, _("Export Image"), QString::fromStdString(UserDirectories::get(UserDirectory::Pictures).string()), "JPEG (*.jpg)") };
+            if(!file.isEmpty())
+            {
+                m_controller->exportImage(m_ui->sliderFlip->value(), file.toStdString());
+            }
+        }
     }
 
     void MainWindow::exportAllImages()
     {
-
+        if(m_controller->getSpotlightImages().empty())
+        {
+            return;
+        }
+        QString folder{ QFileDialog::getExistingDirectory(this, _("Export All Images"), QString::fromStdString(UserDirectories::get(UserDirectory::Pictures).string())) };
+        if(!folder.isEmpty())
+        {
+            m_controller->exportAllImages(folder.toStdString());
+        }
     }
 
     void MainWindow::exit()
@@ -151,13 +178,28 @@ namespace Nickvision::Spotlight::QT::Views
         if(toggled)
         {
             m_ui->viewStack->setCurrentIndex(1);
+            if(m_ui->actionGrid->isChecked())
+            {
+                onSliderFlipChanged(m_ui->sliderFlip->value());    
+            }
             m_ui->actionGrid->setChecked(false);
         }
     }
 
     void MainWindow::setImageAsBackground()
     {
+        if(m_controller->getSpotlightImages().empty())
+        {
+            return;
+        }
+        if(m_ui->actionGrid->isChecked())
+        {
 
+        }
+        else
+        {
+            m_controller->setImageAsDesktopBackground(m_ui->sliderFlip->value());
+        }
     }
 
     void MainWindow::checkForUpdates()
@@ -191,6 +233,37 @@ namespace Nickvision::Spotlight::QT::Views
     {
         AboutDialog dialog{ m_controller->getAppInfo(), m_controller->getDebugInformation(), this };
         dialog.exec();
+    }
+
+    void MainWindow::onSliderFlipChanged(int value)
+    {
+        const std::filesystem::path image{ m_controller->getSpotlightImages()[value] };
+        QPixmap pixmap{ QString::fromStdString(image.string()) };
+        m_ui->lblFlipImage->setPixmap(pixmap.scaled(m_ui->scrollFlip->width() - 20, m_ui->scrollFlip->height() - 20, Qt::KeepAspectRatio, Qt::FastTransformation));
+    }
+
+    void MainWindow::flipNext()
+    {
+        if(m_ui->sliderFlip->value() == m_ui->sliderFlip->maximum())
+        {
+            m_ui->sliderFlip->setValue(0);
+        }
+        else
+        {
+            m_ui->sliderFlip->setValue(m_ui->sliderFlip->value() + 1);
+        }
+    }
+
+    void MainWindow::flipPrev()
+    {
+        if(m_ui->sliderFlip->value() == 0)
+        {
+            m_ui->sliderFlip->setValue(m_ui->sliderFlip->maximum());
+        }
+        else
+        {
+            m_ui->sliderFlip->setValue(m_ui->sliderFlip->value() - 1);
+        }
     }
 
     void MainWindow::onNotificationSent(const NotificationSentEventArgs& args)
@@ -230,6 +303,19 @@ namespace Nickvision::Spotlight::QT::Views
 
     void MainWindow::onImagesSynced()
     {
-        
+        if(m_controller->getSpotlightImages().empty())
+        {
+            QMessageBox::critical(this, _("No Spotlight Images Found"), _("Ensure Windows Spotlight is enabled and come back later to try again. The application will now close."), QMessageBox::StandardButton::Close);
+            close();
+            return;
+        }
+        QLabel* lblStatus{ new QLabel() };
+        lblStatus->setText(QString::fromStdString(std::vformat(_("Total Number of Images: {}"), std::make_format_args(CodeHelpers::unmove(m_controller->getSpotlightImages().size())))));
+        m_ui->statusBar->addWidget(lblStatus);
+        //Setup Grid Page
+        //Setup Flip Page
+        m_ui->sliderFlip->setMaximum(m_controller->getSpotlightImages().size() - 1);
+        m_ui->sliderFlip->setValue(0);
+        onSliderFlipChanged(0);
     }
 }
