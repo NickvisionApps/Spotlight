@@ -5,6 +5,7 @@
 #include <QCloseEvent>
 #include <QMainWindow>
 #include <QResizeEvent>
+#include <QTimer>
 #include "controllers/mainwindowcontroller.h"
 
 namespace Ui { class MainWindow; }
@@ -40,6 +41,11 @@ namespace Nickvision::Spotlight::QT::Views
          * @param event QCloseEvent
          */
         void closeEvent(QCloseEvent* event) override;
+        /**
+         * @brief Handles when the window is resized.
+         * @param event QResizeEvent
+         */
+        void resizeEvent(QResizeEvent* event) override;
 
     private Q_SLOTS:
         /**
@@ -99,6 +105,10 @@ namespace Nickvision::Spotlight::QT::Views
          */
         void about();
         /**
+         * @brief Loads spotlight images into a grid view.
+         */
+        void loadGridView();
+        /**
          * @brief Handles when the tblImages' selection is changed.
          * @param row The row index
          * @param column The column index
@@ -141,6 +151,7 @@ namespace Nickvision::Spotlight::QT::Views
         void onImagesSynced();
         Ui::MainWindow* m_ui;
         std::shared_ptr<Shared::Controllers::MainWindowController> m_controller;
+        QTimer m_resizeTimer;
     };
 }
 

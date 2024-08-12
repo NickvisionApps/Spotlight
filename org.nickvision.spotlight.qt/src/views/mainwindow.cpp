@@ -30,7 +30,8 @@ namespace Nickvision::Spotlight::QT::Views
     MainWindow::MainWindow(const std::shared_ptr<MainWindowController>& controller, QWidget* parent) 
         : QMainWindow{ parent },
         m_ui{ new Ui::MainWindow() },
-        m_controller{ controller }
+        m_controller{ controller },
+        m_resizeTimer{ this }
     {
         m_ui->setupUi(this);
         setWindowTitle(m_controller->getAppInfo().getVersion().getVersionType() == VersionType::Stable ? _("Spotlight") : _("Spotlight (Preview)"));
@@ -54,6 +55,9 @@ namespace Nickvision::Spotlight::QT::Views
         m_ui->actionDiscussions->setText(_("Discussions"));
         m_ui->actionAbout->setText(_("About Spotlight"));
         //Localize Grid Page
+        m_resizeTimer.setSingleShot(true);
+        m_resizeTimer.setInterval(300);
+        connect(&m_resizeTimer, &QTimer::timeout, this, &MainWindow::loadGridView);
         //Localize Flip Page
         m_ui->btnFlipPrev->setToolTip(_("Previous"));
         m_ui->btnFlipNext->setToolTip(_("Next"));
@@ -121,6 +125,15 @@ namespace Nickvision::Spotlight::QT::Views
         }
         m_controller->shutdown({ geometry().width(), geometry().height(), isMaximized() }, m_ui->actionGrid->isChecked() ? ViewMode::Grid : ViewMode::Flip);
         event->accept();
+    }
+
+    void MainWindow::resizeEvent(QResizeEvent* event)
+    {
+        QMainWindow::resizeEvent(event);
+        if(m_ui->actionGrid->isChecked())
+        {
+            m_resizeTimer.start();
+        }
     }
 
     void MainWindow::exportImage()
@@ -242,6 +255,37 @@ namespace Nickvision::Spotlight::QT::Views
         dialog.exec();
     }
 
+    void MainWindow::loadGridView()
+    {
+        m_ui->tblImages->clear();
+        int columnCount{ static_cast<int>(std::floor(m_ui->tblImages->width() / static_cast<double>(m_ui->tblImages->horizontalHeader()->defaultSectionSize()))) };
+        int rowCount{ static_cast<int>(std::ceil(m_controller->getSpotlightImages().size() / static_cast<double>(columnCount))) };
+        m_ui->tblImages->setColumnCount(columnCount);
+        m_ui->tblImages->setRowCount(rowCount);
+        for(int i = 0; i < rowCount; i++)
+        {
+            for(int j = 0; j < columnCount; j++)
+            {
+                int index{ i * columnCount + j };
+                if(index >= m_controller->getSpotlightImages().size())
+                {
+                    break;
+                }
+                QPixmap pixmap{ QString::fromStdString(m_controller->getSpotlightImages()[index].string()) };
+                QLabel* lbl{ new QLabel() };
+                lbl->setScaledContents(true);
+                lbl->setPixmap(pixmap.scaled(m_ui->tblImages->horizontalHeader()->defaultSectionSize(), m_ui->tblImages->verticalHeader()->defaultSectionSize(), Qt::KeepAspectRatio, Qt::FastTransformation));
+                m_ui->tblImages->setCellWidget(i, j, lbl);
+                if(i == 0 && j == 0)
+                {
+                    lbl->setFrameStyle(QFrame::Box);
+                    lbl->setLineWidth(3);
+                }
+                qApp->processEvents();
+            }
+        }
+    }
+
     void MainWindow::onTblImagesSelectionChanged(int row, int column)
     {
         static QLabel* lastSelected{ static_cast<QLabel*>(m_ui->tblImages->cellWidget(0, 0)) };
@@ -334,30 +378,7 @@ namespace Nickvision::Spotlight::QT::Views
         lblStatus->setText(QString::fromStdString(std::vformat(_("Total Number of Images: {}"), std::make_format_args(CodeHelpers::unmove(m_controller->getSpotlightImages().size())))));
         m_ui->statusBar->addWidget(lblStatus);
         //Setup Grid Page
-        int rowCount{ static_cast<int>(std::ceil(m_controller->getSpotlightImages().size() / static_cast<double>(m_ui->tblImages->columnCount()))) };
-        m_ui->tblImages->setRowCount(rowCount);
-        for(int i = 0; i < rowCount; i++)
-        {
-            for(int j = 0; j < m_ui->tblImages->columnCount(); j++)
-            {
-                int index{ i * m_ui->tblImages->columnCount() + j };
-                if(index >= m_controller->getSpotlightImages().size())
-                {
-                    break;
-                }
-                QPixmap pixmap{ QString::fromStdString(m_controller->getSpotlightImages()[index].string()) };
-                QLabel* lbl{ new QLabel() };
-                lbl->setScaledContents(true);
-                lbl->setPixmap(pixmap.scaled(m_ui->tblImages->horizontalHeader()->defaultSectionSize(), m_ui->tblImages->verticalHeader()->defaultSectionSize(), Qt::KeepAspectRatio, Qt::FastTransformation));
-                m_ui->tblImages->setCellWidget(i, j, lbl);
-                if(i == 0 && j == 0)
-                {
-                    lbl->setFrameStyle(QFrame::Box);
-                    lbl->setLineWidth(3);
-                }
-                qApp->processEvents();
-            }
-        }
+        loadGridView();
         //Setup Flip Page
         m_ui->sliderFlip->setMaximum(m_controller->getSpotlightImages().size() - 1);
         m_ui->sliderFlip->setValue(0);

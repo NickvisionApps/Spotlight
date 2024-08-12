@@ -61,9 +61,6 @@
           <property name="cornerButtonEnabled">
            <bool>false</bool>
           </property>
-          <property name="columnCount">
-           <number>3</number>
-          </property>
           <attribute name="horizontalHeaderVisible">
            <bool>false</bool>
           </attribute>
@@ -76,9 +73,6 @@
           <attribute name="verticalHeaderDefaultSectionSize">
            <number>220</number>
           </attribute>
-          <column/>
-          <column/>
-          <column/>
          </widget>
         </item>
        </layout>
