@@ -377,11 +377,11 @@ namespace Nickvision::Spotlight::QT::Views
         QLabel* lblStatus{ new QLabel() };
         lblStatus->setText(QString::fromStdString(std::vformat(_("Total Number of Images: {}"), std::make_format_args(CodeHelpers::unmove(m_controller->getSpotlightImages().size())))));
         m_ui->statusBar->addWidget(lblStatus);
-        //Setup Grid Page
-        loadGridView();
-        //Setup Flip Page
+        //Setup Flip Page (Faster)
         m_ui->sliderFlip->setMaximum(m_controller->getSpotlightImages().size() - 1);
         m_ui->sliderFlip->setValue(0);
         onSliderFlipChanged(0);
+        //Setup Grid Page
+        loadGridView();
     }
 }
