@@ -1,0 +1,227 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-12 11:26-0400\n"
+"PO-Revision-Date: 2025-01-21 15:01+0000\n"
+"Last-Translator: \"Emilio S.\" <emism.translations@gmail.com>\n"
+"Language-Team: Interlingua <https://hosted.weblate.org/projects/"
+"nickvision-spotlight/app/ia/>\n"
+"Language: ia\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10-dev\n"
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:36
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:37
+msgid "Spotlight"
+msgstr ""
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:37
+msgid "Find your favorite Windows spotlight images"
+msgstr ""
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:42
+msgid "Matrix Chat"
+msgstr ""
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:44
+msgid "Contributors on GitHub"
+msgstr ""
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:46
+msgid "Fyodor Sobolev"
+msgstr ""
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:48
+msgid "David Lapshin"
+msgstr ""
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:49
+msgid "translator-credits"
+msgstr ""
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:185
+msgid "New update available"
+msgstr "Nove actualisation disponibile"
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:216
+msgid "Unable to download and install update"
+msgstr "Impossibile de discargar e installar le actualisation"
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:231
+msgid "Image set as desktop background"
+msgstr ""
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:235
+msgid "Unable to set image as desktop background"
+msgstr "Impossibile de definir le imagine como fundo de scriptorio"
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:243
+msgid "Image exported to {}"
+msgstr "Le imagine ha essite exportate a {}"
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:247
+msgid "Unable to export image"
+msgstr "Impossibile de exportar le imagine"
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:255
+msgid "Images exported to {}"
+msgstr ""
+
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:259
+msgid "Unable to export images"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:31
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:56
+msgid "About Spotlight"
+msgstr "A proposito de Spotlight"
+
+#: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:37
+msgid "Copy Debug Information"
+msgstr "Copiar information de depuration"
+
+#: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:38
+msgid "Changelog:"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:39
+msgid ""
+"Developers:\n"
+"{}\n"
+"Designers:\n"
+"{}\n"
+"Artists:\n"
+"{}"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:37
+msgid "Spotlight (Preview)"
+msgstr ""
+
+#. Localize Menu Strings
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:39
+msgid "File"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:40
+msgid "Export"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:41
+msgid "Export All"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:42
+msgid "Exit"
+msgstr "Sortir"
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:43
+msgid "Edit"
+msgstr "Editar"
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:44
+#: org.nickvision.spotlight.qt/src/views/settingsdialog.cpp:16
+msgid "Settings"
+msgstr "Configurationes"
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:45
+msgid "View"
+msgstr "Vider"
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:46
+msgid "Mode"
+msgstr "Modo"
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:47
+msgid "Grid"
+msgstr "Grillia"
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:48
+msgid "Flip"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:49
+msgid "Image"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:50
+msgid "Set as Background"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:51
+msgid "Help"
+msgstr "Adjuta"
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:52
+msgid "Check for Updates"
+msgstr "Verificar actualisationes"
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:53
+msgid "GitHub Repo"
+msgstr "Repositorio de GitHub"
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:54
+msgid "Report a Bug"
+msgstr "Signalar un defecto"
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:55
+msgid "Discussions"
+msgstr ""
+
+#. Localize Flip Page
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:62
+msgid "Previous"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:63
+msgid "Next"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:147
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:155
+msgid "Export Image"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:169
+msgid "Export All Images"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:353
+msgid "Update"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:365
+msgid "Open"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:373
+msgid "No Spotlight Images Found"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:373
+msgid ""
+"Ensure Windows Spotlight is enabled and come back later to try again. The "
+"application will now close."
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:378
+msgid "Total Number of Images: {}"
+msgstr ""
+
+#. Localize Strings
+#: org.nickvision.spotlight.qt/src/views/settingsdialog.cpp:18
+msgid "User Interface"
+msgstr "Interfacie de usator"
+
+#: org.nickvision.spotlight.qt/src/views/settingsdialog.cpp:19
+msgid "Automatically Check for Updates"
+msgstr ""
