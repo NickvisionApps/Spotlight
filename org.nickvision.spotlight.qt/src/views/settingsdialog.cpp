@@ -5,7 +5,7 @@
 using namespace Nickvision::Spotlight::Shared::Controllers;
 using namespace Nickvision::Spotlight::Shared::Models;
 
-namespace Nickvision::Spotlight::QT::Views
+namespace Nickvision::Spotlight::Qt::Views
 {
     SettingsDialog::SettingsDialog(const std::shared_ptr<PreferencesViewController>& controller, QWidget* parent)
         : QDialog{ parent },

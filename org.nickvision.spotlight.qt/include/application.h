@@ -6,10 +6,10 @@
 #include "controllers/mainwindowcontroller.h"
 #include "views/mainwindow.h"
 
-namespace Nickvision::Spotlight::QT
+namespace Nickvision::Spotlight::Qt
 {
     /**
-     * @brief The main QT application point.
+     * @brief The main Qt application point.
      */
     class Application : public QApplication
     {

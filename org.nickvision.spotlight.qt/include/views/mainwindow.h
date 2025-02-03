@@ -10,7 +10,7 @@
 
 namespace Ui { class MainWindow; }
 
-namespace Nickvision::Spotlight::QT::Views
+namespace Nickvision::Spotlight::Qt::Views
 {
     /**
      * @brief The main window for the application.
@@ -82,12 +82,10 @@ namespace Nickvision::Spotlight::QT::Views
          * @brief Checks for application updates.
          */
         void checkForUpdates();
-#ifdef _WIN32
         /**
          * @brief Downloads and installs the latest application update in the background.
          */
         void windowsUpdate();
-#endif
         /**
          * @brief Opens the application's GitHub repo in the browser.
          */

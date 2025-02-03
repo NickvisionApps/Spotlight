@@ -8,7 +8,7 @@
 
 namespace Ui { class SettingsDialog; }
 
-namespace Nickvision::Spotlight::QT::Views
+namespace Nickvision::Spotlight::Qt::Views
 {
     /**
      * @brief The settings dialog for the application.

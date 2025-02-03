@@ -19,13 +19,13 @@ using namespace Nickvision::Events;
 using namespace Nickvision::Filesystem;
 using namespace Nickvision::Helpers;
 using namespace Nickvision::Notifications;
-using namespace Nickvision::Spotlight::QT::Controls;
-using namespace Nickvision::Spotlight::QT::Helpers;
+using namespace Nickvision::Spotlight::Qt::Controls;
+using namespace Nickvision::Spotlight::Qt::Helpers;
 using namespace Nickvision::Spotlight::Shared::Controllers;
 using namespace Nickvision::Spotlight::Shared::Models;
 using namespace Nickvision::Update;
 
-namespace Nickvision::Spotlight::QT::Views
+namespace Nickvision::Spotlight::Qt::Views
 {
     MainWindow::MainWindow(const std::shared_ptr<MainWindowController>& controller, QWidget* parent) 
         : QMainWindow{ parent },
@@ -79,9 +79,9 @@ namespace Nickvision::Spotlight::QT::Views
         connect(m_ui->sliderFlip, &QSlider::valueChanged, this, &MainWindow::onSliderFlipChanged);
         connect(m_ui->btnFlipNext, &QPushButton::clicked, this, &MainWindow::flipNext);
         connect(m_ui->btnFlipPrev, &QPushButton::clicked, this, &MainWindow::flipPrev);
-        m_controller->notificationSent() += [&](const NotificationSentEventArgs& args) { QTHelpers::dispatchToMainThread([this, args]() { onNotificationSent(args); }); };
+        m_controller->notificationSent() += [&](const NotificationSentEventArgs& args) { QtHelpers::dispatchToMainThread([this, args]() { onNotificationSent(args); }); };
         m_controller->shellNotificationSent() += [&](const ShellNotificationSentEventArgs& args) { onShellNotificationSent(args); };
-        m_controller->imagesSynced() += [&](const EventArgs& args) { QTHelpers::dispatchToMainThread([this]() { onImagesSynced(); }); };
+        m_controller->imagesSynced() += [&](const EventArgs& args) { QtHelpers::dispatchToMainThread([this]() { onImagesSynced(); }); };
     }
 
     MainWindow::~MainWindow()
@@ -92,20 +92,11 @@ namespace Nickvision::Spotlight::QT::Views
     void MainWindow::show()
     {
         QMainWindow::show();
-#ifdef _WIN32
-        WindowGeometry geometry{ m_controller->startup(reinterpret_cast<HWND>(winId())) };
-#elif defined(__linux__)
-        WindowGeometry geometry{ m_controller->startup(m_controller->getAppInfo().getId() + ".desktop") };
-#else
-        WindowGeometry geometry{ m_controller->startup() };
-#endif
-        if(geometry.isMaximized())
+        const StartupInformation& info{ m_controller->startup(reinterpret_cast<HWND>(winId())) };
+        setGeometry(QWidget::geometry().x(), QWidget::geometry().y(), info.getWindowGeometry().getWidth(), info.getWindowGeometry().getHeight());
+        if(info.getWindowGeometry().isMaximized())
         {
             showMaximized();
-        }
-        else
-        {
-            setGeometry(QWidget::geometry().x(), QWidget::geometry().y(), geometry.getWidth(), geometry.getHeight());
         }
         if(m_controller->getViewMode() == ViewMode::Grid)
         {
@@ -227,12 +218,10 @@ namespace Nickvision::Spotlight::QT::Views
         m_controller->checkForUpdates();
     }
 
-#ifdef _WIN32
     void MainWindow::windowsUpdate()
     {
         m_controller->windowsUpdate();
     }
-#endif
 
     void MainWindow::gitHubRepo()
     {
@@ -278,7 +267,7 @@ namespace Nickvision::Spotlight::QT::Views
                 QPixmap pixmap{ QString::fromStdString(m_controller->getSpotlightImages()[index].string()) };
                 QLabel* lbl{ new QLabel() };
                 lbl->setScaledContents(true);
-                lbl->setPixmap(pixmap.scaled(m_ui->tblImages->horizontalHeader()->defaultSectionSize(), m_ui->tblImages->verticalHeader()->defaultSectionSize(), Qt::KeepAspectRatio, Qt::FastTransformation));
+                lbl->setPixmap(pixmap.scaled(m_ui->tblImages->horizontalHeader()->defaultSectionSize(), m_ui->tblImages->verticalHeader()->defaultSectionSize(), ::Qt::KeepAspectRatio, ::Qt::FastTransformation));
                 m_ui->tblImages->setCellWidget(i, j, lbl);
                 if(i == 0 && j == 0)
                 {
@@ -308,7 +297,7 @@ namespace Nickvision::Spotlight::QT::Views
     {
         const std::filesystem::path image{ m_controller->getSpotlightImages()[value] };
         QPixmap pixmap{ QString::fromStdString(image.string()) };
-        m_ui->lblFlipImage->setPixmap(pixmap.scaled(m_ui->scrollFlip->width() - 20, m_ui->scrollFlip->height() - 20, Qt::KeepAspectRatio));
+        m_ui->lblFlipImage->setPixmap(pixmap.scaled(m_ui->scrollFlip->width() - 20, m_ui->scrollFlip->height() - 20, ::Qt::KeepAspectRatio));
     }
 
     void MainWindow::flipNext()
@@ -362,12 +351,7 @@ namespace Nickvision::Spotlight::QT::Views
 
     void MainWindow::onShellNotificationSent(const ShellNotificationSentEventArgs& args)
     {
-        m_controller->log(Logging::LogLevel::Info, "ShellNotification sent. (" + args.getMessage() + ")");
-#ifdef _WIN32
         ShellNotification::send(args, reinterpret_cast<HWND>(winId()));
-#elif defined(__linux__)
-        ShellNotification::send(args, m_controller->getAppInfo().getId(), _("Open"));
-#endif
     }
 
     void MainWindow::onImagesSynced()

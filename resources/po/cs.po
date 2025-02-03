@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-03 11:50-0500\n"
+"POT-Creation-Date: 2025-02-03 12:01-0500\n"
 "PO-Revision-Date: 2024-09-04 15:09+0000\n"
 "Last-Translator: Fjuro <fjuro@alius.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-"
@@ -197,28 +197,24 @@ msgstr "Předchozí"
 msgid "Next"
 msgstr "Další"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:147
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:155
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:138
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:146
 msgid "Export Image"
 msgstr "Exportovat obrázek"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:169
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:160
 msgid "Export All Images"
 msgstr "Exportovat všechny obrázky"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:357
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:346
 msgid "Update"
 msgstr "Aktualizovat"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:369
-msgid "Open"
-msgstr "Otevřít"
-
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:377
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:361
 msgid "No Spotlight Images Found"
 msgstr "Nenalezeny žádné obrázky Spotlight"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:377
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:361
 msgid ""
 "Ensure Windows Spotlight is enabled and come back later to try again. The "
 "application will now close."
@@ -226,7 +222,7 @@ msgstr ""
 "Ujistěte se, že je služba Windows Spotlight povolena a zkuste to znovu "
 "později. Aplikace se nyní zavře."
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:382
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:366
 msgid "Total Number of Images: {}"
 msgstr "Celkový počet obrázků: {}"
 
@@ -238,3 +234,6 @@ msgstr "Uživatelské rozhraní"
 #: org.nickvision.spotlight.qt/src/views/settingsdialog.cpp:19
 msgid "Automatically Check for Updates"
 msgstr "Automaticky kontrolovat aktualizace"
+
+#~ msgid "Open"
+#~ msgstr "Otevřít"

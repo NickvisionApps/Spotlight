@@ -20,7 +20,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how can you help the proje
 ## Screenshots
 
 <details>
-  <summary>QT</summary>
+  <summary>Qt</summary>
 
   ![Main](resources/screenshots/qt/main.png)
   ![Flip](resources/screenshots/qt/flip.png)
