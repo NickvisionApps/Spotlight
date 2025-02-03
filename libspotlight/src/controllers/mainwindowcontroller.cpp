@@ -18,6 +18,7 @@ using namespace Nickvision::Events;
 using namespace Nickvision::Filesystem;
 using namespace Nickvision::Helpers;
 using namespace Nickvision::Notifications;
+using namespace Nickvision::Spotlight::Shared::Events;
 using namespace Nickvision::Spotlight::Shared::Models;
 using namespace Nickvision::System;
 using namespace Nickvision::Update;
@@ -34,7 +35,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
         m_appInfo.setVersion({ "2025.2.0" });
         m_appInfo.setShortName(_("Spotlight"));
         m_appInfo.setDescription(_("Find your favorite Windows spotlight images"));
-        m_appInfo.setChangelog("- Fixed an issue where the application could not update itself");
+        m_appInfo.setChangelog("- Added the ability to clear the spotlight cache and resync images\n- Fixed an issue where the application could not update itself");
         m_appInfo.setSourceRepo("https://github.com/NickvisionApps/Spotlight");
         m_appInfo.setIssueTracker("https://github.com/NickvisionApps/Spotlight/issues/new");
         m_appInfo.setSupportUrl("https://github.com/NickvisionApps/Spotlight/discussions");
@@ -64,7 +65,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
         return m_shellNotificationSent;
     }
 
-    Event<EventArgs>& MainWindowController::imagesSynced()
+    Event<ImagesSyncedEventArgs>& MainWindowController::imagesSynced()
     {
         return m_imagesSynced;
     }
@@ -77,11 +78,6 @@ namespace Nickvision::Spotlight::Shared::Controllers
     Theme MainWindowController::getTheme()
     {
         return m_dataFileManager.get<Configuration>("config").getTheme();
-    }
-
-    ViewMode MainWindowController::getViewMode()
-    {
-        return m_dataFileManager.get<Configuration>("config").getViewMode();
     }
 
     std::string MainWindowController::getDebugInformation(const std::string& extraInformation) const
@@ -109,9 +105,19 @@ namespace Nickvision::Spotlight::Shared::Controllers
         return Environment::getDebugInformation(m_appInfo, builder.str());
     }
 
-    const std::vector<std::filesystem::path>& MainWindowController::getSpotlightImages() const
+    size_t MainWindowController::getSpotlightImageCount() const
     {
-        return m_spotlightManager.getImages();
+        return m_spotlightManager.getImages().size();
+    }
+
+    const std::filesystem::path& MainWindowController::getSpotlightImagePath(int index) const
+    {
+        static std::filesystem::path empty;
+        if(index < 0 || index > m_spotlightManager.getImages().size())
+        {
+            return empty;
+        }
+        return m_spotlightManager.getImages()[index];
     }
 
     bool MainWindowController::canShutdown() const
@@ -142,8 +148,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
         //Load images
         std::thread syncWorker{ [this]()
         {
-            m_spotlightManager.sync();
-            m_imagesSynced.invoke({});
+            m_imagesSynced.invoke({ m_spotlightManager.sync(), m_dataFileManager.get<Configuration>("config").getViewMode() });
         } };
         syncWorker.detach();
         m_started = true;

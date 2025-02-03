@@ -61,9 +61,19 @@ namespace Nickvision::Spotlight::Shared::Models
         }
         for(const std::filesystem::directory_entry& entry : std::filesystem::directory_iterator(m_dataDir))
         {
-            m_images.push_back(entry.path());
+            if(entry.path().extension() == ".jpg")
+            {
+                m_images.push_back(entry.path());
+            }
         }
         return m_images;
+    }
+
+    const std::vector<std::filesystem::path>& SpotlightManager::clearAndSync()
+    {
+        std::filesystem::remove_all(m_dataDir);
+        std::filesystem::create_directories(m_dataDir);
+        return sync();
     }
 
     bool SpotlightManager::exportImage(size_t index, const std::filesystem::path& path) const
@@ -122,7 +132,11 @@ namespace Nickvision::Spotlight::Shared::Models
 
     void SpotlightManager::processEntry(const std::filesystem::directory_entry& entry, SpotlightImageType type)
     {
-        if(type == SpotlightImageType::LockScreen && entry.file_size() / 1000 < 200)
+        if(!entry.is_regular_file())
+        {
+            return;
+        }
+        else if(type == SpotlightImageType::LockScreen && entry.file_size() / 1000 < 200)
         {
            return;
         }

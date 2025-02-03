@@ -35,6 +35,11 @@ namespace Nickvision::Spotlight::Shared::Models
          */
         const std::vector<std::filesystem::path>& sync();
         /**
+         * @brief Clears the cached images and resyncs spotlight images.
+         * @return The list of paths to synced spotlight images
+         */
+        const std::vector<std::filesystem::path>& clearAndSync();
+        /**
          * @brief Exports a spotlight image.
          * @param index The index of the image to export
          * @param path The path to export the image to

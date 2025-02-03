@@ -18,6 +18,7 @@
 #include <libnick/taskbar/taskbaritem.h>
 #include <libnick/update/updater.h>
 #include "controllers/preferencesviewcontroller.h"
+#include "events/imagessyncedeventargs.h"
 #include "models/spotlightmanager.h"
 #include "models/startupinformation.h"
 #include "models/theme.h"
@@ -55,7 +56,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
          * @brief Gets the event for when images are synced.
          * @return The images synced event
          */
-        Nickvision::Events::Event<Nickvision::Events::EventArgs>& imagesSynced();
+        Nickvision::Events::Event<Events::ImagesSyncedEventArgs>& imagesSynced();
         /**
          * @brief Gets the AppInfo object for the application
          * @return The current AppInfo object
@@ -67,21 +68,22 @@ namespace Nickvision::Spotlight::Shared::Controllers
          */
         Models::Theme getTheme();
         /**
-         * @brief Gets the view mode for the application.
-         * @return The view mode
-         */
-        Models::ViewMode getViewMode();
-        /**
          * @brief Gets the debugging information for the application.
          * @param extraInformation Extra, ui-specific, information to include in the debug info statement
          * @return The application's debug information
          */
         std::string getDebugInformation(const std::string& extraInformation = "") const;
         /**
-         * @brief Gets the list of paths to synced spotlight images.
-         * @return The list of paths to synced spotlight images
+         * @brief Gets the number of spotlight images synced.
+         * @return The number of spotlight images synced
          */
-        const std::vector<std::filesystem::path>& getSpotlightImages() const;
+        size_t getSpotlightImageCount() const;
+        /**
+         * @brief Gets the path of a spotlight image.
+         * @param index The index of the image
+         * @return The path of the spotlight image
+         */
+        const std::filesystem::path& getSpotlightImagePath(int index) const;
         /**
          * @brief Gets whether or not the application can be shut down.
          * @return True if can shut down, else false
@@ -146,7 +148,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
         Nickvision::Events::Event<Nickvision::Notifications::NotificationSentEventArgs> m_notificationSent;
         Nickvision::Events::Event<Nickvision::Notifications::ShellNotificationSentEventArgs> m_shellNotificationSent;
         Models::SpotlightManager m_spotlightManager;
-        Nickvision::Events::Event<Nickvision::Events::EventArgs> m_imagesSynced;
+        Nickvision::Events::Event<Events::ImagesSyncedEventArgs> m_imagesSynced;
     };
 }
 
