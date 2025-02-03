@@ -8,11 +8,11 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-08-12 11:26-0400\n"
-"PO-Revision-Date: 2024-12-22 15:00+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/"
-"nickvision-spotlight/app/de/>\n"
-"Language: de\n"
+"PO-Revision-Date: 2025-01-21 15:01+0000\n"
+"Last-Translator: \"Emilio S.\" <emism.translations@gmail.com>\n"
+"Language-Team: Interlingua <https://hosted.weblate.org/projects/"
+"nickvision-spotlight/app/ia/>\n"
+"Language: ia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,27 +22,27 @@ msgstr ""
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:36
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:37
 msgid "Spotlight"
-msgstr "Blickpunkt"
+msgstr ""
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:37
 msgid "Find your favorite Windows spotlight images"
-msgstr "Finden Sie Ihre Lieblingsbilder im Windows-Blickpunkt"
+msgstr ""
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:42
 msgid "Matrix Chat"
-msgstr "Matrix-Chat"
+msgstr ""
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:44
 msgid "Contributors on GitHub"
-msgstr "Beitragende auf GitHub"
+msgstr ""
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:46
 msgid "Fyodor Sobolev"
-msgstr "Fjodor Sobolew"
+msgstr ""
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:48
 msgid "David Lapshin"
-msgstr "David Lapshin"
+msgstr ""
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:49
 msgid "translator-credits"
@@ -50,48 +50,48 @@ msgstr ""
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:185
 msgid "New update available"
-msgstr "Neue Aktualisierung verfügbar"
+msgstr "Nove actualisation disponibile"
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:216
 msgid "Unable to download and install update"
-msgstr "Aktualisierung kann nicht heruntergeladen und installiert werden"
+msgstr "Impossibile de discargar e installar le actualisation"
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:231
 msgid "Image set as desktop background"
-msgstr "Bild als Desktophintergrund festgelegt"
+msgstr ""
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:235
 msgid "Unable to set image as desktop background"
-msgstr "Bild kann nicht als Desktophintergrund festgelegt werden"
+msgstr "Impossibile de definir le imagine como fundo de scriptorio"
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:243
 msgid "Image exported to {}"
-msgstr "Bild exportiert nach {}"
+msgstr "Le imagine ha essite exportate a {}"
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:247
 msgid "Unable to export image"
-msgstr "Bild kann nicht exportiert werden"
+msgstr "Impossibile de exportar le imagine"
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:255
 msgid "Images exported to {}"
-msgstr "Bilder exportiert nach {}"
+msgstr ""
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:259
 msgid "Unable to export images"
-msgstr "Bilder können nicht exportiert werden"
+msgstr ""
 
 #: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:31
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:56
 msgid "About Spotlight"
-msgstr "Über Blickpunkt"
+msgstr "A proposito de Spotlight"
 
 #: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:37
 msgid "Copy Debug Information"
-msgstr "Debug-Informationen kopieren"
+msgstr "Copiar information de depuration"
 
 #: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:38
 msgid "Changelog:"
-msgstr "Änderungsprotokoll:"
+msgstr ""
 
 #: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:39
 msgid ""
@@ -102,54 +102,48 @@ msgid ""
 "Artists:\n"
 "{}"
 msgstr ""
-"Entwickler:\n"
-"{}\n"
-"Designer:\n"
-"{}\n"
-"Künstler:\n"
-"{}"
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:37
 msgid "Spotlight (Preview)"
-msgstr "Blickpunkt (Vorschau)"
+msgstr ""
 
 #. Localize Menu Strings
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:39
 msgid "File"
-msgstr "Datei"
+msgstr ""
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:40
 msgid "Export"
-msgstr "Exportieren"
+msgstr ""
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:41
 msgid "Export All"
-msgstr "Alle exportieren"
+msgstr ""
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:42
 msgid "Exit"
-msgstr "Beenden"
+msgstr "Sortir"
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:43
 msgid "Edit"
-msgstr "Bearbeiten"
+msgstr "Editar"
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:44
 #: org.nickvision.spotlight.qt/src/views/settingsdialog.cpp:16
 msgid "Settings"
-msgstr "Einstellungen"
+msgstr "Configurationes"
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:45
 msgid "View"
-msgstr "Ansicht"
+msgstr "Vider"
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:46
 msgid "Mode"
-msgstr "Modus"
+msgstr "Modo"
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:47
 msgid "Grid"
-msgstr "Raster"
+msgstr "Grillia"
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:48
 msgid "Flip"
@@ -157,143 +151,77 @@ msgstr ""
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:49
 msgid "Image"
-msgstr "Bild"
+msgstr ""
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:50
 msgid "Set as Background"
-msgstr "Als Hintergrund festlegen"
+msgstr ""
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:51
 msgid "Help"
-msgstr "Hilfe"
+msgstr "Adjuta"
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:52
 msgid "Check for Updates"
-msgstr "Auf Aktualisierungen prüfen"
+msgstr "Verificar actualisationes"
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:53
 msgid "GitHub Repo"
-msgstr "GitHub-Repo"
+msgstr "Repositorio de GitHub"
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:54
 msgid "Report a Bug"
-msgstr "Problem melden"
+msgstr "Signalar un defecto"
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:55
 msgid "Discussions"
-msgstr "Diskussionen"
+msgstr ""
 
 #. Localize Flip Page
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:62
 msgid "Previous"
-msgstr "Zurück"
+msgstr ""
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:63
 msgid "Next"
-msgstr "Weiter"
+msgstr ""
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:147
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:155
 msgid "Export Image"
-msgstr "Bild exportieren"
+msgstr ""
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:169
 msgid "Export All Images"
-msgstr "Alle Bilder exportieren"
+msgstr ""
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:353
 msgid "Update"
-msgstr "Aktualisieren"
+msgstr ""
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:365
 msgid "Open"
-msgstr "Öffnen"
+msgstr ""
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:373
 msgid "No Spotlight Images Found"
-msgstr "Keine Blickpunkt-Bilder gefunden"
+msgstr ""
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:373
 msgid ""
 "Ensure Windows Spotlight is enabled and come back later to try again. The "
 "application will now close."
 msgstr ""
-"Stellen Sie sicher, dass Windows-Blickpunkt aktiviert ist, und versuchen Sie "
-"es später noch einmal. Die Anwendung wird nun geschlossen."
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:378
 msgid "Total Number of Images: {}"
-msgstr "Gesamtzahl der Bilder: {}"
+msgstr ""
 
 #. Localize Strings
 #: org.nickvision.spotlight.qt/src/views/settingsdialog.cpp:18
 msgid "User Interface"
-msgstr "Benutzeroberfläche"
+msgstr "Interfacie de usator"
 
 #: org.nickvision.spotlight.qt/src/views/settingsdialog.cpp:19
 msgid "Automatically Check for Updates"
-msgstr "Automatisch auf Aktualisierungen prüfen"
-
-#~ msgid "Close"
-#~ msgstr "Schließen"
-
-#~ msgid "Search"
-#~ msgstr "Suchen"
-
-#~ msgid "Credits"
-#~ msgstr "Danksagung"
-
-#~ msgid "Export (Ctrl+S)"
-#~ msgstr "Exportieren (Strg+S)"
-
-#~ msgid "Set as Background (Ctrl+B)"
-#~ msgstr "Als Hintergrund festlegen (Strg+B)"
-
-#~ msgid "Export All (Ctrl+Shift+S)"
-#~ msgstr "Alle exportieren (Strg+Umschalt+S)"
-
-#~ msgid "Debug information copied to clipboard."
-#~ msgstr "Debug-Informationen in die Zwischenablage kopiert."
-
-#~ msgid ""
-#~ "Developers:\n"
-#~ "{}\n"
-#~ "Designers:\n"
-#~ "{}\n"
-#~ "Artists:\n"
-#~ "{}\n"
-#~ "Translators:\n"
-#~ "{}"
-#~ msgstr ""
-#~ "Entwickler:\n"
-#~ "{}\n"
-#~ "Designer:\n"
-#~ "{}\n"
-#~ "Künstler:\n"
-#~ "{}\n"
-#~ "Übersetzer:\n"
-#~ "{}"
-
-#~ msgid "Appearance & behavior"
-#~ msgstr "Erscheinungsbild & Verhalten"
-
-#~ msgid "Theme"
-#~ msgstr "Thema"
-
-#~ msgctxt "Theme"
-#~ msgid "Light"
-#~ msgstr "Hell"
-
-#~ msgctxt "Theme"
-#~ msgid "Dark"
-#~ msgstr "Dunkel"
-
-#~ msgctxt "Theme"
-#~ msgid "System"
-#~ msgstr "System"
-
-#~ msgid "On"
-#~ msgstr "Ein"
-
-#~ msgid "Off"
-#~ msgstr "Aus"
+msgstr ""
