@@ -30,12 +30,14 @@ namespace Nickvision::Spotlight::Qt::Views
     MainWindow::MainWindow(const std::shared_ptr<MainWindowController>& controller, QWidget* parent) 
         : QMainWindow{ parent },
         m_ui{ new Ui::MainWindow() },
+        m_infoBar{ new InfoBar(this) },
         m_controller{ controller },
         m_resizeTimer{ this }
     {
         m_ui->setupUi(this);
         setWindowTitle(m_controller->getAppInfo().getVersion().getVersionType() == VersionType::Stable ? _("Spotlight") : _("Spotlight (Preview)"));
-        //Localize Menu Strings
+        addDockWidget(::Qt::BottomDockWidgetArea, m_infoBar);
+        //MenuBar
         m_ui->menuFile->setTitle(_("File"));
         m_ui->actionExport->setText(_("Export"));
         m_ui->actionExportAll->setText(_("Export All"));
@@ -54,11 +56,10 @@ namespace Nickvision::Spotlight::Qt::Views
         m_ui->actionReportABug->setText(_("Report a Bug"));
         m_ui->actionDiscussions->setText(_("Discussions"));
         m_ui->actionAbout->setText(_("About Spotlight"));
-        //Localize Grid Page
+        //Grid Page
         m_resizeTimer.setSingleShot(true);
         m_resizeTimer.setInterval(300);
-        connect(&m_resizeTimer, &QTimer::timeout, this, &MainWindow::loadGridView);
-        //Localize Flip Page
+        //Flip Page
         m_ui->btnFlipPrev->setToolTip(_("Previous"));
         m_ui->btnFlipNext->setToolTip(_("Next"));
         //Signals
@@ -74,6 +75,7 @@ namespace Nickvision::Spotlight::Qt::Views
         connect(m_ui->actionReportABug, &QAction::triggered, this, &MainWindow::reportABug);
         connect(m_ui->actionDiscussions, &QAction::triggered, this, &MainWindow::discussions);
         connect(m_ui->actionAbout, &QAction::triggered, this, &MainWindow::about);
+        connect(&m_resizeTimer, &QTimer::timeout, this, &MainWindow::loadGridView);
         connect(m_ui->tblImages, &QTableWidget::cellClicked, this, &MainWindow::onTblImagesSelectionChanged);
         connect(m_ui->tblImages, &QTableWidget::cellDoubleClicked, this, &MainWindow::onTblImagesDoubleClicked);
         connect(m_ui->sliderFlip, &QSlider::valueChanged, this, &MainWindow::onSliderFlipChanged);
@@ -86,6 +88,7 @@ namespace Nickvision::Spotlight::Qt::Views
 
     MainWindow::~MainWindow()
     {
+        delete m_infoBar;
         delete m_ui;
     }
 
@@ -326,27 +329,14 @@ namespace Nickvision::Spotlight::Qt::Views
 
     void MainWindow::onNotificationSent(const NotificationSentEventArgs& args)
     {
-        QMessageBox::Icon icon{ QMessageBox::Icon::NoIcon };
-        switch(args.getSeverity())
-        {
-        case NotificationSeverity::Informational:
-        case NotificationSeverity::Success:
-            icon = QMessageBox::Icon::Information;
-            break;
-        case NotificationSeverity::Warning:
-            icon = QMessageBox::Icon::Warning;
-            break;
-        case NotificationSeverity::Error:
-            icon = QMessageBox::Icon::Critical;
-            break;
-        }
-        QMessageBox msgBox{ icon, QString::fromStdString(m_controller->getAppInfo().getShortName()), QString::fromStdString(args.getMessage()), QMessageBox::StandardButton::Ok, this };
+        QString actionText;
+        std::function<void()> actionCallback;
         if(args.getAction() == "update")
         {
-            QPushButton* updateButton{ msgBox.addButton(_("Update"), QMessageBox::ButtonRole::ActionRole) };
-            connect(updateButton, &QPushButton::clicked, this, &MainWindow::checkForUpdates);
+            actionText = _("Update");
+            actionCallback = [this]() { windowsUpdate(); };
         }
-        msgBox.exec();
+        m_infoBar->show(args, actionText, actionCallback);
     }
 
     void MainWindow::onShellNotificationSent(const ShellNotificationSentEventArgs& args)

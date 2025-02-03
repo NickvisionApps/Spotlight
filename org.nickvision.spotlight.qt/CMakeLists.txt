@@ -10,12 +10,15 @@ qt_standard_project_setup()
 
 qt_add_executable(${OUTPUT_NAME}
     "include/controls/aboutdialog.h"
+    "include/controls/infobar.h"
     "include/helpers/qthelpers.h"
     "include/views/mainwindow.h"
     "include/views/settingsdialog.h"
     "include/application.h"
     "src/controls/aboutdialog.ui"
     "src/controls/aboutdialog.cpp"
+    "src/controls/infobar.ui"
+    "src/controls/infobar.cpp"
     "src/helpers/qthelpers.cpp"
     "src/views/mainwindow.ui"
     "src/views/mainwindow.cpp"
@@ -24,7 +27,7 @@ qt_add_executable(${OUTPUT_NAME}
     "src/application.cpp"
     "src/main.cpp"
     "${OUTPUT_NAME}.qrc"
-    "${OUTPUT_NAME}.rc")
+    "../resources/windows/${PROJECT_NAME}.rc")
 target_include_directories(${OUTPUT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
 target_link_libraries(${OUTPUT_NAME} PRIVATE libspotlight Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Svg)
 if(WIN32)
@@ -36,6 +39,7 @@ add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/__qt.h" "${CMAKE_CURRENT_
 
 if(WIN32)
     add_custom_command(TARGET qt_commands POST_BUILD COMMAND Qt6::windeployqt ARGS $<TARGET_FILE:${OUTPUT_NAME}> --no-quick-import --no-translations --no-compiler-runtime)
+    add_custom_command(TARGET qt_commands POST_BUILD COMMAND "mt.exe" -manifest "${CMAKE_SOURCE_DIR}/resources/windows/${PROJECT_NAME}.manifest" -inputresource:\"$<TARGET_FILE:${OUTPUT_NAME}>\"\;\#1 -outputresource:\"$<TARGET_FILE:${OUTPUT_NAME}>\"\;\#1)
 endif()
 
 if(HAS_GETTEXT)

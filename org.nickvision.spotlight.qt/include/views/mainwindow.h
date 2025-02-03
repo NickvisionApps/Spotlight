@@ -7,6 +7,7 @@
 #include <QResizeEvent>
 #include <QTimer>
 #include "controllers/mainwindowcontroller.h"
+#include "controls/infobar.h"
 
 namespace Ui { class MainWindow; }
 
@@ -148,6 +149,7 @@ namespace Nickvision::Spotlight::Qt::Views
          */
         void onImagesSynced();
         Ui::MainWindow* m_ui;
+        Controls::InfoBar* m_infoBar;
         std::shared_ptr<Shared::Controllers::MainWindowController> m_controller;
         QTimer m_resizeTimer;
     };
