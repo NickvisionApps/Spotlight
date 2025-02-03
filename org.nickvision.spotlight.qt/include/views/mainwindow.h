@@ -7,10 +7,11 @@
 #include <QResizeEvent>
 #include <QTimer>
 #include "controllers/mainwindowcontroller.h"
+#include "controls/infobar.h"
 
 namespace Ui { class MainWindow; }
 
-namespace Nickvision::Spotlight::QT::Views
+namespace Nickvision::Spotlight::Qt::Views
 {
     /**
      * @brief The main window for the application.
@@ -82,12 +83,10 @@ namespace Nickvision::Spotlight::QT::Views
          * @brief Checks for application updates.
          */
         void checkForUpdates();
-#ifdef _WIN32
         /**
          * @brief Downloads and installs the latest application update in the background.
          */
         void windowsUpdate();
-#endif
         /**
          * @brief Opens the application's GitHub repo in the browser.
          */
@@ -150,6 +149,7 @@ namespace Nickvision::Spotlight::QT::Views
          */
         void onImagesSynced();
         Ui::MainWindow* m_ui;
+        Controls::InfoBar* m_infoBar;
         std::shared_ptr<Shared::Controllers::MainWindowController> m_controller;
         QTimer m_resizeTimer;
     };

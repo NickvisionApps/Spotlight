@@ -142,11 +142,11 @@ This project contains all of the code used by all platforms of the app:
 
 ##### org.nickvision.spotlight.qt
 
-This project contains all of the code used for the QT platform (Windows) version of the app:
+This project contains all of the code used for the Qt platform (Windows) version of the app:
 - `controls` => Generic controls for the app.
     - These UI objects are separate from views in that they should not be backed by a controller and should be easily ported to any other app.
-- `helpers` => Useful objects and functions specific for the QT platform version of the app.
-- `resources` => Extra icons and other files specific for the QT platform version of the app.
+- `helpers` => Useful objects and functions specific for the Qt platform version of the app.
+- `resources` => Extra icons and other files specific for the Qt platform version of the app.
 - `views` => The views (pages, windows, dialogs, etc...) of the app.
 
 #### Developing and Testing

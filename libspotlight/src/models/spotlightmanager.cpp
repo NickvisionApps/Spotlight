@@ -5,30 +5,27 @@
 #include <windows.h>
 
 using namespace Nickvision::Filesystem;
-using namespace Nickvision::Logging;
 
 namespace Nickvision::Spotlight::Shared::Models
 {
-    static std::string GetLastErrorAsString()
+    SpotlightManager::SpotlightManager(const std::string& appName)
+        : m_dataDir{ UserDirectories::get(ApplicationUserDirectory::Config, appName) / "Images" },
+        m_supportLevel{ SpotlightSupport::None },
+        m_spotlightLockScreenDir{ UserDirectories::get(UserDirectory::LocalData) / "Packages/Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy/LocalState/Assets" },
+        m_spotlightDesktopDir{ UserDirectories::get(UserDirectory::LocalData) / "Packages/MicrosoftWindows.Client.CBS_cw5n1h2txyewy/LocalCache/Microsoft/IrisService" }
     {
-        DWORD errorMessageID{ GetLastError() };
-        if(errorMessageID == 0) 
+        if(std::filesystem::exists(m_spotlightLockScreenDir) && std::filesystem::exists(m_spotlightDesktopDir))
         {
-            return std::string();
+            m_supportLevel = SpotlightSupport::Full;
         }
-        LPSTR messageBuffer{ nullptr };
-        size_t size{ FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, nullptr, errorMessageID, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR)&messageBuffer, 0, nullptr) };
-        std::string message(messageBuffer, size);
-        LocalFree(messageBuffer);
-        return message;
-    }
-
-    SpotlightManager::SpotlightManager(const std::string& appName, Logger& logger)
-        : m_spotlightLockScreenDir{ UserDirectories::get(UserDirectory::LocalData) / "Packages/Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy/LocalState/Assets" },
-        m_spotlightDesktopDir{ UserDirectories::get(UserDirectory::LocalData) / "Packages/MicrosoftWindows.Client.CBS_cw5n1h2txyewy/LocalCache/Microsoft/IrisService" },
-        m_dataDir{ UserDirectories::get(ApplicationUserDirectory::Config, appName) / "Images" },
-        m_logger{ logger }
-    {
+        else if(std::filesystem::exists(m_spotlightLockScreenDir))
+        {
+            m_supportLevel = SpotlightSupport::LockScreenOnly;
+        }
+        else if(std::filesystem::exists(m_spotlightDesktopDir))
+        {
+            m_supportLevel = SpotlightSupport::DesktopOnly;
+        }
         if(!std::filesystem::exists(m_dataDir))
         {
             std::filesystem::create_directories(m_dataDir);
@@ -42,24 +39,11 @@ namespace Nickvision::Spotlight::Shared::Models
 
     SpotlightSupport SpotlightManager::getSupportLevel() const
     {
-        if(std::filesystem::exists(m_spotlightLockScreenDir) && std::filesystem::exists(m_spotlightDesktopDir))
-        {
-            return SpotlightSupport::Full;
-        }
-        else if(std::filesystem::exists(m_spotlightLockScreenDir))
-        {
-            return SpotlightSupport::LockScreenOnly;
-        }
-        else if(std::filesystem::exists(m_spotlightDesktopDir))
-        {
-            return SpotlightSupport::DesktopOnly;
-        }
-        return SpotlightSupport::None;
+        return m_supportLevel;
     }
 
     const std::vector<std::filesystem::path>& SpotlightManager::sync()
     {
-        m_logger.log(LogLevel::Debug, "Loading spotlight images...");
         m_images.clear();
         if(std::filesystem::exists(m_spotlightLockScreenDir))
         {
@@ -77,10 +61,19 @@ namespace Nickvision::Spotlight::Shared::Models
         }
         for(const std::filesystem::directory_entry& entry : std::filesystem::directory_iterator(m_dataDir))
         {
-            m_images.push_back(entry.path());
+            if(entry.path().extension() == ".jpg")
+            {
+                m_images.push_back(entry.path());
+            }
         }
-        m_logger.log(LogLevel::Info, "Loaded " + std::to_string(m_images.size()) + " image(s).");
         return m_images;
+    }
+
+    const std::vector<std::filesystem::path>& SpotlightManager::clearAndSync()
+    {
+        std::filesystem::remove_all(m_dataDir);
+        std::filesystem::create_directories(m_dataDir);
+        return sync();
     }
 
     bool SpotlightManager::exportImage(size_t index, const std::filesystem::path& path) const
@@ -90,7 +83,6 @@ namespace Nickvision::Spotlight::Shared::Models
             return false;
         }
         std::filesystem::copy_file(m_images[index], path, std::filesystem::copy_options::overwrite_existing);
-        m_logger.log(LogLevel::Info, "Exported " + m_images[index].stem().string() + " to " + path.string());
         return true;
     }
 
@@ -114,7 +106,6 @@ namespace Nickvision::Spotlight::Shared::Models
         {
             std::filesystem::copy_file(image, path / image.filename(), std::filesystem::copy_options::overwrite_existing);
         }
-        m_logger.log(LogLevel::Info, "Exported all images to " + path.string());
         return true;
     }
 
@@ -126,14 +117,7 @@ namespace Nickvision::Spotlight::Shared::Models
         }
         std::filesystem::path tempPath{ UserDirectories::get(UserDirectory::LocalData) / "NickvisionSpotlight.jpg" };
         std::filesystem::copy_file(m_images[index], tempPath, std::filesystem::copy_options::overwrite_existing);
-        m_logger.log(LogLevel::Info, "Setting desktop background to " + m_images[index].stem().string() + "...");
-        if(SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, (void*)tempPath.wstring().c_str(), SPIF_UPDATEINIFILE | SPIF_SENDCHANGE) == 0)
-        {
-            m_logger.log(LogLevel::Error, "Failed to set desktop background: " + GetLastErrorAsString());
-            return false;
-        }
-        m_logger.log(LogLevel::Info, "Desktop background set.");
-        return true;
+        return SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, (void*)tempPath.wstring().c_str(), SPIF_UPDATEINIFILE | SPIF_SENDCHANGE) != 0;
     }
 
     bool SpotlightManager::setAsDesktopBackground(const std::filesystem::path& image) const
@@ -148,7 +132,11 @@ namespace Nickvision::Spotlight::Shared::Models
 
     void SpotlightManager::processEntry(const std::filesystem::directory_entry& entry, SpotlightImageType type)
     {
-        if(type == SpotlightImageType::LockScreen && entry.file_size() / 1000 < 200)
+        if(!entry.is_regular_file())
+        {
+            return;
+        }
+        else if(type == SpotlightImageType::LockScreen && entry.file_size() / 1000 < 200)
         {
            return;
         }

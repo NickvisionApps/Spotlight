@@ -23,10 +23,12 @@ jobs:
         with:
           submodules: recursive
       - name: "Setup Environment"
+        shell: pwsh
         run: |
+          $ProgressPreference = 'SilentlyContinue'
           mkdir build
-          powershell -command "Invoke-WebRequest https://github.com/mlocati/gettext-iconv-windows/releases/download/v0.21-v1.16/gettext0.21-iconv1.16-shared-64.zip -OutFile gettext.zip"
-          powershell -command "Expand-Archive -Force 'gettext.zip'"
+          Invoke-WebRequest https://github.com/mlocati/gettext-iconv-windows/releases/download/v0.23-v1.17/gettext0.23-iconv1.17-shared-64.zip -OutFile gettext.zip
+          Expand-Archive -Force 'gettext.zip'
           move gettext\bin\* C:\Windows\System32
           choco install innosetup
       - name: "Vcpkg"
@@ -35,7 +37,7 @@ jobs:
         with:
           pkgs: libnick libjpeg-turbo boost-gil qtbase qtsvg qttools
           triplet: x64-windows
-          revision: e590c2b30c08caf1dd8d612ec602a003f9784b7d
+          revision: 0ca64b4e1c70fa6d9f53b369b8f3f0843797c20c
           token: ${{ secrets.GITHUB_TOKEN }}
           github-binarycache: true
       - name: "Build"
@@ -45,8 +47,10 @@ jobs:
           cmake --build . --config Release
       - name: "Create Installer"
         working-directory: ${{github.workspace}}/inno
+        shell: pwsh
         run: |
-          powershell -command "Invoke-WebRequest https://aka.ms/vs/17/release/vc_redist.x64.exe -OutFile vc_redist.x64.exe"
+          $ProgressPreference = 'SilentlyContinue'
+          Invoke-WebRequest https://aka.ms/vs/17/release/vc_redist.x64.exe -OutFile vc_redist.x64.exe
           iscc setup.iss
       - name: Upload
         uses: actions/upload-artifact@v4
