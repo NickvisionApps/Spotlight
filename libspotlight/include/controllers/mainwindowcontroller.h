@@ -13,13 +13,13 @@
 #include <libnick/app/datafilemanager.h>
 #include <libnick/app/windowgeometry.h>
 #include <libnick/events/event.h>
-#include <libnick/logging/logger.h>
 #include <libnick/notifications/notificationsenteventargs.h>
 #include <libnick/notifications/shellnotificationsenteventargs.h>
 #include <libnick/taskbar/taskbaritem.h>
 #include <libnick/update/updater.h>
 #include "controllers/preferencesviewcontroller.h"
 #include "models/spotlightmanager.h"
+#include "models/startupinformation.h"
 #include "models/theme.h"
 #include "models/viewmode.h"
 
@@ -97,7 +97,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
          * @brief Will only have an effect on the first time called.
          * @return The WindowGeometry to use for the application window at startup
          */
-        Nickvision::App::WindowGeometry startup(HWND hwnd);
+        const Models::StartupInformation& startup(HWND hwnd);
         /**
          * @brief Shuts down the application.
          * @param geometry The window geometry to save
@@ -120,13 +120,6 @@ namespace Nickvision::Spotlight::Shared::Controllers
          */
         void connectTaskbar(HWND hwnd);
         /**
-         * @brief Logs a system message.
-         * @param level The severity level of the message
-         * @param message The message to log
-         * @param source The source location of the log message
-         */
-        void log(Logging::LogLevel level, const std::string& message, const std::source_location& source = std::source_location::current());
-        /**
          * @brief Sets a spotlight image as the desktop background.
          * @param index The index of the image to set as the desktop background
          */
@@ -148,7 +141,6 @@ namespace Nickvision::Spotlight::Shared::Controllers
         std::vector<std::string> m_args;
         Nickvision::App::AppInfo m_appInfo;
         Nickvision::App::DataFileManager m_dataFileManager;
-        Nickvision::Logging::Logger m_logger;
         std::shared_ptr<Nickvision::Update::Updater> m_updater;
         Nickvision::Taskbar::TaskbarItem m_taskbar;
         Nickvision::Events::Event<Nickvision::Notifications::NotificationSentEventArgs> m_notificationSent;
