@@ -62,6 +62,10 @@ namespace Nickvision::Spotlight::Qt::Views
          */
         void exit();
         /**
+         * @brief Clears the image cache and syncs the spotlight images.
+         */
+        void clearAndSync();
+        /**
          * @brief Displays the settings dialog.
          */
         void settings();
@@ -105,8 +109,9 @@ namespace Nickvision::Spotlight::Qt::Views
         void about();
         /**
          * @brief Loads spotlight images into a grid view.
+         * @param images The images to load
          */
-        void loadGridView();
+        void loadGridView(const std::vector<std::filesystem::path>& images);
         /**
          * @brief Handles when the tblImages' selection is changed.
          * @param row The row index
@@ -146,8 +151,9 @@ namespace Nickvision::Spotlight::Qt::Views
         void onShellNotificationSent(const Notifications::ShellNotificationSentEventArgs& args);
         /**
          * @brief Handles when the images are synced.
+         * @param args The ImagesSyncedEventArgs
          */
-        void onImagesSynced();
+        void onImagesSynced(const Shared::Events::ImagesSyncedEventArgs& args);
         Ui::MainWindow* m_ui;
         Controls::InfoBar* m_infoBar;
         std::shared_ptr<Shared::Controllers::MainWindowController> m_controller;

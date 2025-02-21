@@ -122,6 +122,10 @@ namespace Nickvision::Spotlight::Shared::Controllers
          */
         void connectTaskbar(HWND hwnd);
         /**
+         * @brief Clears and syncs the spotlight images.
+         */
+        void clearAndSync();
+        /**
          * @brief Sets a spotlight image as the desktop background.
          * @param index The index of the image to set as the desktop background
          */

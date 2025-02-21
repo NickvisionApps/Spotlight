@@ -32,7 +32,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
         m_dataFileManager{ m_appInfo.getName() },
         m_spotlightManager{ m_appInfo.getName() }
     {
-        m_appInfo.setVersion({ "2025.2.0" });
+        m_appInfo.setVersion({ "2025.2.0-next" });
         m_appInfo.setShortName(_("Spotlight"));
         m_appInfo.setDescription(_("Find your favorite Windows spotlight images"));
         m_appInfo.setChangelog("- Added the ability to clear the spotlight cache and resync images\n- Fixed an issue where the application could not update itself");
@@ -198,6 +198,16 @@ namespace Nickvision::Spotlight::Shared::Controllers
             }
         } };
         worker.detach();
+    }
+
+    void MainWindowController::clearAndSync()
+    {
+        //Load images
+        std::thread syncWorker{ [this]()
+        {
+            m_imagesSynced.invoke({ m_spotlightManager.clearAndSync(), m_dataFileManager.get<Configuration>("config").getViewMode() });
+        } };
+        syncWorker.detach();
     }
 
     void MainWindowController::setImageAsDesktopBackground(int index)

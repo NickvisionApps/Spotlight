@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-03 12:21-0500\n"
+"POT-Creation-Date: 2025-02-03 14:05-0500\n"
 "PO-Revision-Date: 2025-01-20 14:24+0000\n"
 "Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/nickvision-"
@@ -19,74 +19,74 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.10-dev\n"
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:35
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:38
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:36
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:46
 msgid "Spotlight"
 msgstr "ச்பாட்லைட்"
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:36
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:37
 msgid "Find your favorite Windows spotlight images"
 msgstr "உங்களுக்கு பிடித்த சாளரங்கள் ச்பாட்லைட் படங்களைக் கண்டறியவும்"
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:41
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:42
 msgid "Matrix Chat"
 msgstr "அணி அரட்டை"
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:43
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:44
 msgid "Contributors on GitHub"
 msgstr "கிதுபில் பங்களிப்பாளர்கள்"
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:45
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:46
 msgid "Fyodor Sobolev"
 msgstr "ஃபெடோர் சோபோலெவ்"
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:47
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:48
 msgid "David Lapshin"
 msgstr "டேவிட் லாப்சின்"
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:48
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:49
 msgid "translator-credits"
 msgstr "மொழிபெயர்ப்பாளர்-வரவு"
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:174
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:179
 msgid "New update available"
 msgstr "புதிய புதுப்பிப்பு கிடைக்கிறது"
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:187
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:192
 msgid ""
 "The update is downloading in the background and will start once it finishes"
 msgstr ""
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:192
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:197
 msgid "Unable to download and install update"
 msgstr "புதுப்பிப்பைப் பதிவிறக்கி நிறுவ முடியவில்லை"
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:202
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:217
 msgid "Image set as desktop background"
 msgstr "பட டெச்க்டாப் பின்னணியாக அமைக்கப்பட்டுள்ளது"
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:206
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:221
 msgid "Unable to set image as desktop background"
 msgstr "படத்தை டெச்க்டாப் பின்னணியாக அமைக்க முடியவில்லை"
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:214
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:229
 msgid "Image exported to {}"
 msgstr "படம் {} க்கு ஏற்றுமதி செய்யப்பட்டது"
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:218
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:233
 msgid "Unable to export image"
 msgstr "படத்தை ஏற்றுமதி செய்ய முடியவில்லை"
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:226
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:241
 msgid "Images exported to {}"
 msgstr "{} க்கு ஏற்றுமதி செய்யப்பட்ட படங்கள்"
 
-#: libspotlight/src/controllers/mainwindowcontroller.cpp:230
+#: libspotlight/src/controllers/mainwindowcontroller.cpp:245
 msgid "Unable to export images"
 msgstr "படங்களை ஏற்றுமதி செய்ய முடியவில்லை"
 
 #: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:32
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:58
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:67
 msgid "About Spotlight"
 msgstr "ச்பாட்லைட் பற்றி"
 
@@ -128,107 +128,121 @@ msgstr "பிழைத்திருத்த தகவல்களை நக�
 msgid "Notification"
 msgstr ""
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:38
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:46
 msgid "Spotlight (Preview)"
 msgstr "ச்பாட்லைட் (முன்னோட்டம்)"
 
 #. MenuBar
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:41
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:49
 msgid "File"
 msgstr "கோப்பு"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:42
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:50
 msgid "Export"
 msgstr "ஏற்றுமதி"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:43
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:51
 msgid "Export All"
 msgstr "அனைத்தையும் ஏற்றுமதி செய்யுங்கள்"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:44
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:52
 msgid "Exit"
 msgstr "வெளியேறு"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:45
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:53
 msgid "Edit"
 msgstr "தொகு"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:46
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:54
+msgid "Clear and Sync"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:55
 #: org.nickvision.spotlight.qt/src/views/settingsdialog.cpp:18
 msgid "Settings"
 msgstr "அமைப்புகள்"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:47
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:56
 msgid "View"
 msgstr "பார்வை"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:48
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:57
 msgid "Mode"
 msgstr "பயன்முறை"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:49
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:58
 msgid "Grid"
 msgstr "வலைவாய்"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:50
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:59
 msgid "Flip"
 msgstr "புரட்டுதல்"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:51
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:60
 msgid "Image"
 msgstr "படம்"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:52
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:61
 msgid "Set as Background"
 msgstr "பின்னணியாக அமைக்கவும்"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:53
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:62
 msgid "Help"
 msgstr "உதவி"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:54
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:63
 msgid "Check for Updates"
 msgstr "புதுப்பிப்புகளை சரிபார்க்கவும்"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:55
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:64
 msgid "GitHub Repo"
 msgstr "அறிவிலிமையம் ரெப்போ"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:56
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:65
 msgid "Report a Bug"
 msgstr "ஒரு பிழையைப் புகாரளிக்கவும்"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:57
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:66
 msgid "Discussions"
 msgstr "விவாதங்கள்"
 
 #. Flip Page
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:63
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:72
 msgid "Previous"
 msgstr "முந்தைய"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:64
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:73
 msgid "Next"
 msgstr "அடுத்தது"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:141
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:149
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:144
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:152
 msgid "Export Image"
 msgstr "ஏற்றுமதி படம்"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:163
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:166
 msgid "Export All Images"
 msgstr "எல்லா படங்களையும் ஏற்றுமதி செய்யுங்கள்"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:336
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:180
+msgid "Clear and Sync?"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:180
+msgid ""
+"Are you sure you want to clear the image cache and re-sync the spotlight "
+"images?"
+msgstr ""
+
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:350
 msgid "Update"
 msgstr "புதுப்பிப்பு"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:351
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:365
 msgid "No Spotlight Images Found"
 msgstr "ச்பாட்லைட் படங்கள் எதுவும் காணப்படவில்லை"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:351
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:365
 msgid ""
 "Ensure Windows Spotlight is enabled and come back later to try again. The "
 "application will now close."
@@ -236,7 +250,7 @@ msgstr ""
 "சாளரங்கள் ச்பாட்லைட் இயக்கப்பட்டிருப்பதை உறுதிசெய்து, மீண்டும் முயற்சிக்க பின்னர் திரும்பி "
 "வாருங்கள். பயன்பாடு இப்போது மூடப்படும்."
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:356
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:370
 msgid "Total Number of Images: {}"
 msgstr "படங்களின் மொத்த எண்ணிக்கை: {}"
 

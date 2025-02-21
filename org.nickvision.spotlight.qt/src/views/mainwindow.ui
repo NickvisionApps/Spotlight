@@ -31,7 +31,7 @@
     <item>
      <widget class="QStackedWidget" name="viewStack">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="pageGrid">
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -183,6 +183,26 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="pageLoading">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QProgressBar" name="progressBar">
+          <property name="maximum">
+           <number>0</number>
+          </property>
+          <property name="value">
+           <number>-1</number>
+          </property>
+          <property name="textVisible">
+           <bool>false</bool>
+          </property>
+          <property name="invertedAppearance">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -209,6 +229,8 @@
     <property name="title">
      <string/>
     </property>
+    <addaction name="actionClearAndSync"/>
+    <addaction name="separator"/>
     <addaction name="actionSettings"/>
    </widget>
    <widget class="QMenu" name="menuView">
@@ -344,6 +366,11 @@
   <action name="actionFlip">
    <property name="checkable">
     <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionClearAndSync">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::ViewRefresh"/>
    </property>
   </action>
  </widget>

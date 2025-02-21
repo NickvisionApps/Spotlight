@@ -22,11 +22,19 @@ using namespace Nickvision::Notifications;
 using namespace Nickvision::Spotlight::Qt::Controls;
 using namespace Nickvision::Spotlight::Qt::Helpers;
 using namespace Nickvision::Spotlight::Shared::Controllers;
+using namespace Nickvision::Spotlight::Shared::Events;
 using namespace Nickvision::Spotlight::Shared::Models;
 using namespace Nickvision::Update;
 
 namespace Nickvision::Spotlight::Qt::Views
 {
+    enum MainWindowPage
+    {
+        Grid = 0,
+        Flip,
+        Loading
+    };
+
     MainWindow::MainWindow(const std::shared_ptr<MainWindowController>& controller, QWidget* parent) 
         : QMainWindow{ parent },
         m_ui{ new Ui::MainWindow() },
@@ -43,6 +51,7 @@ namespace Nickvision::Spotlight::Qt::Views
         m_ui->actionExportAll->setText(_("Export All"));
         m_ui->actionExit->setText(_("Exit"));
         m_ui->menuEdit->setTitle(_("Edit"));
+        m_ui->actionClearAndSync->setText(_("Clear and Sync"));
         m_ui->actionSettings->setText(_("Settings"));
         m_ui->menuView->setTitle(_("View"));
         m_ui->menuMode->setTitle(_("Mode"));
@@ -66,6 +75,7 @@ namespace Nickvision::Spotlight::Qt::Views
         connect(m_ui->actionExport, &QAction::triggered, this, &MainWindow::exportImage);
         connect(m_ui->actionExportAll, &QAction::triggered, this, &MainWindow::exportAllImages);
         connect(m_ui->actionExit, &QAction::triggered, this, &MainWindow::exit);
+        connect(m_ui->actionClearAndSync, &QAction::triggered, this, &MainWindow::clearAndSync);
         connect(m_ui->actionSettings, &QAction::triggered, this, &MainWindow::settings);
         connect(m_ui->actionGrid, &QAction::toggled, this, &MainWindow::gridMode);
         connect(m_ui->actionFlip, &QAction::toggled, this, &MainWindow::flipMode);
@@ -75,7 +85,7 @@ namespace Nickvision::Spotlight::Qt::Views
         connect(m_ui->actionReportABug, &QAction::triggered, this, &MainWindow::reportABug);
         connect(m_ui->actionDiscussions, &QAction::triggered, this, &MainWindow::discussions);
         connect(m_ui->actionAbout, &QAction::triggered, this, &MainWindow::about);
-        connect(&m_resizeTimer, &QTimer::timeout, this, &MainWindow::loadGridView);
+        //connect(&m_resizeTimer, &QTimer::timeout, this, &MainWindow::loadGridView);
         connect(m_ui->tblImages, &QTableWidget::cellClicked, this, &MainWindow::onTblImagesSelectionChanged);
         connect(m_ui->tblImages, &QTableWidget::cellDoubleClicked, this, &MainWindow::onTblImagesDoubleClicked);
         connect(m_ui->sliderFlip, &QSlider::valueChanged, this, &MainWindow::onSliderFlipChanged);
@@ -83,7 +93,7 @@ namespace Nickvision::Spotlight::Qt::Views
         connect(m_ui->btnFlipPrev, &QPushButton::clicked, this, &MainWindow::flipPrev);
         m_controller->notificationSent() += [&](const NotificationSentEventArgs& args) { QtHelpers::dispatchToMainThread([this, args]() { onNotificationSent(args); }); };
         m_controller->shellNotificationSent() += [&](const ShellNotificationSentEventArgs& args) { onShellNotificationSent(args); };
-        m_controller->imagesSynced() += [&](const EventArgs& args) { QtHelpers::dispatchToMainThread([this]() { onImagesSynced(); }); };
+        m_controller->imagesSynced() += [&](const ImagesSyncedEventArgs& args) { QtHelpers::dispatchToMainThread([this, args]() { onImagesSynced(args); }); };
     }
 
     MainWindow::~MainWindow()
@@ -101,14 +111,7 @@ namespace Nickvision::Spotlight::Qt::Views
         {
             showMaximized();
         }
-        if(m_controller->getViewMode() == ViewMode::Grid)
-        {
-            m_ui->actionGrid->setChecked(true);
-        }
-        else
-        {
-            m_ui->actionFlip->setChecked(true);
-        }
+        m_ui->viewStack->setCurrentIndex(MainWindowPage::Loading);
     }
 
     void MainWindow::closeEvent(QCloseEvent* event)
@@ -132,11 +135,11 @@ namespace Nickvision::Spotlight::Qt::Views
 
     void MainWindow::exportImage()
     {
-        if(m_controller->getSpotlightImages().empty())
+        if(!m_ui->tblImages->selectionModel()->hasSelection())
         {
             return;
         }
-        if(m_ui->actionGrid->isChecked() && m_ui->tblImages->selectionModel()->hasSelection())
+        if(m_ui->actionGrid->isChecked())
         {
             QString file{ QFileDialog::getSaveFileName(this, _("Export Image"), QString::fromStdString(UserDirectories::get(UserDirectory::Pictures).string()), "JPEG (*.jpg)") };
             if(!file.isEmpty())
@@ -156,7 +159,7 @@ namespace Nickvision::Spotlight::Qt::Views
 
     void MainWindow::exportAllImages()
     {
-        if(m_controller->getSpotlightImages().empty())
+        if(m_controller->getSpotlightImageCount() == 0)
         {
             return;
         }
@@ -172,6 +175,17 @@ namespace Nickvision::Spotlight::Qt::Views
         close();
     }
 
+    void MainWindow::clearAndSync()
+    {
+        QMessageBox message{ QMessageBox::Icon::Question, _("Clear and Sync?"), _("Are you sure you want to clear the image cache and re-sync the spotlight images?"), QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No, this };
+        message.setDefaultButton(QMessageBox::StandardButton::No);
+        if(message.exec() == QMessageBox::StandardButton::Yes)
+        {
+            m_controller->clearAndSync();
+            m_ui->viewStack->setCurrentIndex(MainWindowPage::Loading);
+        }
+    }
+
     void MainWindow::settings()
     {
         SettingsDialog dialog{ m_controller->createPreferencesViewController(), this };
@@ -182,7 +196,7 @@ namespace Nickvision::Spotlight::Qt::Views
     {
         if(toggled)
         {
-            m_ui->viewStack->setCurrentIndex(0);
+            m_ui->viewStack->setCurrentIndex(MainWindowPage::Grid);
             m_ui->actionFlip->setChecked(false);
         }
     }
@@ -191,7 +205,7 @@ namespace Nickvision::Spotlight::Qt::Views
     {
         if(toggled)
         {
-            m_ui->viewStack->setCurrentIndex(1);
+            m_ui->viewStack->setCurrentIndex(MainWindowPage::Flip);
             if(m_ui->actionGrid->isChecked())
             {
                 onSliderFlipChanged(m_ui->sliderFlip->value());    
@@ -202,11 +216,11 @@ namespace Nickvision::Spotlight::Qt::Views
 
     void MainWindow::setImageAsBackground()
     {
-        if(m_controller->getSpotlightImages().empty())
+        if(!m_ui->tblImages->selectionModel()->hasSelection())
         {
             return;
         }
-        if(m_ui->actionGrid->isChecked() && m_ui->tblImages->selectionModel()->hasSelection())
+        if(m_ui->actionGrid->isChecked())
         {
             m_controller->setImageAsDesktopBackground(m_ui->tblImages->selectionModel()->currentIndex().row() * m_ui->tblImages->columnCount() + m_ui->tblImages->selectionModel()->currentIndex().column());
         }
@@ -247,10 +261,10 @@ namespace Nickvision::Spotlight::Qt::Views
         dialog.exec();
     }
 
-    void MainWindow::loadGridView()
+    void MainWindow::loadGridView(const std::vector<std::filesystem::path>& images)
     {
         int columnCount{ static_cast<int>(std::floor(m_ui->tblImages->width() / static_cast<double>(m_ui->tblImages->horizontalHeader()->defaultSectionSize()))) };
-        int rowCount{ static_cast<int>(std::ceil(m_controller->getSpotlightImages().size() / static_cast<double>(columnCount))) };
+        int rowCount{ static_cast<int>(std::ceil(images.size() / static_cast<double>(columnCount))) };
         if(columnCount == m_ui->tblImages->columnCount())
         {
             return;
@@ -263,11 +277,11 @@ namespace Nickvision::Spotlight::Qt::Views
             for(int j = 0; j < columnCount; j++)
             {
                 int index{ i * columnCount + j };
-                if(index >= m_controller->getSpotlightImages().size())
+                if(index >= images.size())
                 {
                     break;
                 }
-                QPixmap pixmap{ QString::fromStdString(m_controller->getSpotlightImages()[index].string()) };
+                QPixmap pixmap{ QString::fromStdString(images[index].string()) };
                 QLabel* lbl{ new QLabel() };
                 lbl->setScaledContents(true);
                 lbl->setPixmap(pixmap.scaled(m_ui->tblImages->horizontalHeader()->defaultSectionSize(), m_ui->tblImages->verticalHeader()->defaultSectionSize(), ::Qt::KeepAspectRatio, ::Qt::FastTransformation));
@@ -293,12 +307,12 @@ namespace Nickvision::Spotlight::Qt::Views
 
     void MainWindow::onTblImagesDoubleClicked(int row, int column)
     {
-        QDesktopServices::openUrl(QUrl::fromLocalFile(QString::fromStdString(m_controller->getSpotlightImages()[row * m_ui->tblImages->columnCount() + column].string())));
+        QDesktopServices::openUrl(QUrl::fromLocalFile(QString::fromStdString(m_controller->getSpotlightImagePath(row * m_ui->tblImages->columnCount() + column).string())));
     }
 
     void MainWindow::onSliderFlipChanged(int value)
     {
-        const std::filesystem::path image{ m_controller->getSpotlightImages()[value] };
+        const std::filesystem::path& image{ m_controller->getSpotlightImagePath(value) };
         QPixmap pixmap{ QString::fromStdString(image.string()) };
         m_ui->lblFlipImage->setPixmap(pixmap.scaled(m_ui->scrollFlip->width() - 20, m_ui->scrollFlip->height() - 20, ::Qt::KeepAspectRatio));
     }
@@ -344,22 +358,31 @@ namespace Nickvision::Spotlight::Qt::Views
         ShellNotification::send(args, reinterpret_cast<HWND>(winId()));
     }
 
-    void MainWindow::onImagesSynced()
+    void MainWindow::onImagesSynced(const ImagesSyncedEventArgs& args)
     {
-        if(m_controller->getSpotlightImages().empty())
+        if(args.getImages().empty())
         {
             QMessageBox::critical(this, _("No Spotlight Images Found"), _("Ensure Windows Spotlight is enabled and come back later to try again. The application will now close."), QMessageBox::StandardButton::Close);
             close();
             return;
         }
         QLabel* lblStatus{ new QLabel() };
-        lblStatus->setText(QString::fromStdString(std::vformat(_("Total Number of Images: {}"), std::make_format_args(CodeHelpers::unmove(m_controller->getSpotlightImages().size())))));
+        lblStatus->setText(QString::fromStdString(std::vformat(_("Total Number of Images: {}"), std::make_format_args(CodeHelpers::unmove(args.getImages().size())))));
         m_ui->statusBar->addWidget(lblStatus);
         //Setup Flip Page (Faster)
-        m_ui->sliderFlip->setMaximum(m_controller->getSpotlightImages().size() - 1);
+        m_ui->sliderFlip->setMaximum(args.getImages().size() - 1);
         m_ui->sliderFlip->setValue(0);
         onSliderFlipChanged(0);
         //Setup Grid Page
-        loadGridView();
+        loadGridView(args.getImages());
+        //Change Page
+        if(args.getViewMode() == ViewMode::Grid)
+        {
+            m_ui->actionGrid->setChecked(true);
+        }
+        else
+        {
+            m_ui->actionFlip->setChecked(true);
+        }
     }
 }
