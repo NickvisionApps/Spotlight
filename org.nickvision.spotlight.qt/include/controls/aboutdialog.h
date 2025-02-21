@@ -41,4 +41,4 @@ namespace Nickvision::Spotlight::Qt::Controls
     };
 }
 
-#endif // ABOUTDIALOG_H
+#endif //ABOUTDIALOG_H
