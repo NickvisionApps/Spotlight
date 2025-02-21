@@ -40,7 +40,8 @@ namespace Nickvision::Spotlight::Qt::Views
         m_ui{ new Ui::MainWindow() },
         m_infoBar{ new InfoBar(this) },
         m_controller{ controller },
-        m_resizeTimer{ this }
+        m_resizeTimer{ this },
+        m_lblStatus{ nullptr }
     {
         m_ui->setupUi(this);
         setWindowTitle(m_controller->getAppInfo().getVersion().getVersionType() == VersionType::Stable ? _("Spotlight") : _("Spotlight (Preview)"));
@@ -65,6 +66,9 @@ namespace Nickvision::Spotlight::Qt::Views
         m_ui->actionReportABug->setText(_("Report a Bug"));
         m_ui->actionDiscussions->setText(_("Discussions"));
         m_ui->actionAbout->setText(_("About Spotlight"));
+        //StatusBar
+        m_lblStatus = new QLabel(this);
+        m_ui->statusBar->addWidget(m_lblStatus);
         //Grid Page
         m_resizeTimer.setSingleShot(true);
         m_resizeTimer.setInterval(300);
@@ -181,8 +185,8 @@ namespace Nickvision::Spotlight::Qt::Views
         message.setDefaultButton(QMessageBox::StandardButton::No);
         if(message.exec() == QMessageBox::StandardButton::Yes)
         {
-            m_controller->clearAndSync();
             m_ui->viewStack->setCurrentIndex(MainWindowPage::Loading);
+            m_controller->clearAndSync();
         }
     }
 
@@ -366,15 +370,15 @@ namespace Nickvision::Spotlight::Qt::Views
             close();
             return;
         }
-        QLabel* lblStatus{ new QLabel() };
-        lblStatus->setText(QString::fromStdString(std::vformat(_("Total Number of Images: {}"), std::make_format_args(CodeHelpers::unmove(args.getImages().size())))));
-        m_ui->statusBar->addWidget(lblStatus);
+        m_lblStatus->setText(QString::fromStdString(std::vformat(_("Total Number of Images: {}"), std::make_format_args(CodeHelpers::unmove(args.getImages().size())))));
         //Setup Flip Page (Faster)
         m_ui->sliderFlip->setMaximum(args.getImages().size() - 1);
         m_ui->sliderFlip->setValue(0);
         onSliderFlipChanged(0);
         //Setup Grid Page
         loadGridView(args.getImages());
+        m_ui->actionGrid->setChecked(false);
+        m_ui->actionFlip->setChecked(false);
         //Change Page
         if(args.getViewMode() == ViewMode::Grid)
         {

@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <QCloseEvent>
+#include <QLabel>
 #include <QMainWindow>
 #include <QResizeEvent>
 #include <QTimer>
@@ -158,6 +159,7 @@ namespace Nickvision::Spotlight::Qt::Views
         Controls::InfoBar* m_infoBar;
         std::shared_ptr<Shared::Controllers::MainWindowController> m_controller;
         QTimer m_resizeTimer;
+        QLabel* m_lblStatus;
     };
 }
 
