@@ -35,7 +35,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
         m_appInfo.setVersion({ "2025.2.0-next" });
         m_appInfo.setShortName(_("Spotlight"));
         m_appInfo.setDescription(_("Find your favorite Windows spotlight images"));
-        m_appInfo.setChangelog("- Added the ability to clear the spotlight cache and resync images\n- Fixed an issue where the application could not update itself");
+        m_appInfo.setChangelog("- Added the ability to clear the spotlight cache and resync images\n- Fixed an issue where the application could not update itself\n- Improved the design of the application");
         m_appInfo.setSourceRepo("https://github.com/NickvisionApps/Spotlight");
         m_appInfo.setIssueTracker("https://github.com/NickvisionApps/Spotlight/issues/new");
         m_appInfo.setSupportUrl("https://github.com/NickvisionApps/Spotlight/discussions");

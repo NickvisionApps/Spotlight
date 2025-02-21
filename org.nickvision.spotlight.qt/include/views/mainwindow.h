@@ -3,13 +3,9 @@
 
 #include <memory>
 #include <QCloseEvent>
-#include <QLabel>
 #include <QMainWindow>
-#include <QResizeEvent>
-#include <QTimer>
 #include <oclero/qlementine/style/ThemeManager.hpp>
 #include "controllers/mainwindowcontroller.h"
-#include "controls/infobar.h"
 
 namespace Ui { class MainWindow; }
 
@@ -45,17 +41,8 @@ namespace Nickvision::Spotlight::Qt::Views
          * @param event QCloseEvent
          */
         void closeEvent(QCloseEvent* event) override;
-        /**
-         * @brief Handles when the window is resized.
-         * @param event QResizeEvent
-         */
-        void resizeEvent(QResizeEvent* event) override;
 
     private Q_SLOTS:
-        /**
-         * @brief Exports the selected image.
-         */
-        void exportImage();
         /**
          * @brief Exports all images.
          */
@@ -82,6 +69,10 @@ namespace Nickvision::Spotlight::Qt::Views
          * @param toggled True to switch, false to ignore
          */
         void flipMode(bool toggled);
+        /**
+         * @brief Exports the selected image.
+         */
+        void exportImage();
         /**
          * @brief Sets the selected image as the background.
          */
@@ -158,11 +149,8 @@ namespace Nickvision::Spotlight::Qt::Views
          */
         void onImagesSynced(const Shared::Events::ImagesSyncedEventArgs& args);
         Ui::MainWindow* m_ui;
-        Controls::InfoBar* m_infoBar;
         std::shared_ptr<Shared::Controllers::MainWindowController> m_controller;
         oclero::qlementine::ThemeManager* m_themeManager;
-        QTimer m_resizeTimer;
-        QLabel* m_lblStatus;
     };
 }
 

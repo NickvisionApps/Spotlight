@@ -20,7 +20,6 @@ qt_add_executable(${OUTPUT_NAME}
     "src/controls/aboutdialog.cpp"
     "src/controls/infobar.cpp"
     "src/helpers/qthelpers.cpp"
-    "src/views/mainwindow.ui"
     "src/views/mainwindow.cpp"
     "src/views/settingsdialog.cpp"
     "src/application.cpp"
