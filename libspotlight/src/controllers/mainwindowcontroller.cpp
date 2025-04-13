@@ -9,6 +9,7 @@
 #include <libnick/helpers/codehelpers.h>
 #include <libnick/helpers/stringhelpers.h>
 #include <libnick/localization/gettext.h>
+#include <libnick/notifications/appnotification.h>
 #include <libnick/system/environment.h>
 #include <windows.h>
 #include "models/configuration.h"
@@ -18,7 +19,6 @@ using namespace Nickvision::Events;
 using namespace Nickvision::Filesystem;
 using namespace Nickvision::Helpers;
 using namespace Nickvision::Notifications;
-using namespace Nickvision::Spotlight::Shared::Events;
 using namespace Nickvision::Spotlight::Shared::Models;
 using namespace Nickvision::System;
 using namespace Nickvision::Update;
@@ -32,7 +32,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
         m_dataFileManager{ m_appInfo.getName() },
         m_spotlightManager{ m_appInfo.getName() }
     {
-        m_appInfo.setVersion({ "2025.2.0-next" });
+        m_appInfo.setVersion({ "2025.4.0-next" });
         m_appInfo.setShortName(_("Spotlight"));
         m_appInfo.setDescription(_("Find your favorite Windows spotlight images"));
         m_appInfo.setChangelog("- Added the ability to clear the spotlight cache and resync images\n- Fixed an issue where the application could not update itself\n- Improved the design of the application");
@@ -47,6 +47,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
         m_appInfo.getDesigners()["DaPigGuy"] = "https://github.com/DaPigGuy";
         m_appInfo.getArtists()[_("David Lapshin")] = "https://github.com/daudix";
         m_appInfo.setTranslatorCredits(_("translator-credits"));
+        Localization::Gettext::init(m_appInfo.getEnglishShortName());
         m_updater = std::make_shared<Updater>(m_appInfo.getSourceRepo());
     }
 
@@ -57,15 +58,9 @@ namespace Nickvision::Spotlight::Shared::Controllers
 
     Event<NotificationSentEventArgs>& MainWindowController::notificationSent()
     {
-        return m_notificationSent;
+        return AppNotification::sent();
     }
-
-    Event<ShellNotificationSentEventArgs>& MainWindowController::shellNotificationSent()
-    {
-        return m_shellNotificationSent;
-    }
-
-    Event<ImagesSyncedEventArgs>& MainWindowController::imagesSynced()
+    Event<ParamEventArgs<std::vector<std::filesystem::path>>>& MainWindowController::imagesSynced()
     {
         return m_imagesSynced;
     }
@@ -148,18 +143,17 @@ namespace Nickvision::Spotlight::Shared::Controllers
         //Load images
         std::thread syncWorker{ [this]()
         {
-            m_imagesSynced.invoke({ m_spotlightManager.sync(), m_dataFileManager.get<Configuration>("config").getViewMode() });
+            m_imagesSynced.invoke({ m_spotlightManager.sync() });
         } };
         syncWorker.detach();
         m_started = true;
         return info;
     }
 
-    void MainWindowController::shutdown(const WindowGeometry& geometry, ViewMode viewMode)
+    void MainWindowController::shutdown(const WindowGeometry& geometry)
     {
         Configuration& config{ m_dataFileManager.get<Configuration>("config") };
         config.setWindowGeometry(geometry);
-        config.setViewMode(viewMode);
         config.save();
     }
 
@@ -205,7 +199,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
         //Load images
         std::thread syncWorker{ [this]()
         {
-            m_imagesSynced.invoke({ m_spotlightManager.clearAndSync(), m_dataFileManager.get<Configuration>("config").getViewMode() });
+            m_imagesSynced.invoke({ m_spotlightManager.clearAndSync() });
         } };
         syncWorker.detach();
     }

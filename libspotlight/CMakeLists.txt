@@ -5,7 +5,6 @@ endif()
 add_library(libspotlight
     "src/controllers/mainwindowcontroller.cpp"
     "src/controllers/preferencesviewcontroller.cpp"
-    "src/events/imagessyncedeventargs.cpp"
     "src/models/configuration.cpp"
     "src/models/spotlightmanager.cpp"
     "src/models/startupinformation.cpp")

@@ -5,7 +5,6 @@
 #include <libnick/app/datafilebase.h>
 #include <libnick/app/windowgeometry.h>
 #include "theme.h"
-#include "viewmode.h"
 
 namespace Nickvision::Spotlight::Shared::Models
 {
@@ -51,16 +50,6 @@ namespace Nickvision::Spotlight::Shared::Models
          * @param check Whether or not to automatically check for updates
          */
         void setAutomaticallyCheckForUpdates(bool check);
-        /**
-         * @brief Gets the view mode for the application.
-         * @return The view mode
-         */
-        ViewMode getViewMode() const;
-        /**
-         * @brief Sets the view mode for the application.
-         * @param mode The new view mode
-         */
-        void setViewMode(ViewMode mode);
     };
 }
 

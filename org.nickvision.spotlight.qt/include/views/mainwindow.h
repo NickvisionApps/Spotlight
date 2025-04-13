@@ -3,7 +3,10 @@
 
 #include <memory>
 #include <QCloseEvent>
+#include <QResizeEvent>
+#include <QLabel>
 #include <QMainWindow>
+#include <QTimer>
 #include <oclero/qlementine/style/ThemeManager.hpp>
 #include "controllers/mainwindowcontroller.h"
 
@@ -41,6 +44,11 @@ namespace Nickvision::Spotlight::Qt::Views
          * @param event QCloseEvent
          */
         void closeEvent(QCloseEvent* event) override;
+        /**
+         * @brief Handles when the window is resized.
+         * @param event QResizeEvent
+         */
+        void resizeEvent(QResizeEvent* event) override;
 
     private Q_SLOTS:
         /**
@@ -59,16 +67,6 @@ namespace Nickvision::Spotlight::Qt::Views
          * @brief Displays the settings dialog.
          */
         void settings();
-        /**
-         * @brief Switches to the grid view mode.
-         * @param toggled True to switch, false to ignore
-         */
-        void gridMode(bool toggled);
-        /**
-         * @brief Switches to the flip view mode.
-         * @param toggled True to switch, false to ignore
-         */
-        void flipMode(bool toggled);
         /**
          * @brief Exports the selected image.
          */
@@ -102,35 +100,9 @@ namespace Nickvision::Spotlight::Qt::Views
          */
         void about();
         /**
-         * @brief Loads spotlight images into a grid view.
-         * @param images The images to load
+         * @brief Handles when the window is resized.
          */
-        void loadGridView(const std::vector<std::filesystem::path>& images);
-        /**
-         * @brief Handles when the tblImages' selection is changed.
-         * @param row The row index
-         * @param column The column index
-         */
-        void onTblImagesSelectionChanged(int row, int column);
-        /**
-         * @brief Handles when the tblImages is double clicked.
-         * @param row The row index
-         * @param column The column index
-         */
-        void onTblImagesDoubleClicked(int row, int column);
-        /**
-         * @brief Handles when the flip view's slider is changed.
-         * @param value The value of the slider
-         */
-        void onSliderFlipChanged(int value);
-        /**
-         * @brief Flips to the next image.
-         */
-        void flipNext();
-        /**
-         * @brief Flips to the previous image.
-         */
-        void flipPrev();
+        void onWindowResize();
 
     private:
         /**
@@ -139,18 +111,15 @@ namespace Nickvision::Spotlight::Qt::Views
          */
         void onNotificationSent(const Notifications::NotificationSentEventArgs& args);
         /**
-         * @brief Handles when a shell notification is sent.
-         * @param args The ShellNotificationSentEventArgs
-         */
-        void onShellNotificationSent(const Notifications::ShellNotificationSentEventArgs& args);
-        /**
          * @brief Handles when the images are synced.
-         * @param args The ImagesSyncedEventArgs
+         * @param args ParamEventArgs<std::vector<std::filesystem::path>>
          */
-        void onImagesSynced(const Shared::Events::ImagesSyncedEventArgs& args);
+        void onImagesSynced(const Nickvision::Events::ParamEventArgs<std::vector<std::filesystem::path>>& args);
         Ui::MainWindow* m_ui;
         std::shared_ptr<Shared::Controllers::MainWindowController> m_controller;
         oclero::qlementine::ThemeManager* m_themeManager;
+        QTimer* m_resizeTimer;
+        std::vector<QLabel*> m_images;
     };
 }
 

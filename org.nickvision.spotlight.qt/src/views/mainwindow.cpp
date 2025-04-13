@@ -1,10 +1,9 @@
 #include "views/mainwindow.h"
-#include <cmath>
 #include <format>
 #include <QDesktopServices>
 #include <QFileDialog>
+#include <QGridLayout>
 #include <QHBoxLayout>
-#include <QLabel>
 #include <QListWidget>
 #include <QMenu>
 #include <QMenuBar>
@@ -21,10 +20,17 @@
 #include <libnick/helpers/codehelpers.h>
 #include <libnick/localization/gettext.h>
 #include <libnick/notifications/shellnotification.h>
+#include <oclero/qlementine/widgets/LoadingSpinner.hpp>
 #include "controls/aboutdialog.h"
 #include "controls/infobar.h"
 #include "helpers/qthelpers.h"
 #include "views/settingsdialog.h"
+
+#define RESIZE_TIMER_TIMEOUT 200
+#define IMAGES_PER_ROW 3
+#define IMAGE_SPACING 4
+#define IMAGE_WIDTH ((m_ui->viewStack->geometry().width() / IMAGES_PER_ROW) - (IMAGES_PER_ROW * IMAGE_SPACING))
+#define IMAGE_HEIGHT 220
 
 using namespace Nickvision::App;
 using namespace Nickvision::Events;
@@ -34,9 +40,15 @@ using namespace Nickvision::Notifications;
 using namespace Nickvision::Spotlight::Qt::Controls;
 using namespace Nickvision::Spotlight::Qt::Helpers;
 using namespace Nickvision::Spotlight::Shared::Controllers;
-using namespace Nickvision::Spotlight::Shared::Events;
 using namespace Nickvision::Spotlight::Shared::Models;
 using namespace Nickvision::Update;
+using namespace oclero::qlementine;
+
+enum MainWindowPage
+{
+    Loading = 0,
+    Images
+};
 
 namespace Ui
 {
@@ -50,7 +62,7 @@ namespace Ui
             actionExportAll = new QAction(parent);
             actionExportAll->setText(_("Export All"));
             actionExportAll->setIcon(QLEMENTINE_ICON(Action_SaveToDisk));
-            actionExportAll->setShortcut(Qt::CTRL | Qt::SHIFT || Qt::Key_S);
+            actionExportAll->setShortcut(QKeyCombination(Qt::ControlModifier | Qt::ShiftModifier, Qt::Key_S));
             actionExit = new QAction(parent);
             actionExit->setText(_("Exit"));
             actionExit->setIcon(QLEMENTINE_ICON(Action_Close));
@@ -63,14 +75,6 @@ namespace Ui
             actionSettings->setText(_("Settings"));
             actionSettings->setIcon(QLEMENTINE_ICON(Navigation_Settings));
             actionSettings->setShortcut(Qt::CTRL | Qt::Key_Comma);
-            actionGrid = new QAction(parent);
-            actionGrid->setText(_("Grid"));
-            actionGrid->setCheckable(true);
-            actionGrid->setIcon(QLEMENTINE_ICON(Misc_ItemsGrid));
-            actionFlip = new QAction(parent);
-            actionFlip->setText(_("Flip"));
-            actionFlip->setCheckable(true);
-            actionFlip->setIcon(QLEMENTINE_ICON(Navigation_ArrowRight));
             actionExport = new QAction(parent);
             actionExport->setText(_("Export"));
             actionExport->setIcon(QLEMENTINE_ICON(Action_Save));
@@ -109,13 +113,6 @@ namespace Ui
             menuEdit->addAction(actionClearAndSync);
             menuEdit->addSeparator();
             menuEdit->addAction(actionSettings);
-            QMenu* menuView{ new QMenu(parent) };
-            QMenu* menuMode{ new QMenu(parent) };
-            menuView->setTitle(_("View"));
-            menuMode->setTitle(_("Mode"));
-            menuMode->addAction(actionGrid);
-            menuMode->addAction(actionFlip);
-            menuView->addMenu(menuMode);
             QMenu* menuImage{ new QMenu(parent) };
             menuImage->setTitle(_("Image"));
             menuImage->addAction(actionExport);
@@ -131,7 +128,6 @@ namespace Ui
             menuHelp->addAction(actionAbout);
             parent->menuBar()->addMenu(menuFile);
             parent->menuBar()->addMenu(menuEdit);
-            parent->menuBar()->addMenu(menuView);
             parent->menuBar()->addMenu(menuImage);
             parent->menuBar()->addMenu(menuHelp);
             //StatusBar
@@ -148,25 +144,34 @@ namespace Ui
             toolBar->addAction(actionSetAsBackground);
             parent->addToolBar(toolBar);
             //Loading Page
-            QWidget* pageLoading{ new QWidget(parent) };
-            QHBoxLayout* layoutLoading{ new QHBoxLayout(parent) };
-            QProgressBar* progressBar{ new QProgressBar(parent) };
-            progressBar->setRange(0, 0);
-            progressBar->setValue(-1);
-            progressBar->setTextVisible(false);
-            progressBar->setInvertedAppearance(false);
-            progressBar->setAlignment(::Qt::AlignCenter);
-            layoutLoading->addWidget(progressBar);
-            pageLoading->setLayout(layoutLoading);
-            viewStack->addWidget(pageLoading);
-            //Grid Page
-
-            //Flip Page
-
+            LoadingSpinner* spinner{ new LoadingSpinner(parent) };
+            spinner->setMinimumSize(32, 32);
+            spinner->setMaximumSize(32, 32);
+            spinner->setSpinning(true);
+            QVBoxLayout* layoutSpinner{ new QVBoxLayout() };
+            layoutSpinner->addStretch();
+            layoutSpinner->addWidget(spinner);
+            layoutSpinner->addStretch();
+            QHBoxLayout* layoutLoading{ new QHBoxLayout() };
+            layoutLoading->addStretch();
+            layoutLoading->addLayout(layoutSpinner);
+            layoutLoading->addStretch();
+            QWidget* loadingPage{ new QWidget(parent) };
+            loadingPage->setLayout(layoutLoading);
+            viewStack->addWidget(loadingPage);
+            //Images Page
+            grdImages = new QGridLayout();
+            grdImages->setSpacing(6);
+            QVBoxLayout* layoutImages{ new QVBoxLayout() };
+            layoutImages->addLayout(grdImages);
+            layoutImages->addStretch();
+            QScrollArea* scrollImages{ new QScrollArea(parent) };
+            scrollImages->setLayout(layoutImages);
+            viewStack->addWidget(scrollImages);
             //Main Layout
             QWidget* centralWidget{ new QWidget(parent) };
             QVBoxLayout* layoutMain{ new QVBoxLayout(parent) };
-            layoutMain->setContentsMargins(6, 6, 6, 6);
+            layoutMain->setContentsMargins(0, 0, 0, 0);
             layoutMain->addWidget(viewStack);
             centralWidget->setLayout(layoutMain);
             parent->setCentralWidget(centralWidget);
@@ -176,8 +181,6 @@ namespace Ui
         QAction* actionExit;
         QAction* actionClearAndSync;
         QAction* actionSettings;
-        QAction* actionGrid;
-        QAction* actionFlip;
         QAction* actionExport;
         QAction* actionSetAsBackground;
         QAction* actionCheckForUpdates;
@@ -188,29 +191,23 @@ namespace Ui
         Nickvision::Spotlight::Qt::Controls::InfoBar* infoBar;
         QLabel* lblStatus;
         QStackedWidget* viewStack;
+        QGridLayout* grdImages;
     };
 }
 
 namespace Nickvision::Spotlight::Qt::Views
 {
-    enum MainWindowPage
-    {
-        Loading = 0,
-        Grid,
-        Flip,
-    };
-
     MainWindow::MainWindow(const std::shared_ptr<MainWindowController>& controller, oclero::qlementine::ThemeManager* themeManager, QWidget* parent) 
         : QMainWindow{ parent },
         m_ui{ new Ui::MainWindow() },
         m_controller{ controller },
         m_themeManager{ themeManager },
-        m_resizeTimer{ this }
+        m_resizeTimer{ new QTimer(this) }
     {
         //Window Settings
         bool stable{ m_controller->getAppInfo().getVersion().getVersionType() == VersionType::Stable };
-        setWindowTitle(stable ? _("Application") : _("Application (Preview)"));
-        setWindowIcon(QIcon(":/icon.svg"));
+        setWindowTitle(stable ? _("Spotlight") : _("Spotlight (Preview)"));
+        setWindowIcon(QIcon(":/icon.ico"));
         setAcceptDrops(true);
         //Load Ui
         m_ui->setupUi(this);
@@ -219,8 +216,6 @@ namespace Nickvision::Spotlight::Qt::Views
         connect(m_ui->actionExit, &QAction::triggered, this, &MainWindow::exit);
         connect(m_ui->actionClearAndSync, &QAction::triggered, this, &MainWindow::clearAndSync);
         connect(m_ui->actionSettings, &QAction::triggered, this, &MainWindow::settings);
-        connect(m_ui->actionGrid, &QAction::toggled, this, &MainWindow::gridMode);
-        connect(m_ui->actionFlip, &QAction::toggled, this, &MainWindow::flipMode);
         connect(m_ui->actionExport, &QAction::triggered, this, &MainWindow::exportImage);
         connect(m_ui->actionSetAsBackground, &QAction::triggered, this, &MainWindow::setImageAsBackground);
         connect(m_ui->actionCheckForUpdates, &QAction::triggered, this, &MainWindow::checkForUpdates);
@@ -228,19 +223,13 @@ namespace Nickvision::Spotlight::Qt::Views
         connect(m_ui->actionReportABug, &QAction::triggered, this, &MainWindow::reportABug);
         connect(m_ui->actionDiscussions, &QAction::triggered, this, &MainWindow::discussions);
         connect(m_ui->actionAbout, &QAction::triggered, this, &MainWindow::about);
-        connect(m_ui->tblImages, &QTableWidget::cellClicked, this, &MainWindow::onTblImagesSelectionChanged);
-        connect(m_ui->tblImages, &QTableWidget::cellDoubleClicked, this, &MainWindow::onTblImagesDoubleClicked);
-        connect(m_ui->sliderFlip, &QSlider::valueChanged, this, &MainWindow::onSliderFlipChanged);
-        connect(m_ui->btnFlipNext, &QPushButton::clicked, this, &MainWindow::flipNext);
-        connect(m_ui->btnFlipPrev, &QPushButton::clicked, this, &MainWindow::flipPrev);
+        connect(m_resizeTimer, &QTimer::timeout, this, &MainWindow::onWindowResize);
         m_controller->notificationSent() += [&](const NotificationSentEventArgs& args) { QtHelpers::dispatchToMainThread([this, args]() { onNotificationSent(args); }); };
-        m_controller->shellNotificationSent() += [&](const ShellNotificationSentEventArgs& args) { onShellNotificationSent(args); };
-        m_controller->imagesSynced() += [&](const ImagesSyncedEventArgs& args) { QtHelpers::dispatchToMainThread([this, args]() { onImagesSynced(args); }); };
+        m_controller->imagesSynced() += [&](const ParamEventArgs<std::vector<std::filesystem::path>>& args) { QtHelpers::dispatchToMainThread([this, args]() { onImagesSynced(args); }); };
     }
 
     MainWindow::~MainWindow()
     {
-        delete m_infoBar;
         delete m_ui;
     }
 
@@ -262,8 +251,14 @@ namespace Nickvision::Spotlight::Qt::Views
         {
             return event->ignore();
         }
-        m_controller->shutdown({ geometry().width(), geometry().height(), isMaximized() }, m_ui->actionGrid->isChecked() ? ViewMode::Grid : ViewMode::Flip);
+        m_controller->shutdown({ geometry().width(), geometry().height(), isMaximized() });
         event->accept();
+    }
+
+    void MainWindow::resizeEvent(QResizeEvent* event)
+    {
+        m_resizeTimer->stop();
+        m_resizeTimer->start(RESIZE_TIMER_TIMEOUT);
     }
 
     void MainWindow::exportAllImages()
@@ -301,30 +296,9 @@ namespace Nickvision::Spotlight::Qt::Views
         dialog.exec();
     }
 
-    void MainWindow::gridMode(bool toggled)
-    {
-        if(toggled)
-        {
-            m_ui->viewStack->setCurrentIndex(MainWindowPage::Grid);
-            m_ui->actionFlip->setChecked(false);
-        }
-    }
-
-    void MainWindow::flipMode(bool toggled)
-    {
-        if(toggled)
-        {
-            m_ui->viewStack->setCurrentIndex(MainWindowPage::Flip);
-            if(m_ui->actionGrid->isChecked())
-            {
-                onSliderFlipChanged(m_ui->sliderFlip->value());    
-            }
-            m_ui->actionGrid->setChecked(false);
-        }
-    }
-
     void MainWindow::exportImage()
     {
+        /*
         if(!m_ui->tblImages->selectionModel()->hasSelection())
         {
             return;
@@ -345,10 +319,12 @@ namespace Nickvision::Spotlight::Qt::Views
                 m_controller->exportImage(m_ui->sliderFlip->value(), file.toStdString());
             }
         }
+        */
     }
 
     void MainWindow::setImageAsBackground()
     {
+        /*
         if(!m_ui->tblImages->selectionModel()->hasSelection())
         {
             return;
@@ -361,6 +337,7 @@ namespace Nickvision::Spotlight::Qt::Views
         {
             m_controller->setImageAsDesktopBackground(m_ui->sliderFlip->value());
         }
+        */
     }
 
     void MainWindow::checkForUpdates()
@@ -394,83 +371,26 @@ namespace Nickvision::Spotlight::Qt::Views
         dialog.exec();
     }
 
-    void MainWindow::loadGridView(const std::vector<std::filesystem::path>& images)
+    void MainWindow::onWindowResize()
     {
-        int columnCount{ static_cast<int>(std::floor(m_ui->tblImages->width() / static_cast<double>(m_ui->tblImages->horizontalHeader()->defaultSectionSize()))) };
-        int rowCount{ static_cast<int>(std::ceil(images.size() / static_cast<double>(columnCount))) };
-        if(columnCount == m_ui->tblImages->columnCount())
+        m_resizeTimer->stop();
+        int row{ 0 };
+        int col{ 0 };
+        for(QLabel* image : m_images)
         {
-            return;
+            m_ui->grdImages->removeWidget(image);
         }
-        m_ui->tblImages->clear();
-        m_ui->tblImages->setColumnCount(columnCount);
-        m_ui->tblImages->setRowCount(rowCount);
-        for(int i = 0; i < rowCount; i++)
+        for(QLabel* image : m_images)
         {
-            for(int j = 0; j < columnCount; j++)
+            image->setMinimumSize(IMAGE_WIDTH, IMAGE_HEIGHT);
+            image->setMaximumSize(IMAGE_WIDTH, IMAGE_HEIGHT);
+            m_ui->grdImages->addWidget(image, row, col);
+            col++;
+            if(col == IMAGES_PER_ROW)
             {
-                int index{ i * columnCount + j };
-                if(index >= images.size())
-                {
-                    break;
-                }
-                QPixmap pixmap{ QString::fromStdString(images[index].string()) };
-                QLabel* lbl{ new QLabel() };
-                lbl->setScaledContents(true);
-                lbl->setPixmap(pixmap.scaled(m_ui->tblImages->horizontalHeader()->defaultSectionSize(), m_ui->tblImages->verticalHeader()->defaultSectionSize(), ::Qt::KeepAspectRatio, ::Qt::FastTransformation));
-                m_ui->tblImages->setCellWidget(i, j, lbl);
-                if(i == 0 && j == 0)
-                {
-                    lbl->setFrameStyle(QFrame::Box);
-                    lbl->setLineWidth(3);
-                }
-                qApp->processEvents();
+                row++;
+                col = 0;
             }
-        }
-    }
-
-    void MainWindow::onTblImagesSelectionChanged(int row, int column)
-    {
-        static QLabel* lastSelected{ static_cast<QLabel*>(m_ui->tblImages->cellWidget(0, 0)) };
-        lastSelected->setFrameStyle(QFrame::NoFrame);
-        lastSelected = static_cast<QLabel*>(m_ui->tblImages->cellWidget(row, column));
-        lastSelected->setFrameStyle(QFrame::Box);
-        lastSelected->setLineWidth(3);
-    }
-
-    void MainWindow::onTblImagesDoubleClicked(int row, int column)
-    {
-        QDesktopServices::openUrl(QUrl::fromLocalFile(QString::fromStdString(m_controller->getSpotlightImagePath(row * m_ui->tblImages->columnCount() + column).string())));
-    }
-
-    void MainWindow::onSliderFlipChanged(int value)
-    {
-        const std::filesystem::path& image{ m_controller->getSpotlightImagePath(value) };
-        QPixmap pixmap{ QString::fromStdString(image.string()) };
-        m_ui->lblFlipImage->setPixmap(pixmap.scaled(m_ui->scrollFlip->width() - 20, m_ui->scrollFlip->height() - 20, ::Qt::KeepAspectRatio));
-    }
-
-    void MainWindow::flipNext()
-    {
-        if(m_ui->sliderFlip->value() == m_ui->sliderFlip->maximum())
-        {
-            m_ui->sliderFlip->setValue(0);
-        }
-        else
-        {
-            m_ui->sliderFlip->setValue(m_ui->sliderFlip->value() + 1);
-        }
-    }
-
-    void MainWindow::flipPrev()
-    {
-        if(m_ui->sliderFlip->value() == 0)
-        {
-            m_ui->sliderFlip->setValue(m_ui->sliderFlip->maximum());
-        }
-        else
-        {
-            m_ui->sliderFlip->setValue(m_ui->sliderFlip->value() - 1);
         }
     }
 
@@ -486,36 +406,38 @@ namespace Nickvision::Spotlight::Qt::Views
         m_ui->infoBar->show(args, actionText, actionCallback);
     }
 
-    void MainWindow::onShellNotificationSent(const ShellNotificationSentEventArgs& args)
+    void MainWindow::onImagesSynced(const ParamEventArgs<std::vector<std::filesystem::path>>& args)
     {
-        ShellNotification::send(args, reinterpret_cast<HWND>(winId()));
-    }
-
-    void MainWindow::onImagesSynced(const ImagesSyncedEventArgs& args)
-    {
-        if(args.getImages().empty())
+        if((*args).empty())
         {
             QMessageBox::critical(this, _("No Spotlight Images Found"), _("Ensure Windows Spotlight is enabled and come back later to try again. The application will now close."), QMessageBox::StandardButton::Close);
             close();
             return;
         }
-        m_lblStatus->setText(QString::fromStdString(std::vformat(_("Total Number of Images: {}"), std::make_format_args(CodeHelpers::unmove(args.getImages().size())))));
-        //Setup Flip Page (Faster)
-        m_ui->sliderFlip->setMaximum(args.getImages().size() - 1);
-        m_ui->sliderFlip->setValue(0);
-        onSliderFlipChanged(0);
-        //Setup Grid Page
-        loadGridView(args.getImages());
-        m_ui->actionGrid->setChecked(false);
-        m_ui->actionFlip->setChecked(false);
-        //Change Page
-        if(args.getViewMode() == ViewMode::Grid)
+        int row{ 0 };
+        int col{ 0 };
+        for(QLabel* image : m_images)
         {
-            m_ui->actionGrid->setChecked(true);
+            m_ui->grdImages->removeWidget(image);
         }
-        else
+        m_images.clear();
+        m_ui->viewStack->setCurrentIndex(MainWindowPage::Images);
+        m_ui->lblStatus->setText(QString::fromStdString(std::vformat(_("Total Number of Images: {}"), std::make_format_args(CodeHelpers::unmove((*args).size())))));
+        for(const std::filesystem::path& image : args.getParam())
         {
-            m_ui->actionFlip->setChecked(true);
+            QLabel* lbl{ new QLabel(this) };
+            lbl->setMinimumSize(IMAGE_WIDTH, IMAGE_HEIGHT);
+            lbl->setMaximumSize(IMAGE_WIDTH, IMAGE_HEIGHT);
+            lbl->setScaledContents(true);
+            lbl->setPixmap(QPixmap::fromImage(QImage(QString::fromStdString(image.string()))));
+            m_ui->grdImages->addWidget(lbl, row, col);
+            m_images.push_back(lbl);
+            col++;
+            if(col == IMAGES_PER_ROW)
+            {
+                row++;
+                col = 0;
+            }
         }
     }
 }

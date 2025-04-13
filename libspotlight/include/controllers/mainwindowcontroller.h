@@ -13,16 +13,15 @@
 #include <libnick/app/datafilemanager.h>
 #include <libnick/app/windowgeometry.h>
 #include <libnick/events/event.h>
+#include <libnick/events/parameventargs.h>
 #include <libnick/notifications/notificationsenteventargs.h>
 #include <libnick/notifications/shellnotificationsenteventargs.h>
 #include <libnick/taskbar/taskbaritem.h>
 #include <libnick/update/updater.h>
 #include "controllers/preferencesviewcontroller.h"
-#include "events/imagessyncedeventargs.h"
 #include "models/spotlightmanager.h"
 #include "models/startupinformation.h"
 #include "models/theme.h"
-#include "models/viewmode.h"
 
 namespace Nickvision::Spotlight::Shared::Controllers
 {
@@ -48,15 +47,10 @@ namespace Nickvision::Spotlight::Shared::Controllers
          */
         Nickvision::Events::Event<Nickvision::Notifications::NotificationSentEventArgs>& notificationSent();
         /**
-         * @brief Gets the event for when a shell notification is sent.
-         * @return The shell notification sent event
-         */
-        Nickvision::Events::Event<Nickvision::Notifications::ShellNotificationSentEventArgs>& shellNotificationSent();
-        /**
          * @brief Gets the event for when images are synced.
          * @return The images synced event
          */
-        Nickvision::Events::Event<Events::ImagesSyncedEventArgs>& imagesSynced();
+        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<std::vector<std::filesystem::path>>>& imagesSynced();
         /**
          * @brief Gets the AppInfo object for the application
          * @return The current AppInfo object
@@ -103,9 +97,8 @@ namespace Nickvision::Spotlight::Shared::Controllers
         /**
          * @brief Shuts down the application.
          * @param geometry The window geometry to save
-         * @param viewMode The view mode to save
          */
-        void shutdown(const Nickvision::App::WindowGeometry& geometry, Models::ViewMode viewMode);
+        void shutdown(const Nickvision::App::WindowGeometry& geometry);
         /**
          * @brief Checks for an application update and sends a notification if one is available.
          */
@@ -150,9 +143,8 @@ namespace Nickvision::Spotlight::Shared::Controllers
         std::shared_ptr<Nickvision::Update::Updater> m_updater;
         Nickvision::Taskbar::TaskbarItem m_taskbar;
         Nickvision::Events::Event<Nickvision::Notifications::NotificationSentEventArgs> m_notificationSent;
-        Nickvision::Events::Event<Nickvision::Notifications::ShellNotificationSentEventArgs> m_shellNotificationSent;
         Models::SpotlightManager m_spotlightManager;
-        Nickvision::Events::Event<Events::ImagesSyncedEventArgs> m_imagesSynced;
+        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<std::vector<std::filesystem::path>>> m_imagesSynced;
     };
 }
 
