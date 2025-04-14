@@ -1,6 +1,6 @@
 #include "application.h"
 
-using namespace Nickvision::Spotlight::QT;
+using namespace Nickvision::Spotlight::Qt;
 
 int main(int argc, char *argv[]) 
 {

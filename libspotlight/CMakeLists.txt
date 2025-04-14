@@ -6,7 +6,8 @@ add_library(libspotlight
     "src/controllers/mainwindowcontroller.cpp"
     "src/controllers/preferencesviewcontroller.cpp"
     "src/models/configuration.cpp"
-    "src/models/spotlightmanager.cpp")
+    "src/models/spotlightmanager.cpp"
+    "src/models/startupinformation.cpp")
 target_include_directories(libspotlight PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set_target_properties(libspotlight PROPERTIES VERSION "${PROJECT_VERSION}" SOVERSION "${PROJECT_VERSION}")
 if(MSVC)

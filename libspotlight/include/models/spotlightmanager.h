@@ -3,7 +3,6 @@
 
 #include <filesystem>
 #include <vector>
-#include <libnick/logging/logger.h>
 #include "spotlightimagetype.h"
 #include "spotlightsupport.h"
 
@@ -18,9 +17,8 @@ namespace Nickvision::Spotlight::Shared::Models
         /**
          * @brief Construct a SpotlightManager. 
          * @param appName The name of the application
-         * @param logger The application logger
          */
-        SpotlightManager(const std::string& appName, Logging::Logger& logger);
+        SpotlightManager(const std::string& appName);
         /**
          * @brief Gets the list of paths to synced spotlight images.
          * @return The list of paths to synced spotlight images
@@ -36,6 +34,11 @@ namespace Nickvision::Spotlight::Shared::Models
          * @return The list of paths to synced spotlight images
          */
         const std::vector<std::filesystem::path>& sync();
+        /**
+         * @brief Clears the cached images and resyncs spotlight images.
+         * @return The list of paths to synced spotlight images
+         */
+        const std::vector<std::filesystem::path>& clearAndSync();
         /**
          * @brief Exports a spotlight image.
          * @param index The index of the image to export
@@ -76,11 +79,10 @@ namespace Nickvision::Spotlight::Shared::Models
          * @param type The type of spotlight image
          */
         void processEntry(const std::filesystem::directory_entry& entry, SpotlightImageType type);
+        std::filesystem::path m_dataDir;
         std::filesystem::path m_spotlightLockScreenDir;
         std::filesystem::path m_spotlightDesktopDir;
-        std::filesystem::path m_dataDir;
         std::vector<std::filesystem::path> m_images;
-        Logging::Logger& m_logger;
     };
 }
 

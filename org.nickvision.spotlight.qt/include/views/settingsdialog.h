@@ -1,14 +1,16 @@
+
 #ifndef SETTINGSDIALOG_H
 #define SETTINGSDIALOG_H
 
 #include <memory>
 #include <QCloseEvent>
 #include <QDialog>
+#include <oclero/qlementine/style/ThemeManager.hpp>
 #include "controllers/preferencesviewcontroller.h"
 
 namespace Ui { class SettingsDialog; }
 
-namespace Nickvision::Spotlight::QT::Views
+namespace Nickvision::Spotlight::Qt::Views
 {
     /**
      * @brief The settings dialog for the application.
@@ -16,21 +18,22 @@ namespace Nickvision::Spotlight::QT::Views
     class SettingsDialog : public QDialog
     {
     Q_OBJECT
-
+    
     public:
         /**
          * @brief Constructs a SettingsDialog.
          * @param controller The PreferencesViewController
+         * @param themeManager The ThemeManager
          * @param parent The parent widget
          */
-        SettingsDialog(const std::shared_ptr<Shared::Controllers::PreferencesViewController>& controller, QWidget* parent = nullptr);
+        SettingsDialog(const std::shared_ptr<Shared::Controllers::PreferencesViewController>& controller, oclero::qlementine::ThemeManager* themeManager, QWidget* parent = nullptr);
         /**
          * @brief Destructs a SettingsDialog.
          */
         ~SettingsDialog();
 
     protected:
-       /**
+        /**
          * @brief Handles when the dialog is closed.
          * @param event QCloseEvent
          */
@@ -38,14 +41,14 @@ namespace Nickvision::Spotlight::QT::Views
 
     private Q_SLOTS:
         /**
-         * @brief Handles when the page is changed.
-         * @param index The index of the new page
+         * @brief Handles when the theme combobox changes.
          */
-        void onPageChanged(int index);
+        void onThemeChanged();
 
     private:
         Ui::SettingsDialog* m_ui;
         std::shared_ptr<Shared::Controllers::PreferencesViewController> m_controller;
+        oclero::qlementine::ThemeManager* m_themeManager;
     };
 }
 

@@ -3,13 +3,15 @@
 
 #include <memory>
 #include <QApplication>
+#include <oclero/qlementine/style/QlementineStyle.hpp>
+#include <oclero/qlementine/style/ThemeManager.hpp>
 #include "controllers/mainwindowcontroller.h"
 #include "views/mainwindow.h"
 
-namespace Nickvision::Spotlight::QT
+namespace Nickvision::Spotlight::Qt
 {
     /**
-     * @brief The main QT application point.
+     * @brief The main Qt application point.
      */
     class Application : public QApplication
     {
@@ -32,6 +34,8 @@ namespace Nickvision::Spotlight::QT
     private:
         std::shared_ptr<Shared::Controllers::MainWindowController> m_controller;
         std::shared_ptr<Views::MainWindow> m_mainWindow;
+        oclero::qlementine::QlementineStyle* m_style;
+        oclero::qlementine::ThemeManager* m_themeManager;
     };
 }
 

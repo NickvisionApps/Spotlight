@@ -20,7 +20,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how can you help the proje
 ## Screenshots
 
 <details>
-  <summary>QT</summary>
+  <summary>Qt</summary>
 
   ![Main](resources/screenshots/qt/main.png)
   ![Flip](resources/screenshots/qt/flip.png)
@@ -51,4 +51,4 @@ A C++20 compiler is also required to build Spotlight.
 
 ## Code of Conduct
 
-This project follows the [GNOME Code of Conduct](https://wiki.gnome.org/Foundation/CodeOfConduct).
+This project follows the [GNOME Code of Conduct](https://conduct.gnome.org/).

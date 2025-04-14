@@ -13,15 +13,15 @@
 #include <libnick/app/datafilemanager.h>
 #include <libnick/app/windowgeometry.h>
 #include <libnick/events/event.h>
-#include <libnick/logging/logger.h>
+#include <libnick/events/parameventargs.h>
 #include <libnick/notifications/notificationsenteventargs.h>
 #include <libnick/notifications/shellnotificationsenteventargs.h>
 #include <libnick/taskbar/taskbaritem.h>
 #include <libnick/update/updater.h>
 #include "controllers/preferencesviewcontroller.h"
 #include "models/spotlightmanager.h"
+#include "models/startupinformation.h"
 #include "models/theme.h"
-#include "models/viewmode.h"
 
 namespace Nickvision::Spotlight::Shared::Controllers
 {
@@ -47,15 +47,10 @@ namespace Nickvision::Spotlight::Shared::Controllers
          */
         Nickvision::Events::Event<Nickvision::Notifications::NotificationSentEventArgs>& notificationSent();
         /**
-         * @brief Gets the event for when a shell notification is sent.
-         * @return The shell notification sent event
-         */
-        Nickvision::Events::Event<Nickvision::Notifications::ShellNotificationSentEventArgs>& shellNotificationSent();
-        /**
          * @brief Gets the event for when images are synced.
          * @return The images synced event
          */
-        Nickvision::Events::Event<Nickvision::Events::EventArgs>& imagesSynced();
+        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<std::vector<std::filesystem::path>>>& imagesSynced();
         /**
          * @brief Gets the AppInfo object for the application
          * @return The current AppInfo object
@@ -67,21 +62,22 @@ namespace Nickvision::Spotlight::Shared::Controllers
          */
         Models::Theme getTheme();
         /**
-         * @brief Gets the view mode for the application.
-         * @return The view mode
-         */
-        Models::ViewMode getViewMode();
-        /**
          * @brief Gets the debugging information for the application.
          * @param extraInformation Extra, ui-specific, information to include in the debug info statement
          * @return The application's debug information
          */
         std::string getDebugInformation(const std::string& extraInformation = "") const;
         /**
-         * @brief Gets the list of paths to synced spotlight images.
-         * @return The list of paths to synced spotlight images
+         * @brief Gets the number of spotlight images synced.
+         * @return The number of spotlight images synced
          */
-        const std::vector<std::filesystem::path>& getSpotlightImages() const;
+        size_t getSpotlightImageCount() const;
+        /**
+         * @brief Gets the path of a spotlight image.
+         * @param index The index of the image
+         * @return The path of the spotlight image
+         */
+        const std::filesystem::path& getSpotlightImagePath(int index) const;
         /**
          * @brief Gets whether or not the application can be shut down.
          * @return True if can shut down, else false
@@ -97,13 +93,12 @@ namespace Nickvision::Spotlight::Shared::Controllers
          * @brief Will only have an effect on the first time called.
          * @return The WindowGeometry to use for the application window at startup
          */
-        Nickvision::App::WindowGeometry startup(HWND hwnd);
+        const Models::StartupInformation& startup(HWND hwnd);
         /**
          * @brief Shuts down the application.
          * @param geometry The window geometry to save
-         * @param viewMode The view mode to save
          */
-        void shutdown(const Nickvision::App::WindowGeometry& geometry, Models::ViewMode viewMode);
+        void shutdown(const Nickvision::App::WindowGeometry& geometry);
         /**
          * @brief Checks for an application update and sends a notification if one is available.
          */
@@ -120,12 +115,9 @@ namespace Nickvision::Spotlight::Shared::Controllers
          */
         void connectTaskbar(HWND hwnd);
         /**
-         * @brief Logs a system message.
-         * @param level The severity level of the message
-         * @param message The message to log
-         * @param source The source location of the log message
+         * @brief Clears and syncs the spotlight images.
          */
-        void log(Logging::LogLevel level, const std::string& message, const std::source_location& source = std::source_location::current());
+        void clearAndSync();
         /**
          * @brief Sets a spotlight image as the desktop background.
          * @param index The index of the image to set as the desktop background
@@ -148,13 +140,10 @@ namespace Nickvision::Spotlight::Shared::Controllers
         std::vector<std::string> m_args;
         Nickvision::App::AppInfo m_appInfo;
         Nickvision::App::DataFileManager m_dataFileManager;
-        Nickvision::Logging::Logger m_logger;
         std::shared_ptr<Nickvision::Update::Updater> m_updater;
         Nickvision::Taskbar::TaskbarItem m_taskbar;
-        Nickvision::Events::Event<Nickvision::Notifications::NotificationSentEventArgs> m_notificationSent;
-        Nickvision::Events::Event<Nickvision::Notifications::ShellNotificationSentEventArgs> m_shellNotificationSent;
         Models::SpotlightManager m_spotlightManager;
-        Nickvision::Events::Event<Nickvision::Events::EventArgs> m_imagesSynced;
+        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<std::vector<std::filesystem::path>>> m_imagesSynced;
     };
 }
 

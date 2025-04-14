@@ -3,14 +3,16 @@
 
 #include <memory>
 #include <QCloseEvent>
-#include <QMainWindow>
 #include <QResizeEvent>
+#include <QMainWindow>
 #include <QTimer>
+#include <oclero/qlementine/style/ThemeManager.hpp>
 #include "controllers/mainwindowcontroller.h"
+#include "controls/spotlightimage.h"
 
 namespace Ui { class MainWindow; }
 
-namespace Nickvision::Spotlight::QT::Views
+namespace Nickvision::Spotlight::Qt::Views
 {
     /**
      * @brief The main window for the application.
@@ -23,9 +25,10 @@ namespace Nickvision::Spotlight::QT::Views
         /**
          * @brief Constructs a MainWindow.
          * @param controller The MainWindowController
+         * @param themeManager The theme manager
          * @param parent The parent widget
          */
-        MainWindow(const std::shared_ptr<Shared::Controllers::MainWindowController>& controller, QWidget* parent = nullptr);
+        MainWindow(const std::shared_ptr<Shared::Controllers::MainWindowController>& controller, oclero::qlementine::ThemeManager* themeManager, QWidget* parent = nullptr);
         /**
          * @brief Destructs a MainWindow.
          */
@@ -49,10 +52,6 @@ namespace Nickvision::Spotlight::QT::Views
 
     private Q_SLOTS:
         /**
-         * @brief Exports the selected image.
-         */
-        void exportImage();
-        /**
          * @brief Exports all images.
          */
         void exportAllImages();
@@ -61,19 +60,17 @@ namespace Nickvision::Spotlight::QT::Views
          */
         void exit();
         /**
+         * @brief Clears the image cache and syncs the spotlight images.
+         */
+        void clearAndSync();
+        /**
          * @brief Displays the settings dialog.
          */
         void settings();
         /**
-         * @brief Switches to the grid view mode.
-         * @param toggled True to switch, false to ignore
+         * @brief Exports the selected image.
          */
-        void gridMode(bool toggled);
-        /**
-         * @brief Switches to the flip view mode.
-         * @param toggled True to switch, false to ignore
-         */
-        void flipMode(bool toggled);
+        void exportImage();
         /**
          * @brief Sets the selected image as the background.
          */
@@ -82,12 +79,10 @@ namespace Nickvision::Spotlight::QT::Views
          * @brief Checks for application updates.
          */
         void checkForUpdates();
-#ifdef _WIN32
         /**
          * @brief Downloads and installs the latest application update in the background.
          */
         void windowsUpdate();
-#endif
         /**
          * @brief Opens the application's GitHub repo in the browser.
          */
@@ -105,34 +100,9 @@ namespace Nickvision::Spotlight::QT::Views
          */
         void about();
         /**
-         * @brief Loads spotlight images into a grid view.
+         * @brief Handles when the window is resized.
          */
-        void loadGridView();
-        /**
-         * @brief Handles when the tblImages' selection is changed.
-         * @param row The row index
-         * @param column The column index
-         */
-        void onTblImagesSelectionChanged(int row, int column);
-        /**
-         * @brief Handles when the tblImages is double clicked.
-         * @param row The row index
-         * @param column The column index
-         */
-        void onTblImagesDoubleClicked(int row, int column);
-        /**
-         * @brief Handles when the flip view's slider is changed.
-         * @param value The value of the slider
-         */
-        void onSliderFlipChanged(int value);
-        /**
-         * @brief Flips to the next image.
-         */
-        void flipNext();
-        /**
-         * @brief Flips to the previous image.
-         */
-        void flipPrev();
+        void onWindowResize();
 
     private:
         /**
@@ -141,17 +111,16 @@ namespace Nickvision::Spotlight::QT::Views
          */
         void onNotificationSent(const Notifications::NotificationSentEventArgs& args);
         /**
-         * @brief Handles when a shell notification is sent.
-         * @param args The ShellNotificationSentEventArgs
-         */
-        void onShellNotificationSent(const Notifications::ShellNotificationSentEventArgs& args);
-        /**
          * @brief Handles when the images are synced.
+         * @param args ParamEventArgs<std::vector<std::filesystem::path>>
          */
-        void onImagesSynced();
+        void onImagesSynced(const Nickvision::Events::ParamEventArgs<std::vector<std::filesystem::path>>& args);
         Ui::MainWindow* m_ui;
         std::shared_ptr<Shared::Controllers::MainWindowController> m_controller;
-        QTimer m_resizeTimer;
+        oclero::qlementine::ThemeManager* m_themeManager;
+        QTimer* m_resizeTimer;
+        std::vector<Controls::SpotlightImage*> m_images;
+        Controls::SpotlightImage* m_selectedImage;
     };
 }
 
