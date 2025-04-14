@@ -9,7 +9,7 @@
 namespace Nickvision::Spotlight::Qt::Controls
 {
     /**
-     * @brief A control for displaying a Spotlight iamge.
+     * @brief A control for displaying a Spotlight image.
      */
     class SpotlightImage : public QLabel
     {

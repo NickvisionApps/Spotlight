@@ -3,7 +3,7 @@
 
 #define MyAppName "Nickvision Spotlight"
 #define MyAppShortName "Spotlight"
-#define MyAppVersion "2024.8.0"
+#define MyAppVersion "2025.4.0"
 #define MyAppPublisher "Nickvision"
 #define MyAppURL "https://nickvision.org"
 #define MyAppExeName "org.nickvision.spotlight.qt.exe"
