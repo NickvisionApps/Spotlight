@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-13 22:27-0400\n"
+"POT-Creation-Date: 2025-04-14 18:26-0400\n"
 "PO-Revision-Date: 2024-09-04 15:09+0000\n"
 "Last-Translator: Fjuro <fjuro@alius.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-"
@@ -194,33 +194,33 @@ msgstr "Nápověda"
 msgid "Spotlight (Preview)"
 msgstr "Spotlight (Náhled)"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:273
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:272
 msgid "Export All Images"
 msgstr "Exportovat všechny obrázky"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:287
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:286
 msgid "Clear and Sync?"
 msgstr ""
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:287
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:286
 msgid ""
 "Are you sure you want to clear the image cache and re-sync the spotlight "
 "images?"
 msgstr ""
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:308
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:307
 msgid "Export Image"
 msgstr "Exportovat obrázek"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:383
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:382
 msgid "Update"
 msgstr "Aktualizovat"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:393
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:392
 msgid "No Spotlight Images Found"
 msgstr "Nenalezeny žádné obrázky Spotlight"
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:393
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:392
 msgid ""
 "Ensure Windows Spotlight is enabled and come back later to try again. The "
 "application will now close."
@@ -228,7 +228,7 @@ msgstr ""
 "Ujistěte se, že je služba Windows Spotlight povolena a zkuste to znovu "
 "později. Aplikace se nyní zavře."
 
-#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:407
+#: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:406
 #, c++-format
 msgid "Total Number of Images: {}"
 msgstr "Celkový počet obrázků: {}"

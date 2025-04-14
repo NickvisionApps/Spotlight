@@ -170,7 +170,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
             {
                 if (latest > m_appInfo.getVersion())
                 {
-                    m_notificationSent.invoke({ _("New update available"), NotificationSeverity::Success, "update" });
+                    AppNotification::send({ _("New update available"), NotificationSeverity::Success, "update" });
                 }
             }
         } };
@@ -183,12 +183,12 @@ namespace Nickvision::Spotlight::Shared::Controllers
         {
             return;
         }
-        m_notificationSent.invoke({ _("The update is downloading in the background and will start once it finishes"), NotificationSeverity::Informational });
+        AppNotification::send({ _("The update is downloading in the background and will start once it finishes"), NotificationSeverity::Informational });
         std::thread worker{ [this]()
         {
             if(!m_updater->windowsUpdate(VersionType::Stable))
             {
-                m_notificationSent.invoke({ _("Unable to download and install update"), NotificationSeverity::Error });
+                AppNotification::send({ _("Unable to download and install update"), NotificationSeverity::Error });
             }
         } };
         worker.detach();
@@ -208,11 +208,11 @@ namespace Nickvision::Spotlight::Shared::Controllers
     {
         if(m_spotlightManager.setAsDesktopBackground(static_cast<size_t>(index)))
         {
-            m_notificationSent.invoke({ _("Image set as desktop background"), NotificationSeverity::Success });
+            AppNotification::send({ _("Image set as desktop background"), NotificationSeverity::Success });
         }
         else
         {
-            m_notificationSent.invoke({ _("Unable to set image as desktop background"), NotificationSeverity::Error });
+            AppNotification::send({ _("Unable to set image as desktop background"), NotificationSeverity::Error });
         }
     }
 
@@ -220,11 +220,11 @@ namespace Nickvision::Spotlight::Shared::Controllers
     {
         if(m_spotlightManager.exportImage(static_cast<size_t>(index), path))
         {
-            m_notificationSent.invoke({ std::vformat(_("Image exported to {}"), std::make_format_args(CodeHelpers::unmove(path.string()))), NotificationSeverity::Success });
+            AppNotification::send({ std::vformat(_("Image exported to {}"), std::make_format_args(CodeHelpers::unmove(path.string()))), NotificationSeverity::Success });
         }
         else
         {
-            m_notificationSent.invoke({ _("Unable to export image"), NotificationSeverity::Error });
+            AppNotification::send({ _("Unable to export image"), NotificationSeverity::Error });
         }
     }
 
@@ -232,11 +232,11 @@ namespace Nickvision::Spotlight::Shared::Controllers
     {
         if(m_spotlightManager.exportAllImages(path))
         {
-            m_notificationSent.invoke({ std::vformat(_("Images exported to {}"), std::make_format_args(CodeHelpers::unmove(path.string()))), NotificationSeverity::Success });
+            AppNotification::send({ std::vformat(_("Images exported to {}"), std::make_format_args(CodeHelpers::unmove(path.string()))), NotificationSeverity::Success });
         }
         else
         {
-            m_notificationSent.invoke({ _("Unable to export images"), NotificationSeverity::Error });
+            AppNotification::send({ _("Unable to export images"), NotificationSeverity::Error });
         }
     }
 }

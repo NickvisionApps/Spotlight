@@ -142,7 +142,6 @@ namespace Nickvision::Spotlight::Shared::Controllers
         Nickvision::App::DataFileManager m_dataFileManager;
         std::shared_ptr<Nickvision::Update::Updater> m_updater;
         Nickvision::Taskbar::TaskbarItem m_taskbar;
-        Nickvision::Events::Event<Nickvision::Notifications::NotificationSentEventArgs> m_notificationSent;
         Models::SpotlightManager m_spotlightManager;
         Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<std::vector<std::filesystem::path>>> m_imagesSynced;
     };

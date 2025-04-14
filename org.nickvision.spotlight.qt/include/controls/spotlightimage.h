@@ -65,6 +65,11 @@ namespace Nickvision::Spotlight::Qt::Controls
          * @param event QMouseEvent
          */
         void mousePressEvent(QMouseEvent* event) override;
+        /**
+         * @brief Handles when the image is double clicked.
+         * @param event QMouseEvent
+         */
+        void mouseDoubleClickEvent(QMouseEvent* event) override;
 
     private:
         std::filesystem::path m_imagePath;

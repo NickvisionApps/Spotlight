@@ -211,7 +211,6 @@ namespace Nickvision::Spotlight::Qt::Views
         bool stable{ m_controller->getAppInfo().getVersion().getVersionType() == VersionType::Stable };
         setWindowTitle(stable ? _("Spotlight") : _("Spotlight (Preview)"));
         setWindowIcon(QIcon(":/icon.ico"));
-        setAcceptDrops(true);
         //Load Ui
         m_ui->setupUi(this);
         //Signals

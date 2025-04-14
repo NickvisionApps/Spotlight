@@ -1,4 +1,5 @@
 #include "controls/spotlightimage.h"
+#include <QDesktopServices>
 
 namespace Nickvision::Spotlight::Qt::Controls
 {
@@ -44,5 +45,12 @@ namespace Nickvision::Spotlight::Qt::Controls
     void SpotlightImage::mousePressEvent(QMouseEvent* event)
     {
         Q_EMIT clicked();
+        QLabel::mousePressEvent(event);
+    }
+
+    void SpotlightImage::mouseDoubleClickEvent(QMouseEvent* event)
+    {
+        QDesktopServices::openUrl(QUrl::fromLocalFile(QString::fromStdString(m_imagePath.string())));
+        QLabel::mouseDoubleClickEvent(event);
     }
 }
