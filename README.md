@@ -23,7 +23,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how can you help the proje
   <summary>Qt</summary>
 
   ![Main](resources/screenshots/qt/main.png)
-  ![Flip](resources/screenshots/qt/flip.png)
   ![Dark](resources/screenshots/qt/dark.png)
 </details>
 
