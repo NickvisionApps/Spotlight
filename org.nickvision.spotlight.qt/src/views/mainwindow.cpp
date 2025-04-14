@@ -1,9 +1,11 @@
 #include "views/mainwindow.h"
+#include <cmath>
 #include <format>
 #include <QDesktopServices>
 #include <QFileDialog>
 #include <QGridLayout>
 #include <QHBoxLayout>
+#include <QLabel>
 #include <QListWidget>
 #include <QMenu>
 #include <QMenuBar>
@@ -26,10 +28,11 @@
 #include "helpers/qthelpers.h"
 #include "views/settingsdialog.h"
 
-#define RESIZE_TIMER_TIMEOUT 200
-#define IMAGES_PER_ROW 3
+#define RESIZE_TIMER_TIMEOUT 100
+#define IMAGE_PREFERED_WIDTH 400
+#define IMAGES_PER_ROW static_cast<int>(std::floor(m_ui->viewStack->geometry().width() / static_cast<double>(IMAGE_PREFERED_WIDTH)))
 #define IMAGE_SPACING 4
-#define IMAGE_WIDTH ((m_ui->viewStack->geometry().width() / IMAGES_PER_ROW) - (IMAGES_PER_ROW * IMAGE_SPACING))
+#define IMAGE_WIDTH (IMAGE_PREFERED_WIDTH - (IMAGES_PER_ROW * IMAGE_SPACING))
 #define IMAGE_HEIGHT 220
 
 using namespace Nickvision::App;
@@ -161,20 +164,19 @@ namespace Ui
             viewStack->addWidget(loadingPage);
             //Images Page
             grdImages = new QGridLayout();
-            grdImages->setSpacing(6);
             QVBoxLayout* layoutImages{ new QVBoxLayout() };
             layoutImages->addLayout(grdImages);
             layoutImages->addStretch();
+            QWidget* wdgImages{ new QWidget(parent) };
+            wdgImages->setLayout(layoutImages);
             QScrollArea* scrollImages{ new QScrollArea(parent) };
-            scrollImages->setLayout(layoutImages);
+            scrollImages->setWidgetResizable(true);
+            scrollImages->setVerticalScrollBarPolicy(::Qt::ScrollBarPolicy::ScrollBarAsNeeded);
+            scrollImages->setHorizontalScrollBarPolicy(::Qt::ScrollBarPolicy::ScrollBarAlwaysOff);
+            scrollImages->setWidget(wdgImages);
             viewStack->addWidget(scrollImages);
             //Main Layout
-            QWidget* centralWidget{ new QWidget(parent) };
-            QVBoxLayout* layoutMain{ new QVBoxLayout(parent) };
-            layoutMain->setContentsMargins(0, 0, 0, 0);
-            layoutMain->addWidget(viewStack);
-            centralWidget->setLayout(layoutMain);
-            parent->setCentralWidget(centralWidget);
+            parent->setCentralWidget(viewStack);
         }
 
         QAction* actionExportAll;
@@ -202,7 +204,8 @@ namespace Nickvision::Spotlight::Qt::Views
         m_ui{ new Ui::MainWindow() },
         m_controller{ controller },
         m_themeManager{ themeManager },
-        m_resizeTimer{ new QTimer(this) }
+        m_resizeTimer{ new QTimer(this) },
+        m_selectedImage{ nullptr }
     {
         //Window Settings
         bool stable{ m_controller->getAppInfo().getVersion().getVersionType() == VersionType::Stable };
@@ -298,46 +301,24 @@ namespace Nickvision::Spotlight::Qt::Views
 
     void MainWindow::exportImage()
     {
-        /*
-        if(!m_ui->tblImages->selectionModel()->hasSelection())
+        if(!m_selectedImage)
         {
             return;
         }
-        if(m_ui->actionGrid->isChecked())
+        QString file{ QFileDialog::getSaveFileName(this, _("Export Image"), QString::fromStdString(UserDirectories::get(UserDirectory::Pictures).string()), "JPEG (*.jpg)") };
+        if(!file.isEmpty())
         {
-            QString file{ QFileDialog::getSaveFileName(this, _("Export Image"), QString::fromStdString(UserDirectories::get(UserDirectory::Pictures).string()), "JPEG (*.jpg)") };
-            if(!file.isEmpty())
-            {
-                m_controller->exportImage(m_ui->tblImages->selectionModel()->currentIndex().row() * m_ui->tblImages->columnCount() + m_ui->tblImages->selectionModel()->currentIndex().column(), file.toStdString());
-            }
+            m_controller->exportImage(m_selectedImage->index(), file.toStdString());
         }
-        else
-        {
-            QString file{ QFileDialog::getSaveFileName(this, _("Export Image"), QString::fromStdString(UserDirectories::get(UserDirectory::Pictures).string()), "JPEG (*.jpg)") };
-            if(!file.isEmpty())
-            {
-                m_controller->exportImage(m_ui->sliderFlip->value(), file.toStdString());
-            }
-        }
-        */
     }
 
     void MainWindow::setImageAsBackground()
     {
-        /*
-        if(!m_ui->tblImages->selectionModel()->hasSelection())
+        if(!m_selectedImage)
         {
             return;
         }
-        if(m_ui->actionGrid->isChecked())
-        {
-            m_controller->setImageAsDesktopBackground(m_ui->tblImages->selectionModel()->currentIndex().row() * m_ui->tblImages->columnCount() + m_ui->tblImages->selectionModel()->currentIndex().column());
-        }
-        else
-        {
-            m_controller->setImageAsDesktopBackground(m_ui->sliderFlip->value());
-        }
-        */
+        m_controller->setImageAsDesktopBackground(m_selectedImage->index());
     }
 
     void MainWindow::checkForUpdates()
@@ -376,14 +357,13 @@ namespace Nickvision::Spotlight::Qt::Views
         m_resizeTimer->stop();
         int row{ 0 };
         int col{ 0 };
-        for(QLabel* image : m_images)
+        for(SpotlightImage* image : m_images)
         {
             m_ui->grdImages->removeWidget(image);
         }
-        for(QLabel* image : m_images)
+        for(SpotlightImage* image : m_images)
         {
-            image->setMinimumSize(IMAGE_WIDTH, IMAGE_HEIGHT);
-            image->setMaximumSize(IMAGE_WIDTH, IMAGE_HEIGHT);
+            image->resize(IMAGE_WIDTH, IMAGE_HEIGHT);
             m_ui->grdImages->addWidget(image, row, col);
             col++;
             if(col == IMAGES_PER_ROW)
@@ -416,22 +396,29 @@ namespace Nickvision::Spotlight::Qt::Views
         }
         int row{ 0 };
         int col{ 0 };
-        for(QLabel* image : m_images)
+        for(SpotlightImage* image : m_images)
         {
             m_ui->grdImages->removeWidget(image);
+            delete image;
         }
         m_images.clear();
+        m_selectedImage = nullptr;
         m_ui->viewStack->setCurrentIndex(MainWindowPage::Images);
         m_ui->lblStatus->setText(QString::fromStdString(std::vformat(_("Total Number of Images: {}"), std::make_format_args(CodeHelpers::unmove((*args).size())))));
         for(const std::filesystem::path& image : args.getParam())
         {
-            QLabel* lbl{ new QLabel(this) };
-            lbl->setMinimumSize(IMAGE_WIDTH, IMAGE_HEIGHT);
-            lbl->setMaximumSize(IMAGE_WIDTH, IMAGE_HEIGHT);
-            lbl->setScaledContents(true);
-            lbl->setPixmap(QPixmap::fromImage(QImage(QString::fromStdString(image.string()))));
-            m_ui->grdImages->addWidget(lbl, row, col);
-            m_images.push_back(lbl);
+            SpotlightImage* img{ new SpotlightImage(col + (row * IMAGES_PER_ROW), image, IMAGE_WIDTH, IMAGE_HEIGHT, this) };
+            connect(img, &SpotlightImage::clicked, [this, img]()
+            {
+                if(m_selectedImage)
+                {
+                    m_selectedImage->setSelected(false);
+                }
+                img->setSelected(true);
+                m_selectedImage = img;
+            });
+            m_ui->grdImages->addWidget(img, row, col);
+            m_images.push_back(img);
             col++;
             if(col == IMAGES_PER_ROW)
             {

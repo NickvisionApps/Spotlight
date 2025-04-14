@@ -80,7 +80,6 @@ namespace Nickvision::Spotlight::Shared::Models
          */
         void processEntry(const std::filesystem::directory_entry& entry, SpotlightImageType type);
         std::filesystem::path m_dataDir;
-        SpotlightSupport m_supportLevel;
         std::filesystem::path m_spotlightLockScreenDir;
         std::filesystem::path m_spotlightDesktopDir;
         std::vector<std::filesystem::path> m_images;

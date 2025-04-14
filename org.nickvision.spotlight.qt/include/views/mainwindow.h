@@ -4,11 +4,11 @@
 #include <memory>
 #include <QCloseEvent>
 #include <QResizeEvent>
-#include <QLabel>
 #include <QMainWindow>
 #include <QTimer>
 #include <oclero/qlementine/style/ThemeManager.hpp>
 #include "controllers/mainwindowcontroller.h"
+#include "controls/spotlightimage.h"
 
 namespace Ui { class MainWindow; }
 
@@ -119,7 +119,8 @@ namespace Nickvision::Spotlight::Qt::Views
         std::shared_ptr<Shared::Controllers::MainWindowController> m_controller;
         oclero::qlementine::ThemeManager* m_themeManager;
         QTimer* m_resizeTimer;
-        std::vector<QLabel*> m_images;
+        std::vector<Controls::SpotlightImage*> m_images;
+        Controls::SpotlightImage* m_selectedImage;
     };
 }
 

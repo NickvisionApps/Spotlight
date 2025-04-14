@@ -4,28 +4,18 @@
 #include <libnick/filesystem/userdirectories.h>
 #include <windows.h>
 
+#define SPOTLIGHT_LOCKSCREEN_PACKAGE "Packages/Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy/LocalState/Assets"
+#define SPOTLIGHT_DESKTOP_PACKAGE "Packages/MicrosoftWindows.Client.CBS_cw5n1h2txyewy/LocalCache/Microsoft/IrisService"
+
 using namespace Nickvision::Filesystem;
 
 namespace Nickvision::Spotlight::Shared::Models
 {
     SpotlightManager::SpotlightManager(const std::string& appName)
         : m_dataDir{ UserDirectories::get(ApplicationUserDirectory::Config, appName) / "Images" },
-        m_supportLevel{ SpotlightSupport::None },
-        m_spotlightLockScreenDir{ UserDirectories::get(UserDirectory::LocalData) / "Packages/Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy/LocalState/Assets" },
-        m_spotlightDesktopDir{ UserDirectories::get(UserDirectory::LocalData) / "Packages/MicrosoftWindows.Client.CBS_cw5n1h2txyewy/LocalCache/Microsoft/IrisService" }
+        m_spotlightLockScreenDir{ UserDirectories::get(UserDirectory::LocalData) / SPOTLIGHT_LOCKSCREEN_PACKAGE },
+        m_spotlightDesktopDir{ UserDirectories::get(UserDirectory::LocalData) / SPOTLIGHT_DESKTOP_PACKAGE }
     {
-        if(std::filesystem::exists(m_spotlightLockScreenDir) && std::filesystem::exists(m_spotlightDesktopDir))
-        {
-            m_supportLevel = SpotlightSupport::Full;
-        }
-        else if(std::filesystem::exists(m_spotlightLockScreenDir))
-        {
-            m_supportLevel = SpotlightSupport::LockScreenOnly;
-        }
-        else if(std::filesystem::exists(m_spotlightDesktopDir))
-        {
-            m_supportLevel = SpotlightSupport::DesktopOnly;
-        }
         if(!std::filesystem::exists(m_dataDir))
         {
             std::filesystem::create_directories(m_dataDir);
@@ -39,7 +29,19 @@ namespace Nickvision::Spotlight::Shared::Models
 
     SpotlightSupport SpotlightManager::getSupportLevel() const
     {
-        return m_supportLevel;
+        if(std::filesystem::exists(m_spotlightLockScreenDir) && std::filesystem::exists(m_spotlightDesktopDir))
+        {
+            return SpotlightSupport::Full;
+        }
+        else if(std::filesystem::exists(m_spotlightLockScreenDir))
+        {
+            return SpotlightSupport::LockScreenOnly;
+        }
+        else if(std::filesystem::exists(m_spotlightDesktopDir))
+        {
+            return SpotlightSupport::DesktopOnly;
+        }
+        return SpotlightSupport::None;
     }
 
     const std::vector<std::filesystem::path>& SpotlightManager::sync()
