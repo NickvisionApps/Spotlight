@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-14 18:26-0400\n"
-"PO-Revision-Date: 2024-09-04 15:09+0000\n"
+"POT-Creation-Date: 2025-04-14 18:46-0400\n"
+"PO-Revision-Date: 2025-04-16 12:05+0000\n"
 "Last-Translator: Fjuro <fjuro@alius.cz>\n"
-"Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-"
-"spotlight/app/cs/>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/"
+"nickvision-spotlight/app/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 5.7.2-rc\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
+"X-Generator: Weblate 5.11.1-dev\n"
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:36
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:212
@@ -55,7 +55,7 @@ msgstr "Je dostupná nová aktualizace"
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:186
 msgid ""
 "The update is downloading in the background and will start once it finishes"
-msgstr ""
+msgstr "Aktualizace se stahuje na pozadí a po dokončení bude spuštěna"
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:191
 msgid "Unable to download and install update"
@@ -70,7 +70,6 @@ msgid "Unable to set image as desktop background"
 msgstr "Nepodařilo se nastavit obrázek jako pozadí plochy"
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:223
-#, c++-format
 msgid "Image exported to {}"
 msgstr "Obrázek exportován do složky {}"
 
@@ -79,7 +78,6 @@ msgid "Unable to export image"
 msgstr "Nepodařilo se exportovat obrázek"
 
 #: libspotlight/src/controllers/mainwindowcontroller.cpp:235
-#, c++-format
 msgid "Images exported to {}"
 msgstr "Obrázky exportovány do složky {}"
 
@@ -89,15 +87,15 @@ msgstr "Nepodařilo se exportovat obrázky"
 
 #: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:70
 msgid "Developers"
-msgstr ""
+msgstr "Naprogramovali"
 
 #: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:75
 msgid "Designers"
-msgstr ""
+msgstr "Navrhli"
 
 #: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:80
 msgid "Artists"
-msgstr ""
+msgstr "Ztvárnili"
 
 #: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:91
 #: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:162
@@ -106,20 +104,19 @@ msgstr "Kopírovat ladicí informace"
 
 #: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:109
 msgid "About"
-msgstr ""
+msgstr "O aplikaci"
 
 #: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:110
-#, fuzzy
 msgid "Changelog"
-msgstr "Seznam změn:"
+msgstr "Seznam změn"
 
 #: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:111
 msgid "Credits"
-msgstr ""
+msgstr "Zásluhy"
 
 #: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:112
 msgid "Debugging"
-msgstr ""
+msgstr "Ladění"
 
 #. Dialog Settings
 #: org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp:149
@@ -130,7 +127,7 @@ msgstr "O aplikaci Spotlight"
 #. Window Settings
 #: org.nickvision.spotlight.qt/src/controls/infobar.cpp:50
 msgid "Notification"
-msgstr ""
+msgstr "Oznámení"
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:66
 msgid "Export All"
@@ -142,7 +139,7 @@ msgstr "Ukončit"
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:74
 msgid "Clear and Sync"
-msgstr ""
+msgstr "Vymazat a synchronizovat"
 
 #. Dialog Settings
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:78
@@ -200,13 +197,15 @@ msgstr "Exportovat všechny obrázky"
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:286
 msgid "Clear and Sync?"
-msgstr ""
+msgstr "Vymazat a synchronizovat?"
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:286
 msgid ""
 "Are you sure you want to clear the image cache and re-sync the spotlight "
 "images?"
 msgstr ""
+"Opravdu chcete vymazat mezipaměť a znovu synchronizovat obrázky ze služby "
+"Spotlight?"
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:307
 msgid "Export Image"
@@ -229,25 +228,24 @@ msgstr ""
 "později. Aplikace se nyní zavře."
 
 #: org.nickvision.spotlight.qt/src/views/mainwindow.cpp:406
-#, c++-format
 msgid "Total Number of Images: {}"
 msgstr "Celkový počet obrázků: {}"
 
 #: org.nickvision.spotlight.qt/src/views/settingsdialog.cpp:27
 msgid "Theme"
-msgstr ""
+msgstr "Motiv"
 
 #: org.nickvision.spotlight.qt/src/views/settingsdialog.cpp:29
 msgid "Light"
-msgstr ""
+msgstr "Světlý"
 
 #: org.nickvision.spotlight.qt/src/views/settingsdialog.cpp:30
 msgid "Dark"
-msgstr ""
+msgstr "Tmavý"
 
 #: org.nickvision.spotlight.qt/src/views/settingsdialog.cpp:31
 msgid "System"
-msgstr ""
+msgstr "Systémový"
 
 #: org.nickvision.spotlight.qt/src/views/settingsdialog.cpp:33
 msgid "Automatically Check for Updates"
