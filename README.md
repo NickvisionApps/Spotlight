@@ -22,8 +22,8 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how can you help the proje
 <details>
   <summary>WinUI</summary>
 
-  ![Main](resources/screenshots/winui/main.png)
-  ![Dark](resources/screenshots/winui/dark.png)
+  ![Main](org.nickvision.spotlight.winui/screenshots/main.png)
+  ![Dark](org.nickvision.spotlight.winui/screenshots/dark.png)
 </details>
 
 ## Building Manually
