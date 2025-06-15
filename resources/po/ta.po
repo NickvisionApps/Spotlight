@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-14 21:11-0400\n"
+"POT-Creation-Date: 2025-06-14 21:57-0400\n"
 "PO-Revision-Date: 2025-01-20 14:24+0000\n"
 "Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/nickvision-"
@@ -91,7 +91,7 @@ msgid "OK"
 msgstr ""
 
 #: org.nickvision.spotlight.winui/Controls/AboutDialog.xaml.cpp:35
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:61
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:70
 msgid "About"
 msgstr ""
 
@@ -128,65 +128,70 @@ msgstr "பிழைத்திருத்த தகவல்களை நக�
 msgid "Search"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:53
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:62
 #, fuzzy
 msgid "Preview"
 msgstr "முந்தைய"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:54
 #: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:63
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:72
 #, fuzzy
 msgid "Images"
 msgstr "படம்"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:55
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:64
 msgid "Help"
 msgstr "உதவி"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:56
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:65
 #: org.nickvision.spotlight.winui/Views/SettingsPage.xaml.cpp:19
 msgid "Settings"
 msgstr "அமைப்புகள்"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:57
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:66
 msgid "Check for Updates"
 msgstr "புதுப்பிப்புகளை சரிபார்க்கவும்"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:58
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:67
 msgid "GitHub Repo"
 msgstr "அறிவிலிமையம் ரெப்போ"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:59
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:68
 msgid "Report a Bug"
 msgstr "ஒரு பிழையைப் புகாரளிக்கவும்"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:60
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:69
 msgid "Discussions"
 msgstr "விவாதங்கள்"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:62
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:71
 msgid "This may take some time..."
 msgstr ""
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:64
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:73
 msgid "Export"
 msgstr "ஏற்றுமதி"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:65
-msgid "Set as Background"
-msgstr "பின்னணியாக அமைக்கவும்"
-
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:66
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:74
 msgid "Export All"
 msgstr "அனைத்தையும் ஏற்றுமதி செய்யுங்கள்"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:67
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:75
+msgid "Set as Background"
+msgstr "பின்னணியாக அமைக்கவும்"
+
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:76
 msgid "Clear and Sync"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:160
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:169
 msgid "Update"
 msgstr "புதுப்பிப்பு"
+
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:274
+#, c++-format
+msgid "Total Number of Images: {}"
+msgstr "படங்களின் மொத்த எண்ணிக்கை: {}"
 
 #: org.nickvision.spotlight.winui/Views/SettingsPage.xaml.cpp:20
 msgid "User Interface"
@@ -251,9 +256,6 @@ msgstr ""
 #~ msgstr ""
 #~ "சாளரங்கள் ச்பாட்லைட் இயக்கப்பட்டிருப்பதை உறுதிசெய்து, மீண்டும் முயற்சிக்க பின்னர் திரும்பி "
 #~ "வாருங்கள். பயன்பாடு இப்போது மூடப்படும்."
-
-#~ msgid "Total Number of Images: {}"
-#~ msgstr "படங்களின் மொத்த எண்ணிக்கை: {}"
 
 #~ msgid "View"
 #~ msgstr "பார்வை"

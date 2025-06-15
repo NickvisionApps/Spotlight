@@ -18,6 +18,8 @@ using namespace winrt::Microsoft::UI::Xaml;
 using namespace winrt::Microsoft::UI::Xaml::Controls;
 using namespace winrt::Microsoft::UI::Xaml::Controls::Primitives;
 using namespace winrt::Microsoft::UI::Xaml::Input;
+using namespace winrt::Microsoft::UI::Xaml::Media;
+using namespace winrt::Microsoft::UI::Xaml::Media::Imaging;
 using namespace winrt::Windows::Graphics;
 using namespace winrt::Windows::Storage;
 using namespace winrt::Windows::Storage::Pickers;
@@ -27,6 +29,13 @@ enum MainWindowPage
 {
     Images = 0,
     Custom
+};
+
+enum ImagesPage
+{
+    Loading = 0,
+    Has,
+    None
 };
 
 namespace winrt::Nickvision::Spotlight::WinUI::Views::implementation
@@ -62,8 +71,8 @@ namespace winrt::Nickvision::Spotlight::WinUI::Views::implementation
         LblLoading().Text(winrt::to_hstring(_("This may take some time...")));
         LblImages().Text(winrt::to_hstring(_("Images")));
         LblExport().Text(winrt::to_hstring(_("Export")));
-        LblSetAsBackground().Text(winrt::to_hstring(_("Set as Background")));
         BtnExportAll().Label(winrt::to_hstring(_("Export All")));
+        BtnSetAsBackground().Label(winrt::to_hstring(_("Set as Background")));
         BtnClearAndSync().Label(winrt::to_hstring(_("Clear and Sync")));
     }
 
@@ -98,7 +107,7 @@ namespace winrt::Nickvision::Spotlight::WinUI::Views::implementation
             AppWindow().MoveAndResize(size);
         }
         NavViewImages().IsSelected(true);
-        ViewStackImages().CurrentPageIndex(0);
+        ViewStackImages().CurrentPageIndex(ImagesPage::Loading);
         m_opened = true;
     }
 
@@ -217,8 +226,64 @@ namespace winrt::Nickvision::Spotlight::WinUI::Views::implementation
         co_await dialog.ShowAsync();
     }
 
+    Windows::Foundation::IAsyncAction MainWindow::ExportImage(const IInspectable& sender, const RoutedEventArgs& args)
+    {
+        if(ListImages().SelectedIndex() == -1)
+        {
+            co_return;
+        }
+        FileSavePicker picker;
+        picker.as<::IInitializeWithWindow>()->Initialize(m_hwnd);
+        picker.FileTypeChoices().Insert(L"Image", winrt::single_threaded_vector(std::vector<winrt::hstring>{ L".jpg" }));
+        StorageFile file{ co_await picker.PickSaveFileAsync() };
+        if(file)
+        {
+            m_controller->exportImage(ListImages().SelectedIndex(), winrt::to_string(file.Path()));
+        }
+    }
+
+    Windows::Foundation::IAsyncAction MainWindow::ExportAllImages(const IInspectable& sender, const RoutedEventArgs& args)
+    {
+        FolderPicker picker;
+        picker.as<::IInitializeWithWindow>()->Initialize(m_hwnd);
+        picker.FileTypeFilter().Append(L"*");
+        StorageFolder folder{ co_await picker.PickSingleFolderAsync() };
+        if(folder)
+        {
+            m_controller->exportAllImages(winrt::to_string(folder.Path()));
+        }
+    }
+
+    void MainWindow::SetImageAsBackground(const IInspectable& sender, const RoutedEventArgs& args)
+    {
+        if(ListImages().SelectedIndex() == -1)
+        {
+            return;
+        }
+        m_controller->setImageAsDesktopBackground(ListImages().SelectedIndex());
+    }
+
+    void MainWindow::ClearAndSync(const IInspectable& sender, const RoutedEventArgs& args)
+    {
+
+    }
+
     void MainWindow::OnImagesSynced(const ParamEventArgs<std::vector<std::filesystem::path>>& args)
     {
-        ViewStackImages().CurrentPageIndex(1);
+        ViewStackImages().CurrentPageIndex(ImagesPage::Has);
+        LblTotalImages().Text(winrt::to_hstring(_f("Total Number of Images: {}", (*args).size())));
+        for(const std::filesystem::path& image : *args)
+        {
+            Image img;
+            img.Width(300);
+            img.Height(200);
+            img.Source(BitmapImage(Windows::Foundation::Uri(winrt::to_hstring(image.string()))));
+            img.Stretch(Stretch::UniformToFill);
+            img.DoubleTapped([this, image](const IInspectable&, const DoubleTappedRoutedEventArgs&) -> Windows::Foundation::IAsyncAction
+            {
+                co_await Launcher::LaunchFileAsync(co_await StorageFile::GetFileFromPathAsync(winrt::to_hstring(image.string())));
+            });
+            ListImages().Items().Append(img);
+        }
     }
 }

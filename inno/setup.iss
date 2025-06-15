@@ -45,7 +45,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Source: "vc_redist.exe"; DestDir: "{app}"; Flags: deleteafterinstall
 Source: "windowsappruntimeinstall.exe"; DestDir: "{app}"; Flags: deleteafterinstall
 Source: "..\build\org.nickvision.spotlight.winui\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\build\org.nickvision.spotlight.winui\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; AfterInstall: Cleanup
+Source: "..\build\org.nickvision.spotlight.winui\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

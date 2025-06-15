@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-14 21:11-0400\n"
+"POT-Creation-Date: 2025-06-14 21:57-0400\n"
 "PO-Revision-Date: 2025-04-16 12:05+0000\n"
 "Last-Translator: Fjuro <fjuro@alius.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-"
@@ -91,7 +91,7 @@ msgid "OK"
 msgstr ""
 
 #: org.nickvision.spotlight.winui/Controls/AboutDialog.xaml.cpp:35
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:61
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:70
 msgid "About"
 msgstr "O aplikaci"
 
@@ -127,65 +127,70 @@ msgstr "Kopírovat ladicí informace"
 msgid "Search"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:53
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:62
 #, fuzzy
 msgid "Preview"
 msgstr "Předchozí"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:54
 #: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:63
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:72
 #, fuzzy
 msgid "Images"
 msgstr "Obrázek"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:55
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:64
 msgid "Help"
 msgstr "Nápověda"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:56
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:65
 #: org.nickvision.spotlight.winui/Views/SettingsPage.xaml.cpp:19
 msgid "Settings"
 msgstr "Nastavení"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:57
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:66
 msgid "Check for Updates"
 msgstr "Zkontrolovat aktualizace"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:58
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:67
 msgid "GitHub Repo"
 msgstr "Repozitář na GitHubu"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:59
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:68
 msgid "Report a Bug"
 msgstr "Nahlásit chybu"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:60
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:69
 msgid "Discussions"
 msgstr "Diskuze"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:62
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:71
 msgid "This may take some time..."
 msgstr ""
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:64
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:73
 msgid "Export"
 msgstr "Exportovat"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:65
-msgid "Set as Background"
-msgstr "Nastavit jako pozadí"
-
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:66
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:74
 msgid "Export All"
 msgstr "Exportovat vše"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:67
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:75
+msgid "Set as Background"
+msgstr "Nastavit jako pozadí"
+
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:76
 msgid "Clear and Sync"
 msgstr "Vymazat a synchronizovat"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:160
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:169
 msgid "Update"
 msgstr "Aktualizovat"
+
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:274
+#, c++-format
+msgid "Total Number of Images: {}"
+msgstr "Celkový počet obrázků: {}"
 
 #: org.nickvision.spotlight.winui/Views/SettingsPage.xaml.cpp:20
 msgid "User Interface"
@@ -263,9 +268,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Ujistěte se, že je služba Windows Spotlight povolena a zkuste to znovu "
 #~ "později. Aplikace se nyní zavře."
-
-#~ msgid "Total Number of Images: {}"
-#~ msgstr "Celkový počet obrázků: {}"
 
 #~ msgid "View"
 #~ msgstr "Zobrazení"

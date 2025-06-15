@@ -102,6 +102,30 @@ namespace winrt::Nickvision::Spotlight::WinUI::Views::implementation
         */
         Windows::Foundation::IAsyncAction About(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
         /**
+        * @brief Exports the selected spotlight image.
+        * @param sender IInspectable
+        * @param args Microsoft::UI::Xaml::RoutedEventArgs
+        */
+        Windows::Foundation::IAsyncAction ExportImage(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
+        /**
+        * @brief Exports all spotlight images.
+        * @param sender IInspectable
+        * @param args Microsoft::UI::Xaml::RoutedEventArgs
+        */
+        Windows::Foundation::IAsyncAction ExportAllImages(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
+        /**
+        * @brief Sets the selected spotlight image as the background.
+        * @param sender IInspectable
+        * @param args Microsoft::UI::Xaml::RoutedEventArgs
+        */
+        void SetImageAsBackground(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
+        /**
+        * @brief Clears all spotlight images and re-syncs them.
+        * @param sender IInspectable
+        * @param args Microsoft::UI::Xaml::RoutedEventArgs
+        */
+        void ClearAndSync(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
+        /**
          * @brief Handles when the spotlight images are synced.
          * @param args Nickvision::Events::ParamEventArgs<std::vector<std::filesystem::path>>
          */
