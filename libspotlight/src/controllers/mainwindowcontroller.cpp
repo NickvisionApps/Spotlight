@@ -32,10 +32,10 @@ namespace Nickvision::Spotlight::Shared::Controllers
         m_dataFileManager{ m_appInfo.getName() },
         m_spotlightManager{ m_appInfo.getName() }
     {
-        m_appInfo.setVersion({ "2025.4.0" });
+        m_appInfo.setVersion({ "2025.6.0" });
         m_appInfo.setShortName(_("Spotlight"));
         m_appInfo.setDescription(_("Find your favorite Windows spotlight images"));
-        m_appInfo.setChangelog("- Added the ability to clear the spotlight cache and resync images\n- Fixed an issue where the application could not update itself\n- Improved the design of the application");
+        m_appInfo.setChangelog("- Redesigned the application using WinUI and the WindowsAppSDK");
         m_appInfo.setSourceRepo("https://github.com/NickvisionApps/Spotlight");
         m_appInfo.setIssueTracker("https://github.com/NickvisionApps/Spotlight/issues/new");
         m_appInfo.setSupportUrl("https://github.com/NickvisionApps/Spotlight/discussions");
