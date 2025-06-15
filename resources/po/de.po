@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-14 21:57-0400\n"
+"POT-Creation-Date: 2025-06-14 22:12-0400\n"
 "PO-Revision-Date: 2024-12-22 15:00+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-"
@@ -134,7 +134,7 @@ msgid "Preview"
 msgstr "Zurück"
 
 #: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:63
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:72
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:74
 #, fuzzy
 msgid "Images"
 msgstr "Bild"
@@ -168,27 +168,57 @@ msgstr "Diskussionen"
 msgid "This may take some time..."
 msgstr ""
 
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:72
+#, fuzzy
+msgid "No Images Found"
+msgstr "Keine Blickpunkt-Bilder gefunden"
+
 #: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:73
+#, fuzzy
+msgid "Ensure Windows Spotlight is enabled and restart the app"
+msgstr ""
+"Stellen Sie sicher, dass Windows-Blickpunkt aktiviert ist, und versuchen Sie "
+"es später noch einmal. Die Anwendung wird nun geschlossen."
+
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:75
 msgid "Export"
 msgstr "Exportieren"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:74
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:76
 msgid "Export All"
 msgstr "Alle exportieren"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:75
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:77
 msgid "Set as Background"
 msgstr "Als Hintergrund festlegen"
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:76
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:78
 msgid "Clear and Sync"
 msgstr ""
 
-#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:169
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:171
 msgid "Update"
 msgstr "Aktualisieren"
 
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:271
+msgid "Clear and Sync?"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:272
+msgid ""
+"Are you sure you want to clear the image cache and re-sync the spotlight "
+"images?"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:273
+msgid "No"
+msgstr ""
+
 #: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:274
+msgid "Yes"
+msgstr ""
+
+#: org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp:289
 #, c++-format
 msgid "Total Number of Images: {}"
 msgstr "Gesamtzahl der Bilder: {}"
@@ -248,16 +278,6 @@ msgstr "Aus"
 
 #~ msgid "Export Image"
 #~ msgstr "Bild exportieren"
-
-#~ msgid "No Spotlight Images Found"
-#~ msgstr "Keine Blickpunkt-Bilder gefunden"
-
-#~ msgid ""
-#~ "Ensure Windows Spotlight is enabled and come back later to try again. The "
-#~ "application will now close."
-#~ msgstr ""
-#~ "Stellen Sie sicher, dass Windows-Blickpunkt aktiviert ist, und versuchen "
-#~ "Sie es später noch einmal. Die Anwendung wird nun geschlossen."
 
 #~ msgid "View"
 #~ msgstr "Ansicht"

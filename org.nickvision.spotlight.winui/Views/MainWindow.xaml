@@ -92,6 +92,8 @@
                                     <TextBlock x:Name="LblLoading" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Gray"/>
                                 </StackPanel>
 
+                                <controls:StatusPage x:Name="StsNoImages" Glyph="&#xE783;"/>
+
                                 <Grid Margin="24,24,24,24" RowSpacing="12">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>

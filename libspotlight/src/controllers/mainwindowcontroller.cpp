@@ -32,7 +32,7 @@ namespace Nickvision::Spotlight::Shared::Controllers
         m_dataFileManager{ m_appInfo.getName() },
         m_spotlightManager{ m_appInfo.getName() }
     {
-        m_appInfo.setVersion({ "2025.6.0-next" });
+        m_appInfo.setVersion({ "2025.6.0" });
         m_appInfo.setShortName(_("Spotlight"));
         m_appInfo.setDescription(_("Find your favorite Windows spotlight images"));
         m_appInfo.setChangelog("- Redesigned the application using WinUI and the WindowsAppSDK");

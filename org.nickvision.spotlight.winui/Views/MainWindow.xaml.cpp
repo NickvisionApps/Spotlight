@@ -34,8 +34,8 @@ enum MainWindowPage
 enum ImagesPage
 {
     Loading = 0,
-    Has,
-    None
+    None,
+    Has
 };
 
 namespace winrt::Nickvision::Spotlight::WinUI::Views::implementation
@@ -69,6 +69,8 @@ namespace winrt::Nickvision::Spotlight::WinUI::Views::implementation
         MenuDiscussions().Text(winrt::to_hstring(_("Discussions")));
         MenuAbout().Text(winrt::to_hstring(_("About")));
         LblLoading().Text(winrt::to_hstring(_("This may take some time...")));
+        StsNoImages().Title(winrt::to_hstring(_("No Images Found")));
+        StsNoImages().Description(winrt::to_hstring(_("Ensure Windows Spotlight is enabled and restart the app")));
         LblImages().Text(winrt::to_hstring(_("Images")));
         LblExport().Text(winrt::to_hstring(_("Export")));
         BtnExportAll().Label(winrt::to_hstring(_("Export All")));
@@ -263,15 +265,29 @@ namespace winrt::Nickvision::Spotlight::WinUI::Views::implementation
         m_controller->setImageAsDesktopBackground(ListImages().SelectedIndex());
     }
 
-    void MainWindow::ClearAndSync(const IInspectable& sender, const RoutedEventArgs& args)
+    Windows::Foundation::IAsyncAction MainWindow::ClearAndSync(const IInspectable& sender, const RoutedEventArgs& args)
     {
-
+        ContentDialog dialog;
+        dialog.Title(winrt::box_value(winrt::to_hstring(_("Clear and Sync?"))));
+        dialog.Content(winrt::box_value(winrt::to_hstring(_("Are you sure you want to clear the image cache and re-sync the spotlight images?"))));
+        dialog.CloseButtonText(winrt::to_hstring(_("No")));
+        dialog.PrimaryButtonText(winrt::to_hstring(_("Yes")));
+        dialog.DefaultButton(ContentDialogButton::Close);
+        dialog.RequestedTheme(MainGrid().RequestedTheme());
+        dialog.XamlRoot(MainGrid().XamlRoot());
+        ContentDialogResult result{ co_await dialog.ShowAsync() };
+        if(result == ContentDialogResult::Primary)
+        {
+            ViewStackImages().CurrentPageIndex(ImagesPage::Loading);
+            m_controller->clearAndSync();
+        }
     }
 
     void MainWindow::OnImagesSynced(const ParamEventArgs<std::vector<std::filesystem::path>>& args)
     {
-        ViewStackImages().CurrentPageIndex(ImagesPage::Has);
+        ViewStackImages().CurrentPageIndex((*args).size() > 0 ? ImagesPage::Has : ImagesPage::None);
         LblTotalImages().Text(winrt::to_hstring(_f("Total Number of Images: {}", (*args).size())));
+        ListImages().Items().Clear();
         for(const std::filesystem::path& image : *args)
         {
             Image img;

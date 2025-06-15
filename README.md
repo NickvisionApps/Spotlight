@@ -20,10 +20,10 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how can you help the proje
 ## Screenshots
 
 <details>
-  <summary>Qt</summary>
+  <summary>WinUI</summary>
 
-  ![Main](resources/screenshots/qt/main.png)
-  ![Dark](resources/screenshots/qt/dark.png)
+  ![Main](resources/screenshots/winui/main.png)
+  ![Dark](resources/screenshots/winui/dark.png)
 </details>
 
 ## Building Manually
@@ -37,7 +37,7 @@ A C++20 compiler is also required to build Spotlight.
 1. Set the `VCPKG_ROOT` environment variable to the path of your vcpkg installation's root directory.
 #### Windows
 1. Set the `VCPKG_DEFAULT_TRIPLET` environment variable to `x64-windows`
-1. Run `vcpkg install libnick libjpeg-turbo boost-gil qtbase qtsvg qttools`
+1. Run `vcpkg install libnick libjpeg-turbo boost-gil`
 
 ### Building
 1. First, clone/download the repo.

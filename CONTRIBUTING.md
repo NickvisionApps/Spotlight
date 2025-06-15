@@ -25,7 +25,7 @@ All types of contributions are encouraged and valued. See the [Table of Contents
 
 ## I Have a Question
 
-Before you ask a question, it is best to search for existing [Discussions](https://github.com/NickvisionApps/Spotlight/discussions) and [Issues](https://github.com/NickvisionApps/Spotlight/issues) that might help you. 
+Before you ask a question, it is best to search for existing [Discussions](https://github.com/NickvisionApps/Spotlight/discussions) and [Issues](https://github.com/NickvisionApps/Spotlight/issues) that might help you.
 
 In case you have found a suitable existing issue/discussion and still need clarification, you can write your question in said post. It is also advisable to search the internet for answers first to common error messages.
 
@@ -39,22 +39,22 @@ We will then take care of the question as soon as possible and convert it to a p
 
 ## I Want To Contribute
 
-> ### Legal Notice
-> When contributing to this project, you must agree that you have authored 100% of the content and/or that you have the necessary rights to the content and that the content you contribute may be provided under the project [license](COPYING).
+### Legal Notice
+When contributing to this project, you must agree that you have authored 100% of the content and/or that you have the necessary rights to the content and that the content you contribute may be provided under the project [license](COPYING).
 
 ### Reporting Bugs
 
 #### Before Submitting a Bug Report
 
-A good bug report shouldn't leave others needing to chase you up for more information. Therefore, we ask that you to investigate carefully, collect information and describe the issue in detail in your report. Please complete the following steps in advance to help us fix any potential bug as fast as possible:
+A good bug report shouldn't leave others needing to chase you up for more information. Therefore, we ask that you investigate carefully, collect necessary information and describe the issue in detail in your report. Please complete the following steps in advanced to help us fix any potential bug as fast as possible:
 
-- Make sure that you are using the latest released version.
+- Make sure that you are using the latest released stable version.
 - Determine if your bug is really a bug and not an error on your side. If you are looking for support, you might want to check [this section](#i-have-a-question).
 - See if other users have experienced (and potentially already solved) the same issue you are having, check if there is not already a bug report existing for your bug or error in both the [Discussions](https://github.com/NickvisionApps/Spotlight/discussions) and [Issues](https://github.com/NickvisionApps/Spotlight/issues) sections.
 - Collect information about the bug:
   - Debug information provided by the application
     - GNOME: From the main hamburger menu, open About Spotlight → Troubleshooting → Debugging Information and copy the information to the clipboard to paste in your issue.
-    - WinUI: From the Help item in the left-side navigation, click the gear/wrench icon in the top right corner of the flyout to copy the information to the clipboard to paste in your issue.
+    - WinUI: From the Help item in the left-side navigation, open About -> Debugging and copy the information to the clipboard to paste in your issue.
   - Stack trace (Traceback)
     - Including any error messages thrown by the application
     - You may need to start the application via the terminal/console to receive an error message for a crash.
@@ -65,7 +65,7 @@ A good bug report shouldn't leave others needing to chase you up for more inform
 
 #### How Do I Submit a Good Bug Report?
 
-> You must never report security related issues, vulnerabilities and bugs (including sensitive information) to the issue tracker nor elsewhere in public. Instead sensitive issues must be reported and handled via email to <nlogozzo225@gmail.com>.
+You must never report security related issues, vulnerabilities and bugs (including sensitive information) to the issue tracker nor elsewhere in public. Instead, sensitive issues must be reported and handled via email to <nlogozzo225@gmail.com>.
 
 We use GitHub issues to track bugs and errors. If you run into an issue with the project:
 
@@ -76,8 +76,8 @@ We use GitHub issues to track bugs and errors. If you run into an issue with the
 Once it has been opened:
 
 - The project team will label the issue accordingly.
-- A team member will try to reproduce the issue with your provided steps. If there are no reproduction steps or no obvious way to reproduce the issue, the team will ask you for those steps. 
-    - Bugs that are not able to be reproduced will not be addressed until they are reproduced. Therefore, it is important to include steps to speed up the fixing process.
+- A team member will try to reproduce the issue with your provided steps. If there are no reproduction steps or no obvious way to reproduce the issue, the team will ask you for those steps.
+  - Bugs that are not able to be reproduced will not be addressed until they are reproduced. Therefore, it is important to include steps to speed up the fixing process.
 
 ### Suggesting Enhancements
 
@@ -95,8 +95,8 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/Nickvi
 
 - Use a **clear and descriptive title** for the issue to identify the suggestion.
 - Provide a **step-by-step description of the suggested enhancement** in as many details as possible.
-    - For enhancements to existing functionality, **describe the current behavior** and **explain which behavior you expected to see instead** and why. At this point you can also tell which alternatives do not work for you.
-    - For completely new features, **describe what you would like to see from this new feature** in terms of **both functionality and design**. Providing mockups, even if in sketch format, greatly help the team envision what you would like to see.
+  - For enhancements to existing functionality, **describe the current behavior** and **explain which behavior you expected to see instead** and why. At this point you can also tell which alternatives do not work for you.
+  - For completely new features, **describe what you would like to see from this new feature** in terms of **both functionality and design**. Providing mockups, even if in sketch format, greatly help the team envision what you would like to see.
 - **Explain why this enhancement would be useful** to most Spotlight users. You may also want to point out similar projects of other platforms and their solutions to serve as inspiration.
 
 ### Providing Translations
@@ -111,11 +111,13 @@ Spotlight is available to translate on [Weblate](https://hosted.weblate.org/enga
 
 To start translating the app, fork the repository and clone it locally.
 
-Spotlight uses [gettext](https://www.gnu.org/software/gettext/manual/gettext.html#PO-Files) for translations. In the `resources/po` folder you will find files that can be edited in your favourite `*.po` files editor (or with any plain text editor). 
+Spotlight uses [gettext](https://www.gnu.org/software/gettext/manual/gettext.html#PO-Files) for translations. In the `resources/po` folder you will find files that can be edited in your favourite `*.po` files editor (or with any plain text editor).
 
-If you want to create a new translation, copy the `spotlight.pot` file and rename said copy as `<lang_code>.po`, where `<lang_code>` is the language code for your translation. Usually the code is two letters, but it can also be a specific locale code to differentiate between versions of the same language (for example, `pt` and `pt_BR`). **Also, add the language code to `LINGUAS` file** (keeping this file in alphabetical order).
+If you want to create a new translation, copy the `spotlight.pot` file and rename said copy as `<lang_code>.po`, where `<lang_code>` is the language code for your translation. Usually the code is two letters, but it can also be a specific locale code to differentiate between versions of the same language (for example, `pt` and `pt_BR`).
 
-Edit your new translation file with correct translations for the English messages. 
+**Also, add the language code to `LINGUAS` file** (keeping this file in alphabetical order).
+
+Edit your new translation file with correct translations for the English messages.
 
 To check your translation file, make sure your system is in the locale of the language you are translating and [locally build and run the app](README#building-manually). If all steps were carried out successfully, you should see your translation in action!
 
@@ -125,28 +127,27 @@ Once all changes to your translated file are made, commit these changes and crea
 
 #### Structure
 
-Spotlight is built using C++20 and platform-native user interface libraries. With these technologies, Spotlight is built for Windows.
+Spotlight is built using C++20 and platform-native user interface libraries. With these technologies, Spotlight is built for the Windows operating system.
 
 The project is split up into the following sub-projects:
- - [libspotlight](#libspotlight)
- - [org.nickvision.spotlight.qt](org.nickvision.spotlight.qt)
+- [libapplication](#libapplication)
+- [org.nickvision.application.winui](org.nickvision.application.winui)
 
 The whole project utilizes the [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) pattern for separating data models and UI views.
 
-##### libspotlight
+##### libapplication
 
 This project contains all of the code used by all platforms of the app:
 - `controllers` => The objects used by UI views to receive and manipulate data from the models.
 - `helpers` => Useful objects and functions specific to the application that can be used by all platforms.
 - `models` => The data driven objects of the application (i.e. Configuration, Database, etc...).
 
-##### org.nickvision.spotlight.qt
+##### org.nickvision.application.winui
 
-This project contains all of the code used for the Qt platform (Windows) version of the app:
+This project contains all of the code used for the WinUI platform version of the app:
 - `controls` => Generic controls for the app.
-    - These UI objects are separate from views in that they should not be backed by a controller and should be easily ported to any other app.
+  - These UI objects are separate from views in that they should not be backed by a controller and should be easily ported to any other app.
 - `helpers` => Useful objects and functions specific for the Qt platform version of the app.
-- `resources` => Extra icons and other files specific for the Qt platform version of the app.
 - `views` => The views (pages, windows, dialogs, etc...) of the app.
 
 #### Developing and Testing
@@ -162,7 +163,7 @@ Spotlight uses the following naming conventions:
 - `pascalCase` for file names, functions, and variables
 - `m_` prefix appended to class member variables
 - `get` and `set` prefixes used for accessor and modifiers methods of a class variable respectively
-    - Exception: For boolean class members, `is` and `setIs` should be used as the prefixes for the accessor and modifier methods of said members.
+  - Exception: For boolean class members, `is` and `setIs` should be used as the prefixes for the accessor and modifier methods of said members.
 
 Spotlight uses the following coding styles:
 - ```cpp
@@ -170,12 +171,12 @@ Spotlight uses the following coding styles:
     #define FILENAME_H
     ...
     #endif //FILENAME_H
-  ``` 
-  used as the guards to a header file. 
+  ```
+  used as the guards to a header file.
   - `#pragma once` should not be used.
-- Brackets `{}` should be placed on individual new lines and never inline. 
-    - This applies for any type of structure (`if`, `switch`, `class`, etc...) that requires brackets.
-    - *Single-line if statements should also be wrapped by brackets.*
+- Brackets `{}` should be placed on individual new lines and never inline.
+  - This applies for any type of structure (`if`, `switch`, `class`, etc...) that requires brackets.
+  - *Single-line if statements should also be wrapped by brackets.*
 - Proper indentation using spacing with spaces and not tabs.
 
 

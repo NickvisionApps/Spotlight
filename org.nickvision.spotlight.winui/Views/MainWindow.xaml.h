@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "pch.h"
+#include "Controls/StatusPage.g.h"
 #include "Controls/TitleBar.g.h"
 #include "Controls/ViewStack.g.h"
 #include "Views/MainWindow.g.h"
@@ -124,7 +125,7 @@ namespace winrt::Nickvision::Spotlight::WinUI::Views::implementation
         * @param sender IInspectable
         * @param args Microsoft::UI::Xaml::RoutedEventArgs
         */
-        void ClearAndSync(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
+        Windows::Foundation::IAsyncAction ClearAndSync(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
         /**
          * @brief Handles when the spotlight images are synced.
          * @param args Nickvision::Events::ParamEventArgs<std::vector<std::filesystem::path>>
