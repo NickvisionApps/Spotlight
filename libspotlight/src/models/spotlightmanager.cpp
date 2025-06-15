@@ -138,11 +138,15 @@ namespace Nickvision::Spotlight::Shared::Models
         {
             return;
         }
-        else if(type == SpotlightImageType::LockScreen && entry.file_size() / 1000 < 200)
+        if(type == SpotlightImageType::LockScreen && entry.file_size() / 1000 < 200)
         {
            return;
         }
-        else if(type == SpotlightImageType::Desktop && entry.path().extension() != ".jpg")
+        if(type == SpotlightImageType::Desktop && entry.path().extension() != ".jpg")
+        {
+            return;
+        }
+        if(entry.path().filename().string().find("_") != std::string::npos)
         {
             return;
         }

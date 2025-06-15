@@ -1,5 +1,5 @@
 libspotlight/src/controllers/mainwindowcontroller.cpp
-org.nickvision.spotlight.qt/src/controls/aboutdialog.cpp
-org.nickvision.spotlight.qt/src/controls/infobar.cpp
-org.nickvision.spotlight.qt/src/views/mainwindow.cpp
-org.nickvision.spotlight.qt/src/views/settingsdialog.cpp
+org.nickvision.spotlight.winui/Controls/AboutDialog.xaml.cpp
+org.nickvision.spotlight.winui/Controls/TitleBar.xaml.cpp
+org.nickvision.spotlight.winui/Views/MainWindow.xaml.cpp
+org.nickvision.spotlight.winui/Views/SettingsPage.xaml.cpp

@@ -3,10 +3,10 @@
 
 #define MyAppName "Nickvision Spotlight"
 #define MyAppShortName "Spotlight"
-#define MyAppVersion "2025.4.0"
+#define MyAppVersion "2025.6.0"
 #define MyAppPublisher "Nickvision"
 #define MyAppURL "https://nickvision.org"
-#define MyAppExeName "org.nickvision.spotlight.qt.exe"
+#define MyAppExeName "org.nickvision.spotlight.winui.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -35,21 +35,6 @@ PrivilegesRequired=admin
 DirExistsWarning=no
 CloseApplications=yes
 
-[Code]
-procedure SetupVC();
-var
-  ResultCode: Integer;
-begin
-  if not Exec(ExpandConstant('{app}\deps\vc_redist.x64.exe'), '/install /quiet /norestart', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
-  then
-    MsgBox('Unable to install VC . Please try again', mbError, MB_OK);
-end;
-
-procedure Cleanup();
-begin
-  DelTree(ExpandConstant('{app}\deps'), True, True, True);
-end;
-
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
@@ -57,9 +42,10 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "vc_redist.x64.exe"; DestDir: "{app}\deps"; AfterInstall: SetupVC  
-Source: "..\build\org.nickvision.spotlight.qt\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion 
-Source: "..\build\org.nickvision.spotlight.qt\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; AfterInstall: Cleanup
+Source: "vc_redist.exe"; DestDir: "{app}"; Flags: deleteafterinstall
+Source: "windowsappruntimeinstall.exe"; DestDir: "{app}"; Flags: deleteafterinstall
+Source: "..\build\org.nickvision.spotlight.winui\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\build\org.nickvision.spotlight.winui\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; AfterInstall: Cleanup
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
@@ -67,5 +53,7 @@ Name: "{autoprograms}\{#MyAppShortName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppShortName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Run]
+Filename: "{app}\vc_redist.exe"; Parameters: "/install /quiet /norestart"
+Filename: "{app}\windowsappruntimeinstall.exe"
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
 
