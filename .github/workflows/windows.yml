@@ -46,7 +46,7 @@ jobs:
         with:
           pkgs: libnick libjpeg-turbo boost-gil
           triplet: ${{ matrix.variant.triplet }}
-          revision: b0b4f9904e2791bc16b9fd8003243a9f55c42e6e
+          revision: 47313591da1d14a8a9b209f4bee39d29acc39b31
           token: ${{ github.token }}
           github-binarycache: true
       - name: "Build"
